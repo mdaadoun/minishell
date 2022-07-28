@@ -1,8 +1,4 @@
 #include "../inc/minishell.h"
-#include <errno.h>
-#include <error.h>
-#include <getopt.h>
-#include <signal.h>
 
 void	handle_signals(int signo)
 {
@@ -26,6 +22,7 @@ int	main(int ac, char **av)
 			free(input);
 			break;
 		}
+		add_history(input);
 		free(input);
 	}
 	(void)ac;
