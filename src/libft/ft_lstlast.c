@@ -3,20 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/06 07:13:59 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/04/06 07:14:00 by dlaidet          ###   ########.fr       */
+/*   Created: 2022/04/19 19:44:00 by pi                #+#    #+#             */
+/*   Updated: 2022/05/24 11:15:06 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "../../inc/libft.h"
 
+/*
+ * Return the last connected list by checking if next is NULL
+*/
 t_list	*ft_lstlast(t_list *lst)
 {
-	if (lst == 0)
-		return (0);
-	while (lst->next)
+	while (lst)
+	{
+		if (!lst->next)
+			break ;
 		lst = lst->next;
+	}
 	return (lst);
 }

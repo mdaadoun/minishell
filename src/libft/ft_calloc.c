@@ -3,24 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/29 15:32:20 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/03/29 15:32:22 by dlaidet          ###   ########.fr       */
+/*   Created: 2022/04/07 09:54:28 by mdaadoun          #+#    #+#             */
+/*   Updated: 2022/05/24 11:14:10 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "../../inc/libft.h"
 
+/*
+** 	allocate memory of number*size and set each value to 0
+**	return the pointer to first area of this memory
+*/
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	void	*s;
+	void	*ptr;
 
 	if (nmemb > 4294967296 && size > 4294967296)
-		return (0);
-	s = malloc(size * nmemb);
-	if (s == 0)
-		return (0);
-	ft_bzero(s, (nmemb * size));
-	return (s);
+		return (NULL);
+	ptr = malloc(nmemb * size);
+	if (!ptr)
+		return (NULL);
+	ft_bzero(ptr, nmemb * size);
+	return (ptr);
 }

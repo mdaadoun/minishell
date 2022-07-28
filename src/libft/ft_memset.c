@@ -3,27 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/28 14:20:00 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/03/28 14:20:02 by dlaidet          ###   ########.fr       */
+/*   Created: 2022/03/29 08:49:45 by mdaadoun          #+#    #+#             */
+/*   Updated: 2022/06/28 10:27:21 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "../../inc/libft.h"
 
+/*
+** Copy n times c in the memory areas of s
+*/
 void	*ft_memset(void *s, int c, size_t n)
 {
-	char	*temp;
+	size_t	i;
+	char	*cast_s;
 
-	if (s == NULL)
-		return (NULL);
-	temp = s;
-	while (n != 0)
-	{
-		*temp = c;
-		temp++;
-		n--;
-	}
+	cast_s = (char *) s;
+	i = 0;
+	while (i++ < n)
+		cast_s[i - 1] = c;
 	return (s);
 }

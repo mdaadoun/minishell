@@ -3,53 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/30 07:27:29 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/03/30 07:29:26 by dlaidet          ###   ########.fr       */
+/*   Created: 2022/04/08 10:08:22 by mdaadoun          #+#    #+#             */
+/*   Updated: 2022/05/24 11:16:25 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "../../inc/libft.h"
 
-static void	ft_cpy(char *rst, char const *s, size_t len)
-{
-	size_t	compt;
-
-	compt = 0;
-	while (compt < len)
-	{
-		rst[compt] = s[compt];
-		compt++;
-	}
-	rst[compt] = '\0';
-}
-
+/*
+**	Return a pointer to new c-string extracted from c-string s
+**		of length len starting from char s[start]
+**	3 if-checks:
+**		1. Reset start index to end of s if start > s_len (s length)
+**		2. Reset len new c-string to (s_len + start) when (len + start > s_len)
+**		3. If start == s length and len is not 0, decrease len by one
+*/
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*rst;
-	size_t	lon;
+	char	*str;
+	size_t	s_len;
+	size_t	i;
 
-	if (s == 0)
+	if (!s)
+		return (NULL);
+	i = 0;
+	s_len = ft_strlen(s);
+	if (start > s_len)
+		start = s_len;
+	if (start + len > s_len)
+		len = s_len - start;
+	if (start == s_len && len)
+		len--;
+	str = ft_calloc(len + 1, sizeof(char));
+	if (!str)
 		return (0);
-	lon = ft_strlen(s);
-	if (len > lon)
-		len = lon;
-	if (start > lon)
-	{
-		rst = malloc(sizeof(char) * len);
-		rst[0] = '\0';
-		return (rst);
-	}
-	else
-	{
-		lon = ft_strlen(&s[start]);
-		if (len > lon)
-			len = lon;
-		rst = malloc(sizeof(char) * len + 1);
-		if (rst == NULL)
-			return (NULL);
-		ft_cpy(rst, &s[start], len);
-	}
-	return (rst);
+	while (i < len)
+		str[i++] = s[start++];
+	return (str);
 }

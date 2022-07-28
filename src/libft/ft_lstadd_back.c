@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/06 07:24:47 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/04/06 07:24:49 by dlaidet          ###   ########.fr       */
+/*   Created: 2022/04/19 19:51:42 by pi                #+#    #+#             */
+/*   Updated: 2022/05/24 11:14:52 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "../../inc/libft.h"
 
+/*
+ * set the last connected element of list lst to new
+*/
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_list	*tmp;
-
-	if (*lst == 0)
-	{
-		*lst = new;
+	if (!lst)
 		return ;
-	}
-	tmp = ft_lstlast(*lst);
-	tmp->next = new;
+	if (!*lst)
+		*lst = new;
+	else
+		(ft_lstlast(*lst))->next = new;
 }

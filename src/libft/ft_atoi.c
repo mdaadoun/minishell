@@ -3,37 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/29 15:11:58 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/03/29 15:12:00 by dlaidet          ###   ########.fr       */
+/*   Created: 2022/04/06 10:56:37 by mdaadoun          #+#    #+#             */
+/*   Updated: 2022/05/24 11:14:04 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "../../inc/libft.h"
+
+/*
+** converts the c-string nptr to int.
+** -48 is ascii offset for char 0
+*/
+int	set_neg(int isneg, int nb)
+{
+	if (isneg)
+		return (-nb);
+	else
+		return (nb);
+}
 
 int	ft_atoi(const char *nptr)
 {
-	int	nega;
 	int	result;
+	int	isneg;
+	int	ispos;
 
-	nega = 0;
 	result = 0;
-	while ((*nptr >= '\t' && *nptr <= '\r') || *nptr == ' ')
-		nptr++;
-	if (*nptr == '-')
+	isneg = 0;
+	ispos = 0;
+	while (*nptr++)
 	{
-		nega = 1;
-		nptr++;
+		if (ft_isspace(*(nptr - 1)) && !result && !ispos && !isneg)
+			;
+		else if (*(nptr - 1) == '+' && !result && !ispos && !isneg)
+			ispos = 1;
+		else if (*(nptr - 1) == '-' && !result && !ispos && !isneg)
+			isneg = 1;
+		else if (ft_isdigit(*(nptr - 1)))
+			result = result * 10 + *(nptr - 1) - 48;
+		else
+			return (set_neg(isneg, result));
 	}
-	else if (*nptr == '+')
-		nptr++;
-	while (*nptr >= '0' && *nptr <= '9')
-	{
-		result = result * 10 + *nptr - '0';
-		nptr++;
-	}
-	if (nega % 2 == 1)
-		result *= -1;
-	return (result);
+	return (set_neg(isneg, result));
 }

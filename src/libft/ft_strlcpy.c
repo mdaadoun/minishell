@@ -3,32 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/29 08:47:02 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/03/29 08:47:04 by dlaidet          ###   ########.fr       */
+/*   Created: 2022/03/31 13:56:13 by mdaadoun          #+#    #+#             */
+/*   Updated: 2022/05/24 11:16:05 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "../../inc/libft.h"
 
+/*
+** copy a string src to dst and return the length of the copied string
+*/
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	size_t	a;
-	size_t	b;
+	size_t	length;
+	char	*cast_dst;
+	char	*cast_src;
 
-	a = ft_strlen(src);
-	b = 0;
-	if (dst == NULL || src == NULL)
-		return (0);
-	if (size != 0)
-	{
-		while (src[b] != '\0' && b < size - 1)
-		{
-			dst[b] = src[b];
-			b++;
-		}
-		dst[b] = '\0';
-	}
-	return (a);
+	cast_dst = (char *) dst;
+	cast_src = (char *) src;
+	length = ft_strlen(cast_src);
+	if (size > length)
+		size = length + 1;
+	if (!size)
+		return (length);
+	while (--size)
+		*cast_dst++ = *cast_src++;
+	*cast_dst = '\0';
+	return (length);
 }

@@ -3,28 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/29 07:36:12 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/03/29 07:36:14 by dlaidet          ###   ########.fr       */
+/*   Created: 2022/04/04 11:10:38 by mdaadoun          #+#    #+#             */
+/*   Updated: 2022/05/24 11:16:14 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "../../inc/libft.h"
 
+/* 
+** compares the two strings s1 and s2, return s1 - s2 difference
+*/
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t	count;
+	size_t	i;
 
-	if (n == 0)
+	i = 0;
+	if (!n)
 		return (0);
-	count = 0;
-	while (s1[count] == s2[count] && s1[count] != '\0')
+	while (*s2 && *s1 && (*s1 == *s2) && i < n - 1)
 	{
-		if (count < (n - 1))
-			count++;
-		else
-			return (0);
+		s1++;
+		s2++;
+		i++;
 	}
-	return ((unsigned char)(s1[count]) - (unsigned char)(s2[count]));
+	return ((unsigned char) *(s1) - (unsigned char) *(s2));
 }

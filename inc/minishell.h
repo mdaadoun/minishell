@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
+/*   Updated: 2022/07/28 14:06:13 by mdaadoun         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
 // libraries
 
-# include "../src/libft/libft.h"
+# include "libft.h"
 
 # include <stdio.h>
 # include <readline/readline.h>

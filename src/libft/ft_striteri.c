@@ -3,28 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/04 07:19:40 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/04/04 07:19:42 by dlaidet          ###   ########.fr       */
+/*   Created: 2022/04/15 09:23:02 by mdaadoun          #+#    #+#             */
+/*   Updated: 2022/05/24 11:15:57 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "../../inc/libft.h"
 
+/*
+ * Apply the f function to each char of the string s (without return)
+*/
 void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	unsigned int	count;
-	unsigned int	len;
+	int		i;
 
-	count = 0;
-	if (s != NULL && f != NULL)
+	if (s)
 	{
-		len = ft_strlen(s);
-		while (count < len)
+		i = 0;
+		while (s[i])
 		{
-			(*f)(count, &s[count]);
-			count++;
+			f(i, &s[i]);
+			i++;
 		}
 	}
 }

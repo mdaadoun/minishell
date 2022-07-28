@@ -3,31 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/02 09:40:05 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/04/02 09:40:08 by dlaidet          ###   ########.fr       */
+/*   Created: 2022/04/15 09:23:02 by mdaadoun          #+#    #+#             */
+/*   Updated: 2022/05/24 11:16:10 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "../../inc/libft.h"
 
+/*
+ * Apply the f function to each char of the string s
+ * Return a new string with the new chars composed from f function
+*/
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	unsigned int	count;
-	char			*rst;
+	char	*str;
+	int		i;
 
-	if (s == 0 || f == 0)
+	if (!s)
+		return (NULL);
+	str = ft_calloc(ft_strlen(s) + 1, sizeof(char));
+	if (!str)
 		return (0);
-	rst = malloc(sizeof(char) * ft_strlen(s) + 1);
-	if (rst == 0)
-		return (0);
-	ft_strlcpy(rst, s, ft_strlen(s) + 1);
-	count = 0;
-	while (rst[count])
+	i = 0;
+	while (s[i])
 	{
-		rst[count] = (*f)(count, rst[count]);
-		count++;
+		str[i] = f(i, s[i]);
+		i++;
 	}
-	return (rst);
+	return (str);
 }

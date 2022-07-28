@@ -5,65 +5,94 @@
 #                                                     +:+ +:+         +:+      #
 #    By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/05/10 07:46:55 by dlaidet           #+#    #+#              #
-#    Updated: 2022/07/28 13:41:50 by mdaadoun         ###   ########.fr        #
+#    Created: 2022/05/20 08:44:56 by mdaadoun          #+#    #+#              #
+#    Updated: 2022/07/28 14:28:25 by mdaadoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# **************************************************************************** #
-#CONFIG
-VAL	= 
+NAME = minishell
+SRCS = ms_main.c
+DIR = src
+OBJS = $(addprefix $(DIR)/,$(SRCS:%.c=%.o))
+LIBFT = $(DIR)/libft/libft.a
+CC = gcc
+AR = ar rcs
+RM = rm -f
+FLAGS = -Wall -Wextra -Werror 
+READLINE_FLAGS = -L/usr/local/lib -I/usr/local/include -lreadline
 
-NAME	= minishell
+R = \033[38;5;1m
+G = \033[38;5;2m
+B = \033[38;5;4m
+D = \033[38;5;255m
 
-# **************************************************************************** #
-#MANDATORY
-M_PATH_SRCS	= main.c
+.c.o:
+	@$(CC) $(FLAGS) -c $< -o ${<:.c=.o}
 
-M_PATH_DIR = src/
+all: build_lib $(NAME)
 
-M_PATH	= $(addprefix $(M_PATH_DIR), $(M_PATH_SRCS))
+$(NAME): $(OBJS)
+	@echo "$(B)Building $(NAME) program.$(D)"
+	@$(CC) $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(READLINE_FLAGS)
+	@echo "$(G)$(NAME) program created.$(D)"
 
-M_OBJS	= ${M_PATH:.c=.o}
-# **************************************************************************** #
-#UTILS
-CC	= gcc
+build_lib:
+	@make -sC src/libft
 
-LIBNAME = libft.a
+NAME_BONUS = minishell_bonus
+SRCS_BONUS = ms_main_bonus.c
+DIR_BONUS = bonus
+OBJS_BONUS = $(addprefix $(DIR_BONUS)/,$(SRCS_BONUS:%.c=%.o))
 
-LIBFTPATH = src/libft/
+$(NAME_BONUS): $(OBJS_BONUS)
+	@echo "$(B)Building $(NAME_BONUS) program.$(D)"
+	@$(CC) $(FLAGS) $(OBJS_BONUS) $(LIBFT) -o $(NAME_BONUS) $(READLINE_FLAGS)
+	@echo "$(G)$(NAME_BONUS) program created.$(D)"
 
-CFLAGS	= -Wall -Wextra -Werror
-# **************************************************************************** #
-#VALGRIND
-V_ARG	= --track-origins=yes --leak-check=full --show-leak-kinds=all -s
-# **************************************************************************** #
-
-all:	${NAME}
-
-${NAME}:	${M_OBJS}
-	make -C ${LIBFTPATH}
-	mv $(LIBFTPATH)${LIBNAME} ${LIBNAME}
-	${CC} ${CFLAGS} -o ${NAME} ${M_OBJS} ${LIBNAME} -L/usr/local/lib -I/usr/local/include -lreadline
+bonus: build_lib $(NAME_BONUS)
 
 clean:
-	rm -f ${M_OBJS}
-	
-fclean:	clean
-	rm -f ${NAME} ${LIBNAME}
-	make fclean -C ${LIBFTPATH}
+	@echo "$(R)Remove all object files.$(D)"
+	@$(RM) $(OBJS) $(OBJS_BONUS) 
+	@make clean -sC src/libft
 
-re:	fclean all
+fclean: clean
+	@echo "$(R)Remove $(NAME) and $(NAME_BONUS) programs if present.$(D)"
+	@$(RM) $(NAME) $(NAME_BONUS)
+	@make fclean -sC src/libft
 
-gdb:	${M_OBJS}
-	make -C ${LIBFTPATH}
-	mv $(LIBFTPATH)${LIBNAME} ${LIBNAME}
-	${CC} ${CFLAGS} -g -o ${NAME} ${M_OBJS} ${LIBNAME}
+re: fclean all
+
+## DEBUG SECTION
+
+DEBUG_FLAGS = -g3 -ggdb -I. -fsanitize=address # -fsanitize=leak
+V_ARG	= --track-origins=yes --leak-check=full --show-leak-kinds=all -s
+DIR_LIB = src/libft
+ARGS =
+
+debug: fclean
+	@make debug -sC src/libft
+	@echo "$(B)Starting debug compilation.$(D)"
+	@$(CC) $(FLAGS) $(DEBUG_FLAGS) $(addprefix $(DIR)/,$(SRCS)) $(addprefix $(DIR_LIB)/,$(SRCS_LIB)) $(MLIBX) -lXext -lX11  -o $(NAME)
+	@echo "$(G)$(NAME) debug program created.$(D)"
+
+test: debug
+	@echo "$(B)Starting memory test.$(D)"
+	valgrind $(V_ARG) ./$(NAME)
+	@echo "$(G)Test done.$(D)"
+
+debug_bonus: fclean
+	@make debug -sC src/libft
+	@echo "$(B)Starting debug compilation.$(D)"
+	@$(CC) $(FLAGS) $(DEBUG_FLAGS) $(addprefix $(DIR_BONUS)/,$(SRCS_BONUS)) $(addprefix $(DIR_LIB)/,$(SRCS_LIB)) $(MLIBX) -lXext -lX11  -o $(NAME_BONUS)
+	@echo "$(G)$(NAME_BONUS) debug program created.$(D)"
+
+test_bonus: debug_bonus
+	@echo "$(B)Starting memory test.$(D)"
+	valgrind $(V_ARG) ./$(NAME_BONUS)
+	@echo "$(G)Test done.$(D)"
 
 run:
-	./${NAME} ${VAL}
+	./${NAME} ${ARGS}
 
-val:
-	valgrind $(V_ARG) ./${NAME} ${VAL}
-
-.PHONY:	all clean fclean re val run gdb
+.PHONY:  all clean fclean re debug test start bonus

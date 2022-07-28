@@ -3,33 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/29 10:45:37 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/03/29 10:45:39 by dlaidet          ###   ########.fr       */
+/*   Created: 2022/04/04 11:29:39 by mdaadoun          #+#    #+#             */
+/*   Updated: 2022/05/24 11:16:16 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "../../inc/libft.h"
 
+/* 
+** return first occurence of c-string little in c-string big
+** 	search only for len characters.
+** Return big if little is empty, pointer to first char in big
+** 	for the first occurence of little, or 0 if nothing is found.
+*/
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	size_t	b;
-	size_t	c;
+	size_t	i;
+	size_t	j;
 
-	if (*little == 0)
-		return ((char *)big);
-	b = 0;
-	while (big[b] != '\0' && b < len)
+	if (!*little)
+		return ((char *) big);
+	i = 0;
+	while (len-- && big[i])
 	{
-		c = 0;
-		while (little[c] == big[b + c] && (b + c) < len)
-		{
-			if (little[c + 1] == '\0')
-				return ((char *)(big + b));
-			c++;
-		}
-		b++;
+		j = 0;
+		while (big[i + j] == little[j] && big[i + j] && j < len + 1)
+			j++;
+		if (!little[j])
+			return ((char *) &big[i]);
+		if (!big[i + j])
+			return (0);
+		i++;
 	}
 	return (0);
 }

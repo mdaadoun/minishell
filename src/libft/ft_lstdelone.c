@@ -3,17 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/06 07:40:29 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/04/06 07:40:31 by dlaidet          ###   ########.fr       */
+/*   Created: 2022/04/19 20:13:08 by pi                #+#    #+#             */
+/*   Updated: 2022/07/12 09:18:42 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "../../inc/libft.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+/*
+ *  Pass the content of lst to the function del and then free it
+*/
+void	ft_lstdelone(t_list *lst, void (*del)(void*))
 {
+	if (!lst || !del)
+		return ;
 	del(lst->content);
 	free(lst);
 }

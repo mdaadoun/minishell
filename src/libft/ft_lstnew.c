@@ -3,23 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/05 08:23:31 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/04/05 08:23:33 by dlaidet          ###   ########.fr       */
+/*   Created: 2022/04/19 09:53:50 by mdaadoun          #+#    #+#             */
+/*   Updated: 2022/07/12 10:11:05 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "../../inc/libft.h"
 
+/*
+ * Create a new list of type t_list and return it
+*/
 t_list	*ft_lstnew(void *content)
 {
-	t_list	*ind;
+	t_list	*list;
 
-	ind = malloc(sizeof(t_list));
-	if (ind == 0)
-		return (0);
-	ind->content = content;
-	ind->next = 0;
-	return (ind);
+	list = ft_calloc(1, sizeof(t_list));
+	if (!list)
+		return (NULL);
+	list->content = content;
+	list->next = NULL;
+	return (list);
 }

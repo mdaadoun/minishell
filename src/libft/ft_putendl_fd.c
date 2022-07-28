@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/02 09:23:30 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/04/02 09:23:33 by dlaidet          ###   ########.fr       */
+/*   Created: 2022/04/15 12:01:56 by mdaadoun          #+#    #+#             */
+/*   Updated: 2022/05/24 11:15:38 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "../../inc/libft.h"
 
 void	ft_putendl_fd(char *s, int fd)
 {
-	int	len;
+	int	length;
 
-	if (s == 0)
-		return ;
-	len = ft_strlen(s);
-	write(fd, s, len);
-	write(fd, "\n", 1);
+	if (s)
+	{
+		length = ft_strlen(s);
+		write(fd, s, length);
+		write(fd, "\n", 1);
+	}
 }

@@ -1,41 +1,41 @@
 /* ************************************************************************** */
-/*                                                                            */
+/*		                                                                    */
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/29 07:07:22 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/03/29 07:07:24 by dlaidet          ###   ########.fr       */
+/*   Created: 2022/03/30 08:01:34 by mdaadoun          #+#    #+#             */
+/*   Updated: 2022/03/31 10:18:27 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "../../inc/libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t n)
+/*
+** same as memcpy but use a temporary buffer
+** to avoid overlapping errors.
+** Need to be rewritten with calloc for buffer, 
+**		now use a reverse copy
+**      when the adress of destination is > adress of source 
+** 		(replace with strdup ?)
+*/
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	char		*dest;
-	const char	*sourc;
-	int			compt;
+	size_t	i;
+	char	*cast_dst;
+	char	*cast_src;
 
-	if (dst == NULL || src == NULL)
+	if (!dest && !src)
 		return (NULL);
-	dest = (char *)dst;
-	sourc = (char *)src;
-	compt = 0;
-	if (dst > src)
-	{
+	i = 0;
+	cast_dst = (char *) dest;
+	cast_src = (char *) src;
+	if (cast_dst > cast_src)
 		while (n--)
-			dest[n] = sourc[n];
-	}
-	else if (src > dst)
-	{
-		while (n)
-		{
-			dest[compt] = sourc[compt];
-			compt++;
-			n--;
-		}
-	}
+			cast_dst[n] = cast_src[n];
+	else
+		while (i++ < n)
+			cast_dst[i - 1] = cast_src[i - 1];
 	return (dest);
 }

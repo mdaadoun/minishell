@@ -3,53 +3,67 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/31 09:52:09 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/03/31 09:52:10 by dlaidet          ###   ########.fr       */
+/*   Created: 2022/04/14 08:55:02 by mdaadoun          #+#    #+#             */
+/*   Updated: 2022/05/24 11:14:50 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "../../inc/libft.h"
 
-static int	ft_count(int a)
+size_t	count_chars(int n)
 {
-	int	count;
+	size_t	count;
 
 	count = 0;
-	while (a)
-	{
-		a /= 10;
+	if (n == 0 || n < 0)
 		count++;
+	while (n)
+	{
+		count++;
+		n /= 10;
 	}
 	return (count);
 }
 
+void	fill_chars(char *chars, size_t	nb_chars, int nb)
+{
+	size_t	unb;
+
+	unb = 0;
+	if (nb == 0)
+		chars[0] = '0';
+	else if (nb < 0)
+	{
+		chars[0] = '-';
+		unb = (size_t) nb * -1;
+	}
+	else
+		unb = nb;
+	while (nb_chars)
+	{
+		nb_chars--;
+		if (chars[nb_chars] != '-')
+		{
+			chars[nb_chars] = '0' + unb % 10;
+			unb /= 10;
+		}
+	}
+}
+
+/*
+**	return a string converted from the given int n
+*/
 char	*ft_itoa(int n)
 {
-	int				size;
-	long int		tmp;
-	char			*rst;
+	char	*str;
+	size_t	nb_chars;
 
-	tmp = n;
-	size = 0;
-	if (n <= 0 && size++ == 0)
-		tmp = -tmp;
-	else
-		size = 0;
-	size += ft_count(n);
-	rst = (char *)malloc(size + 1);
-	if (rst == 0)
+	nb_chars = count_chars(n);
+	str = ft_calloc(nb_chars + 1, sizeof(char));
+	if (!str)
 		return (0);
-	rst[size--] = '\0';
-	while (tmp)
-	{
-		rst[size--] = tmp % 10 + '0';
-		tmp /= 10;
-	}
-	if (size == 0 && rst[1] == '\0')
-		rst[size] = '0';
-	else if (size == 0 && rst[1] != '\0')
-		rst[size] = '-';
-	return (rst);
+	fill_chars(str, nb_chars, n);
+	return (str);
 }

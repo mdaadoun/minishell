@@ -3,33 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/06 08:36:30 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/04/06 08:36:32 by dlaidet          ###   ########.fr       */
+/*   Created: 2022/04/19 21:56:27 by pi                #+#    #+#             */
+/*   Updated: 2022/07/12 09:18:01 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "../../inc/libft.h"
 
+/*
+ *  Apply the function f to the content of each connected lists
+ *      Return a new connected list with the modified content
+*/
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*rst;
-	t_list	*tmp;
+	t_list	*new_list;
+	t_list	*new_elem;
 
-	rst = 0;
-	if (!lst)
+	if (!lst || !f)
 		return (0);
+	new_elem = 0;
+	new_list = 0;
 	while (lst)
 	{
-		tmp = ft_lstnew(f(lst->content));
-		if (tmp == 0)
-		{
-			ft_lstclear(&rst, del);
-			return (0);
-		}
-		ft_lstadd_back(&rst, tmp);
+		new_elem = ft_lstnew(f(lst->content));
+		if (!new_elem)
+			ft_lstclear(&new_elem, del);
+		else if (!new_list)
+			new_list = new_elem;
+		else
+			ft_lstadd_back(&new_list, new_elem);
 		lst = lst->next;
 	}
-	return (rst);
+	return (new_list);
 }

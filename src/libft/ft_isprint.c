@@ -3,18 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/28 13:54:21 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/03/28 13:54:23 by dlaidet          ###   ########.fr       */
+/*   Created: 2022/03/28 16:06:08 by mdaadoun          #+#    #+#             */
+/*   Updated: 2022/05/24 11:14:43 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "../../inc/libft.h"
 
+/*
+** check if c is a printable char 
+*/
 int	ft_isprint(int c)
 {
 	if (c >= ' ' && c <= '~')
-		return (1);
+		return (16384);
 	return (0);
 }

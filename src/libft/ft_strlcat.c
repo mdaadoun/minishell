@@ -3,30 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/29 10:12:25 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/03/29 10:12:28 by dlaidet          ###   ########.fr       */
+/*   Created: 2022/03/31 13:56:13 by mdaadoun          #+#    #+#             */
+/*   Updated: 2022/05/24 11:16:02 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "../../inc/libft.h"
 
+/*
+** concatenate a string src to dst and return the length of the complete string
+*/
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	size_t	a;
-	size_t	b;
+	size_t	len_dst;
 
-	a = ft_strlen(src);
-	b = ft_strlen(dst);
-	if (size <= b)
-		return (size + a);
-	a = 0;
-	while (src[a] != '\0' && b + a + 1 < size)
-	{
-		dst[b + a] = src[a];
-		a++;
-	}
-	dst[b + a] = '\0';
-	return (ft_strlen(&src[a]) + ft_strlen(dst));
+	len_dst = ft_strlen(dst);
+	if (!size)
+		return (ft_strlen(src));
+	if (size < len_dst)
+		return (ft_strlen(src) + size);
+	while (len_dst < size - 1 && *src)
+		dst[len_dst++] = *src++;
+	dst[len_dst] = '\0';
+	return (len_dst + ft_strlen(src));
 }
