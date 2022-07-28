@@ -6,7 +6,7 @@
 #    By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 07:46:55 by dlaidet           #+#    #+#              #
-#    Updated: 2022/07/28 11:30:22 by dlaidet          ###   ########.fr        #
+#    Updated: 2022/07/28 12:02:55 by dlaidet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ LIBNAME = libft.a
 
 LIBFTPATH = ../libft/
 
-CFLAGS	= -Wall -Wextra -Werror -lreadline
+CFLAGS	= -Wall -Wextra -Werror
 # **************************************************************************** #
 #VALGRIND
 V_ARG	= --track-origins=yes --leak-check=full --show-leak-kinds=all -s
@@ -44,7 +44,7 @@ all:	${NAME}
 ${NAME}:	${M_OBJS}
 	make -C ${LIBFTPATH}
 	mv $(LIBFTPATH)${LIBNAME} ${LIBNAME}
-	${CC} ${CFLAGS} -o ${NAME} ${M_OBJS} ${LIBNAME}
+	${CC} ${CFLAGS} -o ${NAME} ${M_OBJS} ${LIBNAME} -L/usr/local/lib -I/usr/local/include -lreadline
 
 clean:
 	rm -f ${M_OBJS}

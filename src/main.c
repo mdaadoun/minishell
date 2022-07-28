@@ -10,6 +10,8 @@ int	main(int ac, char **av)
 	{
 		test = readline("|-->");
 		printf("%s\n", test);
+		if (ft_strncmp(test, "exit", 4))
+			count = 10;
 		free(test);
 		count++;
 	}
