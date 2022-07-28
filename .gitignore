@@ -1,0 +1,17 @@
+.vscode
+*~
+nodes_module
+__pycache__
+venv
+.git
+*.zip
+*.exe
+*.o
+*.a
+a.out
+*.so
+debug_bin
+.idea
+*.log
+libft.a
+minishell

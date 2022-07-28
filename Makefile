@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 07:46:55 by dlaidet           #+#    #+#              #
-#    Updated: 2022/07/28 12:02:55 by dlaidet          ###   ########.fr        #
+#    Updated: 2022/07/28 13:41:50 by mdaadoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ CC	= gcc
 
 LIBNAME = libft.a
 
-LIBFTPATH = ../libft/
+LIBFTPATH = src/libft/
 
 CFLAGS	= -Wall -Wextra -Werror
 # **************************************************************************** #
