@@ -2,10 +2,16 @@
 
 int	main(int ac, char **av)
 {
-	write(1, "-->", 3);
-	while (1)
-	{
+	char	*test;
+	int	count;
 
+	count = 0;
+	while (count < 10)
+	{
+		test = readline("|-->");
+		printf("%s\n", test);
+		free(test);
+		count++;
 	}
 	(void)ac;
 	(void)av;

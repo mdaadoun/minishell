@@ -6,7 +6,7 @@
 #    By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 07:46:55 by dlaidet           #+#    #+#              #
-#    Updated: 2022/07/28 11:02:57 by dlaidet          ###   ########.fr        #
+#    Updated: 2022/07/28 11:30:22 by dlaidet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ NAME	= minishell
 #MANDATORY
 M_PATH_SRCS	= main.c
 
-M_PATH_DIR = ./src/
+M_PATH_DIR = src/
 
 M_PATH	= $(addprefix $(M_PATH_DIR), $(M_PATH_SRCS))
 
@@ -33,7 +33,7 @@ LIBNAME = libft.a
 
 LIBFTPATH = ../libft/
 
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror -lreadline
 # **************************************************************************** #
 #VALGRIND
 V_ARG	= --track-origins=yes --leak-check=full --show-leak-kinds=all -s
