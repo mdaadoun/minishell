@@ -58,8 +58,8 @@
 
 ## Partie obligatoire roadmap
 
--[ ] display prompt
-    - [ ] exit prompt
--[ ] launch any program (bin paths)
--[ ] history command
-- ...
+- [ ] display prompt 
+    - [ ] exit prompt (exit) 
+- [ ] launch any program (bin paths) 
+- [ ] history command 
+- [x] test
