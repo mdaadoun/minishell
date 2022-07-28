@@ -56,9 +56,10 @@
 * tgoto
 * tputs
 
-## Partie obligatoire
+## Partie obligatoire roadmap
 
--[] prompt
--[] history command
--[] launch any program (bin paths)
+-[ ] display prompt
+    - [ ] exit prompt
+-[ ] launch any program (bin paths)
+-[ ] history command
 - ...
