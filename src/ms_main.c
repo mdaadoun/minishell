@@ -6,11 +6,29 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:07:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/07/28 14:07:11 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/07/28 14:53:54 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+static char	*ft_get_cmd(char **path, char *cmd)
+{
+	char	*tmp;
+	char	*command;
+
+	while (*path)
+	{
+		tmp = ft_strjoin(*path, "/");
+		command = ft_strjoin(tmp, cmd);
+		free(tmp);
+		if (access(command, 0) == 0)
+			return (command);
+		free(command);
+		path++;
+	}
+	return (NULL);
+}
 
 void	handle_signals(int signo)
 {
@@ -18,10 +36,14 @@ void	handle_signals(int signo)
 		printf("\nYou pressed Ctrl+C\n|-->");
 }
 
-int	main(int ac, char **av)
+int	main(int ac, char **av, char **envp)
 {
 	char	*input;
+	char	**path;
+	char	*cmd;
+	char	**arg;
 
+	path = ft_split(getenv("PATH"), ':');
 	if (signal(SIGINT, handle_signals) == SIG_ERR)
 		printf("Failed\n");
 	while (1)
@@ -29,12 +51,11 @@ int	main(int ac, char **av)
 		input = readline("|-->");
 		if (!input)
 			break;
-		if (!ft_strncmp(input, "exit", 4))
-		{
-			free(input);
-			break;
-		}
+		ft_printf("%s\n", input);
 		add_history(input);
+		arg = ft_split(input, ' ');
+		cmd = ft_get_cmd(path, arg[0]);
+		execve(cmd, arg, envp);
 		free(input);
 	}
 	(void)ac;
