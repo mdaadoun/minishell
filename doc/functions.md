@@ -1,11 +1,11 @@
 
 ## Fonction autorisées
-* **readline** : get a line from a user with editing. [man](https://www.man7.org/linux/man-pages/man3/readline.3.html)
+* **readline** : Get a line from a user with editing. [man](https://www.man7.org/linux/man-pages/man3/readline.3.html)
 * rl_clear_history
 * rl_on_new_line
 * rl_replace_line
 * rl_redisplay
-* add_history
+* **add_history** : *void add_history (const char* **string)* Place string at the end of the history list. [man](https://www.man7.org/linux/man-pages/man3/history.3.html)
 * printf
 * malloc
 * free

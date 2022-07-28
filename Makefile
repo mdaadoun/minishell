@@ -6,7 +6,7 @@
 #    By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/20 08:44:56 by mdaadoun          #+#    #+#              #
-#    Updated: 2022/07/28 14:28:25 by mdaadoun         ###   ########.fr        #
+#    Updated: 2022/07/28 15:38:03 by mdaadoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,4 +95,4 @@ test_bonus: debug_bonus
 run:
 	./${NAME} ${ARGS}
 
-.PHONY:  all clean fclean re debug test start bonus
+.PHONY:  all clean fclean re run bonus debug test debug_bonus test_bonus
