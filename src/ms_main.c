@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:07:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/07/28 14:59:40 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/07/29 07:44:26 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static char	*ft_get_cmd(char **path, char *cmd)
 
 void	handle_signals(int signo)
 {
+
 	ft_printf("%d", signo);
 	if (signo == SIGINT)
 		printf("\nYou pressed Ctrl+C\n|-->");

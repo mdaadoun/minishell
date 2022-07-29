@@ -24,27 +24,27 @@
 * sigemptyset
 * sigaddset
 * kill
-* exit
+* exit : Close the current program and return it's parameter to parent program. [man](https://man7.org/linux/man-pages/man2/execve.2.html)
 * getcwd
 * chdir
 * stat
 * lstat
 * fstat
 * unlink
-* execve
-* dup
-* dup2
-* pipe
-* opendir
-* readdir
-* closedir
-* strerror
-* perror
+* execve : Execute program passed in pathname. Close the current program. [man](https://man7.org/linux/man-pages/man2/execve.2.html)
+* dup : Create a redicrection to the smallest fd possible. [man](https://man7.org/linux/man-pages/man2/dup.2.html)
+* dup2 : Create a redirection newfd to oldfd. [man](https://man7.org/linux/man-pages/man2/dup.2.html) 
+* pipe : Take int[2] in parameter and link to it the read end and write end fd. [man](https://man7.org/linux/man-pages/man2/pipe.2.html) 
+* opendir : Return a pointer to the directory stream name passed in parameter. [man](https://man7.org/linux/man-pages/man3/opendir.3.html) 
+* readdir : Function returns a pointer to a dirent structure representing the next directory entry in the directory stream pointed to by dirp. [man](https://man7.org/linux/man-pages/man3/readdir.3.html)
+* closedir : Function close directory stream associated with Dirp. [man](https://man7.org/linux/man-pages/man3/closedir.3.html)
+* strerror : Return a pointer to a string describing the code errno passed in parameter. [man](https://man7.org/linux/man-pages/man3/strerror.3.html)
+* perror : Produce a error message on standart error (fd: 2) producing by multiple function library. [man](https://man7.org/linux/man-pages/man3/sys_nerr.3.html)
 * isatty
 * ttyname
 * ttyslot
-* ioctl
-* getenv
+* ioctl : [man](https://man7.org/linux/man-pages/man2/ioctl.2.html)
+* getenv : Return a pointer to environement variable passed in parameter.  [man] (http://manpagesfr.free.fr/man/man3/getenv.3.html)
 * tcsetattr
 * tcgetattr
 * tgetent

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/07/28 15:23:17 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/07/29 07:38:53 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef signed long long	t_int64;
 typedef unsigned long long	t_uint64;
 
 
-# define NB_ERRORS 5;
+# define NB_ERRORS 5
 
 typedef enum e_errors {
     KEY_ERROR_PARAMS,
@@ -51,9 +51,6 @@ typedef struct s_error {
     int     err_key;
     char    *err_msg;
 }           t_error;
-
-struct t_error tab_errors[NB_ERRORS];
-
 
 # define MSG_ERROR_PARAMS "Minishell don't take any params."
 
