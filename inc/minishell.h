@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/07/29 07:38:53 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/07/29 08:34:29 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,18 @@ typedef struct s_error {
     int     err_key;
     char    *err_msg;
 }           t_error;
+
+/*
+  builtin shell commands:
+*/
+t_uint8 ms_echo(char option, char **args);
+t_uint8 ms_cd(char **args);
+t_uint8 ms_pwd(char **args);
+t_uint8 ms_export(char **args);
+t_uint8 ms_unset(char **args);
+t_uint8 ms_env(void);
+t_uint8 ms_exit(void);
+
 
 # define MSG_ERROR_PARAMS "Minishell don't take any params."
 

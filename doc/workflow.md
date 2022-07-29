@@ -18,11 +18,12 @@ La boucle générale du programme:
 ```c
 while (1)
 {
-    display_prompt();
-    read_input(); // parse and analysis of input
+    display_prompt(); // prompt and readline
+    check_input(); // parse and errors
+    tokenization_data(); // analysis of input and data structure (AST ?)
     if ( fork() != 0 ) // parent
-        wait (NULL);
+        wait (NULL); // wait for child
     else
-        execve ? // execution du programme
+        execve ? // execution du programme from data
 }
 ```

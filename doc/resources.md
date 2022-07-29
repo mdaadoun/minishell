@@ -5,6 +5,7 @@
 * [POSIX Specification](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html) (see section 2.10 shell grammar)
 * [Bash Reference Manual](https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html) 
 * [Unix Processes in C Playlist](https://www.youtube.com/playlist?list=PLfqABt5AS4FkW5mOn2Tn9ZZLLDwA3kZUY)
+* [Unix Signal](https://www.linuxtricks.fr/wiki/signaux-unix-unix-signals)
 
 ## stack overflow:
 
@@ -19,6 +20,7 @@
 * https://hackernoon.com/lets-build-a-linux-shell-part-i-bz3n3vg1
 * https://www.geeksforgeeks.org/developing-linux-based-shell/
 * https://www.geeksforgeeks.org/making-linux-shell-c/
+* https://www.tutorialspoint.com/unix/unix-signals-traps.htm
 
 ## diagram
 
