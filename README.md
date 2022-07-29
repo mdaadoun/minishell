@@ -2,22 +2,6 @@
 
 Objective : Write a shell
 
-## Architecture
-
-TODO : https://draw.42l.fr/
-
-## Workflow steps
-
-**READ > EVALUATE > PRINT > LOOP** (REPL)
-
-### 1) Lexer, lexical analyser
-
-* Tokenization
-
-### 3) parser -> AST
-
-### 3) Executor, printing the result
-
 ## Partie obligatoire
 
 - [x] display **prompt** 
