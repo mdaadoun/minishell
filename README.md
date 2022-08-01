@@ -2,12 +2,11 @@
 
 Objective : Write a shell
 
-## Partie obligatoire
+## Partie obligatoire (dossier ./src/core)
 
-- [x] display **prompt** 
-    - [ ] exit prompt (exit, ctrl-D) 
+- [x] display **prompt**
 > Afficher un prompt en l’attente d’une nouvelle commande.
-- [ ] Launch any **program** (using path env) 
+- [ ] Launch any **program** (using path env to find programs) 
 >    Chercher et lancer le bon exécutable (en se basant sur la variable d’environnement PATH, ou sur un chemin relatif ou absolu).
 - [ ] **History**
     * access global history ? add/clear
@@ -75,7 +74,7 @@ Notes :
 
 > La fonction readline() peut causer des fuites de mémoire. Vous n’avez pas à les gérer. Attention, cela ne veut pas pour autant dire que votre code, oui celui que vous avez écrit, peut avoir des fuites de mémoire.
 
-## Partie bonus
+## Partie bonus (dossier ./src/bonus)
 
 - [ ] && and || with (parentheses) for priority in operations.
 - [ ] The wildcard * in the current directory.

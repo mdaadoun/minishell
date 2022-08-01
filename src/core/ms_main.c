@@ -6,11 +6,11 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:07:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/07/29 07:44:26 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/01 15:26:37 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../inc/minishell.h"
 
 static char	*ft_get_cmd(char **path, char *cmd)
 {
@@ -33,34 +33,56 @@ static char	*ft_get_cmd(char **path, char *cmd)
 void	handle_signals(int signo)
 {
 
-	ft_printf("%d", signo);
+	// ft_printf("signal:%d", signo);
 	if (signo == SIGINT)
-		printf("\nYou pressed Ctrl+C\n|-->");
+		printf("\nYou pressed Ctrl+C\nminishell>");
 }
 
-int	main(int ac, char **av, char **envp)
+/*
+ * Alloc memory and prepare starting data for the minishell.
+ * 		path: current working directory
+ * 
+ * @params:
+ *      ms  :   the main minishell data structure to free.
+*/
+void initialize_minishell(t_minishell **ms)
 {
-	char	*input;
-	char	**path;
+	*ms = (t_minishell *) ft_calloc(sizeof(t_minishell), 1);
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	t_minishell *ms;
 	char	*cmd;
 	char	**arg;
 
-	path = ft_split(getenv("PATH"), ':');
+	if (argc != 1)
+		exit(ms_free_before_exit(NULL, ERROR_PARAMS));
+	initialize_minishell(&ms);
+	if (DEBUG)
+	{
+		// run_test(argc, argv, envp);
+		exit(ms_free_before_exit(NULL, SUCCESS));
+	}
+	ms->path = ft_split(getenv("PATH"), ':');
 	if (signal(SIGINT, handle_signals) == SIG_ERR)
 		printf("Failed\n");
-	while (1)
+	ms->line = "";
+	while (ms->line)
 	{
-		input = readline("|-->");
-		if (!input)
-			break;
-		ft_printf("%s\n", input);
-		add_history(input);
-		arg = ft_split(input, ' ');
-		cmd = ft_get_cmd(path, arg[0]);
+		ms->line = readline("minishell>");
+		if (!ms->line)
+			exit(ms_free_before_exit(ms, ERROR_UNKNOWN));
+		ft_printf("%d\n",rl_catch_signals);
+		ft_printf("%s\n", ms->line);
+		add_history(ms->line);
+		arg = ft_split(ms->line, ' ');
+		cmd = ft_get_cmd(ms->path, arg[0]);
 		execve(cmd, arg, envp);
-		free(input);
+		free(ms->line);
 	}
-	(void)ac;
-	(void)av;
-	return (0);
+	(void)argc;
+	(void)argv;
+	(void)envp;
+	return (ms_free_before_exit(ms, SUCCESS));
 }

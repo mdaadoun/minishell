@@ -6,7 +6,7 @@
 #    By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/20 08:44:56 by mdaadoun          #+#    #+#              #
-#    Updated: 2022/07/28 14:27:55 by mdaadoun         ###   ########.fr        #
+#    Updated: 2022/08/01 10:22:49 by mdaadoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,10 +62,4 @@ fclean: clean
 
 re: fclean all
 
-debug:
-	@$(CC) $(DEBUG_FLAGS) -c $(SRCS)
-	@echo "$(B)Building debug libraries.$(D)"
-	@$(AR) $(NAME) $(OBJS)
-	@echo "$(G)$(NAME) created.$(D)"
-
-.PHONY:  all clean fclean re debug
+.PHONY:  all clean fclean re 
