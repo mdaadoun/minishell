@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/02 10:44:17 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/02 10:57:04 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,9 @@ t_uint8 ms_exit(void);
 
 typedef struct s_token
 {
-    char            *content;
-    t_grammar_type  *type;
-    struct s_token  *next;
+    char                    *content;
+    enum e_grammar_type     *type;
+    struct s_token          *next;
 }           t_token;
 
 void ms_parser(t_minishell *ms);
