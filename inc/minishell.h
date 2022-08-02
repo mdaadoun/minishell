@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/01 15:14:42 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/02 09:06:48 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef unsigned long long	t_uint64;
 */
 typedef struct e_minishell {
 	char	*name;
-	char	**path;
+	char	*path;
 	char	*line;
 }           t_minishell;
 
@@ -92,6 +92,24 @@ t_uint8 ms_exit(void);
  *  Signal handling:
 */
 
+/*
+ *  Lexical Analyzer:
+*/
+
+void ms_lexer(t_minishell *ms);
+
+/*
+ *  Parser:
+*/
+
+void ms_parser(t_minishell *ms);
+
+
+/*
+ *  Evaluation executer:
+*/
+
+void ms_executer(t_minishell *ms);
 
 /*
  *	Errors and memory:

@@ -6,7 +6,7 @@
 #    By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/20 08:44:56 by mdaadoun          #+#    #+#              #
-#    Updated: 2022/08/01 14:38:04 by mdaadoun         ###   ########.fr        #
+#    Updated: 2022/08/02 09:05:35 by mdaadoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,9 @@ NAME = minishell
 SRCS = ms_main.c \
 builtin/ms_cd.c builtin/ms_echo.c builtin/ms_env.c builtin/ms_exit.c \
 builtin/ms_export.c builtin/ms_pwd.c builtin/ms_unset.c \
-executor/ms_execute.c executor/ms_free.c \
+executer/ms_executer.c executer/ms_free.c \
+parser/ms_parser.c \
+lexer/ms_lexer.c \
 parser/ms_errors.c
 DIR = src/core
 OBJS = $(addprefix $(DIR)/,$(SRCS:%.c=%.o))
