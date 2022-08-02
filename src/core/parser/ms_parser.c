@@ -6,12 +6,15 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 09:03:27 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/02 14:45:50 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/02 17:06:46 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
+ // build data structure from line 
+ // read command line and build tokens structure 
+ // (space "" '' $ |)
 void ms_parser(t_minishell *ms)
 {
 	size_t	ind;

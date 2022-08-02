@@ -1,1 +1,13 @@
-* signal sigaction Ctrl-C
+
+## parsing single and double quotes
+
+* build and free the token structure each readline, also when program exit
+* unit-test the parser (quotes), debug test (displaying the test) and assert test (just ok if it is what is expected)
+    * for the quote function return an int representing the number of token produced
+* clean the parser to move the quote filtering in its own functions 
+
+## signal and keys ?
+
+* signal sigaction Ctrl-C ?
+* Ctrl-D ?
+* Ctrl-\ ?

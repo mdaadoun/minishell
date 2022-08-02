@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/02 10:57:04 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/02 16:34:32 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct e_minishell {
 }           t_minishell;
 
 
+
 /*
  *  Errors structures:
 */
@@ -71,6 +72,16 @@ typedef enum e_error {
     ERROR_UNKNOWN
 }           t_error;
 
+
+/*
+ * Main functions
+ *		files:
+ *			core/ms_main.c
+*/
+
+void	ms_initialize_minishell(t_minishell **ms);
+
+
 /*
  *  Builtin shell commands:
  *		files :	
@@ -83,9 +94,9 @@ typedef enum e_error {
  *			core/builtin/ms_unset.c
 */
 
-t_uint8 ms_echo(char **args, char option);
-t_uint8 ms_cd(char **args);
-t_uint8 ms_pwd(char **args);
+t_uint8	ms_echo(char **args, char option);
+t_uint8	ms_cd(char **args);
+t_uint8	ms_pwd(char **args);
 
 typedef struct s_variable {
     char                *name;
@@ -93,38 +104,46 @@ typedef struct s_variable {
     struct s_variable   *next;
 }   t_variable;
 
-
-t_uint8 ms_export(char **args);
-t_uint8 ms_unset(char **args);
-t_uint8 ms_env(char **args);
-t_uint8 ms_exit(void);
+t_uint8	ms_export(char **args);
+t_uint8	ms_unset(char **args);
+t_uint8	ms_env(char **args);
+t_uint8	ms_exit(void);
 
 /*
  *  Signal handling:
+ *      Files :
+ *			core/executer/ms_events.c
 */
+
+void	handle_signals(int signo);
 
 /*
  *  Parser:
+ *      Files :
+ *			core/parser/ms_parser.c
+ *			core/parser/ms_tokenization.c
+ *          
 */
 
 typedef struct s_token
 {
-    char                    *content;
-    enum e_grammar_type     *type;
-    struct s_token          *next;
+    char				*content;
+    enum e_token_type   *type;
+    struct s_token		*next;
 }           t_token;
 
-void ms_parser(t_minishell *ms);
-void ms_check_quotes(char *str);
-void ms_add_token(t_minishell *ms, char* content);
+void	ms_parser(t_minishell *ms);
+void	ms_check_quotes(char *str);
+void	ms_add_token(t_minishell *ms, char* content);
+void	ms_free_all_tokens(t_minishell *ms);
 
 /*
  *  Lexical Analyzer:
 */
 
-typedef enum e_grammar_type
+typedef enum e_token_type
 {
-    NILL,
+    NO_TYPE,
     ARG_STRING,
     ARG_OPTION,
     PIPE,
@@ -136,16 +155,16 @@ typedef enum e_grammar_type
     REDIRECTION_DOUBLE_LEFT,
     REDIRECTION_RIGHT,
     REDIRECTION_DOUBLE_RIGHT
-}   t_grammar_type;
+}   t_token_type;
 
-void ms_lexer(t_minishell *ms);
-void ms_replace_variables(t_minishell *ms);
+void	ms_lexer(t_minishell *ms);
+void	ms_replace_variables(t_minishell *ms);
 
 /*
  *  Evaluation executer:
 */
 
-void ms_executer(t_minishell *ms);
+void	ms_executer(t_minishell *ms);
 
 /*
  *	Errors and memory:
@@ -154,8 +173,8 @@ void ms_executer(t_minishell *ms);
  *			core/executor/ms_free.c
 */
 
-int    ms_free_before_exit(t_minishell *ms, int err_key);
-
+int		ms_free_before_exit(t_minishell *ms, int err_key);
+void	ms_free_last_command(t_minishell *ms);
 
 /*
  *  Debug variables and functions:
@@ -168,7 +187,8 @@ int    ms_free_before_exit(t_minishell *ms, int err_key);
 # define DEBUG 0
 #endif
 
-void  run_test(int argc, char **argv, char **envp);
-void  test_builtin(int argc, char **argv, char **envp);
+void 	run_test(int argc, char **argv, char **envp);
+void 	test_builtin(int argc, char **argv, char **envp);
+void	test_parser(t_minishell *ms);
 
 #endif
