@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/02 09:06:48 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/02 10:44:17 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,11 @@ typedef unsigned long long	t_uint64;
  *		line:	last line read from input.
 */
 typedef struct e_minishell {
-	char	*name;
-	char	*path;
-	char	*line;
+	char	            *cwd_path;
+	char	            **bin_paths;
+	char	            *line;
+    struct s_token      *first_token;
+    struct s_variable   *first_var;
 }           t_minishell;
 
 
@@ -80,9 +82,18 @@ typedef enum e_error {
  *			core/builtin/ms_pwd.c
  *			core/builtin/ms_unset.c
 */
+
 t_uint8 ms_echo(char **args, char option);
 t_uint8 ms_cd(char **args);
 t_uint8 ms_pwd(char **args);
+
+typedef struct s_variable {
+    char                *name;
+    char                *content;
+    struct s_variable   *next;
+}   t_variable;
+
+
 t_uint8 ms_export(char **args);
 t_uint8 ms_unset(char **args);
 t_uint8 ms_env(char **args);
@@ -93,17 +104,42 @@ t_uint8 ms_exit(void);
 */
 
 /*
- *  Lexical Analyzer:
-*/
-
-void ms_lexer(t_minishell *ms);
-
-/*
  *  Parser:
 */
 
-void ms_parser(t_minishell *ms);
+typedef struct s_token
+{
+    char            *content;
+    t_grammar_type  *type;
+    struct s_token  *next;
+}           t_token;
 
+void ms_parser(t_minishell *ms);
+void ms_check_quotes(char *str);
+void ms_add_token(t_minishell *ms, char* content);
+
+/*
+ *  Lexical Analyzer:
+*/
+
+typedef enum e_grammar_type
+{
+    NILL,
+    ARG_STRING,
+    ARG_OPTION,
+    PIPE,
+    EXTERNAL_COMMAND,
+    BUILTIN_COMMAND,
+    AND,
+    OR,
+    REDIRECTION_LEFT,
+    REDIRECTION_DOUBLE_LEFT,
+    REDIRECTION_RIGHT,
+    REDIRECTION_DOUBLE_RIGHT
+}   t_grammar_type;
+
+void ms_lexer(t_minishell *ms);
+void ms_replace_variables(t_minishell *ms);
 
 /*
  *  Evaluation executer:

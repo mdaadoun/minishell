@@ -6,7 +6,7 @@
 #    By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/20 08:44:56 by mdaadoun          #+#    #+#              #
-#    Updated: 2022/08/02 09:05:35 by mdaadoun         ###   ########.fr        #
+#    Updated: 2022/08/02 09:26:55 by mdaadoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,15 +36,13 @@ D = \033[38;5;255m
 .c.o:
 	@$(CC) $(FLAGS) -c $< -o ${<:.c=.o}
 
-all: build_lib $(NAME)
+all: $(NAME)
 
 $(NAME): $(OBJS)
+	@make -sC src/libft
 	@echo "$(B)Building $(NAME) program.$(D)"
 	@$(CC) $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(READLINE_FLAGS)
 	@echo "$(G)$(NAME) program created.$(D)"
-
-build_lib:
-	@make -sC src/libft
 
 NAME_BONUS = minishell_bonus
 SRCS_BONUS = ms_main_bonus.c
@@ -52,11 +50,13 @@ DIR_BONUS = src/bonus
 OBJS_BONUS = $(addprefix $(DIR_BONUS)/,$(SRCS_BONUS:%.c=%.o))
 
 $(NAME_BONUS): $(OBJS_BONUS)
-	@echo "$(B)Building $(NAME_BONUS) program.$(D)"
+	@make -sC src/libft
+	@echo "$(B)Building $(NAME) program with bonus.$(D)"
 	@$(CC) $(FLAGS) $(OBJS_BONUS) $(LIBFT) -o $(NAME_BONUS) $(READLINE_FLAGS)
-	@echo "$(G)$(NAME_BONUS) program created.$(D)"
+	@rm $(NAME); mv $(NAME_BONUS) $(NAME)
+	@echo "$(G)$(NAME) program with bonus created.$(D)"
 
-bonus: build_lib $(NAME_BONUS)
+bonus: $(NAME_BONUS)
 
 clean:
 	@echo "$(R)Remove all object files.$(D)"

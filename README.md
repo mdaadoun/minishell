@@ -6,8 +6,10 @@ Objective : Write a shell
 
 - [x] display **prompt**
 > Afficher un prompt en l’attente d’une nouvelle commande.
+
 - [ ] Launch any **program** (using path env to find programs) 
 >    Chercher et lancer le bon exécutable (en se basant sur la variable d’environnement PATH, ou sur un chemin relatif ou absolu).
+
 - [ ] **History**
     * access global history ? add/clear
 > Posséder un historique fonctionnel.
