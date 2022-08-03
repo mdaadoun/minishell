@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 13:48:48 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/02 17:15:19 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/03 09:27:35 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ char *get_err_msg(int err_key)
         str = MSG_ERROR_PARAMS;
     else if (err_key == ERROR_ALLOC)
         str = MSG_ERROR_ALLOC;
+    else if (err_key == ERROR_COMMAND)
+        str = MSG_ERROR_COMMAND;
     else
         str = MSG_ERROR_UNKNOWN;
     return (str);

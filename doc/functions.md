@@ -62,12 +62,13 @@ ssize_t read(int fildes, void *buf, size_t nbyte);
 char *getcwd(char *buf, size_t size);
 ```
 > Return a null-terminated string containing an absolute pathname that is the current working directory of the calling process. [man](https://www.man7.org/linux/man-pages/man3/getcwd.3.html)
+* **chdir** : change working directory.
 
-* **chdir**
-* **stat**
-* **lstat**
-* **fstat**
-* **unlink**
+* **stat** : display file or file system status
+* **lstat** : get file status 
+* **fstat** : get file status
+
+* **unlink** : delete a name and possibly the file it refers to
 * **execve** : 
 > Execute program passed in pathname. Close the current program. [man](https://man7.org/linux/man-pages/man2/execve.2.html)
 * **dup** : 
