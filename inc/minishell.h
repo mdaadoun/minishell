@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/03 10:24:56 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/03 10:28:44 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,23 @@ void	handle_signals(int signo);
  *          
 */
 
+typedef enum e_token_type
+{
+    NO_TYPE,
+    ARG_STRING,
+    ARG_OPTION,
+    PIPE,
+    EXTERNAL_COMMAND,
+    BUILTIN_COMMAND,
+    AND,
+    OR,
+    REDIRECTION_LEFT,
+    REDIRECTION_DOUBLE_LEFT,
+    REDIRECTION_RIGHT,
+    REDIRECTION_DOUBLE_RIGHT,
+    WILDCARD
+}   t_token_type;
+
 typedef struct s_token
 {
     char				*content;
@@ -154,23 +171,6 @@ void	ms_free_all_tokens(t_minishell *ms);
  *          core/lexer/ms_lexer.c
  *          core/lexer/ms_command.c
 */
-
-typedef enum e_token_type
-{
-    NO_TYPE,
-    ARG_STRING,
-    ARG_OPTION,
-    PIPE,
-    EXTERNAL_COMMAND,
-    BUILTIN_COMMAND,
-    AND,
-    OR,
-    REDIRECTION_LEFT,
-    REDIRECTION_DOUBLE_LEFT,
-    REDIRECTION_RIGHT,
-    REDIRECTION_DOUBLE_RIGHT,
-    WILDCARD
-}   t_token_type;
 
 void	ms_lexer(t_minishell *ms);
 bool    ms_is_valid_command(t_minishell *ms);
