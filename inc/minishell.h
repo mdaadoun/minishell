@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/03 10:55:53 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/03 11:39:48 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,8 @@ t_token *ms_create_new_token(t_minishell *ms);
 void	ms_add_token(t_minishell *ms, char* content, t_token_type type);
 void    ms_append_token(t_token *before_token, t_token *add_token);
 void	ms_free_all_tokens(t_minishell *ms);
+
+void	ms_swap_env(t_minishell *ms);
 
 /*
  *  Lexical Analyzer:

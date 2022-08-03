@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 09:03:27 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/03 08:51:47 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/03 11:41:22 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void ms_parser(t_minishell *ms)
 			if (line[ind + count] == 39)
 			{
 				content = ft_substr(line, ind, count);
-				ms_add_token(ms, content);
+				ms_add_token(ms, content, ARG_STRING);
 				count++;
 			}
 		}
@@ -55,7 +55,7 @@ void ms_parser(t_minishell *ms)
 			if (line[ind + count] == 34)
 			{
 				content = ft_substr(line, ind, count);
-				ms_add_token(ms , content);
+				ms_add_token(ms , content, ARG_STRING);
 				count++;
 			}
 		}
@@ -66,9 +66,10 @@ void ms_parser(t_minishell *ms)
 				count++;
 			}
 			content = ft_substr(line, ind, count);
-			ms_add_token(ms, content);
+			ms_add_token(ms, content, NO_TYPE);
 		}
 		ind += count;
 		count = 0;
 	}
+	ms_swap_env(ms);
 }
