@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 13:48:48 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/03 09:27:35 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/03 15:11:16 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void ms_free_last_command(t_minishell *ms)
 {
     if (ms)
     {
-        if (ms->line)
-            free(ms->line);
+        if (ms->full_line)
+            free(ms->full_line);
         ms_free_all_tokens(ms);
     }
 }

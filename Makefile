@@ -6,7 +6,7 @@
 #    By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/20 08:44:56 by mdaadoun          #+#    #+#              #
-#    Updated: 2022/08/03 14:18:39 by dlaidet          ###   ########.fr        #
+#    Updated: 2022/08/03 15:54:33 by mdaadoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,9 @@ SRCS = ms_main.c \
 builtin/ms_cd.c builtin/ms_echo.c builtin/ms_env.c builtin/ms_exit.c \
 builtin/ms_export.c builtin/ms_pwd.c builtin/ms_unset.c \
 executer/ms_executer.c executer/ms_free.c executer/ms_events.c \
-parser/ms_parser.c parser/ms_tokenizer.c parser/ms_errors.c \
-lexer/ms_lexer.c lexer/ms_command.c parser/ms_env.c parser/ms_parse_pipe.c
+parser/ms_parser.c parser/ms_tokenizer.c  parser/ms_parse_pipe.c \
+parser/ms_env.c parser/ms_parse_quotes.c \
+lexer/ms_lexer.c lexer/ms_command.c 
 
 DIR = src/core
 OBJS = $(addprefix $(DIR)/,$(SRCS:%.c=%.o))
@@ -88,7 +89,7 @@ ft_dlstlast.c ft_lstnew_str.c ft_lstdelone_str.c ft_lstclear_str.c ft_lstadd_bac
 
 DEBUG_FLAGS = -g3 -ggdb -I. -D DEBUG=1 #-fsanitize=address  -fsanitize=leak
 V_ARG	=  --suppressions=.valgrind_ignore_readline --track-origins=yes --leak-check=full --show-leak-kinds=all -s
-TEST_SRCS = src/test/test_builtin.c src/test/test_main.c src/test/test_parsing.c
+TEST_SRCS = src/test/test_builtin.c src/test/test_main.c src/test/test_parser.c src/test/test_lexer.c
 
 ARGS = 
 

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:07:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/03 07:51:28 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/03 15:11:32 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	ms_initialize_minishell(t_minishell **ms)
 {
 	char *buf;
 
-	ft_printf("%s", MINISHELL_LOGO);
+	if (!DEBUG)
+		ft_printf("%s", MINISHELL_LOGO);
 	buf = (char *)ft_calloc(sizeof(char), 1024);
 	if (!buf)
 		exit(ms_free_before_exit(*ms, ERROR_ALLOC));
@@ -32,7 +33,7 @@ void	ms_initialize_minishell(t_minishell **ms)
 		exit(ms_free_before_exit(*ms, ERROR_ALLOC));
 	(*ms)->cwd_path = getcwd(buf, 1024);
 	(*ms)->bin_paths = ft_split(getenv("PATH"), ':');
-	(*ms)->line = "";
+	(*ms)->full_line = "";
 }
 
 /*
@@ -42,10 +43,10 @@ void	ms_initialize_minishell(t_minishell **ms)
 static void display_prompt_and_wait(t_minishell *ms)
 {
 	printf("%s", ms->cwd_path);
-	ms->line = readline(">");
-	if (!ms->line)
+	ms->full_line = readline(">");
+	if (!ms->full_line)
 		exit(ms_free_before_exit(ms, ERROR_UNKNOWN));
-	add_history(ms->line);
+	add_history(ms->full_line);
 }
 
 /*
@@ -67,12 +68,15 @@ int	main(int argc, char **argv, char **envp)
 	ms_initialize_minishell(&ms);
 	if (signal(SIGINT, handle_signals) == SIG_ERR)
 		printf("Failed\n");
-	while (ms->line)
+	while (ms->full_line)
 	{
 		display_prompt_and_wait(ms);
-		ms_parser(ms);
-		ms_lexer(ms);
-		ms_executer(ms);
+		if (ft_strlen(ms->full_line))
+		{
+			ms_parser(ms);
+			ms_lexer(ms);
+			ms_executer(ms);
+		}
 		ms_free_last_command(ms);
 	}
 	return (ms_free_before_exit(ms, SUCCESS));

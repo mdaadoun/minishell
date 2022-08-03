@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 10:55:29 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/03 11:04:55 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/03 15:18:47 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static  void push_after_last_token(t_token *first, t_token *last)
         tmp = tmp->next;
     tmp->next = last;
 }
-
 
 /*
  * Return a pointer to the allocated memory for a new t_token element.

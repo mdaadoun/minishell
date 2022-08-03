@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 13:46:11 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/02 15:59:59 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/03 15:12:01 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,18 @@
 // 	return (NULL);
 // }
 
+// rebuild each commands from tokens
+void build_commands(t_minishell *ms)
+{
+    (void) ms;
+}
+
+// debug function to display the built commands
+void display_commands(t_minishell *ms)
+{
+    (void) ms;
+}
+
 void ms_executer(t_minishell *ms)
 {
     // if ( fork() != 0 ) // parent
@@ -38,8 +50,9 @@ void ms_executer(t_minishell *ms)
     // else
     //     execve ? // execution du programme child from data
     
-    // arg = ft_split(ms->line, ' ');
+    // arg = ft_split(ms->full_line, ' ');
     // cmd = ft_get_cmd(ms->bin_paths, arg[0]);
     // execve(cmd, arg, envp);
-    (void) ms;
+    build_commands(ms);
+    display_commands(ms);
 }

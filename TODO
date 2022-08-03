@@ -11,3 +11,11 @@
 * signal sigaction Ctrl-C ?
 * Ctrl-D ?
 * Ctrl-\ ?
+
+Change:
+ms->full_line : ms->command_line
+
+
+commands functions to check after parser and lexer:
+build_commands(ms);
+display_commands(ms);

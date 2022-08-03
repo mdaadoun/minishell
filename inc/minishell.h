@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/03 14:49:00 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/03 15:51:43 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,15 @@ typedef unsigned long long	t_uint64;
 // Minishell main structure:
 
 # define MINISHELL_LOGO "\
-=================================================================== \n\n\
-███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗ \n\
-████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║ \n\
-██╔████╔██║██║██╔██╗ ██║██║███████╗███████║█████╗  ██║     ██║ \n\
-██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║     ██║ \n\
-██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗ \n\
-╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝ \n\
-=========================mdaadoun&dlaidet========================== \n\n"\
++=====================================================================+\n\
+|             :            .                                          |\n\
+| ███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗      |\n\
+| ████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║      |\n\
+| ██╔████╔██║██║██╔██╗ ██║██║███████╗███████║█████╗  ██║     ██║      |\n\
+| ██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║     ██║      |\n\
+| ██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗ |\n\
+| ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝ |\n\
+\\=========================mdaadoun&&dlaidet===========================/\n\n"\
 
 /*
  *	Elements:
@@ -58,7 +59,8 @@ typedef unsigned long long	t_uint64;
 typedef struct e_minishell {
 	char	            *cwd_path;
 	char	            **bin_paths;
-	char	            *line;
+    char                **command_lines;
+	char	            *full_line;
     struct s_token      *first_token;
     struct s_variable   *first_var;
 }           t_minishell;
@@ -80,7 +82,6 @@ typedef enum e_error {
     ERROR_UNKNOWN
 }           t_error;
 
-
 /*
  * Main functions
  *		files:
@@ -88,7 +89,6 @@ typedef enum e_error {
 */
 
 void	ms_initialize_minishell(t_minishell **ms);
-
 
 /*
  *  Builtin shell commands:
@@ -164,7 +164,7 @@ t_token *ms_create_new_token(t_minishell *ms);
 void	ms_add_token(t_minishell *ms, char* content, t_token_type type);
 void    ms_append_token(t_token *before_token, t_token *add_token);
 void	ms_free_all_tokens(t_minishell *ms);
-
+void    ms_parse_quotes(t_minishell *ms);
 void	ms_swap_env(t_minishell *ms);
 void	ms_parse_pipe(t_minishell *ms);
 void	ms_replace_token(t_token *old, t_token *new);
@@ -207,8 +207,10 @@ void	ms_free_last_command(t_minishell *ms);
 # define DEBUG 0
 #endif
 
+void    display_tokens(t_minishell *ms);
 void 	run_test(int argc, char **argv, char **envp);
 void 	test_builtin(int argc, char **argv, char **envp);
+void    test_lexer(t_minishell *ms);
 void	test_parser(t_minishell *ms);
 
 #endif
