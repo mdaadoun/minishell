@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:07:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/02 17:05:04 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/03 07:51:28 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	ms_initialize_minishell(t_minishell **ms)
 {
 	char *buf;
 
+	ft_printf("%s", MINISHELL_LOGO);
 	buf = (char *)ft_calloc(sizeof(char), 1024);
 	if (!buf)
 		exit(ms_free_before_exit(*ms, ERROR_ALLOC));
