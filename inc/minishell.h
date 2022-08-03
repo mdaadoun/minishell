@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/03 10:28:44 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/03 10:30:08 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ typedef enum e_token_type
 typedef struct s_token
 {
     char				*content;
-    enum e_token_type   *type;
+    enum e_token_type   type;
     struct s_token		*prev;
     struct s_token		*next;
 }           t_token;
