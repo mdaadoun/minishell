@@ -6,7 +6,7 @@
 /*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 11:06:35 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/03 11:40:55 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/03 14:23:35 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ void	ms_swap_env(t_minishell *ms)
 	size_t	lenv;
 	char	*s1;
 	char	*s2;
+	char	*env;
 	char	*new;
+	t_variable *var;
 
 	tok = ms->first_token;
 	while (tok)
@@ -34,7 +36,22 @@ void	ms_swap_env(t_minishell *ms)
 				while (tok->content[ind + lenv] && tok->content[ind +lenv] != ' ')
 					lenv++;
 				s2 = ft_substr(tok->content, ind + 1, lenv);
-				new = ft_strjoin(s1, getenv(s2));
+				env = getenv(s2);
+				if (!env)
+				{
+					var = ms->first_var;
+					while (var)
+					{
+						if (strcmp(s2, var->name))
+						{
+							env = var->content;
+							break;
+						}
+					}
+				}
+				if (!env)
+					env = "";
+				new = ft_strjoin(s1, env);
 				free(s1);
 				free(s2);
 				ind += lenv;
