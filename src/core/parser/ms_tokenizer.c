@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 10:55:29 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/03 10:25:40 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/03 10:56:18 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@ static  void push_after_last_token(t_token *first, t_token *last)
     tmp->next = last;
 }
 
+
 /*
  * Return a pointer to the allocated memory for a new t_token element.
 */
-static t_token *create_new_token(t_minishell *ms)
+t_token *ms_create_new_token(t_minishell *ms)
 {
     t_token *token;
 
@@ -64,7 +65,7 @@ void ms_free_all_tokens(t_minishell *ms)
 /*
  * Check if it the first token
 */
-void ms_add_token(t_minishell *ms, char* content, t_token_type type)
+t_token *token ms_add_token(t_minishell *ms, char* content, t_token_type type)
 {
     t_token *token;
 
@@ -78,3 +79,7 @@ void ms_add_token(t_minishell *ms, char* content, t_token_type type)
 }
 
 // create a function to add a token next to a given token
+void ms_append_token(t_token *before_token, t_token *add_token)
+{
+    ft_printf("Added token:%s after token:%s\n", add_token->content, before_token->content);
+}

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/03 10:30:08 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/03 10:55:53 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ typedef struct e_minishell {
     struct s_token      *first_token;
     struct s_variable   *first_var;
 }           t_minishell;
-
-
 
 /*
  *  Errors structures:
@@ -143,12 +141,12 @@ typedef enum e_token_type
     PIPE,
     EXTERNAL_COMMAND,
     BUILTIN_COMMAND,
-    AND,
-    OR,
     REDIRECTION_LEFT,
     REDIRECTION_DOUBLE_LEFT,
     REDIRECTION_RIGHT,
     REDIRECTION_DOUBLE_RIGHT,
+    AND,
+    OR,
     WILDCARD
 }   t_token_type;
 
@@ -162,7 +160,9 @@ typedef struct s_token
 
 void	ms_parser(t_minishell *ms);
 void	ms_check_quotes(char *str);
+t_token *ms_create_new_token(t_minishell *ms);
 void	ms_add_token(t_minishell *ms, char* content, t_token_type type);
+void    ms_append_token(t_token *before_token, t_token *add_token);
 void	ms_free_all_tokens(t_minishell *ms);
 
 /*
