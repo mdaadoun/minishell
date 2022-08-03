@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/03 08:17:51 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/03 10:24:56 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,14 @@ typedef struct e_minishell {
 
 # define MSG_ERROR_PARAMS "Minishell don't take any parameter."
 # define MSG_ERROR_ALLOC "An error with memory allocation occured."
+# define MSG_ERROR_COMMAND "The command is not found."
 # define MSG_ERROR_UNKNOWN "Error."
 
 typedef enum e_error {
     SUCCESS,
     ERROR_PARAMS,
     ERROR_ALLOC,
-    ERROR_TMP_3,
-    ERROR_TMP_4,
+    ERROR_COMMAND,
     ERROR_UNKNOWN
 }           t_error;
 
@@ -139,16 +139,20 @@ typedef struct s_token
 {
     char				*content;
     enum e_token_type   *type;
+    struct s_token		*prev;
     struct s_token		*next;
 }           t_token;
 
 void	ms_parser(t_minishell *ms);
 void	ms_check_quotes(char *str);
-void	ms_add_token(t_minishell *ms, char* content);
+void	ms_add_token(t_minishell *ms, char* content, t_token_type type);
 void	ms_free_all_tokens(t_minishell *ms);
 
 /*
  *  Lexical Analyzer:
+ *      Files :
+ *          core/lexer/ms_lexer.c
+ *          core/lexer/ms_command.c
 */
 
 typedef enum e_token_type
@@ -164,11 +168,13 @@ typedef enum e_token_type
     REDIRECTION_LEFT,
     REDIRECTION_DOUBLE_LEFT,
     REDIRECTION_RIGHT,
-    REDIRECTION_DOUBLE_RIGHT
+    REDIRECTION_DOUBLE_RIGHT,
+    WILDCARD
 }   t_token_type;
 
 void	ms_lexer(t_minishell *ms);
-void	ms_replace_variables(t_minishell *ms);
+bool    ms_is_valid_command(t_minishell *ms);
+// void	ms_replace_variables(t_minishell *ms);
 
 /*
  *  Evaluation executer:

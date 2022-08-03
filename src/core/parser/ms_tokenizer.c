@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_tokenization.c                                  :+:      :+:    :+:   */
+/*   ms_tokenizer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 10:55:29 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/02 17:27:11 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/03 10:25:40 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,17 @@ void ms_free_all_tokens(t_minishell *ms)
 /*
  * Check if it the first token
 */
-void ms_add_token(t_minishell *ms, char* content)
+void ms_add_token(t_minishell *ms, char* content, t_token_type type)
 {
     t_token *token;
 
     token = create_new_token(ms);
     token->content = content;
+    token->type = type;
     if (!ms->first_token)
         ms->first_token = token;
     else
         push_after_last_token(ms->first_token, token);
 }
+
+// create a function to add a token next to a given token
