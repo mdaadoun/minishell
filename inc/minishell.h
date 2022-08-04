@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/03 15:51:43 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/04 09:27:07 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,19 @@ void	ms_initialize_minishell(t_minishell **ms);
  *			core/builtin/ms_unset.c
 */
 
+
+typedef enum e_builtins {
+    BIN_NULL,
+    BIN_ECHO,
+    BIN_CD,
+    BIN_PWD,
+    BIN_EXPORT,
+    BIN_UNSET,
+    BIN_ENV,
+    BIN_EXIT,
+    BIN_HISTORY,
+}   t_builtins;
+
 t_uint8	ms_echo(char **args, char option);
 t_uint8	ms_cd(char **args);
 t_uint8	ms_pwd(char **args);
@@ -154,6 +167,7 @@ typedef struct s_token
 {
     char				*content;
     enum e_token_type   type;
+    t_builtins          builtin;
     struct s_token		*prev;
     struct s_token		*next;
 }           t_token;

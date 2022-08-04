@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 09:04:20 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/03 13:53:41 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/04 09:36:37 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
  *      x. Pipes ?
  *      x. Redirections ?
  *      x. If valid syntax, checking errors and ignore if not
+ * 		last. check last NO_TYPE if string arg or option
 */
 void ms_lexer(t_minishell *ms)
 {
