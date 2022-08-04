@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 13:48:48 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/03 15:11:16 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/04 13:34:23 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,23 @@ int    ms_free_before_exit(t_minishell *ms, int err_key)
         ft_printf("%s", msg);
         return (EXIT_FAILURE);
     }
+}
+
+/*
+ * Free all the tokens of the ms structure.
+*/
+void ms_free_all_tokens(t_minishell *ms)
+{
+    t_token *token;
+    t_token *swp;
+
+    token = ms->first_token;
+    while (token)
+    {
+        swp = token->next;
+        free(token->content);
+        free(token);
+        token = swp;
+    }
+    ms->first_token = NULL;
 }

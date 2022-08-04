@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 12:07:36 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/04 13:04:52 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/04 13:26:34 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void ms_analyze_pipes(t_minishell *ms)
     token = ms->first_token;
     while(token)
     {
-        if (ft_strncmp("|", token->content, ft_strlen(token->content)))
+        if (!ft_strncmp("|", token->content, ft_strlen(token->content)))
         {
             token->type = TYPE_PIPE;
             ms_analyse_command(ms, token->next);

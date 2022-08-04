@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:07:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/03 15:11:32 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/04 13:15:18 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ms_initialize_minishell(t_minishell **ms)
 */
 static void display_prompt_and_wait(t_minishell *ms)
 {
-	printf("%s", ms->cwd_path);
+	printf("\e[1;38m%s\e[m", ms->cwd_path);
 	ms->full_line = readline(">");
 	if (!ms->full_line)
 		exit(ms_free_before_exit(ms, ERROR_UNKNOWN));

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 10:55:29 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/04 08:20:09 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/04 13:49:17 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,6 @@ t_token *ms_create_new_token(t_minishell *ms)
     return (token);
 }
 
-/*
- * Free all the tokens of the ms structure.
-*/
-void ms_free_all_tokens(t_minishell *ms)
-{
-    t_token *token;
-    t_token *swp;
-
-    token = ms->first_token;
-    while (token)
-    {
-        swp = token->next;
-        free(token->content);
-        free(token);
-        token = swp;
-    }
-    ms->first_token = NULL;
-}
 
 /*
  * Check if it the first token
@@ -84,4 +66,23 @@ void ms_append_token(t_token *before_token, t_token *add_token)
 	add_token->next = before_token->next;
 	add_token->prev = before_token;
 	before_token->next = add_token;
+}
+
+void ms_delete_token(t_token *token)
+{
+    t_token *prev_token;
+    t_token *next_token;
+
+    prev_token = token->prev;
+    next_token = token->next;
+    if (prev_token)
+        prev_token->next = next_token;
+    else
+        next_token->prev = NULL;
+    if (next_token)
+        next_token->prev = prev_token;
+    else
+        prev_token->next = NULL;
+    free(token->content);
+    free(token);
 }

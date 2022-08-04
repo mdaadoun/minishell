@@ -17,6 +17,18 @@ void launch_lexer_command(t_minishell *ms)
     ft_printf("\n");
 }
 
+void launch_lexer_pipe(t_minishell *ms)
+{
+    ft_printf("\e[1;34mTest lexer pipes:\e[m %s\n", ms->full_line);
+    ms_parser(ms);
+    ms_analyse_command(ms, ms->first_token);
+    ms_analyze_pipes(ms);
+    ft_printf("\e[1;34mThe tokens are:\e[m \n");
+    display_tokens(ms);
+    ms_free_all_tokens(ms);
+    ft_printf("\n");
+}
+
 void test_builtins(t_minishell *ms)
 {
 	printf("===Testing builtins lexer===\n");
@@ -70,25 +82,25 @@ void test_pipes(t_minishell *ms)
 {
 	printf("===Testing pipes lexer===\n");
     ms->full_line = ft_strdup("'hello' | hello | hello");
-    launch_lexer_command(ms);
+    launch_lexer_pipe(ms);
 	free(ms->full_line);
     ms->full_line = ft_strdup("cat | | \"cat | cat\"");
-    launch_lexer_command(ms);
+    launch_lexer_pipe(ms);
 	free(ms->full_line);
     ms->full_line = ft_strdup("||cd | '$home'");
-    launch_lexer_command(ms);
+    launch_lexer_pipe(ms);
 	free(ms->full_line);
     ms->full_line = ft_strdup("'$home'cd | cd | cd");
-    launch_lexer_command(ms);
+    launch_lexer_pipe(ms);
 	free(ms->full_line);
     ms->full_line = ft_strdup("|");
-    launch_lexer_command(ms);
+    launch_lexer_pipe(ms);
 	free(ms->full_line);
     ms->full_line = ft_strdup("||||");
-    launch_lexer_command(ms);
+    launch_lexer_pipe(ms);
 	free(ms->full_line);
     ms->full_line = ft_strdup("echo hi | cat | cat | cat | cat");
-    launch_lexer_command(ms);
+    launch_lexer_pipe(ms);
 	free(ms->full_line);
 }
 

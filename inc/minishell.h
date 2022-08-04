@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/04 13:04:39 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/04 13:37:19 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,15 @@ typedef unsigned long long	t_uint64;
 // Minishell main structure:
 
 # define MINISHELL_LOGO "\
-\e[1;38m+=====================================================================+\e[m\n\
-\e[1;38m|\e[m\e[1;34m             :            .                                          \e[m\e[1;38m|\e[m\n\
-\e[1;38m|\e[m\e[1;34m ███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗      \e[m\e[1;38m|\e[m\n\
-\e[1;38m|\e[m\e[1;36m ████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║      \e[m\e[1;38m|\e[m\n\
-\e[1;38m|\e[m\e[1;36m ██╔████╔██║██║██╔██╗ ██║██║███████╗███████║█████╗  ██║     ██║      \e[m\e[1;38m|\e[m\n\
-\e[1;38m|\e[m\e[1;36m ██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║     ██║      \e[m\e[1;38m|\e[m\n\
-\e[1;38m|\e[m\e[1;34m ██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗ \e[m\e[1;38m|\e[m\n\
-\e[1;38m|\e[m\e[1;34m ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝ \e[m\e[1;38m|\e[m\n\
-\e[1;38m\\=========================mdaadoun&&dlaidet===========================/\e[m\n\n"\
+\e[0;38m+=====================================================================+\e[m\n\
+\e[0;38m|\e[m\e[1;34m             :            .                                          \e[m\e[0;38m|\e[m\n\
+\e[0;38m|\e[m\e[1;34m ███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗      \e[m\e[0;38m|\e[m\n\
+\e[0;38m|\e[m\e[1;36m ████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║      \e[m\e[0;38m|\e[m\n\
+\e[0;38m|\e[m\e[1;36m ██╔████╔██║██║██╔██╗ ██║██║███████╗███████║█████╗  ██║     ██║      \e[m\e[0;38m|\e[m\n\
+\e[0;38m|\e[m\e[1;36m ██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║     ██║      \e[m\e[0;38m|\e[m\n\
+\e[0;38m|\e[m\e[1;34m ██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗ \e[m\e[0;38m|\e[m\n\
+\e[0;38m|\e[m\e[1;34m ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝ \e[m\e[0;38m|\e[m\n\
+\e[0;38m\\=========================mdaadoun&&dlaidet===========================/\e[m\n\n"\
 
 /*
  *	Elements:
@@ -139,9 +139,8 @@ t_uint8	ms_exit(void);
 void	handle_signals(int signo);
 
 /*
- *  Parser:
+ *  Tokens:
  *      Files :
- *			core/parser/ms_parser.c
  *			core/parser/ms_tokenization.c
  *          
 */
@@ -172,16 +171,25 @@ typedef struct s_token
     struct s_token		*next;
 }           t_token;
 
+void	ms_replace_token(t_token *old, t_token *new);
+void    ms_delete_token(t_token *token);
+void	ms_add_token(t_minishell *ms, char* content, t_token_type type);
+void    ms_append_token(t_token *before_token, t_token *add_token);
+
+
+/*
+ *  Parser:
+ *      Files :
+ *			core/parser/ms_parser.c
+ *          
+*/
+
 void	ms_parser(t_minishell *ms);
 void	ms_check_quotes(char *str);
 t_token *ms_create_new_token(t_minishell *ms);
-void	ms_add_token(t_minishell *ms, char* content, t_token_type type);
-void    ms_append_token(t_token *before_token, t_token *add_token);
-void	ms_free_all_tokens(t_minishell *ms);
 void    ms_parse_quotes(t_minishell *ms);
 void	ms_swap_env(t_minishell *ms);
 void	ms_parse_pipe(t_minishell *ms);
-void	ms_replace_token(t_token *old, t_token *new);
 
 /*
  *  Lexical Analyzer:
@@ -212,6 +220,7 @@ void	ms_executer(t_minishell *ms);
 
 int		ms_free_before_exit(t_minishell *ms, int err_key);
 void	ms_free_last_command(t_minishell *ms);
+void	ms_free_all_tokens(t_minishell *ms);
 
 /*
  *  Debug variables and functions:
