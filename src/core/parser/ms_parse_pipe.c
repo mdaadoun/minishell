@@ -6,7 +6,7 @@
 /*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 14:15:26 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/04 08:08:12 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/04 09:41:05 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ void	ms_parse_pipe(t_minishell *ms)
 	tok = ms->first_token;
 	while (tok)
 	{
+		if (tok->type != 0)
+		{
+			tok = tok->next;
+			continue ;
+		}
 		ind = 0;
 		while (tok->content[ind])
 		{
@@ -37,6 +42,7 @@ void	ms_parse_pipe(t_minishell *ms)
 				tmp->content = str;
 				ms_append_token(tok->prev, tmp);
 				tok->prev = tmp;
+				tmp->type = PIPE;
 				ind++;
 				str = ft_substr(tok->content, ind, ft_strlen(&tok->content[ind]));
 				free(tok->content);
@@ -46,12 +52,4 @@ void	ms_parse_pipe(t_minishell *ms)
 		}
 		tok = tok->next;
 	}
-}
-
-void	ms_replace_token(t_token *old, t_token *new)
-{
-	old->next->prev = new;
-	old->prev->next = new;
-	new->next = old->next;
-	new->prev = old->prev;
 }
