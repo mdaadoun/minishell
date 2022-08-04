@@ -43,8 +43,12 @@ void test_parser(t_minishell *ms)
 	launch_parser(ms, ms->full_line);
 	ms->full_line = ft_strdup("cat Makefile|wc -l");
 	launch_parser(ms, ms->full_line);
+	ms->full_line = ft_strdup("cat Makefile | wc -l");
+	launch_parser(ms, ms->full_line);
 	ms->full_line = ft_strdup("echo $PAGER");
 	launch_parser(ms, ms->full_line);
 	ms->full_line = ft_strdup("cat 'Makefile|wc' -l");
+	launch_parser(ms, ms->full_line);
+	ms->full_line = ft_strdup("|wc -l");
 	launch_parser(ms, ms->full_line);
 }

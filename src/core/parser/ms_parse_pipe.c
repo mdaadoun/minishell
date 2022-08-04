@@ -6,7 +6,7 @@
 /*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 14:15:26 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/04 09:41:05 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/04 10:25:52 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	ms_parse_pipe(t_minishell *ms)
 		{
 			if (tok->content[ind] == '|')
 			{
+				if (ind == 0)
+					break;
 				str = ft_substr(tok->content, 0, ind);
 				tmp = ms_create_new_token(ms);
 				tmp->content = str;
