@@ -24,25 +24,38 @@ void display_help()
     ft_printf("  23: pipes\n");
 }
 
+void	free_test(t_minishell *ms)
+{
+	size_t	ind;
+
+	ind = 0;
+	while (ms->bin_paths[ind])
+	{
+		free(ms->bin_paths[ind]);
+		ind++;
+	}
+	free(ms->bin_paths);
+	free(ms->cwd_path);
+	free(ms);
+}
+
 void run_test(int argc, char **argv, char **envp)
 {
     char *line;
 	t_minishell *ms;
     int     debug;
 
-    // if (argv )
-	ms_initialize_minishell(&ms);
-    if (argc == 2)
-    {
-        if (argv[1][0] == 'h')
-        {
-            display_help();
-            exit(ms_free_before_exit(NULL, SUCCESS));
-        }
-        else
-            debug = ft_atoi(argv[1]);
-    }
-    set_and_run_tests(ms, debug);
-    free(ms);
-    exit(ms_free_before_exit(NULL, SUCCESS));
+	if (argc == 2)
+	{
+		ms_initialize_minishell(&ms);
+    	if (argv[1][0] == 'h')
+			display_help();
+		else
+		{
+			debug = ft_atoi(argv[1]);
+    		set_and_run_tests(ms, debug);
+		}
+   		free_test(ms);
+	}
+    exit(0);
 }
