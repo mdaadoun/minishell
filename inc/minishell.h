@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/04 12:49:12 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/04 13:04:39 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,18 +149,18 @@ void	handle_signals(int signo);
 typedef enum e_token_type
 {
     NO_TYPE,
-    ARG_STRING,
-    ARG_OPTION,
-    PIPE,
-    EXTERNAL_COMMAND,
-    BUILTIN_COMMAND,
-    REDIRECTION_LEFT,
-    REDIRECTION_DOUBLE_LEFT,
-    REDIRECTION_RIGHT,
-    REDIRECTION_DOUBLE_RIGHT,
-    AND,
-    OR,
-    WILDCARD
+    TYPE_ARG_STRING,
+    TYPE_ARG_OPTION,
+    TYPE_PIPE,
+    TYPE_EXTERNAL_COMMAND,
+    TYPE_BUILTIN_COMMAND,
+    TYPE_REDIRECT_LEFT,
+    TYPE_REDIRECT_DOUBLE_LEFT,
+    TYPE_REDIRECT_RIGHT,
+    TYPE_REDIRECT_DOUBLE_RIGHT,
+    TYPE_AND,
+    TYPE_OR,
+    TYPE_WILDCARD
 }   t_token_type;
 
 typedef struct s_token
@@ -192,7 +192,7 @@ void	ms_replace_token(t_token *old, t_token *new);
 */
 
 void	ms_lexer(t_minishell *ms);
-bool    ms_is_valid_command(t_minishell *ms, t_token *cmd);
+void    ms_analyse_command(t_minishell *ms, t_token *cmd);
 void    ms_analyze_pipes(t_minishell *ms);
 
 // void	ms_replace_variables(t_minishell *ms);

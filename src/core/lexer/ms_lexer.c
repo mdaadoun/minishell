@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 09:04:20 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/04 12:20:25 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/04 12:58:55 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@
 */
 void ms_lexer(t_minishell *ms)
 {
+	ms_analyse_command(ms, ms->first_token);
 	ms_analyze_pipes(ms);
 	// Check first command and each after each pipes
-	if(!ms_is_valid_command(ms, ms->first_token))
-		exit(ms_free_before_exit(ms, ERROR_COMMAND));
+	// if(!ms_analyse_command(ms, ms->first_token))
+		// exit(ms_free_before_exit(ms, ERROR_COMMAND));
 }

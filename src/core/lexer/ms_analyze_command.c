@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_command.c                                       :+:      :+:    :+:   */
+/*   ms_analyze_command.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:43:46 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/04 11:59:45 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/04 13:07:42 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static bool check_if_builtin(t_token *command)
         flag = true;
     if (flag)
     {
-        command->type = BUILTIN_COMMAND;
+        command->type = TYPE_BUILTIN_COMMAND;
         return (true);
     }
     return (false);
@@ -53,7 +53,7 @@ static bool check_if_builtin(t_token *command)
 
 /*
  * If the token is an external command:
- *      The type of token become EXTERNAL_COMMAND
+ *      The type of token become TYPE_EXTERNAL_COMMAND
  *      The content of token become the path to the external command
 */
 static bool check_if_external(t_minishell *ms, t_token *command)
@@ -70,7 +70,7 @@ static bool check_if_external(t_minishell *ms, t_token *command)
 		free(tmp_path);
 		if (access(command_path, 0) == 0)
         {
-            command->type = EXTERNAL_COMMAND;
+            command->type = TYPE_EXTERNAL_COMMAND;
             free(command->content);
             command->content = command_path;
 			return (true);
@@ -83,16 +83,15 @@ static bool check_if_external(t_minishell *ms, t_token *command)
 // check if the command is external or builtin, 
 //      * tag correct type, return true
 //      * error, return false
-bool ms_is_valid_command(t_minishell *ms, t_token *cmd)
+void ms_analyse_command(t_minishell *ms, t_token *cmd)
 {
-    bool    valid;
     t_token *command;
 
     command = cmd;
-    valid = false;
-    if (check_if_builtin(command))
-        valid = true;
-    else if (check_if_external(ms, command))
-        valid = true;
-    return (valid);
+    if (command)
+    {
+        check_if_builtin(command);
+        if (command->type == NO_TYPE)
+            check_if_external(ms, command);
+    }
 }

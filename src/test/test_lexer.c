@@ -4,8 +4,11 @@ void launch_lexer_command(t_minishell *ms)
 {
     ft_printf("\e[1;34mTest with command:\e[m %s\n", ms->full_line);
     ms_parser(ms);
-    if (ms_is_valid_command(ms, ms->first_token))
-        ft_printf("%s is a valid command of type %d.\n", ms->first_token->content, ms->first_token->type);
+    ms_analyse_command(ms, ms->first_token);
+    if (ms->first_token->type == TYPE_EXTERNAL_COMMAND)
+        ft_printf("%s is a valid command of type %d (external).\n", ms->first_token->content, ms->first_token->type);
+    if (ms->first_token->type == TYPE_BUILTIN_COMMAND)
+        ft_printf("%s is a valid command of type %d (builtin).\n", ms->first_token->content, ms->first_token->type);
     else
         ft_printf("%s is not a valid command.\n", ms->first_token->content);
     ft_printf("\e[1;34mThe tokens are:\e[m \n");

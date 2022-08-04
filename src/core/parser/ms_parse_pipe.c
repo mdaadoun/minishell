@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse_pipe.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 14:15:26 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/04 10:25:52 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/04 13:07:13 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ms_parse_pipe(t_minishell *ms)
 				tmp->content = str;
 				ms_append_token(tok->prev, tmp);
 				tok->prev = tmp;
-				tmp->type = PIPE;
+				tmp->type = TYPE_PIPE;
 				ind++;
 				str = ft_substr(tok->content, ind, ft_strlen(&tok->content[ind]));
 				free(tok->content);

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 12:07:36 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/04 12:53:23 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/04 13:04:52 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void ms_analyze_pipes(t_minishell *ms)
     {
         if (ft_strncmp("|", token->content, ft_strlen(token->content)))
         {
-            token->type = PIPE;
-            // ms_is_valid_command()
+            token->type = TYPE_PIPE;
+            ms_analyse_command(ms, token->next);
         }
         token = token->next;
     }
