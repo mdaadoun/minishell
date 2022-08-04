@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/04 09:27:07 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/04 11:01:35 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,6 +217,21 @@ void	ms_free_last_command(t_minishell *ms);
  *			test/test_main.c
 */
 
+
+typedef enum e_tests
+{
+    NO_TEST,
+    TEST_PARSER = 1,
+    TEST_LEXER = 2,
+    TEST_PARSER_QUOTES = 11,
+    TEST_PARSER_PIPES = 12,
+    TEST_PARSER_ENV = 13,
+    TEST_PARSER_REDIRECT = 14,
+    TEST_LEXER_BUILTINS = 21,
+    TEST_LEXER_EXTERNALS = 22,
+    TEST_LEXER_PIPES = 23
+}   t_tests;
+
 #ifndef DEBUG
 # define DEBUG 0
 #endif
@@ -224,7 +239,7 @@ void	ms_free_last_command(t_minishell *ms);
 void    display_tokens(t_minishell *ms);
 void 	run_test(int argc, char **argv, char **envp);
 void 	test_builtin(int argc, char **argv, char **envp);
-void    test_lexer(t_minishell *ms);
-void	test_parser(t_minishell *ms);
+void    test_lexer(t_minishell *ms, int debug);
+void	test_parser(t_minishell *ms, int debug);
 
 #endif

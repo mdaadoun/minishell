@@ -60,11 +60,19 @@ void test_others(t_minishell *ms)
     launch_lexer_command(ms);
 }
 
-void test_lexer(t_minishell *ms)
+void test_lexer(t_minishell *ms, int debug)
 {
-    if (ft_strlen(ms->full_line))
-        launch_lexer_command(ms);
-    test_builtins(ms);
-    test_externals(ms);
-    test_others(ms);
+    if (debug == TEST_LEXER_BUILTINS)
+        test_builtins(ms);
+    if (debug == TEST_LEXER_EXTERNALS)
+        test_externals(ms);
+    // if (debug == TEST_LEXER_PIPES)
+    //     test_pipes(ms);
+    if (debug == TEST_LEXER)
+    {
+        test_builtins(ms);
+        test_externals(ms);
+        // test_pipes(ms);
+        test_others(ms);
+    }
 }
