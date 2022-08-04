@@ -6,18 +6,18 @@
 #    By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/20 08:44:56 by mdaadoun          #+#    #+#              #
-#    Updated: 2022/08/04 10:38:58 by mdaadoun         ###   ########.fr        #
+#    Updated: 2022/08/04 12:54:20 by mdaadoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 SRCS = ms_main.c \
-builtin/ms_cd.c builtin/ms_echo.c builtin/ms_env.c builtin/ms_exit.c \
-builtin/ms_export.c builtin/ms_pwd.c builtin/ms_unset.c \
+builtins/ms_cd.c builtins/ms_echo.c builtins/ms_env.c builtins/ms_exit.c \
+builtins/ms_export.c builtins/ms_pwd.c builtins/ms_unset.c \
 executer/ms_executer.c executer/ms_free.c executer/ms_events.c \
 parser/ms_parser.c parser/ms_tokenizer.c  parser/ms_parse_pipe.c \
 parser/ms_env.c parser/ms_parse_quotes.c \
-lexer/ms_lexer.c lexer/ms_command.c 
+lexer/ms_lexer.c lexer/ms_analyze_command.c lexer/ms_analyze_pipes.c 
 
 DIR = src/core
 OBJS = $(addprefix $(DIR)/,$(SRCS:%.c=%.o))
@@ -114,7 +114,6 @@ valgrind_bonus: debug_bonus
 	@echo "$(G)Test done.$(D)"
 
 run:
-	bash run.sh
-	# ./${NAME} ${ARGS}
+	./${NAME} ${ARGS}
 
 .PHONY:  all clean fclean re run bonus debug test debug_bonus test_bonus

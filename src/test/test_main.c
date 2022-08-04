@@ -8,16 +8,20 @@ static void set_and_run_tests(t_minishell *ms, int debug)
 
 void display_help()
 {
-    ft_printf("HELP TESTER\n");
-    ft_printf("./minishell <number_test>\n");
+	ft_printf("\e[1;44m=============================\e[m\n");
+    ft_printf("\e[1;47;30mHELP for the MINISHELL TESTER\e[m\n");
+	ft_printf("\e[1;41m=============================\e[m\n");
+    ft_printf("\nuse the command:\n\t./minishell <number_test>\n\n");
+    ft_printf("The <number_test> list:\n");
+    ft_printf("0: all\n");
     ft_printf("1: parser\n");
     ft_printf("  11: quotes\n");
     ft_printf("  12: pipes\n");
     ft_printf("  13: variables\n");
     ft_printf("2: lexer\n");
-    ft_printf("  22: builtins\n");
-    ft_printf("  23: external\n");
-    ft_printf("  24: pipes\n");
+    ft_printf("  21: builtins\n");
+    ft_printf("  22: external\n");
+    ft_printf("  23: pipes\n");
 }
 
 void run_test(int argc, char **argv, char **envp)

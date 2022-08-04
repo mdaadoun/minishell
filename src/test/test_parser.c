@@ -16,9 +16,9 @@ void display_tokens(t_minishell *ms)
 void launch_parser(t_minishell *ms, char *line)
 {
 
-    ft_printf("TEST PARSER with command: %s\n", line);
+    ft_printf("\e[1;34mTest with command:\e[m %s\n", line);
     ms_parser(ms);
-    ft_printf("The tokens are: \n");
+    ft_printf("\e[1;34mThe tokens are:\e[m \n");
     display_tokens(ms);
     ms_free_all_tokens(ms);
     ft_printf("\n");

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:43:46 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/04 09:31:11 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/04 11:59:45 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,20 +83,16 @@ static bool check_if_external(t_minishell *ms, t_token *command)
 // check if the command is external or builtin, 
 //      * tag correct type, return true
 //      * error, return false
-bool ms_is_valid_command(t_minishell *ms)
+bool ms_is_valid_command(t_minishell *ms, t_token *cmd)
 {
     bool    valid;
     t_token *command;
 
-    command = ms->first_token;
+    command = cmd;
     valid = false;
     if (check_if_builtin(command))
         valid = true;
     else if (check_if_external(ms, command))
         valid = true;
-    if (valid)
-        ft_printf("%s is a valid command of type %d.\n", command->content, command->type);
-    else
-        ft_printf("%s is not a valid command.\n", command->content);
     return (valid);
 }
