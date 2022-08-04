@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 09:04:20 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/04 09:36:37 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/04 10:33:47 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 */
 void ms_lexer(t_minishell *ms)
 {
+
+	// Check first command and each after each pipes
 	if(!ms_is_valid_command(ms))
 		exit(ms_free_before_exit(ms, ERROR_COMMAND));
 }
