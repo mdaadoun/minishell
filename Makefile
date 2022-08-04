@@ -6,7 +6,7 @@
 #    By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/20 08:44:56 by mdaadoun          #+#    #+#              #
-#    Updated: 2022/08/03 15:54:33 by mdaadoun         ###   ########.fr        #
+#    Updated: 2022/08/04 10:20:30 by mdaadoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -114,6 +114,7 @@ valgrind_bonus: debug_bonus
 	@echo "$(G)Test done.$(D)"
 
 run:
-	./${NAME} ${ARGS}
+	bash run.sh
+	# ./${NAME} ${ARGS}
 
 .PHONY:  all clean fclean re run bonus debug test debug_bonus test_bonus
