@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 10:55:29 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/03 15:18:47 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/04 08:20:09 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static  void push_after_last_token(t_token *first, t_token *last)
     while (tmp->next)
         tmp = tmp->next;
     tmp->next = last;
+	last->prev = tmp;
 }
 
 /*
@@ -80,5 +81,7 @@ void	ms_add_token(t_minishell *ms, char* content, t_token_type type)
 // create a function to add a token next to a given token
 void ms_append_token(t_token *before_token, t_token *add_token)
 {
-    ft_printf("Added token:%s after token:%s\n", add_token->content, before_token->content);
+	add_token->next = before_token->next;
+	add_token->prev = before_token;
+	before_token->next = add_token;
 }

@@ -6,7 +6,7 @@
 /*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 14:15:26 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/03 14:49:49 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/04 08:08:12 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,22 @@ void	ms_parse_pipe(t_minishell *ms)
 			{
 				str = ft_substr(tok->content, 0, ind);
 				tmp = ms_create_new_token(ms);
-				ms_replace_token(tok, tmp);
 				tmp->content = str;
+				ms_append_token(tok->prev, tmp);
+				tok->prev = tmp;
 				str = ft_substr(tok->content, ind, 1);
 				tmp = ms_create_new_token(ms);
 				tmp->content = str;
-				ms_append_token(tok->next->prev, tmp);
-				str = ft_substr(tok->content, ind + 1, ft_strlen(&tok->content[ind + 1]));
+				ms_append_token(tok->prev, tmp);
+				tok->prev = tmp;
+				ind++;
+				str = ft_substr(tok->content, ind, ft_strlen(&tok->content[ind]));
 				free(tok->content);
 				tok->content = str;
 			}
 			ind++;
 		}
-		if (tok->next->prev != tok)
-			tok = tmp;
-		else
-			tok = tok->next;
+		tok = tok->next;
 	}
 }
 
