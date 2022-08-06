@@ -6,18 +6,22 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:27:14 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/01 11:42:16 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/06 08:26:13 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-t_uint8 ms_pwd(char **args)
+t_uint8 ms_pwd(void)
 {
-    (void) args;
-    ft_printf("pwd\n");
-    char cwd[1024];
-    getcwd(cwd, sizeof(cwd));
-    printf("%s\n", cwd);
-    return (SUCCESS);
+    char cwd[PATH_MAX];
+
+    ft_printf("PWD command is launched\n");
+	if (getcwd(cwd, PATH_MAX))
+    {
+		ft_printf("%s\n", cwd);
+		return (SUCCESS);
+	}
+	else
+		return (ERROR_PWD);
 }

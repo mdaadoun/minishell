@@ -4,6 +4,7 @@ static void set_and_run_tests(t_minishell *ms, int debug)
 {
     test_parser(ms, debug);
     test_lexer(ms, debug);
+	test_builtin(ms,debug);
 }
 
 void display_help()

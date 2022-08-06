@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/04 13:37:19 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/06 08:32:02 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "libft.h"
 
 # include <stdio.h>
+# include <limits.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <errno.h>
@@ -61,6 +62,7 @@ typedef struct e_minishell {
 	char	            **bin_paths;
     char                **command_lines;
 	char	            *full_line;
+	bool				has_pipe;
     struct s_token      *first_token;
     struct s_variable   *first_var;
 }           t_minishell;
@@ -79,7 +81,8 @@ typedef enum e_error {
     ERROR_PARAMS,
     ERROR_ALLOC,
     ERROR_COMMAND,
-    ERROR_UNKNOWN
+    ERROR_UNKNOWN,
+	ERROR_PWD
 }           t_error;
 
 /*
@@ -117,7 +120,7 @@ typedef enum e_builtins {
 
 t_uint8	ms_echo(char **args, char option);
 t_uint8	ms_cd(char **args);
-t_uint8	ms_pwd(char **args);
+t_uint8	ms_pwd(void);
 
 typedef struct s_variable {
     char                *name;
@@ -235,13 +238,15 @@ typedef enum e_tests
     NO_TEST,
     TEST_PARSER = 1,
     TEST_LEXER = 2,
+	TEST_BUILTIN = 3,
     TEST_PARSER_QUOTES = 11,
     TEST_PARSER_PIPES = 12,
     TEST_PARSER_ENV = 13,
     TEST_PARSER_REDIRECT = 14,
     TEST_LEXER_BUILTINS = 21,
     TEST_LEXER_EXTERNALS = 22,
-    TEST_LEXER_PIPES = 23
+    TEST_LEXER_PIPES = 23,
+	TEST_BUILTIN_PWD = 31
 }   t_tests;
 
 #ifndef DEBUG
@@ -250,7 +255,7 @@ typedef enum e_tests
 
 void    display_tokens(t_minishell *ms);
 void 	run_test(int argc, char **argv, char **envp);
-void 	test_builtin(int argc, char **argv, char **envp);
+void	test_builtin(t_minishell *ms, int debug);
 void    test_lexer(t_minishell *ms, int debug);
 void	test_parser(t_minishell *ms, int debug);
 

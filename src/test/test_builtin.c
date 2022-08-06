@@ -1,8 +1,16 @@
 #include "../../inc/minishell.h"
 
-void test_builtin(int argc, char **argv, char **envp)
+void test_builtin(t_minishell *ms, int debug)
 {
-    int test;
+	if (debug == TEST_BUILTIN)
+	{
+		ms_pwd();
+	}
+	if (debug == TEST_BUILTIN_PWD)
+	{
+		ms_pwd();
+	}
+/*    int test;
 
     test = 0;
     ft_printf("Testing the builtin functions.\n");
@@ -14,8 +22,5 @@ void test_builtin(int argc, char **argv, char **envp)
     test =  ms_env(envp);
     test = ms_exit();
     if (test)
-        ft_printf("builtin test error\n");
-    (void) argc;
-    (void) argv;
-    (void) envp;
+        ft_printf("builtin test error\n");*/
 }
