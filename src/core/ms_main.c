@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:07:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/04 13:15:18 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/06 08:58:59 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,12 @@ int	main(int argc, char **argv, char **envp)
 	if (argc != 1)
 		exit(ms_free_before_exit(NULL, ERROR_PARAMS));
 	ms_initialize_minishell(&ms);
-	if (signal(SIGINT, handle_signals) == SIG_ERR)
-		printf("Failed\n");
+	if (signal(SIGINT, ft_SIGINT) == SIG_ERR)
+		ft_printf("Failed SIGINT\n");
+	if (signal(SIGQUIT, ft_SIGQUIT) == SIG_ERR)
+	{
+		ft_printf("Failed SIGQUIT\n");
+	}
 	while (ms->full_line)
 	{
 		display_prompt_and_wait(ms);

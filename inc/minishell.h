@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/06 08:32:02 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/06 08:57:01 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,8 @@ t_uint8	ms_exit(void);
  *			core/executer/ms_events.c
 */
 
-void	handle_signals(int signo);
+void	ft_SIGINT(int signo);
+void	ft_SIGQUIT(int signo);
 
 /*
  *  Tokens:

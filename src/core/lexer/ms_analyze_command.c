@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:43:46 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/04 13:07:42 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/06 09:33:37 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ static bool check_if_builtin(t_token *command)
     else if (is_builtin(command, "exit", BIN_EXIT))
         flag = true;
     else if (is_builtin(command, "pwd", BIN_PWD))
-        flag = true;
-    else if (is_builtin(command, "unset", BIN_UNSET))
         flag = true;
     else if (is_builtin(command, "unset", BIN_UNSET))
         flag = true;
