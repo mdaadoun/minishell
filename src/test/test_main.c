@@ -26,6 +26,7 @@ void display_help()
     ft_printf("3: builtin command\n");
     ft_printf("  31: pwd\n");
     ft_printf("  32: env\n");
+    ft_printf("  33: export\n");
 }
 
 void	free_test(t_minishell *ms)

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/08 11:11:06 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/08 14:07:56 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ typedef struct s_variable {
     struct s_variable   *next;
 }   t_variable;
 
-t_uint8	ms_export(char **args);
+t_uint8	ms_export(t_minishell *ms, char *cmd);
 t_uint8	ms_unset(char **args);
 t_uint8	ms_env(t_minishell *ms);
 t_uint8	ms_exit(void);
@@ -250,7 +250,8 @@ typedef enum e_tests
     TEST_LEXER_EXTERNALS = 22,
     TEST_LEXER_PIPES = 23,
 	TEST_BUILTIN_PWD = 31,
-	TEST_BUILTIN_ENV = 32
+	TEST_BUILTIN_ENV = 32,
+	TEST_BUILTIN_EXPORT = 33
 }   t_tests;
 
 #ifndef DEBUG

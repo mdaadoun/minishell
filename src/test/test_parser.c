@@ -65,6 +65,10 @@ void	test_env(t_minishell *ms)
 	ms->full_line = ft_strdup("$BA echo");
 	launch_parser(ms, ms->full_line);
 	// free(ms->full_line);
+	ms->full_line = ft_strdup("echo $a");
+	launch_parser(ms, ms->full_line);
+	ms->full_line = ft_strdup("export a=$BA");
+	launch_parser(ms, ms->full_line);
 }
 
 void	test_pipe(t_minishell *ms)
