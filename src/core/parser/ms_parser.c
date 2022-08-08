@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 09:03:27 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/08 10:23:03 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/08 11:10:39 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ void ms_parser(t_minishell *ms)
 	ms_parse_quotes(ms);
 	ms_swap_env(ms);
 	ms_parse_pipe(ms);
+	// ms_parse_redirections(ms);
 	clean_tokens(ms);
 }
