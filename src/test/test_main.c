@@ -52,6 +52,7 @@ void run_test(int argc, char **argv, char **envp)
 	if (argc == 2)
 	{
 		ms_initialize_minishell(&ms);
+		ms->envp = envp;
 		debug = ft_atoi(argv[1]);
     	set_and_run_tests(ms, debug);
    		free_test(ms);
