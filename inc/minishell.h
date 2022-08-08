@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/08 14:07:56 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/08 15:34:15 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,17 @@ typedef unsigned long long	t_uint64;
  *		path:	the current working directory.
  *		line:	last line read from input.
 */
-typedef struct e_minishell {
+typedef struct s_minishell {
 	char	            *cwd_path;
 	char	            **bin_paths;
-    char                **command_lines;
 	char				**envp;
 	char	            *full_line;
 	bool				has_pipe;
     struct s_token      *first_token;
     struct s_variable   *first_var;
+    struct s_processes  *processes;
 }           t_minishell;
+
 
 /*
  *  Errors structures:
@@ -215,18 +216,38 @@ void    ms_analyze_pipes(t_minishell *ms);
  *  Evaluation executer:
 */
 
+typedef struct s_processes {
+    int                 nb_process;
+    struct s_command   *first_command;
+}   t_processes;
+
+typedef struct s_command {
+    char *line;
+    pid_t pid;
+}   t_command;
+
+
 void	ms_executer(t_minishell *ms);
 
 /*
- *	Errors and memory:
+ *	Memory:
  *		files :	
- *			core/parser/ms_errors.c
  *			core/executor/ms_free.c
 */
 
 int		ms_free_before_exit(t_minishell *ms, int err_key);
 void	ms_free_last_command(t_minishell *ms);
 void	ms_free_all_tokens(t_minishell *ms);
+
+
+/*
+ *	Errors:
+ *		files :	
+ *			core/errors/ms_errors.c
+*/
+
+bool checking_no_errors(t_minishell *ms);
+
 
 /*
  *  Debug variables and functions:

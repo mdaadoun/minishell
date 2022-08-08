@@ -21,10 +21,6 @@ parser les redirections et les tagger dans le LEXER < << >> >
 
 EXECUTER:
 
-commands functions to check after parser and lexer:
-build_commands(ms); construire ms->command_lines (char**) separé par les pipes
-control des type rediriger vers des erreurs de bases comme erreur commande lorsque NO_TYPE a la place d'un BUILTIN ou EXTERNAL
-
 TESTER:
 
 display_commands(ms);
