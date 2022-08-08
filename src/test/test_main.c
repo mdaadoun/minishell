@@ -23,6 +23,8 @@ void display_help()
     ft_printf("  21: builtins\n");
     ft_printf("  22: external\n");
     ft_printf("  23: pipes\n");
+    ft_printf("3: builtin command\n");
+    ft_printf("  31: pwd\n");
 }
 
 void	free_test(t_minishell *ms)
