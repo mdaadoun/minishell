@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 09:03:27 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/04 13:52:25 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/08 10:23:03 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,13 @@ void clean_tokens(t_minishell *ms)
 	while (token)
 	{
 		if (ft_strlen(token->content) == 0)
-		{
 			if (token == ms->first_token)
-				ms->first_token = token->next;
-			if (token->next)
 			{
-				token = token->next;
-				ms_delete_token(token->prev);
+				token = ms_delete_token(token);
+				ms->first_token = token;
 			}
 			else
-				ms_delete_token(token);
-		}
+				token = ms_delete_token(token);
 		else
 			token = token->next;
 	}

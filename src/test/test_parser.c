@@ -50,12 +50,21 @@ void	test_quote(t_minishell *ms)
 void	test_env(t_minishell *ms)
 {
 	printf("===Testing env parser===\n");
-	ms->full_line = ft_strdup("echo $PAGER");
-	launch_parser(ms, ms->full_line);
-	free(ms->full_line);
+	// ms->full_line = ft_strdup("echo $PAGER");
+	// launch_parser(ms, ms->full_line);
+	// free(ms->full_line);
 	ms->full_line = ft_strdup("echo $BA");
 	launch_parser(ms, ms->full_line);
-	free(ms->full_line);
+	// free(ms->full_line);
+	ms->full_line = ft_strdup("$BA echo $BA");
+	launch_parser(ms, ms->full_line);
+	// free(ms->full_line);
+	ms->full_line = ft_strdup("$BA");
+	launch_parser(ms, ms->full_line);
+	// free(ms->full_line);
+	ms->full_line = ft_strdup("$BA echo");
+	launch_parser(ms, ms->full_line);
+	// free(ms->full_line);
 }
 
 void	test_pipe(t_minishell *ms)

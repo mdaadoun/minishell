@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 10:55:29 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/04 13:49:17 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/08 10:13:28 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,21 +68,32 @@ void ms_append_token(t_token *before_token, t_token *add_token)
 	before_token->next = add_token;
 }
 
-void ms_delete_token(t_token *token)
+
+// delete token, connect prev to next and return next token
+// prev_token <-> token <-> next_token
+// prev_token <-> next_token
+t_token *ms_delete_token(t_token *token)
 {
     t_token *prev_token;
     t_token *next_token;
 
     prev_token = token->prev;
     next_token = token->next;
+    
     if (prev_token)
         prev_token->next = next_token;
-    else
+    else if (next_token)
         next_token->prev = NULL;
     if (next_token)
         next_token->prev = prev_token;
-    else
+    else if (prev_token)
         prev_token->next = NULL;
+
     free(token->content);
     free(token);
+
+    if (next_token)
+        return (next_token);
+    else
+        return (NULL);
 }
