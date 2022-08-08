@@ -6,18 +6,25 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/01 09:58:28 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/08 10:48:21 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-t_uint8 ms_env(char **args)
+t_uint8 ms_env(t_minishell *ms)
 {
-    int i;
+    int ind;
+	t_variable *env;
 
-    i = 0;
-    while(args[i])
-        ft_printf("%s\n", args[i++]);
+    ind = 0;
+    while(ms->envp[ind])
+		ft_printf("%s\n", ms->envp[ind++]);
+	env = ms->first_var;
+	while (env)
+	{
+		ft_printf("%s=%s\n", env->name, env->content);
+		env = env->next;
+	}
     return (SUCCESS);
 }

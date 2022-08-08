@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/06 08:57:01 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/08 10:42:42 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct e_minishell {
 	char	            *cwd_path;
 	char	            **bin_paths;
     char                **command_lines;
+	char				**envp;
 	char	            *full_line;
 	bool				has_pipe;
     struct s_token      *first_token;
@@ -130,7 +131,7 @@ typedef struct s_variable {
 
 t_uint8	ms_export(char **args);
 t_uint8	ms_unset(char **args);
-t_uint8	ms_env(char **args);
+t_uint8	ms_env(t_minishell *ms);
 t_uint8	ms_exit(void);
 
 /*
@@ -176,7 +177,7 @@ typedef struct s_token
 }           t_token;
 
 void	ms_replace_token(t_token *old, t_token *new);
-void    ms_delete_token(t_token *token);
+t_token	*ms_delete_token(t_token *token);
 void	ms_add_token(t_minishell *ms, char* content, t_token_type type);
 void    ms_append_token(t_token *before_token, t_token *add_token);
 
@@ -247,7 +248,8 @@ typedef enum e_tests
     TEST_LEXER_BUILTINS = 21,
     TEST_LEXER_EXTERNALS = 22,
     TEST_LEXER_PIPES = 23,
-	TEST_BUILTIN_PWD = 31
+	TEST_BUILTIN_PWD = 31,
+	TEST_BUILTIN_ENV = 32
 }   t_tests;
 
 #ifndef DEBUG

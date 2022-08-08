@@ -25,6 +25,7 @@ void display_help()
     ft_printf("  23: pipes\n");
     ft_printf("3: builtin command\n");
     ft_printf("  31: pwd\n");
+    ft_printf("  32: env\n");
 }
 
 void	free_test(t_minishell *ms)
@@ -51,14 +52,11 @@ void run_test(int argc, char **argv, char **envp)
 	if (argc == 2)
 	{
 		ms_initialize_minishell(&ms);
-    	if (argv[1][0] == 'h')
-			display_help();
-		else
-		{
-			debug = ft_atoi(argv[1]);
-    		set_and_run_tests(ms, debug);
-		}
+		debug = ft_atoi(argv[1]);
+    	set_and_run_tests(ms, debug);
    		free_test(ms);
 	}
+	else
+		display_help();
     exit(0);
 }

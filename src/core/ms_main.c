@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:07:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/06 08:58:59 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/08 10:23:51 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	main(int argc, char **argv, char **envp)
 	if (argc != 1)
 		exit(ms_free_before_exit(NULL, ERROR_PARAMS));
 	ms_initialize_minishell(&ms);
+	ms->envp = envp;
 	if (signal(SIGINT, ft_SIGINT) == SIG_ERR)
 		ft_printf("Failed SIGINT\n");
 	if (signal(SIGQUIT, ft_SIGQUIT) == SIG_ERR)

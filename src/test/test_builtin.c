@@ -10,6 +10,10 @@ void test_builtin(t_minishell *ms, int debug)
 	{
 		ms_pwd();
 	}
+	if (debug == TEST_BUILTIN_ENV)
+	{
+		ms_env(ms);
+	}
 /*    int test;
 
     test = 0;
