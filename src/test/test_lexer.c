@@ -99,6 +99,9 @@ void test_pipes(t_minishell *ms)
     ms->full_line = ft_strdup("||||");
     launch_lexer_pipe(ms);
 	free(ms->full_line);
+    ms->full_line = ft_strdup("| | | |");
+    launch_lexer_pipe(ms);
+	free(ms->full_line);
     ms->full_line = ft_strdup("echo hi | cat | cat | cat | cat");
     launch_lexer_pipe(ms);
 	free(ms->full_line);

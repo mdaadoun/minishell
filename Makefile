@@ -6,7 +6,7 @@
 #    By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/20 08:44:56 by mdaadoun          #+#    #+#              #
-#    Updated: 2022/08/04 12:54:20 by mdaadoun         ###   ########.fr        #
+#    Updated: 2022/08/08 11:47:17 by mdaadoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ builtins/ms_export.c builtins/ms_pwd.c builtins/ms_unset.c \
 executer/ms_executer.c executer/ms_free.c executer/ms_events.c \
 parser/ms_parser.c parser/ms_tokenizer.c  parser/ms_parse_pipe.c \
 parser/ms_env.c parser/ms_parse_quotes.c \
-lexer/ms_lexer.c lexer/ms_analyze_command.c lexer/ms_analyze_pipes.c 
+lexer/ms_lexer.c lexer/ms_analyze_command.c lexer/ms_analyze_pipes.c  \
+errors/ms_errors.c
 
 DIR = src/core
 OBJS = $(addprefix $(DIR)/,$(SRCS:%.c=%.o))

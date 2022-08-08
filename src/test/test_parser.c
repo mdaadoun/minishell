@@ -82,6 +82,9 @@ void	test_pipe(t_minishell *ms)
     ms->full_line = ft_strdup("|wc -l");
 	launch_parser(ms, ms->full_line);
 	free(ms->full_line);
+    ms->full_line = ft_strdup("| | | | |");
+	launch_parser(ms, ms->full_line);
+	free(ms->full_line);
 }
 
 void test_parser(t_minishell *ms, int debug)
