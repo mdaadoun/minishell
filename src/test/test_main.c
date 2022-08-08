@@ -27,6 +27,8 @@ void display_help()
     ft_printf("  31: pwd\n");
     ft_printf("  32: env\n");
     ft_printf("  33: export\n");
+    ft_printf("4: executer\n");
+    ft_printf("  41: test building processes\n");
 }
 
 void	free_test(t_minishell *ms)
@@ -46,7 +48,7 @@ void	free_test(t_minishell *ms)
 
 void run_test(int argc, char **argv, char **envp)
 {
-    char *line;
+    // char *line;
 	t_minishell *ms;
     int     debug;
 

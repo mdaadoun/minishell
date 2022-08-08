@@ -6,7 +6,7 @@
 #    By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/20 08:44:56 by mdaadoun          #+#    #+#              #
-#    Updated: 2022/08/08 11:47:17 by mdaadoun         ###   ########.fr        #
+#    Updated: 2022/08/08 17:53:42 by mdaadoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,9 @@ SRCS = ms_main.c \
 builtins/ms_cd.c builtins/ms_echo.c builtins/ms_env.c builtins/ms_exit.c \
 builtins/ms_export.c builtins/ms_pwd.c builtins/ms_unset.c \
 executer/ms_executer.c executer/ms_free.c executer/ms_events.c \
-parser/ms_parser.c parser/ms_tokenizer.c  parser/ms_parse_pipe.c \
-parser/ms_env.c parser/ms_parse_quotes.c \
+executer/ms_processes.c \
+parser/ms_parser.c parser/ms_tokenizer.c  parser/ms_parse_pipes.c \
+parser/ms_parse_variables.c parser/ms_parse_quotes.c \
 lexer/ms_lexer.c lexer/ms_analyze_command.c lexer/ms_analyze_pipes.c  \
 errors/ms_errors.c
 
@@ -90,13 +91,14 @@ ft_dlstlast.c ft_lstnew_str.c ft_lstdelone_str.c ft_lstclear_str.c ft_lstadd_bac
 
 DEBUG_FLAGS = -g3 -ggdb -I. -D DEBUG=1 #-fsanitize=address  -fsanitize=leak
 V_ARG	=  --suppressions=.valgrind_ignore_readline --track-origins=yes --leak-check=full --show-leak-kinds=all -s
-TEST_SRCS = src/test/test_builtin.c src/test/test_main.c src/test/test_parser.c src/test/test_lexer.c
-
+TEST_SRCS = src/test/test_builtin.c src/test/test_main.c src/test/test_parser.c src/test/test_lexer.c \
+src/test/test_executer.c src/test/test_utils.c
+ 
 ARGS = 
 
 debug: fclean
 	@echo "$(B)Starting debug compilation.$(D)"
-	@$(CC) $(DEBUG_FLAGS) $(addprefix $(DIR)/,$(SRCS)) $(TEST_SRCS) $(addprefix $(DIR_LIB)/,$(DEBUG_SRCS)) -o $(NAME) $(READLINE_FLAGS) 
+	@$(CC) $(FLAGS) $(DEBUG_FLAGS) $(addprefix $(DIR)/,$(SRCS)) $(TEST_SRCS) $(addprefix $(DIR_LIB)/,$(DEBUG_SRCS)) -o $(NAME) $(READLINE_FLAGS) 
 	@echo "$(G)$(NAME) debug program created.$(D)"
 
 valgrind: debug
@@ -106,7 +108,7 @@ valgrind: debug
 
 debug_bonus: fclean
 	@echo "$(B)Starting debug compilation.$(D)"
-	@$(CC) $(DEBUG_FLAGS) $(addprefix $(DIR)/,$(SRCS)) $(TEST_SRCS) $(addprefix $(DIR_LIB)/,$(DEBUG_SRCS)) -o $(NAME_BONUS) $(READLINE_FLAGS)
+	@$(CC) $(FLAGS) $(DEBUG_FLAGS) $(addprefix $(DIR)/,$(SRCS)) $(TEST_SRCS) $(addprefix $(DIR_LIB)/,$(DEBUG_SRCS)) -o $(NAME_BONUS) $(READLINE_FLAGS)
 	@echo "$(G)$(NAME_BONUS) debug program created.$(D)"
 
 valgrind_bonus: debug_bonus

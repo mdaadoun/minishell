@@ -7,7 +7,7 @@ TODO : https://draw.42l.fr/
 
 **READ > EVALUATE > PRINT > LOOP** (REPL)
 
-### 1) Lexer, lexical analyser
+### 1) Lexer, lexical analyzer
 
 * Tokenization
 

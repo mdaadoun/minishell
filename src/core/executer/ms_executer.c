@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 13:46:11 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/08 11:44:47 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/08 17:33:36 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,18 @@
 
 
 /*
- *  build each commands from tokens
- *
+ *  For each execution:
+ *      1. Build from tokens all the commands separated from pipes
+ *      2. Check each command and find out errors
+ *      3. If no error, start the processes from each command
+ *      4. Free the processes.
 */
-void build_processes(t_minishell *ms)
-{
-    (void) ms;
-}
-
-// fork and wait
-void start_processes(t_minishell *ms)
-{
-    (void) ms;
-}
-
 void ms_executer(t_minishell *ms)
 {
-    if (checking_no_errors(ms))
-    {
-        build_processes(ms);
-        start_processes(ms);
-    }
+    ms_build_processes(ms);
+    ms_checking_for_errors(ms);
+    if (!ms->error)
+        ms_start_processes(ms);
+    else
+        perror(strerror(ms->error));
 }

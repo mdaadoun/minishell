@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 11:37:03 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/08 11:44:02 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/08 17:24:47 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@
  * 		2. if syntax correct (pipes next to each other)
  * 		3. redirection error ??
 */
-bool checking_no_errors(t_minishell *ms)
+void ms_checking_for_errors(t_minishell *ms)
 {
 	(void) ms;
 	ft_printf("checking errors\n");
-	return (true);
 }

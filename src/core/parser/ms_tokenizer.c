@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 10:55:29 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/08 10:13:28 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/08 13:55:39 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_token *ms_create_new_token(t_minishell *ms)
 
     token = (t_token *) ft_calloc(sizeof(t_token), 1);
     if (!token)
-        exit(ms_free_before_exit(ms, ERROR_ALLOC));
+        exit(ms_free_before_exit(ms, ENOMEM));
     token->type = NO_TYPE;
     token->content = NULL;
     token->next = NULL;

@@ -83,6 +83,11 @@ char *getcwd(char *buf, size_t size);
 > Function returns a pointer to a dirent structure representing the next directory entry in the directory stream pointed to by dirp. [man](https://man7.org/linux/man-pages/man3/readdir.3.html)
 * **closedir** : 
 > Function close directory stream associated with Dirp. [man](https://man7.org/linux/man-pages/man3/closedir.3.html)
+
+### Error
+
+* **errno list** : [man](https://man7.org/linux/man-pages/man3/errno.3.html)
+
 * **strerror** : 
 > Return a pointer to a string describing the code errno passed in parameter. [man](https://man7.org/linux/man-pages/man3/strerror.3.html)
 * **perror** : 

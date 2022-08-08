@@ -5,7 +5,7 @@ void test_builtin(t_minishell *ms, int debug)
 	if (debug == TEST_BUILTIN)
 		ms_pwd();
 	if (debug == TEST_BUILTIN_PWD)
-		ms_pwd;
+		ms_pwd();
 	if (debug == TEST_BUILTIN_ENV)
 		ms_env(ms);
 	if (debug == TEST_BUILTIN_EXPORT)

@@ -6,15 +6,15 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/01 10:15:17 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/08 17:13:34 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-t_uint8 ms_exit(void)
+// cause the shell to exit
+void ms_exit(t_minishell *ms)
 {   
-    ft_printf("exit\n");
-    exit(SUCCESS);
-    return (SUCCESS);
+    ft_printf("\n");
+    exit(ms_free_before_exit(ms, ENOTTY));
 }

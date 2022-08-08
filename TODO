@@ -1,10 +1,8 @@
 
-## parsing single and double quotes
-
-* build and free the token structure each readline, also when program exit
-* unit-test the parser (quotes), debug test (displaying the test) and assert test (just ok if it is what is expected)
-    * for the quote function return an int representing the number of token produced
-* clean the parser to move the quote filtering in its own functions 
+* build each command from tokens and count processes
+* check error and return shell if any
+* start forking processes
+* free processes structure
 
 ## signal and keys ?
 
@@ -12,19 +10,15 @@
 * Ctrl-D ?
 * Ctrl-\ ?
 
-Change:
-ms->full_line : ms->command_line
-
-PARSER:
+### PARSER:
 
 parser les redirections et les tagger dans le LEXER < << >> >
 
-EXECUTER:
+### EXECUTER:
 
-TESTER:
+### TESTER:
 
 display_commands(ms);
 afficher les commands lines sous forme texte, token, ligne type par type 
 ex: BUILTIN ARG_TEXT PIPE EXTERNAL PIPE NOTYPE
 afficher les commands lines sous forme texte, ms->command_lines (char**)
-

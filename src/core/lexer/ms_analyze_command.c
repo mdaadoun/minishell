@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:43:46 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/06 09:33:37 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/08 16:58:02 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ static bool check_if_external(t_minishell *ms, t_token *command)
             command->content = command_path;
 			return (true);
         }
+        else
+            free(command_path);
 		path++;
 	}
     return (false);
@@ -81,7 +83,7 @@ static bool check_if_external(t_minishell *ms, t_token *command)
 // check if the command is external or builtin, 
 //      * tag correct type, return true
 //      * error, return false
-void ms_analyse_command(t_minishell *ms, t_token *cmd)
+void ms_analyze_command(t_minishell *ms, t_token *cmd)
 {
     t_token *command;
 

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 09:03:27 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/04 13:04:30 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/08 16:32:31 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ms_parse_quotes(t_minishell *ms)
 	char	*line;
 	char	*content;
 
-	line = ms->full_line;
+	line = ms->full_command;
 	ind = 0;
 	count = 0;
 	while (line[ind])

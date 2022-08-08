@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/08 14:48:42 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/08 17:15:11 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static size_t	ft_count(char **str)
 	return (ind);
 }
 
-static t_variable	*ft_create_env(char	*str)
+static t_variable	*ft_create_variable(char	*str)
 {
 	size_t	ind;
 	t_variable	*env;
@@ -40,9 +40,10 @@ static t_variable	*ft_create_env(char	*str)
 		env->content = ft_substr(str, ind, ft_strlen(&str[ind]));
 	}
 	env->next = 0;
+	return (env);
 }
 
-static void	ft_add_env(t_minishell *ms, t_variable *env)
+static void	ft_add_variable(t_minishell *ms, t_variable *env)
 {
 	t_variable	*var;
 
@@ -58,7 +59,8 @@ static void	ft_add_env(t_minishell *ms, t_variable *env)
 }
 
 /*
- * Dynamic structure of variables
+ *	set the export attribute for variables
+ *  Dynamic structure of variables
 */
 t_uint8 ms_export(t_minishell *ms, char *cmd)
 {
@@ -74,9 +76,9 @@ t_uint8 ms_export(t_minishell *ms, char *cmd)
 		ind = 1;
 		while (arg[ind])
 		{
-			ft_add_env(ms, ft_create_env(arg[ind]));
+			ft_add_variable(ms, ft_create_variable(arg[ind]));
 			ind++;
 		}
 	}
-    return (SUCCESS);
+    return (0);
 }

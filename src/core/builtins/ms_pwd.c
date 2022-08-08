@@ -6,12 +6,13 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:27:14 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/06 09:31:11 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/08 17:15:30 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
+// print name of current/working directory
 t_uint8 ms_pwd(void)
 {
     char cwd[PATH_MAX];
@@ -19,8 +20,8 @@ t_uint8 ms_pwd(void)
 	if (getcwd(cwd, PATH_MAX))
     {
 		ft_printf("%s\n", cwd);
-		return (SUCCESS);
+		return (0);
 	}
 	else
-		return (ERROR_PWD);
+		return (1);
 }

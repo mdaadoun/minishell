@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 13:48:48 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/04 13:34:23 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/08 17:11:10 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,50 +19,26 @@ void ms_free_last_command(t_minishell *ms)
 {
     if (ms)
     {
-        if (ms->full_line)
-            free(ms->full_line);
+        if (ms->full_command)
+            free(ms->full_command);
         ms_free_all_tokens(ms);
     }
 }
 
 /*
- * @params:
- *      err: the error key
- * @return:
- *      the message related to the error key
-*/
-char *get_err_msg(int err_key)
-{
-    char *str;
-    
-    if (err_key == ERROR_PARAMS)
-        str = MSG_ERROR_PARAMS;
-    else if (err_key == ERROR_ALLOC)
-        str = MSG_ERROR_ALLOC;
-    else if (err_key == ERROR_COMMAND)
-        str = MSG_ERROR_COMMAND;
-    else
-        str = MSG_ERROR_UNKNOWN;
-    return (str);
-}
-
-/*
- *  Free all the process allocated memory and print err message.
+ *  Free all the process allocated memory and print error message.
  *  
  * @params:
- *      ms  :   the main minishell data structure to free.
- *      err :   the error object containing key and msg.
+ *      ms      :   the main minishell data structure to free.
+ *      err_key :   the error number to get the correct err msg.
  * @return:
- *      EXIT_SUCCESS or EXIT_FAILURE depending err.
+ *      EXIT_SUCCESS or EXIT_FAILURE depending error.
 */
 int    ms_free_before_exit(t_minishell *ms, int err_key)
 {
-    char *msg;
     int  i;
 
     i = 0;
-    ft_printf("exit\n");
-    msg = get_err_msg(err_key);
     if (ms)
     {
         if (ms->cwd_path)
@@ -79,13 +55,11 @@ int    ms_free_before_exit(t_minishell *ms, int err_key)
         ms_free_last_command(ms);
         free(ms);
     }
-    if (err_key == SUCCESS)
+    if (err_key == ENOTTY)
         return (EXIT_SUCCESS);
     else
-    {
-        ft_printf("%s", msg);
-        return (EXIT_FAILURE);
-    }
+        perror(strerror(err_key));
+    return (EXIT_FAILURE);
 }
 
 /*

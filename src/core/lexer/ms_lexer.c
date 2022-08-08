@@ -6,14 +6,14 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 09:04:20 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/04 13:28:33 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/08 16:58:02 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
 /*
- * Analyse each token following this order and set types:
+ * analyze each token following this order and set types:
  *		1. Check if first token is valid command
  *      2. Tag all Pipes and check if next token is a valid token
  *      	* Check token is external or builtin programs
@@ -23,9 +23,6 @@
 */
 void ms_lexer(t_minishell *ms)
 {
-	ms_analyse_command(ms, ms->first_token);
+	ms_analyze_command(ms, ms->first_token);
 	ms_analyze_pipes(ms);
-	// Check first command and each after each pipes
-	// if(!ms_analyse_command(ms, ms->first_token))
-		// exit(ms_free_before_exit(ms, ERROR_COMMAND));
 }

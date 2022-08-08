@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_events.c                                        :+:      :+:    :+:   */
+/*   ms_processes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/08 16:28:29 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/08 17:26:38 by mdaadoun         ###   ########.fr       */
+/*   Created: 2022/08/08 16:05:09 by mdaadoun          #+#    #+#             */
+/*   Updated: 2022/08/08 17:40:34 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../../../inc/minishell.h"
 
-
-static void	cancel_process(int signo)
+/*
+ *  build each commands from tokens
+ *
+*/
+void ms_build_processes(t_minishell *ms)
 {
-	// ft_printf("signal:%d", signo);
-	if (signo == SIGINT)
-	{
-		printf("\nYou pressed Ctrl+C\nminishell>");
-		// ms_display_prompt(ms);
-	}
+	(void) ms;
 }
 
-void	ms_initialize_signals(void)
+// fork and wait
+void ms_start_processes(t_minishell *ms)
 {
-	if (signal(SIGINT, cancel_process) == SIG_ERR)
-		ft_printf("Failed SIGINT\n");
+	(void) ms;
+}
+
+void ms_free_processes(t_minishell *ms)
+{
+	(void) ms;
 }
