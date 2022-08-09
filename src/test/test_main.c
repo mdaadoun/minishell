@@ -4,7 +4,8 @@ static void set_and_run_tests(t_minishell *ms, int debug)
 {
     test_parser(ms, debug);
     test_lexer(ms, debug);
-	test_builtin(ms,debug);
+	test_builtin(ms, debug);
+	test_executer(ms, debug);
 }
 
 void display_help()
@@ -20,15 +21,18 @@ void display_help()
     ft_printf("  12: pipes\n");
     ft_printf("  13: variables\n");
     ft_printf("2: lexer\n");
-    ft_printf("  21: builtins\n");
-    ft_printf("  22: external\n");
+    ft_printf("  21: builtins command\n");
+    ft_printf("  22: external command\n");
     ft_printf("  23: pipes\n");
+    ft_printf("  24: redirections\n");
+    ft_printf("  25: arguments\n");
     ft_printf("3: builtin command\n");
     ft_printf("  31: pwd\n");
     ft_printf("  32: env\n");
     ft_printf("  33: export\n");
     ft_printf("4: executer\n");
     ft_printf("  41: test building processes\n");
+    ft_printf("  42: test building errors\n");
 }
 
 void	free_test(t_minishell *ms)

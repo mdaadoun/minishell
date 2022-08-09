@@ -6,11 +6,11 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 13:48:48 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/08 17:11:10 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/09 08:04:18 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../inc/minishell.h"
+#include "../../inc/minishell.h"
 
 /*
  * Free memory related to the last command.
@@ -75,6 +75,8 @@ void ms_free_all_tokens(t_minishell *ms)
     {
         swp = token->next;
         free(token->content);
+        if (token->external_path)
+            free(token->external_path);
         free(token);
         token = swp;
     }

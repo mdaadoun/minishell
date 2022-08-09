@@ -1,18 +1,24 @@
+# TODO
+
+* fix the leaks with the build processes
 
 * build each command from tokens and count processes
-* check error and return shell if any
-* start forking processes
+* check error and if any print and return shell
+* start forking processes, add pid to each processes structure
+* parent wait all processes
 * free processes structure
 
-## signal and keys ?
+* redirection and heredocs !!
 
-* signal sigaction Ctrl-C ?
-* Ctrl-D ?
-* Ctrl-\ ?
+## signals handling
+
+* Ctrl-C with signal
+* Ctrl-D with realine
+* Ctrl-\
 
 ### PARSER:
 
-parser les redirections et les tagger dans le LEXER < << >> >
+* '$variable' et "$variable"
 
 ### EXECUTER:
 

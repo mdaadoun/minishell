@@ -33,7 +33,7 @@
 * https://www.geeksforgeeks.org/making-linux-shell-c/
 * https://www.tutorialspoint.com/unix/unix-signals-traps.htm
 
-## diagram
+## diagram:
 
 * https://whimsical.com/minishell-architecture-big-picture-7b9N8PL3qHrddbs977mQ2J
 * https://miro.com/app/board/o9J_lghFXQU=/?invite_link_id=874120899640
@@ -68,6 +68,7 @@
 
 * [Unix Processes in C playlist](https://www.youtube.com/playlist?list=PLfqABt5AS4FkW5mOn2Tn9ZZLLDwA3kZUY)
 * [Bash wiki](https://wiki.bash-hackers.org/syntax/basicgrammar)
+* [Terminal colors](https://chrisyeh96.github.io/2020/03/28/terminal-colors.html)
 
 ## Discussions:
 * ctrl-C signal handler : https://app.slack.com/client/T039P7U66/CMX2R5JSW/thread/CMX2R5JSW-1659104268.134569

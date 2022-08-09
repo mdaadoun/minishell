@@ -1,17 +1,12 @@
 # Architecture
 
-TODO : https://draw.42l.fr/
-
-
 ## Workflow steps
 
 **READ > EVALUATE > PRINT > LOOP** (REPL)
 
-### 1) Lexer, lexical analyzer
+### 1) parser -> Tokenization
 
-* Tokenization
-
-### 3) parser -> AST ?
+### 2) Lexer, lexical analyzer
 
 ### 3) Executor, printing the result
 

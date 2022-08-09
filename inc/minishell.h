@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/08 18:06:54 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/09 12:02:36 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <error.h>
 # include <getopt.h>
 # include <signal.h>
+# include <assert.h>
 
 // types
 
@@ -47,7 +48,7 @@ typedef unsigned long long	t_uint64;
 \e[0;38m|\e[m\e[1;36m ██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║     ██║      \e[m\e[0;38m|\e[m\n\
 \e[0;38m|\e[m\e[1;34m ██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗ \e[m\e[0;38m|\e[m\n\
 \e[0;38m|\e[m\e[1;34m ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝ \e[m\e[0;38m|\e[m\n\
-\e[0;38m\\=========================\e[0;34mm\e[m\e[0;36mdaadoun\e[m&&\e[0;34md\e[m\e[0;36mlaidet\e[m===========================/\e[m\n\n"\
+\e[0;38m\\=========================\e[0;34mm\e[m\e[0;36mdaadoun\e[m&&\e[0;34md\e[m\e[0;36mmakelaidet\e[m===========================/\e[m\n\n"\
 
 // Minishell main structure:
 
@@ -64,9 +65,10 @@ typedef struct s_minishell {
 	char				**envp;
 	char				*full_command;
 	bool				has_pipe;
+	t_uint8				nb_processes;
 	struct s_token		*first_token;
 	struct s_variable	*first_var;
-	struct s_processes	*processes;
+	struct s_process	*first_process;
 }	t_minishell;
 
 /*
@@ -138,6 +140,7 @@ typedef enum e_token_type
 	TYPE_PIPE,
 	TYPE_EXTERNAL_COMMAND,
 	TYPE_BUILTIN_COMMAND,
+	TYPE_BAD_COMMAND,
 	TYPE_REDIRECT_LEFT,
 	TYPE_REDIRECT_DOUBLE_LEFT,
 	TYPE_REDIRECT_RIGHT,
@@ -151,6 +154,7 @@ typedef struct s_token
 {
 	char				*content;
 	enum e_token_type	type;
+	char				*external_path;
 	t_builtins			builtin;
 	struct s_token		*prev;
 	struct s_token		*next;
@@ -185,11 +189,15 @@ void	ms_parse_redirections(t_minishell *ms);
  *          core/lexer/ms_lexer.c
  *          core/lexer/ms_analyze_command.c
  *          core/lexer/ms_analyze_pipes.c
+ *          core/lexer/ms_analyze_redirections.c
+ *          core/lexer/ms_analyze_arguments.c
 */
 
 void	ms_lexer(t_minishell *ms);
 void	ms_analyze_command(t_minishell *ms, t_token *cmd);
 void	ms_analyze_pipes(t_minishell *ms);
+void	ms_analyze_redirections(t_minishell *ms);
+void	ms_analyze_arguments(t_minishell *ms);
 
 /*
  *  Evaluation executer:
@@ -198,20 +206,19 @@ void	ms_analyze_pipes(t_minishell *ms);
  *			core/executer/ms_processes.c
 */
 
-typedef struct s_processes {
-	t_uint8				nb_process;
-	struct s_command	*first_command;
-}   t_processes;
-
-typedef struct s_command {
-	char	*command_line;
-	pid_t	process_id;
-}   t_command;
+typedef struct s_process {
+	int					nb_tokens;
+	char				*command_line;
+	t_token_type		*types_line;
+	pid_t				process_id;
+	struct s_process	*next;
+}   t_process;
 
 void	ms_executer(t_minishell *ms);
 void	ms_start_processes(t_minishell *ms);
 void	ms_build_processes(t_minishell *ms);
-void	ms_free_processes(t_minishell *ms);
+void	ms_free_all_processes(t_minishell *ms);
+
 
 /*
  *	Memory:
@@ -252,10 +259,13 @@ typedef enum e_tests
 	TEST_LEXER_BUILTINS = 21,
 	TEST_LEXER_EXTERNALS = 22,
 	TEST_LEXER_PIPES = 23,
+	TEST_LEXER_REDIRECTIONS = 24,
+	TEST_LEXER_ARGUMENTS = 25,
 	TEST_BUILTIN_PWD = 31,
 	TEST_BUILTIN_ENV = 32,
 	TEST_BUILTIN_EXPORT = 33,
-	TEST_EXECUTER_PROCESSES_BUILD = 41
+	TEST_EXECUTER_PROCESSES_BUILD = 41,
+	TEST_EXECUTER_PROCESSES_ERROR = 42
 }   t_tests;
 
 #ifndef DEBUG
@@ -263,6 +273,8 @@ typedef enum e_tests
 #endif
 
 void	display_tokens(t_minishell *ms);
+void	display_tokens_types(t_minishell *ms);
+void	display_processes(t_minishell *ms);
 void 	run_test(int argc, char **argv, char **envp);
 void	test_builtin(t_minishell *ms, int debug);
 void	test_lexer(t_minishell *ms, int debug);

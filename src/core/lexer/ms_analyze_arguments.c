@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_analyze_pipes.c                                 :+:      :+:    :+:   */
+/*   ms_analyze_arguments.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 12:07:36 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/09 08:36:30 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/09 09:10:29 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-// Give type for each pipe
-void ms_analyze_pipes(t_minishell *ms)
+
+/*
+ * Check if token left with NO_TYPE are option (with -) or simply text
+*/
+void ms_analyze_arguments(t_minishell *ms)
 {
     t_token *token;
 
     token = ms->first_token;
     while(token)
     {
-        if (!ft_strncmp("|", token->content, ft_strlen(token->content)))
+        if (token->type == NO_TYPE)
         {
-            token->type = TYPE_PIPE;
-            ms_analyze_command(ms, token->next);
+            if (!ft_strncmp("-", token->content, 1))
+                token->type = TYPE_ARG_OPTION;
+            else
+                token->type = TYPE_ARG_STRING;
         }
         token = token->next;
     }
