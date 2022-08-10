@@ -1,5 +1,12 @@
 #include "../../inc/minishell.h"
 
+static void	test_unset(t_minishell *ms)
+{
+	ms_export(ms, "export a=1 b=2 c=3 d=4");
+	ms_unset(ms, "unset b c");
+	ms_env(ms);
+}
+
 void test_builtin(t_minishell *ms, int debug)
 {
 	if (debug == TEST_BUILTIN)
@@ -13,6 +20,8 @@ void test_builtin(t_minishell *ms, int debug)
 		ms_export(ms, "export abs=echo e=$abs");
 		ms_env(ms);
 	}
+	if (debug == TEST_BUILTIN_UNSET)
+		test_unset(ms);
 /*    int test;
 
     test = 0;

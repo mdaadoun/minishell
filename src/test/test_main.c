@@ -34,6 +34,7 @@ void display_help()
     ft_printf("\t\e[1;33m  31:\e[m pwd\n");
     ft_printf("\t\e[1;33m  32:\e[m env\n");
     ft_printf("\t\e[1;33m  33:\e[m export\n");
+    ft_printf("\t\e[1;33m  34:\e[m unset\n");
     ft_printf("\t\e[1;33m4:\e[m executer\n");
     ft_printf("\t\e[1;33m  41:\e[m test building processes\n");
     ft_printf("\t\e[1;33m  42:\e[m test building errors\n");

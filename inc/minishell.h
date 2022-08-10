@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/10 07:44:59 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/10 08:41:56 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,11 +109,13 @@ typedef struct s_variable {
 	struct s_variable   *next;
 }   t_variable;
 
+void	ft_remove_env(t_minishell *ms, t_variable *last, t_variable *current);
+
 t_uint8	ms_echo(char **args, char option);
 t_uint8	ms_cd(char **args);
 t_uint8	ms_pwd(void);
 t_uint8	ms_export(t_minishell *ms, char *cmd);
-t_uint8	ms_unset(char **args);
+t_uint8	ms_unset(t_minishell *ms, char *cmd);
 t_uint8	ms_env(t_minishell *ms);
 void	ms_exit(t_minishell *ms);
 
@@ -266,6 +268,7 @@ typedef enum e_tests
 	TEST_BUILTIN_PWD = 31,
 	TEST_BUILTIN_ENV = 32,
 	TEST_BUILTIN_EXPORT = 33,
+	TEST_BUILTIN_UNSET = 34,
 	TEST_EXECUTER_PROCESSES_BUILD = 41,
 	TEST_EXECUTER_PROCESSES_ERROR = 42
 }   t_tests;
