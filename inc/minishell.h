@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/10 13:54:33 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/10 16:12:42 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@
 # include <getopt.h>
 # include <signal.h>
 # include <assert.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+
 
 //======
 // Types
@@ -104,6 +107,7 @@ typedef struct s_minishell {
 	char				**envp;
 	char				*full_command;
 	bool				has_pipe;
+	int					nb_pipes;
 	t_uint8				nb_processes;
 	struct s_token		*first_token;
 	struct s_variable	*first_var;
@@ -174,11 +178,13 @@ typedef struct s_token
 */
 
 typedef struct s_process {
+	int					pipe_in;
+	int					pipe_out;
 	int					nb_tokens;
 	char				*command_line;
 	t_token_type		*types_line;
 	char				option;
-	pid_t				process_id;
+	pid_t				pid;
 	struct s_process	*next;
 }   t_process;
 

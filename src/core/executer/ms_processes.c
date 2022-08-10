@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:05:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/10 14:13:17 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/10 16:13:26 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,27 +116,52 @@ void ms_build_processes(t_minishell *ms)
 }
 
 // close pipe
-static void	ft_close_pipe(int pipe[2])
-{
-	close(pipe[0]);
-	close(pipe[1]);
-}
+// static void	ft_close_pipe(int pipe[2])
+// {
+// 	close(pipe[0]);
+// 	close(pipe[1]);
+// }
 
 //child function
-static void	ft_child(int in, int out)
+// static void	run_external(int in, int out)
+// {
+// 	dup2(out, 1);
+// // close 0 or 1 in certain case
+// 	dup2(in, 0);
+// // build command or check command
+// // cmd == path + core cmd
+// // arg == core cmd + arg
+// // envp == environement variable
+// 	execve(cmd, arg, envp);
+// }
+
+static void run_process(t_process *process)
 {
-	dup2(out, 1);
-// close 0 or 1 in certain case
-	dup2(in, 0);
-// build command or check command
-// cmd == path + core cmd
-// arg == core cmd + arg
-// envp == environement variable
-	execve(cmd, arg, envp);
+	if (process->types_line[0] == TYPE_BUILTIN_COMMAND)
+	{
+		ft_printf("%d,%d\n", process->pipe_out, process->next->pipe_in);
+		ft_printf("run builtin\n");
+	}
+		// run_builtin(process);
+	else if (process->types_line[0] == TYPE_EXTERNAL_COMMAND)
+	{
+		ft_printf("%d,%d\n", process->pipes[0], process->pipes[1]);
+		ft_printf("run external\n");
+	}
+	exit(EXIT_SUCCESS);
+		// run_external(process->in, process->out);
+	// if (command ERROR)
+	// 	error command;
+}
+
+static void create_pipes(t_minishell *ms)
+{
+	// count pipes
+	// connect pipes fd between each process
 }
 
 /*
- * fork and zait
+ * fork and wait
  * 1. launch external
  * 2. or launch builtin
  * 3. or print error
@@ -144,17 +169,34 @@ static void	ft_child(int in, int out)
 */
 void ms_start_processes(t_minishell *ms)
 {
-	int	pipe[2];
-	pid_t	pid1;
-	pid_t	pid2;
+	int	pipes[2];
+	t_process *process;
 
-	pid1 = fork();
-	if (pid1 == 0)
-		//launch child
-	pid2 = fork();
-	if (pid2 == 0)
-		//launch child
-	ft_close_pipe(pipe);
-	waitpid(pid1, NULL, 0);
-	waitpid(pid2, NULL, 0);
+	process = ms->first_process;
+	// if (ms->error->flag)
+		// error return prompt
+	// else
+	pipe(pipes);
+	// process->pipe_in = pipes[1];
+	// process->next->pipe_out = pipes[0];
+	create_pipes(ms);
+	while (process->next)
+	{
+		ft_printf("process:%s\n",process->command_line);
+		process->pid = fork();
+		if (process->pid == 0)
+			run_process(process);
+		process = process->next;
+		// if (!process->next)
+		// {
+		// 	close(process->pipe_out);
+		// 	close(process->next->pipe_in);
+		// }
+	}
+	process = ms->first_process;
+	while (process->next)
+	{
+		waitpid(process->pid, NULL, 0);
+		process = process->next;
+	}
 }

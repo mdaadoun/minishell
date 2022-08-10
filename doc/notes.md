@@ -56,3 +56,17 @@ The special parameters ‘*’ and ‘@’ have special meaning when in double q
 Section 3.5.3 [Shell Parameter Expansion], page 25).
 
 Note: for the minishell we don't deal with the escape character \
+
+
+
+pipes[0] 3
+pipes[1] 4
+
+pipe(0-out-read=3, 1-in-write=4)
+
+|out=NULL		P1     				in=4|out=3    		P2      		in=5|out=6    	P3				in=NULL
+				in = 0								    in = 0							in = 0
+				out = 1 								out = 1							out = 1
+				command_line	  						command_line	     	 		command_line
+				pid (fork)        						pid (fork)         		 		pid (fork)
+				next ->			  						next -> 		     	 		next ->
