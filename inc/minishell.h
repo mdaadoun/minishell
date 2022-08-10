@@ -6,14 +6,16 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/10 09:13:34 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/10 13:54:33 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-// libraries
+//-=========
+// Libraries
+//==========
 
 # include "libft.h"
 # include <stdio.h>
@@ -26,7 +28,9 @@
 # include <signal.h>
 # include <assert.h>
 
-// types
+//======
+// Types
+//======
 
 typedef signed char			t_int8;
 typedef unsigned char		t_uint8;
@@ -37,7 +41,9 @@ typedef unsigned long		t_uint32;
 typedef signed long long	t_int64;
 typedef unsigned long long	t_uint64;
 
-// logo
+//=====
+// Logo
+//=====
 
 # define MINISHELL_LOGO "\
 \e[0;38m+=====================================================================+\e[m\n\
@@ -50,17 +56,49 @@ typedef unsigned long long	t_uint64;
 \e[0;38m|\e[m\e[1;34m ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝ \e[m\e[0;38m|\e[m\n\
 \e[0;38m\\=========================\e[0;34mm\e[m\e[0;36mdaadoun\e[m&&\e[0;34md\e[m\e[0;36mlaidet\e[m===========================/\e[m\n\n"\
 
-// Minishell main structure:
+//=====================
+// Minishell structures
+//=====================
 
 /*
- *	Elements:
- *		name:	shell name.
- *		path:	the current working directory.
- *		line:	last line read from input.
+ *	Errors structures:
+*/
+
+# define MSG_ERROR_MALLOC "An error with memory allocation occured."
+# define MSG_ERROR_PARAMS "Minishell don't take any parameter."
+# define MSG_ERROR_COMMAND "The command doesn't exist."
+# define MSG_ERROR_BUILTIN_OPTION "The option is not valid."
+# define MSG_ERROR_BUILTIN_ARGUMENT "The arguments are not valid."
+# define MSG_ERROR_SYNTAX_PIPE "The syntax with pipes is not valid."
+# define MSG_ERROR_SYNTAX_REDIRECT "The syntax with redirections is not valid."
+
+typedef enum e_err_key {
+	NO_ERROR,
+	ERROR_PARAMS,
+	ERROR_MALLOC,
+	ERROR_COMMAND,
+	ERROR_BUILTIN_OPTION,
+	ERROR_BUILTIN_ARGUMENT,
+	ERROR_SYNTAX
+}           t_err_key;
+
+typedef struct s_error {
+	bool		flag;
+	char		*msg;
+	int			length;
+	t_err_key	key;
+} t_error;
+
+
+/*
+ *	Main structure:
+ *		cwd_path:		the current working directory.
+ *		bin_paths:		path where to find all binary.
+ *		envp: 			the env data.
+ *		full_command:	last line read from input.
 */
 
 typedef struct s_minishell {
-	int					error;
 	char				*cwd_path;
 	char				**bin_paths;
 	char				**envp;
@@ -70,26 +108,12 @@ typedef struct s_minishell {
 	struct s_token		*first_token;
 	struct s_variable	*first_var;
 	struct s_process	*first_process;
+	t_error 			*error;
 }	t_minishell;
 
-/*
- * Main functions
- *		files:
- *			core/ms_main.c
-*/
-
-void	ms_initialize_minishell(t_minishell **ms);
 
 /*
- *  Builtin shell commands:
- *		files :	
- *			core/builtin/ms_cd.c
- *			core/builtin/ms_echo.c
- *			core/builtin/ms_env.c
- *			core/builtin/ms_exit.c
- *			core/builtin/ms_export.c
- *			core/builtin/ms_pwd.c
- *			core/builtin/ms_unset.c
+ *  Builtin commands structures:
 */
 
 typedef enum e_builtins {
@@ -110,29 +134,8 @@ typedef struct s_variable {
 	struct s_variable   *next;
 }   t_variable;
 
-void	ft_remove_env(t_minishell *ms, t_variable *last, t_variable *current);
-
-t_uint8	ms_echo(char **args, char option);
-t_uint8	ms_cd(char **args);
-t_uint8	ms_pwd(void);
-t_uint8	ms_export(t_minishell *ms, char *cmd);
-t_uint8	ms_unset(t_minishell *ms, char *cmd);
-t_uint8	ms_env(t_minishell *ms);
-void	ms_exit(t_minishell *ms);
-
 /*
- *  Signal handling:
- *		Files :
- *			core/executer/ms_events.c
-*/
-
-void	ms_initialize_signals(void);
-
-/*
- *  Tokens:
- *      Files :
- *			core/parser/ms_tokenization.c
- *          
+ *  Tokens structures:
 */
 
 typedef enum e_token_type
@@ -164,6 +167,79 @@ typedef struct s_token
 	struct s_token		*prev;
 	struct s_token		*next;
 }           t_token;
+
+
+/*
+ *  Executer structures:
+*/
+
+typedef struct s_process {
+	int					nb_tokens;
+	char				*command_line;
+	t_token_type		*types_line;
+	char				option;
+	pid_t				process_id;
+	struct s_process	*next;
+}   t_process;
+
+
+//====================
+// Minishell functions
+//====================
+
+/*
+ *	Errors functions:
+ *		files :	
+ *			core/ms_errors.c
+*/
+
+void ms_checking_for_errors(t_minishell *ms);
+void ms_set_error(t_minishell *ms, t_err_key err_key, char *err_msg);
+
+/*
+ * Main functions
+ *		files:
+ *			core/ms_main.c
+*/
+
+void	ms_initialize_minishell(t_minishell **ms, t_error *error);
+
+/*
+ *  Builtin commands functions:
+ *		files :	
+ *			core/builtin/ms_cd.c
+ *			core/builtin/ms_echo.c
+ *			core/builtin/ms_env.c
+ *			core/builtin/ms_exit.c
+ *			core/builtin/ms_export.c
+ *			core/builtin/ms_pwd.c
+ *			core/builtin/ms_unset.c
+*/
+
+void	ft_remove_env(t_minishell *ms, t_variable *last, t_variable *current);
+
+t_uint8	ms_echo(char **args, char option);
+t_uint8	ms_cd(char **args);
+t_uint8	ms_pwd(void);
+t_uint8	ms_export(t_minishell *ms, char *cmd);
+t_uint8	ms_unset(t_minishell *ms, char *cmd);
+t_uint8	ms_env(t_minishell *ms);
+void	ms_exit(t_minishell *ms);
+
+/*
+ *  Signal handling:
+ *		Files :
+ *			core/executer/ms_events.c
+*/
+
+void	ms_initialize_signals(void);
+
+/*
+ *  Tokens:
+ *      Files :
+ *			core/parser/ms_tokenization.c
+ *          
+*/
 
 void	ms_replace_token(t_token *old, t_token *new);
 t_token	*ms_delete_token(t_token *token);
@@ -211,14 +287,6 @@ void	ms_analyze_arguments(t_minishell *ms);
  *			core/executer/ms_processes.c
 */
 
-typedef struct s_process {
-	int					nb_tokens;
-	char				*command_line;
-	t_token_type		*types_line;
-	pid_t				process_id;
-	struct s_process	*next;
-}   t_process;
-
 void	ms_executer(t_minishell *ms);
 void	ms_build_processes(t_minishell *ms);
 void	ms_start_processes(t_minishell *ms);
@@ -229,35 +297,14 @@ void	ms_start_processes(t_minishell *ms);
  *			core/ms_free.c
 */
 
-int		ms_free_before_exit(t_minishell *ms, int err_key);
+int		ms_free_before_exit(t_minishell *ms);
 void	ms_free_last_command(t_minishell *ms);
 void	ms_free_all_tokens(t_minishell *ms);
 void	ms_free_all_processes(t_minishell *ms);
 
-/*
- *	Errors:
- *		files :	
- *			core/ms_errors.c
-*/
-
-# define MSG_ERROR_PARAMS "Minishell don't take any parameter."
-# define MSG_ERROR_MALLOC "An error with memory allocation occured."
-# define MSG_ERROR_COMMAND "The command doesn't exist."
-# define MSG_ERROR_SYNTAX_PIPE "The syntax with pipes is not valid."
-# define MSG_ERROR_SYNTAX_REDIRECT "The syntax with redirections is not valid."
-# define MSG_ERROR_UNKNOWN "Error."
-
-typedef enum e_err_key {
-    SUCCESS,
-    ERROR_PARAMS,
-    ERROR_ALLOC,
-    ERROR_COMMAND,
-    ERROR_SYNTAX,
-    ERROR_UNKNOWN
-}           t_err_key;
-
-
-void ms_checking_for_errors(t_minishell *ms);
+//=========================================
+// Minishell testing functions & structures
+//=========================================
 
 /*
  *  Debug variables and functions:

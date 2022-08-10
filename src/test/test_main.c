@@ -59,12 +59,15 @@ void run_test(int argc, char **argv, char **envp)
 {
     // char *line;
 	t_minishell *ms;
+	t_error		error;
     int     debug;
 
+	error.flag = false;
 	if (argc >= 2)
 	{
-		ms_initialize_minishell(&ms);
+		ms_initialize_minishell(&ms, &error);
 		ms->envp = envp;
+	    ms_initialize_signals();
         if (!ft_strncmp(argv[1], "v", 1))
         {
             ft_printf("verbose mode");

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 13:48:48 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/09 15:31:42 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/10 13:37:01 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void ms_free_last_command(t_minishell *ms)
  * @return:
  *      EXIT_SUCCESS or EXIT_FAILURE depending error.
 */
-int    ms_free_before_exit(t_minishell *ms, int err_key)
+int    ms_free_before_exit(t_minishell *ms)
 {
     int  i;
 
@@ -55,11 +55,12 @@ int    ms_free_before_exit(t_minishell *ms, int err_key)
         ms_free_last_command(ms);
         free(ms);
     }
-    if (err_key == ENOTTY)
-        return (EXIT_SUCCESS);
-    else
-        perror(strerror(err_key));
-    return (EXIT_FAILURE);
+    if (ms->error->flag)
+    {
+        write(2, ms->error->msg, ms->error->length);
+        return (EXIT_FAILURE);
+    }
+    return (EXIT_SUCCESS);
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:05:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/09 15:42:25 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/10 13:55:44 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ static void add_process(t_process *proc)
 	proc->next = new_process;
 }
 
+/*
+ * Create an array of the token type for each process.
+*/
 static void build_type_line(t_minishell *ms)
 {
 	t_token_type	*types_line;
@@ -36,11 +39,16 @@ static void build_type_line(t_minishell *ms)
 		nb_tokens = process->nb_tokens;
 		types_line = (t_token_type *) ft_calloc(sizeof(t_token_type), nb_tokens);
 		if (!process)
-			exit(ms_free_before_exit(ms, ENOMEM));
+		{
+			ms_set_error(ms, ERROR_MALLOC, MSG_ERROR_MALLOC);
+			exit(ms_free_before_exit(ms));
+		}
 		i = 0;
 		while(i < nb_tokens)
 		{
 			types_line[i] = token->type;
+			if (token->type == TYPE_ARG_OPTION && ft_strlen(token->content) == 2)
+				process->option = token->content[1];
 			token = token->next;
 			i++;
 		}
@@ -68,10 +76,16 @@ void ms_build_processes(t_minishell *ms)
 	ms->nb_processes = 1;
 	process = (t_process *)ft_calloc(sizeof(t_process), 1);
 	if (!process)
-		exit(ms_free_before_exit(ms, ENOMEM));
+	{
+		ms_set_error(ms, ERROR_MALLOC, MSG_ERROR_MALLOC);
+		exit(ms_free_before_exit(ms));
+	}
 	command = (char *)ft_calloc(sizeof(char), 1);
 	if (!command)
-		exit(ms_free_before_exit(ms, ENOMEM));
+	{
+		ms_set_error(ms, ERROR_MALLOC, MSG_ERROR_MALLOC);
+		exit(ms_free_before_exit(ms));
+	}
 	ms->first_process = process;
 	while (token)
 	{
@@ -101,7 +115,13 @@ void ms_build_processes(t_minishell *ms)
 	build_type_line(ms);
 }
 
-// fork and wait
+/*
+ * fork and wait
+ *	1. launch external
+ *	2. or launch builtin
+ *	3. or print error
+ * 
+*/ 
 void ms_start_processes(t_minishell *ms)
 {
 	(void) ms;
