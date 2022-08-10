@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_env.c                                           :+:      :+:    :+:   */
+/*   ms_parse_variables.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 11:06:35 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/03 14:23:35 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/10 08:07:33 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ void	ms_swap_env(t_minishell *ms)
 	tok = ms->first_token;
 	while (tok)
 	{
+		if (tok->type == TYPE_S_QUOTE_STRING)
+		{
+			tok = tok->next;
+			continue;
+		}
 		ind = 0;
 		while (tok->content[ind])
 		{

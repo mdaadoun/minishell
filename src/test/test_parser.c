@@ -37,24 +37,25 @@ void	test_quote(t_minishell *ms)
 void	test_env(t_minishell *ms)
 {
 	printf("===Testing env parser===\n");
-	// ms->full_command = ft_strdup("echo $PAGER");
-	// launch_parser(ms);
-	// free(ms->full_command);
+	ms->full_command = ft_strdup("echo $PAGER");
+	launch_parser(ms);
+	free(ms->full_command);
 	ms->full_command = ft_strdup("echo $BA");
 	launch_parser(ms);
-	// free(ms->full_command);
-	ms->full_command = ft_strdup("$BA echo $BA");
-	launch_parser(ms);
-	// free(ms->full_command);
+	free(ms->full_command);
 	ms->full_command = ft_strdup("$BA");
 	launch_parser(ms);
-	// free(ms->full_command);
+	free(ms->full_command);
 	ms->full_command = ft_strdup("$BA echo");
 	launch_parser(ms);
-	// free(ms->full_command);
-	ms->full_command = ft_strdup("echo $a");
-	launch_parser(ms);
+	free(ms->full_command);
 	ms->full_command = ft_strdup("export a=$BA");
+	launch_parser(ms);
+	free(ms->full_command);
+	ms->full_command = ft_strdup("echo \"$LOGNAME\"");
+	launch_parser(ms);
+	free(ms->full_command);
+	ms->full_command = ft_strdup("echo \'$LOGNAME\'");
 	launch_parser(ms);
 }
 
