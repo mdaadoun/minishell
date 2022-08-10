@@ -1,6 +1,7 @@
 # TODO
 
 * test "sad | das| | asd| Asd| sda |" - check: Invalid read of size 1
+
 * catch the $variables in the " "
 
 * build each command from tokens and count processes

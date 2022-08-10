@@ -6,7 +6,11 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2022/08/10 08:41:56 by dlaidet          ###   ########.fr       */
+=======
+/*   Updated: 2022/08/10 09:07:52 by mdaadoun         ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +62,7 @@ typedef unsigned long long	t_uint64;
  *		path:	the current working directory.
  *		line:	last line read from input.
 */
+
 typedef struct s_minishell {
 	int					error;
 	char				*cwd_path;
@@ -219,14 +224,13 @@ typedef struct s_process {
 }   t_process;
 
 void	ms_executer(t_minishell *ms);
-void	ms_start_processes(t_minishell *ms);
 void	ms_build_processes(t_minishell *ms);
-
+void	ms_start_processes(t_minishell *ms);
 
 /*
  *	Memory:
  *		files :	
- *			core/executer/ms_free.c
+ *			core/ms_free.c
 */
 
 int		ms_free_before_exit(t_minishell *ms, int err_key);
@@ -237,16 +241,37 @@ void	ms_free_all_processes(t_minishell *ms);
 /*
  *	Errors:
  *		files :	
- *			core/errors/ms_errors.c
+ *			core/ms_errors.c
 */
+
+# define MSG_ERROR_PARAMS "Minishell don't take any parameter."
+# define MSG_ERROR_MALLOC "An error with memory allocation occured."
+# define MSG_ERROR_COMMAND "The command doesn't exist."
+# define MSG_ERROR_SYNTAX_PIPE "The syntax with pipes is not valid."
+# define MSG_ERROR_SYNTAX_REDIRECT "The syntax with redirections is not valid."
+# define MSG_ERROR_UNKNOWN "Error."
+
+typedef enum e_err_key {
+    SUCCESS,
+    ERROR_PARAMS,
+    ERROR_ALLOC,
+    ERROR_COMMAND,
+    ERROR_SYNTAX,
+    ERROR_UNKNOWN
+}           t_err_key;
+
 
 void ms_checking_for_errors(t_minishell *ms);
 
 /*
  *  Debug variables and functions:
  *		files :	
- *			test/test_builtin.c
  *			test/test_main.c
+ *			test/test_utils.c
+ *			test/test_parser.c
+ *			test/test_lexer.c
+ *			test/test_executer.c
+ *			test/test_builtin.c
 */
 
 typedef enum e_tests
