@@ -8,7 +8,7 @@ void test_builtin(t_minishell *ms, int debug)
 		ms_pwd();
 	if (debug == TEST_BUILTIN_ENV)
 		ms_env(ms);
-	if (debug == TEST_BUILTIN_EXPORT)
+	if (debug == TEST_BUILTIN_EXPORT || debug == TEST_ALL)
 	{
 		ms_export(ms, "export abs=echo e=$abs");
 		ms_env(ms);

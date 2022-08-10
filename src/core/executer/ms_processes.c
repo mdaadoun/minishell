@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:05:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/09 12:01:52 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/09 15:42:25 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,36 @@ static void add_process(t_process *proc)
 	proc->next = new_process;
 }
 
+static void build_type_line(t_minishell *ms)
+{
+	t_token_type	*types_line;
+	int				nb_tokens;
+	int				i;
+	t_process 		*process;
+    t_token 		*token;
+
+	token = ms->first_token;
+	process = ms->first_process;
+	while (process)
+	{
+		nb_tokens = process->nb_tokens;
+		types_line = (t_token_type *) ft_calloc(sizeof(t_token_type), nb_tokens);
+		if (!process)
+			exit(ms_free_before_exit(ms, ENOMEM));
+		i = 0;
+		while(i < nb_tokens)
+		{
+			types_line[i] = token->type;
+			token = token->next;
+			i++;
+		}
+		if (token)
+			token = token->next;
+		process->types_line = types_line;
+		process = process->next;
+	}
+}
+
 /*
  *  build each commands from tokens
 	// start by counting processes with pipe, if any pipe raise flag: has_pipe
@@ -30,6 +60,7 @@ static void add_process(t_process *proc)
 void ms_build_processes(t_minishell *ms)
 {
 	char		*command;
+	char		*new_command;
     t_token 	*token;
 	t_process 	*process;
 
@@ -56,36 +87,22 @@ void ms_build_processes(t_minishell *ms)
 		}
 		else
 		{
-			command = ft_strjoin(command, token->content);
-			command = ft_strjoin(command, " ");
+			new_command = ft_strjoin(command, token->content);
+			free(command);
+			command = new_command;
+			new_command = ft_strjoin(command, " ");
+			free(command);
+			command = new_command;
 			process->nb_tokens++;
 		}
 		token = token->next;
 	}
 	process->command_line = command;
+	build_type_line(ms);
 }
 
 // fork and wait
 void ms_start_processes(t_minishell *ms)
 {
 	(void) ms;
-}
-
-void ms_free_all_processes(t_minishell *ms)
-{
-	t_process 	*process;
-    t_process	*swp;
-
-	ms->has_pipe = false;
-	ms->nb_processes = 0;
-	process = ms->first_process;
-	while (process)
-	{
-        swp = process->next;
-        free(process->command_line);
-        // free(process->types_line);
-        free(process);
-        process = swp;
-	}
-	ms->first_process = NULL;
 }

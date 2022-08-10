@@ -51,7 +51,7 @@ void test_executer(t_minishell *ms, int debug)
 		test_processes_build(ms);
 	else if (debug == TEST_EXECUTER_PROCESSES_ERROR)
 		test_processes_errors(ms);
-    else if (debug == TEST_EXECUTER)
+    else if (debug == TEST_EXECUTER  || debug == TEST_ALL)
     {
 	    printf("===Testing EXECUTER===\n");
 		test_processes_build(ms);

@@ -86,7 +86,7 @@ void test_parser(t_minishell *ms, int debug)
 		test_env(ms);
 	if (debug == TEST_PARSER_PIPES)
 		test_pipe(ms);
-    if (debug == TEST_PARSER)
+    if (debug == TEST_PARSER || debug == TEST_ALL)
     {
 	    printf("===Testing PARSER===\n");
 		test_quote(ms);

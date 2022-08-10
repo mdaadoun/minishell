@@ -25,7 +25,6 @@ void print_type(int t)
         ft_printf("REDIRECT_RIGHT");
 	else if (t == TYPE_REDIRECT_DOUBLE_RIGHT)
         ft_printf("REDIRECT_DOUBLE_RIGHT");
-    ft_printf("\e[m\n");
 }
 
 // display all the tokens as a list
@@ -40,6 +39,7 @@ void display_tokens_types(t_minishell *ms)
     {
         ft_printf("%d:\n\tContent: \e[0;36m%s\e[m\n\tType:\e[0;36m", i, token->content);
         print_type(token->type);
+    	ft_printf("\e[m\n");
         if (token->type == TYPE_EXTERNAL_COMMAND)
             ft_printf("\tExternal binary path: \e[0;32m%s\e[m\n", token->external_path);
         token = token->next;
@@ -67,6 +67,7 @@ void display_processes(t_minishell *ms)
 {
 	t_process *process;
     int i;
+    int j;
 
     i = 1;
 	process = ms->first_process;
@@ -82,7 +83,15 @@ void display_processes(t_minishell *ms)
 		ft_printf("\tNumber of tokens: \e[0;36m%d\e[m\n", process->nb_tokens);
 		ft_printf("\tProcess id: \e[0;36m%d\e[m\n", process->process_id);
 		ft_printf("\tThe command line: \e[0;36m%s\e[m\n", process->command_line);
-		ft_printf("\tThe type line: \e[0;36mTODO\e[m\n");
+		ft_printf("\tThe type line: \e[0;36m");
+		j = 0;
+		while (j < process->nb_tokens)
+		{
+			print_type(process->types_line[j]);
+			ft_printf(" ");
+			j++;
+		}
+		ft_printf("\e[m\n");
 		process = process->next;
 		i++;
 	}

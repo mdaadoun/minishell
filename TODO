@@ -1,6 +1,7 @@
 # TODO
 
-* fix the leaks with the build processes
+* test "sad | das| | asd| Asd| sda |" Invalid read of size 1
+* catch the commands in the ' ' and " " !
 
 * build each command from tokens and count processes
 * check error and if any print and return shell

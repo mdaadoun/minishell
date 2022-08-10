@@ -216,7 +216,7 @@ void test_lexer(t_minishell *ms, int debug)
         test_redirections(ms);
     if (debug == TEST_LEXER_ARGUMENTS)
         test_arguments(ms);
-    if (debug == TEST_LEXER)
+    if (debug == TEST_LEXER  || debug == TEST_ALL)
     {
 	    printf("===Testing LEXER===\n");
         test_builtins(ms);

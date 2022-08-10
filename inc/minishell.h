@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/09 12:10:38 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/09 15:54:08 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,6 @@ typedef struct s_process {
 void	ms_executer(t_minishell *ms);
 void	ms_start_processes(t_minishell *ms);
 void	ms_build_processes(t_minishell *ms);
-void	ms_free_all_processes(t_minishell *ms);
 
 
 /*
@@ -229,6 +228,7 @@ void	ms_free_all_processes(t_minishell *ms);
 int		ms_free_before_exit(t_minishell *ms, int err_key);
 void	ms_free_last_command(t_minishell *ms);
 void	ms_free_all_tokens(t_minishell *ms);
+void	ms_free_all_processes(t_minishell *ms);
 
 /*
  *	Errors:
@@ -247,7 +247,7 @@ void ms_checking_for_errors(t_minishell *ms);
 
 typedef enum e_tests
 {
-	NO_TEST,
+	TEST_ALL,
 	TEST_PARSER = 1,
 	TEST_LEXER = 2,
 	TEST_BUILTIN = 3,

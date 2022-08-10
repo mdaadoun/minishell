@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 13:48:48 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/09 08:04:18 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/09 15:31:42 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,23 @@ void ms_free_all_tokens(t_minishell *ms)
         token = swp;
     }
     ms->first_token = NULL;
+}
+
+void ms_free_all_processes(t_minishell *ms)
+{
+	t_process 	*process;
+    t_process	*swp;
+
+	ms->has_pipe = false;
+	ms->nb_processes = 0;
+	process = ms->first_process;
+	while (process)
+	{
+        swp = process->next;
+        free(process->command_line);
+        free(process->types_line);
+        free(process);
+        process = swp;
+	}
+	ms->first_process = NULL;
 }
