@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:05:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/10 13:55:44 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/10 14:13:17 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,14 +115,46 @@ void ms_build_processes(t_minishell *ms)
 	build_type_line(ms);
 }
 
+// close pipe
+static void	ft_close_pipe(int pipe[2])
+{
+	close(pipe[0]);
+	close(pipe[1]);
+}
+
+//child function
+static void	ft_child(int in, int out)
+{
+	dup2(out, 1);
+// close 0 or 1 in certain case
+	dup2(in, 0);
+// build command or check command
+// cmd == path + core cmd
+// arg == core cmd + arg
+// envp == environement variable
+	execve(cmd, arg, envp);
+}
+
 /*
- * fork and wait
- *	1. launch external
- *	2. or launch builtin
- *	3. or print error
- * 
-*/ 
+ * fork and zait
+ * 1. launch external
+ * 2. or launch builtin
+ * 3. or print error
+ *
+*/
 void ms_start_processes(t_minishell *ms)
 {
-	(void) ms;
+	int	pipe[2];
+	pid_t	pid1;
+	pid_t	pid2;
+
+	pid1 = fork();
+	if (pid1 == 0)
+		//launch child
+	pid2 = fork();
+	if (pid2 == 0)
+		//launch child
+	ft_close_pipe(pipe);
+	waitpid(pid1, NULL, 0);
+	waitpid(pid2, NULL, 0);
 }
