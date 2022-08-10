@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 12:07:36 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/09 09:10:29 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/10 07:48:59 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void ms_analyze_arguments(t_minishell *ms)
     token = ms->first_token;
     while(token)
     {
-        if (token->type == NO_TYPE)
+        if (token->type == NO_TYPE || token->type == TYPE_S_QUOTE_STRING \
+        || token->type == TYPE_D_QUOTE_STRING )
         {
             if (!ft_strncmp("-", token->content, 1))
                 token->type = TYPE_ARG_OPTION;

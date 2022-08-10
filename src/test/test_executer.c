@@ -34,6 +34,18 @@ void	test_processes_build(t_minishell *ms)
     ms->full_command = ft_strdup("cat test | echo -o test | cd cd | echo | cat ");
 	launch_executer_build(ms);
 	free(ms->full_command);
+    ms->full_command = ft_strdup("sad | das| | asd| Asd| sda |");
+	launch_executer_build(ms);
+	free(ms->full_command);
+    ms->full_command = ft_strdup("'cat' | cat | \"cat\"");
+	launch_executer_build(ms);
+	free(ms->full_command);
+    ms->full_command = ft_strdup("     'cat    ' |  cat   | \"     cat     \"");
+	launch_executer_build(ms);
+	free(ms->full_command);
+    ms->full_command = ft_strdup("'$cat' | $cat | \"$cat\"");
+	launch_executer_build(ms);
+	free(ms->full_command);
 }
 
 void	test_processes_errors(t_minishell *ms)

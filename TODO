@@ -1,15 +1,25 @@
 # TODO
 
-* test "sad | das| | asd| Asd| sda |" Invalid read of size 1
-* catch the commands in the ' ' and " " !
+* test "sad | das| | asd| Asd| sda |" - check: Invalid read of size 1
+* catch the $variables in the " "
 
 * build each command from tokens and count processes
-* check error and if any print and return shell
+
+* ERRORS: check error and if any print and return shell
+
+* $? -> valeur retour du dernier process
+
 * start forking processes, add pid to each processes structure
+* fd, stdin, stdout
 * parent wait all processes
 * free processes structure
 
 * redirection and heredocs !!
+<< EOF
+test
+test
+test
+EOF
 
 ## signals handling
 

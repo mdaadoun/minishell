@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 09:03:27 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/08 16:32:31 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/10 07:45:13 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ms_parse_quotes(t_minishell *ms)
 			if (line[ind + count] == 39)
 			{
 				content = ft_substr(line, ind, count);
-				ms_add_token(ms, content, TYPE_ARG_STRING);
+				ms_add_token(ms, content, TYPE_S_QUOTE_STRING);
 				count++;
 			}
 		}
@@ -52,7 +52,7 @@ void	ms_parse_quotes(t_minishell *ms)
 			if (line[ind + count] == 34)
 			{
 				content = ft_substr(line, ind, count);
-				ms_add_token(ms , content, TYPE_ARG_STRING);
+				ms_add_token(ms , content, TYPE_D_QUOTE_STRING);
 				count++;
 			}
 		}

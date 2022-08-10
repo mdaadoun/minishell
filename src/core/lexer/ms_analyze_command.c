@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:43:46 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/09 08:59:17 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/10 07:36:35 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void ms_analyze_command(t_minishell *ms, t_token *cmd)
     if (command)
     {
         check_if_builtin(command);
-        if (command->type == NO_TYPE)
+        if (command->type != TYPE_BUILTIN_COMMAND)
             check_if_external(ms, command);
         if (command->type != TYPE_EXTERNAL_COMMAND \
         && command->type != TYPE_BUILTIN_COMMAND)
