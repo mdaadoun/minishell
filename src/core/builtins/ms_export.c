@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/08 17:15:11 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/10 07:14:24 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ static t_variable	*ft_create_variable(char	*str)
 	env = malloc(sizeof(t_variable) * 1);
 	while (str[ind] && str[ind] != '=')
 		ind++;
-	if (str[ind])
+	if (!str[ind])
 		return (0);
-	if (str[ind] != '=')
+	if (str[ind] == '=')
 	{
 		env->name = ft_substr(str, 0, ind);
-		ind += 2;
+		ind++;
 		env->content = ft_substr(str, ind, ft_strlen(&str[ind]));
 	}
 	env->next = 0;
