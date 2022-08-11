@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 13:48:48 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/11 11:07:05 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/11 12:38:11 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,15 @@ int    ms_free_before_exit(t_minishell *ms)
             free(ms->bin_paths);
         }
         ms_free_last_command(ms);
+    	ms_free_all_processes(ms);
+        if (ms->global_error->flag)
+        {
+            write(2, ms->global_error->msg, ms->global_error->length);
+            write(2, "\n", 1);
+            free(ms);
+            return (EXIT_FAILURE);
+        }
         free(ms);
-    }
-    if (ms->global_error->flag)
-    {
-        write(2, ms->global_error->msg, ms->global_error->length);
-        return (EXIT_FAILURE);
     }
     return (EXIT_SUCCESS);
 }

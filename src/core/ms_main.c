@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:07:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/11 11:59:04 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/11 12:33:35 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static void display_prompt_and_wait(t_minishell *ms)
 	if (!ms->full_command)
     {
         ft_printf("exit\n");
+		// ms_set_error(ms->global_error, NO_ERROR, NULL);
 		exit(ms_free_before_exit(ms));
 	}
 	add_history(ms->full_command);
