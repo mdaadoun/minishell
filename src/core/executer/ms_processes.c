@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:05:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/11 09:57:02 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/11 10:29:42 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void add_process(t_process *proc)
 
 	new_process = (t_process *)ft_calloc(sizeof(t_process), 1);
 	proc->next = new_process;
+	new_process->prev = proc;
 }
 
 /*
@@ -66,6 +67,8 @@ void create_pipes(t_minishell *ms)
 	int		nb_pipe;
 	int		pipes[2];
 
+	if (!ms->has_pipe)
+		return ;
 	nb_pipe = 0;
 	tok = ms->first_token;
 	while (tok)
@@ -140,6 +143,7 @@ void ms_build_processes(t_minishell *ms)
 			add_process(process);
 			process->command_line = command;
 			command = (char *)ft_calloc(sizeof(char), 1);
+			process->envp = ms->envp;
 			process = process->next;
 			ms->nb_processes++;
 		}
@@ -182,16 +186,29 @@ void ms_build_processes(t_minishell *ms)
 
 static void run_process(t_process *process)
 {
+	char	**arg;
+
+	if (process->pipe_out != 1)
+	{
+		dup2(process->pipe_out, 1);
+		if (process->next)
+				close(process->next->pipe_in);
+	}
+	if (process->pipe_in != 0)
+	{
+		dup2(process->pipe_in, 0);
+		if (process->prev)
+			close(process->prev->pipe_out);
+	}
 	if (process->types_line[0] == TYPE_BUILTIN_COMMAND)
 	{
 		ft_printf("%d,%d\n", process->pipe_out, process->next->pipe_in);
 		ft_printf("run builtin\n");
 	}
-		// run_builtin(process);
 	else if (process->types_line[0] == TYPE_EXTERNAL_COMMAND)
 	{
-		ft_printf("%d,%d\n", process->pipe_out, process->next->pipe_in);
-		ft_printf("run external\n");
+		arg = ft_split(process->command_line, ' ');
+		execve(process->exec_path, arg, process->envp);
 	}
 	exit(EXIT_SUCCESS);
 		// run_external(process->in, process->out);
@@ -209,14 +226,12 @@ static void run_process(t_process *process)
 void ms_start_processes(t_minishell *ms)
 {
 	t_process *process;
-	return ;
 	process = ms->first_process;
 	// if (ms->error->flag)
 		// error return prompt
 	// else
 	create_pipes(ms);
-
-	while (process->next)
+	while (process)
 	{
 		process->pid = fork();
 		if (process->pid == 0)

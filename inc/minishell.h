@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/11 09:55:23 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/11 10:02:03 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,7 @@ typedef struct s_process {
 	int					nb_tokens;
 	char				*command_line;
 	char				*exec_path;
+	char				**envp;
 	t_token_type		*types_line;
 	char				option;
 	pid_t				pid;
