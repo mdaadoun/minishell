@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:05:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/11 08:55:25 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/11 09:39:45 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,7 +207,6 @@ static void run_process(t_process *process)
 void ms_start_processes(t_minishell *ms)
 {
 	t_process *process;
-	display_processes(ms);
 	return ;
 	process = ms->first_process;
 	// if (ms->error->flag)
@@ -217,7 +216,6 @@ void ms_start_processes(t_minishell *ms)
 
 	while (process->next)
 	{
-		ft_printf("process:%s\n",process->command_line);
 		process->pid = fork();
 		if (process->pid == 0)
 			run_process(process);
@@ -229,7 +227,7 @@ void ms_start_processes(t_minishell *ms)
 		// }
 	}
 	process = ms->first_process;
-	while (process->next)
+	while (process)
 	{
 		waitpid(process->pid, NULL, 0);
 		process = process->next;
