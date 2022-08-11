@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/11 09:46:09 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/11 09:55:23 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,7 @@ typedef struct s_process {
 	int					pipe_out;
 	int					nb_tokens;
 	char				*command_line;
+	char				*exec_path;
 	t_token_type		*types_line;
 	char				option;
 	pid_t				pid;
@@ -298,7 +299,7 @@ void	ms_analyze_arguments(t_minishell *ms);
 void	ms_executer(t_minishell *ms);
 void	ms_build_processes(t_minishell *ms);
 void	ms_start_processes(t_minishell *ms);
-void   create_pipes(t_minishell *ms);
+void	create_pipes(t_minishell *ms);
 
 /*
  *	Memory:

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:05:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/11 09:43:12 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/11 09:57:02 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,8 @@ void ms_build_processes(t_minishell *ms)
 	ms->first_process = process;
 	while (token)
 	{
+		if (token->type == TYPE_EXTERNAL_COMMAND)
+			process->exec_path = token->external_path;
 		if (token->type == TYPE_PIPE)
 		{
 			if (!ms->has_pipe)
