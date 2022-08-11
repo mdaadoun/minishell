@@ -1,7 +1,6 @@
 #include "../../inc/minishell.h"
 
-
-void print_type(int t)
+static void print_type(int t)
 {
 	if (t == NO_TYPE)
         ft_printf("NO_TYPE");
@@ -28,7 +27,7 @@ void print_type(int t)
 }
 
 // display all the tokens as a list
-void display_tokens_types(t_minishell *ms)
+void test_display_tokens_types(t_minishell *ms)
 {
     t_token *token;
     int i;
@@ -48,7 +47,7 @@ void display_tokens_types(t_minishell *ms)
     }
 }
 
-void display_tokens(t_minishell *ms)
+void test_display_tokens(t_minishell *ms)
 {
     t_token *token;
     int i;
@@ -64,7 +63,7 @@ void display_tokens(t_minishell *ms)
 }
 
 // display all the commands from processes rebuilt from token
-void display_processes(t_minishell *ms)
+void test_display_processes(t_minishell *ms)
 {
 	t_process *process;
 	int i;
@@ -139,4 +138,19 @@ void test_display_errors(t_minishell *ms)
 		process = process->next;
 		i++;
 	}
+}
+
+void test_run_command(t_minishell *ms, char *str, void (*function)())
+{
+    ms->full_command = ft_strdup(str);
+	(*function)(ms);
+}
+
+void test_reset(t_minishell *ms)
+{
+    ms_free_all_tokens(ms);
+    ms_free_all_processes(ms);
+	free(ms->full_command);
+	ms_set_error(ms->global_error, NO_ERROR, NULL);
+    ft_printf("\n");
 }

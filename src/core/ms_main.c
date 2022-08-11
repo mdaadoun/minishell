@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:07:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/11 12:33:35 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/11 18:55:28 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * @params:
  *      ms  :   the main minishell data structure to free.
 */
-void	ms_initialize_minishell(t_minishell **ms, t_error *error)
+void	ms_initialize_minishell(t_minishell **ms, t_error *error, char **envp)
 {
 	char *buf;
 
@@ -31,6 +31,7 @@ void	ms_initialize_minishell(t_minishell **ms, t_error *error)
 		write(2, MSG_ERROR_MALLOC, 41);
 		exit(EXIT_FAILURE);
 	}
+	error->flag = false;
 	(*ms)->global_error = error;
 	buf = (char *)ft_calloc(sizeof(char), 1024);
 	if (!buf)
@@ -38,6 +39,7 @@ void	ms_initialize_minishell(t_minishell **ms, t_error *error)
 		ms_set_error((*ms)->global_error, ERROR_MALLOC, MSG_ERROR_MALLOC);
 		exit(ms_free_before_exit(*ms));
 	}
+	(*ms)->envp = envp;
 	(*ms)->cwd_path = getcwd(buf, 1024);
 	(*ms)->bin_paths = ft_split(getenv("PATH"), ':');
 	(*ms)->full_command = "";
@@ -78,9 +80,7 @@ int	main(int argc, char **argv, char **envp)
 
 	if (DEBUG)
 		run_test(argc, argv, envp);
-	error.flag = false;
-	ms_initialize_minishell(&ms, &error);
-	ms->envp = envp;
+	ms_initialize_minishell(&ms, &error, envp);
 	ms_initialize_signals();
 	while (ms->full_command)
 	{

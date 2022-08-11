@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:28:29 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/11 10:57:02 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/11 15:51:18 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,8 @@
 
 static void	cancel_process(int signo)
 {
-	// ft_printf("signal:%d", signo);
 	if (signo == SIGINT)
-	{
-		printf("\nYou pressed Ctrl+C\nminishell>");
-		// ms_display_prompt(ms);
-	}
+		printf("\nYou pressed Ctrl+C\n");
 }
 
 void	ms_initialize_signals(void)

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/11 13:35:35 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/11 18:54:18 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,7 +208,7 @@ void	ms_set_error(t_error *error, t_err_key err_key, char *err_msg);
  *			core/ms_main.c
 */
 
-void	ms_initialize_minishell(t_minishell **ms, t_error *error);
+void	ms_initialize_minishell(t_minishell **ms, t_error *error, char **envp);
 
 /*
  *  Builtin commands functions:
@@ -350,12 +350,14 @@ typedef enum e_tests
 }	t_tests;
 
 # ifndef DEBUG
-# define DEBUG 0
+# 	define DEBUG 0
 # endif
 
-void	display_tokens(t_minishell *ms);
-void	display_tokens_types(t_minishell *ms);
-void	display_processes(t_minishell *ms);
+void	test_run_command(t_minishell *ms, char *str, void (*function)());
+void	test_reset(t_minishell *ms);
+void	test_display_tokens(t_minishell *ms);
+void	test_display_tokens_types(t_minishell *ms);
+void	test_display_processes(t_minishell *ms);
 void	test_display_errors(t_minishell *ms);
 void	run_test(int argc, char **argv, char **envp);
 void	test_builtin(t_minishell *ms, int debug);
