@@ -3,7 +3,7 @@
 
 void print_type(int t)
 {
-    if (t == NO_TYPE)
+	if (t == NO_TYPE)
         ft_printf("NO_TYPE");
 	else if (t == TYPE_ARG_STRING)
         ft_printf("ARG_STRING");
@@ -66,10 +66,10 @@ void display_tokens(t_minishell *ms)
 void display_processes(t_minishell *ms)
 {
 	t_process *process;
-    int i;
-    int j;
+	int i;
+	int j;
 
-    i = 1;
+	i = 1;
 	process = ms->first_process;
 	ft_printf("Has pipes: ");
 	if (ms->has_pipe)

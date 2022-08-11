@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:05:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/11 09:39:45 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/11 09:43:12 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void build_type_line(t_minishell *ms)
 		types_line = (t_token_type *) ft_calloc(sizeof(t_token_type), nb_tokens);
 		if (!process)
 		{
-			ms_set_error(ms, ERROR_MALLOC, MSG_ERROR_MALLOC);
+			ms_set_error(ms->error, ERROR_MALLOC, MSG_ERROR_MALLOC);
 			exit(ms_free_before_exit(ms));
 		}
 		i = 0;
@@ -119,13 +119,13 @@ void ms_build_processes(t_minishell *ms)
 	process = (t_process *)ft_calloc(sizeof(t_process), 1);
 	if (!process)
 	{
-		ms_set_error(ms, ERROR_MALLOC, MSG_ERROR_MALLOC);
+		ms_set_error(ms->error, ERROR_MALLOC, MSG_ERROR_MALLOC);
 		exit(ms_free_before_exit(ms));
 	}
 	command = (char *)ft_calloc(sizeof(char), 1);
 	if (!command)
 	{
-		ms_set_error(ms, ERROR_MALLOC, MSG_ERROR_MALLOC);
+		ms_set_error(ms->error, ERROR_MALLOC, MSG_ERROR_MALLOC);
 		exit(ms_free_before_exit(ms));
 	}
 	ms->first_process = process;

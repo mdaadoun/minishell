@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 10:55:29 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/10 13:55:52 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/11 09:39:55 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_token *ms_create_new_token(t_minishell *ms)
     token = (t_token *) ft_calloc(sizeof(t_token), 1);
     if (!token)
     {
-		ms_set_error(ms, ERROR_MALLOC, MSG_ERROR_MALLOC);
+		ms_set_error(ms->error, ERROR_MALLOC, MSG_ERROR_MALLOC);
         exit(ms_free_before_exit(ms));
     }
     token->type = NO_TYPE;

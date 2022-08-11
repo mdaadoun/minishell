@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 13:46:11 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/11 08:31:15 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/11 09:29:25 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ void ms_executer(t_minishell *ms)
 {
     ms_build_processes(ms);
     ms_checking_for_errors(ms);
-    ms_start_processes(ms);
+    // ms_start_processes(ms);
     ms_free_all_processes(ms);
 }
