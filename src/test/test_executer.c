@@ -16,6 +16,37 @@ void launch_executer_build(t_minishell *ms)
     ft_printf("\n");
 }
 
+void launch_executer_errors(t_minishell *ms)
+{
+    ft_printf("\e[1;34mTest with command:\e[m %s\n", ms->full_command);
+    ms_parser(ms);
+	ms_lexer(ms);
+    ms_build_processes(ms);
+    ms_checking_for_errors(ms);
+    display_tokens_types(ms);
+    display_processes(ms);
+    test_display_errors(ms);
+    ms_free_all_tokens(ms);
+    ms_free_all_processes(ms);
+	ms_set_error(ms->global_error, NO_ERROR, NULL);
+    ft_printf("\n");
+}
+
+void launch_executer_run_pipeline(t_minishell *ms)
+{
+    ft_printf("\e[1;34mTest with command:\e[m %s\n", ms->full_command);
+    ms_parser(ms);
+	ms_lexer(ms);
+    ms_executer(ms);
+    display_tokens_types(ms);
+    display_processes(ms);
+    test_display_errors(ms);
+    ms_free_all_tokens(ms);
+    ms_free_all_processes(ms);
+	ms_set_error(ms->global_error, NO_ERROR, NULL);
+    ft_printf("\n");
+}
+
 void	test_processes_build(t_minishell *ms)
 {
 	printf("\e[1;34m===Testing processes===\e[m\n");
@@ -54,10 +85,18 @@ void	test_processes_build(t_minishell *ms)
 void	test_processes_errors(t_minishell *ms)
 {
 	(void) ms;
-	printf("\e[1;34m===Testing processes errors===\e[m\n");
-    // ms->full_command = ft_strdup("env hello");
-	// launch_executer_build(ms);
-	// free(ms->full_command);
+	printf("\e[1;34m===Testing processes errors (BAD COMMANDS)===\e[m\n");
+	// test_set_command(ms, "asd | echo hello | eee eee");
+    ms->full_command = ft_strdup("asd | echo hello | eee eee");
+	launch_executer_errors(ms);
+	free(ms->full_command);
+    ms->full_command = ft_strdup("echo hello");
+	launch_executer_errors(ms);
+	free(ms->full_command);
+    ms->full_command = ft_strdup("echo test | asd hello | eee eee | echo hello | cat -e");
+	launch_executer_errors(ms);
+	free(ms->full_command);
+	printf("\e[1;34m===Testing processes errors (SYNTAX PIPES)===\e[m\n");
 }
 
 static void	close_pipe(t_minishell *ms)

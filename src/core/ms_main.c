@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:07:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/11 09:39:32 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/11 11:59:04 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ void	ms_initialize_minishell(t_minishell **ms, t_error *error)
 		write(2, MSG_ERROR_MALLOC, 41);
 		exit(EXIT_FAILURE);
 	}
-	(*ms)->error = error;
+	(*ms)->global_error = error;
 	buf = (char *)ft_calloc(sizeof(char), 1024);
 	if (!buf)
 	{
-		ms_set_error((*ms)->error, ERROR_MALLOC, MSG_ERROR_MALLOC);
+		ms_set_error((*ms)->global_error, ERROR_MALLOC, MSG_ERROR_MALLOC);
 		exit(ms_free_before_exit(*ms));
 	}
 	(*ms)->cwd_path = getcwd(buf, 1024);
@@ -90,7 +90,9 @@ int	main(int argc, char **argv, char **envp)
 			ms_lexer(ms);
 			ms_executer(ms);
 		}
+    	ms_free_all_processes(ms);
 		ms_free_last_command(ms);
+		ms_set_error(ms->global_error, NO_ERROR, NULL);
 	}
 	return (ms_free_before_exit(ms));
 }

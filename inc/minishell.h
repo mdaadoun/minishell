@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/11 10:02:03 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/11 11:47:31 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ typedef struct s_minishell {
 	struct s_token		*first_token;
 	struct s_variable	*first_var;
 	struct s_process	*first_process;
-	t_error 			*error;
+	t_error 			*global_error;
 }	t_minishell;
 
 
@@ -189,7 +189,7 @@ typedef struct s_process {
 	pid_t				pid;
 	struct s_process	*prev;
 	struct s_process	*next;
-	t_error 			*error;
+	t_error 			*internal_error;
 }   t_process;
 
 
@@ -360,6 +360,7 @@ typedef enum e_tests
 void	display_tokens(t_minishell *ms);
 void	display_tokens_types(t_minishell *ms);
 void	display_processes(t_minishell *ms);
+void	test_display_errors(t_minishell *ms);
 void 	run_test(int argc, char **argv, char **envp);
 void	test_builtin(t_minishell *ms, int debug);
 void	test_lexer(t_minishell *ms, int debug);

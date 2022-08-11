@@ -35,6 +35,7 @@ void display_tokens_types(t_minishell *ms)
 
     i = 1;
     token = ms->first_token;
+    ft_printf("\e[1;34mThe tokens are:\e[m \n");
     while (token)
     {
         ft_printf("%d:\n\tContent: \e[0;36m%s\e[m\n\tType:\e[0;36m", i, token->content);
@@ -71,11 +72,14 @@ void display_processes(t_minishell *ms)
 
 	i = 1;
 	process = ms->first_process;
+    ft_printf("\e[1;34mThe processes are:\e[m \n");
 	ft_printf("Has pipes: ");
+
 	if (ms->has_pipe)
 		ft_printf("\e[0;32myes\e[m\n");
 	else
 		ft_printf("\e[0;31mno\e[m\n");
+
 	ft_printf("Nb of processes: \e[0;33m%d\e[m\n", ms->nb_processes);
 	while (process)
 	{
@@ -94,6 +98,44 @@ void display_processes(t_minishell *ms)
 			j++;
 		}
 		ft_printf("\e[m\n");
+		process = process->next;
+		i++;
+	}
+}
+
+void test_display_errors(t_minishell *ms)
+{
+	t_error	  *global_error;
+	t_process *process;
+	int i;
+
+	global_error = ms->global_error;
+    ft_printf("\e[1;34mThe errors are:\e[m \n");
+    ft_printf("\e[1;34m\tGlobal:\e[m \n");
+	ft_printf("\t\tHas global error: ");
+
+	if (global_error->flag)
+	{
+		ft_printf("\e[0;31myes\e[m\n");
+		ft_printf("\t\tError message: \e[0;31m%s\e[m\n", global_error->msg);
+
+	}
+	else
+		ft_printf("\e[0;32mno\e[m\n");
+
+    ft_printf("\e[1;34m\tInternal:\e[m \n");
+	process = ms->first_process;
+	i = 1;
+
+	while (process)
+	{
+		ft_printf("\t\t%d:", i);
+		if (process->internal_error->flag)
+		{
+			ft_printf(" Internal error: \e[0;31m%s\e[m\n", process->internal_error->msg);
+		}
+		else
+			ft_printf(" \e[0;32mNo internal error.\e[m\n");
 		process = process->next;
 		i++;
 	}

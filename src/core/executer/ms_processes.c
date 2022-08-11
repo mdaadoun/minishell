@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:05:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/11 10:29:42 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/11 11:15:05 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void add_process(t_process *proc)
 	t_process *new_process;
 
 	new_process = (t_process *)ft_calloc(sizeof(t_process), 1);
+	new_process->internal_error = (t_error *)ft_calloc(sizeof(t_error), 1);
 	proc->next = new_process;
 	new_process->prev = proc;
 }
@@ -41,7 +42,7 @@ static void build_type_line(t_minishell *ms)
 		types_line = (t_token_type *) ft_calloc(sizeof(t_token_type), nb_tokens);
 		if (!process)
 		{
-			ms_set_error(ms->error, ERROR_MALLOC, MSG_ERROR_MALLOC);
+			ms_set_error(ms->global_error, ERROR_MALLOC, MSG_ERROR_MALLOC);
 			exit(ms_free_before_exit(ms));
 		}
 		i = 0;
@@ -120,15 +121,16 @@ void ms_build_processes(t_minishell *ms)
 	token = ms->first_token;
 	ms->nb_processes = 1;
 	process = (t_process *)ft_calloc(sizeof(t_process), 1);
+	process->internal_error = (t_error *)ft_calloc(sizeof(t_error), 1);
 	if (!process)
 	{
-		ms_set_error(ms->error, ERROR_MALLOC, MSG_ERROR_MALLOC);
+		ms_set_error(ms->global_error, ERROR_MALLOC, MSG_ERROR_MALLOC);
 		exit(ms_free_before_exit(ms));
 	}
 	command = (char *)ft_calloc(sizeof(char), 1);
 	if (!command)
 	{
-		ms_set_error(ms->error, ERROR_MALLOC, MSG_ERROR_MALLOC);
+		ms_set_error(ms->global_error, ERROR_MALLOC, MSG_ERROR_MALLOC);
 		exit(ms_free_before_exit(ms));
 	}
 	ms->first_process = process;
@@ -216,6 +218,17 @@ static void run_process(t_process *process)
 	// 	error command;
 }
 
+static bool check_global_error(t_minishell *ms)
+{
+	if (ms->global_error->flag)
+	{
+        write(2, ms->global_error->msg, ms->global_error->length);
+        write(2, "\n", 1);
+		return (false);
+	}
+	return (true);
+}
+
 /*
  * fork and wait
  * 1. launch external
@@ -225,23 +238,23 @@ static void run_process(t_process *process)
 */
 void ms_start_processes(t_minishell *ms)
 {
+	bool run_pipeline;
 	t_process *process;
 	process = ms->first_process;
-	// if (ms->error->flag)
-		// error return prompt
-	// else
 	create_pipes(ms);
-	while (process)
+	run_pipeline = true;
+	while (process && run_pipeline)
 	{
 		process->pid = fork();
 		if (process->pid == 0)
-			run_process(process);
+		{
+			run_pipeline = check_global_error(ms);
+			if (run_pipeline)
+				run_process(process);
+			else
+				exit(EXIT_FAILURE);
+		}
 		process = process->next;
-		// if (!process->next)
-		// {
-		// 	close(process->pipe_out);
-		// 	close(process->next->pipe_in);
-		// }
 	}
 	process = ms->first_process;
 	while (process)
