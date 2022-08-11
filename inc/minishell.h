@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/11 11:47:31 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/11 13:35:35 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,8 @@
 # include <getopt.h>
 # include <signal.h>
 # include <assert.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-
+# include <sys/types.h>
+# include <sys/wait.h>
 
 //======
 // Types
@@ -57,7 +56,7 @@ typedef unsigned long long	t_uint64;
 \e[0;38m|\e[m\e[1;36m ██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║     ██║      \e[m\e[0;38m|\e[m\n\
 \e[0;38m|\e[m\e[1;34m ██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗ \e[m\e[0;38m|\e[m\n\
 \e[0;38m|\e[m\e[1;34m ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝ \e[m\e[0;38m|\e[m\n\
-\e[0;38m\\=========================\e[0;34mm\e[m\e[0;36mdaadoun\e[m&&\e[0;34md\e[m\e[0;36mlaidet\e[m===========================/\e[m\n\n"\
+\e[0;38m\\=========================\e[0;34mm\e[m\e[0;36mdaadoun\e[m&&\e[0;34md\e[m\e[0;36mlaidet\e[m===========================/\e[m\n\n"
 
 //=====================
 // Minishell structures
@@ -83,15 +82,14 @@ typedef enum e_err_key {
 	ERROR_BUILTIN_OPTION,
 	ERROR_BUILTIN_ARGUMENT,
 	ERROR_SYNTAX
-}           t_err_key;
+}			t_err_key;
 
 typedef struct s_error {
 	bool		flag;
 	char		*msg;
 	int			length;
 	t_err_key	key;
-} t_error;
-
+}				t_error;
 
 /*
  *	Main structure:
@@ -112,31 +110,30 @@ typedef struct s_minishell {
 	struct s_token		*first_token;
 	struct s_variable	*first_var;
 	struct s_process	*first_process;
-	t_error 			*global_error;
+	struct s_error		*global_error;
 }	t_minishell;
-
 
 /*
  *  Builtin commands structures:
 */
 
 typedef enum e_builtins {
-    BIN_NULL,
-    BIN_ECHO,
-    BIN_CD,
-    BIN_PWD,
-    BIN_EXPORT,
-    BIN_UNSET,
-    BIN_ENV,
-    BIN_EXIT,
-    BIN_HISTORY,
-}   t_builtins;
+	BIN_NULL,
+	BIN_ECHO,
+	BIN_CD,
+	BIN_PWD,
+	BIN_EXPORT,
+	BIN_UNSET,
+	BIN_ENV,
+	BIN_EXIT,
+	BIN_HISTORY,
+}	t_builtins;
 
 typedef struct s_variable {
 	char				*name;
 	char				*content;
-	struct s_variable   *next;
-}   t_variable;
+	struct s_variable	*next;
+}						t_variable;
 
 /*
  *  Tokens structures:
@@ -170,8 +167,7 @@ typedef struct s_token
 	t_builtins			builtin;
 	struct s_token		*prev;
 	struct s_token		*next;
-}           t_token;
-
+}						t_token;
 
 /*
  *  Executer structures:
@@ -185,13 +181,13 @@ typedef struct s_process {
 	char				*exec_path;
 	char				**envp;
 	t_token_type		*types_line;
+
 	char				option;
 	pid_t				pid;
 	struct s_process	*prev;
 	struct s_process	*next;
-	t_error 			*internal_error;
-}   t_process;
-
+	t_error				*internal_error;
+}						t_process;
 
 //====================
 // Minishell functions
@@ -203,8 +199,8 @@ typedef struct s_process {
  *			core/ms_errors.c
 */
 
-void ms_checking_for_errors(t_minishell *ms);
-void ms_set_error(t_error *error, t_err_key err_key, char *err_msg);
+void	ms_checking_for_errors(t_minishell *ms);
+void	ms_set_error(t_error *error, t_err_key err_key, char *err_msg);
 
 /*
  * Main functions
@@ -253,7 +249,7 @@ void	ms_initialize_signals(void);
 
 void	ms_replace_token(t_token *old, t_token *new);
 t_token	*ms_delete_token(t_token *token);
-void	ms_add_token(t_minishell *ms, char* content, t_token_type type);
+void	ms_add_token(t_minishell *ms, char *content, t_token_type type);
 void	ms_append_token(t_token *before_token, t_token *add_token);
 
 /*
@@ -351,17 +347,17 @@ typedef enum e_tests
 	TEST_EXECUTER_PROCESSES_BUILD = 41,
 	TEST_EXECUTER_PROCESSES_ERROR = 42,
 	TEST_EXECUTER_PROCESSES_PIPE = 43
-}   t_tests;
+}	t_tests;
 
-#ifndef DEBUG
+# ifndef DEBUG
 # define DEBUG 0
-#endif
+# endif
 
 void	display_tokens(t_minishell *ms);
 void	display_tokens_types(t_minishell *ms);
 void	display_processes(t_minishell *ms);
 void	test_display_errors(t_minishell *ms);
-void 	run_test(int argc, char **argv, char **envp);
+void	run_test(int argc, char **argv, char **envp);
 void	test_builtin(t_minishell *ms, int debug);
 void	test_lexer(t_minishell *ms, int debug);
 void	test_parser(t_minishell *ms, int debug);

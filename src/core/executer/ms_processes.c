@@ -6,16 +6,15 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:05:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/11 11:15:05 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/11 14:06:01 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-
-static void add_process(t_process *proc)
+static void	add_process(t_process *proc)
 {
-	t_process *new_process;
+	t_process	*new_process;
 
 	new_process = (t_process *)ft_calloc(sizeof(t_process), 1);
 	new_process->internal_error = (t_error *)ft_calloc(sizeof(t_error), 1);
@@ -26,13 +25,13 @@ static void add_process(t_process *proc)
 /*
  * Create an array of the token type for each process.
 */
-static void build_type_line(t_minishell *ms)
+static void	build_type_line(t_minishell *ms)
 {
 	t_token_type	*types_line;
 	int				nb_tokens;
 	int				i;
-	t_process 		*process;
-    t_token 		*token;
+	t_process		*process;
+	t_token			*token;
 
 	token = ms->first_token;
 	process = ms->first_process;
@@ -46,7 +45,7 @@ static void build_type_line(t_minishell *ms)
 			exit(ms_free_before_exit(ms));
 		}
 		i = 0;
-		while(i < nb_tokens)
+		while (i < nb_tokens)
 		{
 			types_line[i] = token->type;
 			if (token->type == TYPE_ARG_OPTION && ft_strlen(token->content) == 2)
@@ -61,12 +60,12 @@ static void build_type_line(t_minishell *ms)
 	}
 }
 
-void create_pipes(t_minishell *ms)
+void	create_pipes(t_minishell *ms)
 {
-	t_token	*tok;
+	t_token		*tok;
 	t_process	*proc;
-	int		nb_pipe;
-	int		pipes[2];
+	int			nb_pipe;
+	int			pipes[2];
 
 	if (!ms->has_pipe)
 		return ;
@@ -111,12 +110,12 @@ void create_pipes(t_minishell *ms)
 	// then build each commands from token as a char ** and type as a int * 
  *
 */
-void ms_build_processes(t_minishell *ms)
+void	ms_build_processes(t_minishell *ms)
 {
 	char		*command;
 	char		*new_command;
-    t_token 	*token;
-	t_process 	*process;
+	t_token		*token;
+	t_process	*process;
 
 	token = ms->first_token;
 	ms->nb_processes = 1;
@@ -163,7 +162,6 @@ void ms_build_processes(t_minishell *ms)
 	}
 	process->command_line = command;
 	build_type_line(ms);
-//	create_pipes(ms);
 }
 
 // close pipe
@@ -186,7 +184,7 @@ void ms_build_processes(t_minishell *ms)
 // 	execve(cmd, arg, envp);
 // }
 
-static void run_process(t_process *process)
+static void	run_process(t_process *process)
 {
 	char	**arg;
 
@@ -194,7 +192,7 @@ static void run_process(t_process *process)
 	{
 		dup2(process->pipe_out, 1);
 		if (process->next)
-				close(process->next->pipe_in);
+			close(process->next->pipe_in);
 	}
 	if (process->pipe_in != 0)
 	{
@@ -213,17 +211,14 @@ static void run_process(t_process *process)
 		execve(process->exec_path, arg, process->envp);
 	}
 	exit(EXIT_SUCCESS);
-		// run_external(process->in, process->out);
-	// if (command ERROR)
-	// 	error command;
 }
 
-static bool check_global_error(t_minishell *ms)
+static bool	check_global_error(t_minishell *ms)
 {
 	if (ms->global_error->flag)
 	{
-        write(2, ms->global_error->msg, ms->global_error->length);
-        write(2, "\n", 1);
+		write(2, ms->global_error->msg, ms->global_error->length);
+		write(2, "\n", 1);
 		return (false);
 	}
 	return (true);
@@ -236,10 +231,11 @@ static bool check_global_error(t_minishell *ms)
  * 3. or print error
  *
 */
-void ms_start_processes(t_minishell *ms)
+void	ms_start_processes(t_minishell *ms)
 {
-	bool run_pipeline;
-	t_process *process;
+	bool		run_pipeline;
+	t_process	*process;
+
 	process = ms->first_process;
 	create_pipes(ms);
 	run_pipeline = true;
