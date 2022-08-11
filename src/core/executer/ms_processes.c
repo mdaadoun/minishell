@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:05:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/11 07:15:29 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/11 08:55:25 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,48 @@ static void build_type_line(t_minishell *ms)
 			token = token->next;
 		process->types_line = types_line;
 		process = process->next;
+	}
+}
+
+void create_pipes(t_minishell *ms)
+{
+	t_token	*tok;
+	t_process	*proc;
+	int		nb_pipe;
+	int		pipes[2];
+
+	nb_pipe = 0;
+	tok = ms->first_token;
+	while (tok)
+	{
+		if (tok->type == TYPE_PIPE)
+			nb_pipe++;
+		tok = tok->next;
+	}
+	proc = ms->first_process;
+	while (proc)
+	{
+		if (nb_pipe != 0)
+		{
+			nb_pipe--;
+			pipe(pipes);
+		}
+		if (proc == ms->first_process)
+		{
+			proc->pipe_in = 0;
+			proc->pipe_out = pipes[1];
+			proc->next->pipe_in = pipes[0];
+		}
+		else if (proc->next == 0)
+		{
+			proc->pipe_out = 1;
+		}
+		else
+		{
+			proc->pipe_out = pipes[1];
+			proc->next->pipe_in = pipes[0];
+		}
+		proc = proc->next;
 	}
 }
 
@@ -113,6 +155,7 @@ void ms_build_processes(t_minishell *ms)
 	}
 	process->command_line = command;
 	build_type_line(ms);
+//	create_pipes(ms);
 }
 
 // close pipe
@@ -154,13 +197,6 @@ static void run_process(t_process *process)
 	// 	error command;
 }
 
-static void create_pipes(t_minishell *ms)
-{
-	(void) ms;
-	// count pipes
-	// connect pipes fd between each process
-}
-
 /*
  * fork and wait
  * 1. launch external
@@ -170,17 +206,15 @@ static void create_pipes(t_minishell *ms)
 */
 void ms_start_processes(t_minishell *ms)
 {
-	int	pipes[2];
 	t_process *process;
-
+	display_processes(ms);
+	return ;
 	process = ms->first_process;
 	// if (ms->error->flag)
 		// error return prompt
 	// else
-	pipe(pipes);
-	// process->pipe_in = pipes[1];
-	// process->next->pipe_out = pipes[0];
 	create_pipes(ms);
+
 	while (process->next)
 	{
 		ft_printf("process:%s\n",process->command_line);

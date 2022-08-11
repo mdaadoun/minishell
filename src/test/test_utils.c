@@ -81,8 +81,10 @@ void display_processes(t_minishell *ms)
 	{
 		ft_printf("%d:\n", i);
 		ft_printf("\tNumber of tokens: \e[0;36m%d\e[m\n", process->nb_tokens);
-		ft_printf("\tProcess id: \e[0;36m%d\e[m\n", process->process_id);
+		ft_printf("\tProcess id: \e[0;36m%d\e[m\n", process->pid);
 		ft_printf("\tThe command line: \e[0;36m%s\e[m\n", process->command_line);
+		ft_printf("\tPipe In: \e[0;36m%d\e[m\n", process->pipe_in);
+		ft_printf("\tPipe Out: \e[0;36m%d\e[m\n", process->pipe_out);
 		ft_printf("\tThe type line: \e[0;36m");
 		j = 0;
 		while (j < process->nb_tokens)

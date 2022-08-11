@@ -38,6 +38,7 @@ void display_help()
     ft_printf("\t\e[1;33m4:\e[m executer\n");
     ft_printf("\t\e[1;33m  41:\e[m test building processes\n");
     ft_printf("\t\e[1;33m  42:\e[m test building errors\n");
+    ft_printf("\t\e[1;33m  43:\e[m test building pipes\n");
 }
 
 void	free_test(t_minishell *ms)

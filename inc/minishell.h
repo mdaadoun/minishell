@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/10 16:12:42 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/11 08:43:16 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -296,6 +296,7 @@ void	ms_analyze_arguments(t_minishell *ms);
 void	ms_executer(t_minishell *ms);
 void	ms_build_processes(t_minishell *ms);
 void	ms_start_processes(t_minishell *ms);
+void	create_pipes(t_minishell *ms);
 
 /*
  *	Memory:
@@ -344,7 +345,8 @@ typedef enum e_tests
 	TEST_BUILTIN_EXPORT = 33,
 	TEST_BUILTIN_UNSET = 34,
 	TEST_EXECUTER_PROCESSES_BUILD = 41,
-	TEST_EXECUTER_PROCESSES_ERROR = 42
+	TEST_EXECUTER_PROCESSES_ERROR = 42,
+	TEST_EXECUTER_PROCESSES_PIPE = 43
 }   t_tests;
 
 #ifndef DEBUG
