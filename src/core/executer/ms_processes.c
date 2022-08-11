@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:05:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/10 16:13:26 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/11 07:15:29 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ static void run_process(t_process *process)
 		// run_builtin(process);
 	else if (process->types_line[0] == TYPE_EXTERNAL_COMMAND)
 	{
-		ft_printf("%d,%d\n", process->pipes[0], process->pipes[1]);
+		ft_printf("%d,%d\n", process->pipe_out, process->next->pipe_in);
 		ft_printf("run external\n");
 	}
 	exit(EXIT_SUCCESS);
@@ -156,6 +156,7 @@ static void run_process(t_process *process)
 
 static void create_pipes(t_minishell *ms)
 {
+	(void) ms;
 	// count pipes
 	// connect pipes fd between each process
 }
