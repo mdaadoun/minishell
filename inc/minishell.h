@@ -6,11 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2022/08/12 09:04:45 by dlaidet          ###   ########.fr       */
-=======
-/*   Updated: 2022/08/12 09:26:13 by mdaadoun         ###   ########.fr       */
->>>>>>> Stashed changes
+/*   Updated: 2022/08/12 09:38:39 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
