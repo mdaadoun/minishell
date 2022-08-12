@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:05:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/11 14:06:01 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/12 07:10:38 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,6 +224,21 @@ static bool	check_global_error(t_minishell *ms)
 	return (true);
 }
 
+static void	close_pipe(t_minishell *ms)
+{
+	t_process	*proc;
+
+	proc = ms->first_process;
+	while (proc)
+	{
+		if (proc->prev)
+			close(proc->pipe_in);
+		if (proc->next)
+			close(proc->pipe_out);
+		proc = proc->next;
+	}
+}
+
 /*
  * fork and wait
  * 1. launch external
@@ -252,6 +267,7 @@ void	ms_start_processes(t_minishell *ms)
 		}
 		process = process->next;
 	}
+	close_pipe(ms);
 	process = ms->first_process;
 	while (process)
 	{

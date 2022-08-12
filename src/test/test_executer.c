@@ -98,6 +98,24 @@ void	test_processes_pipe(t_minishell *ms)
 	test_run_command(ms, "env | wc | wc -l", &launch_executer_pipe);
 }
 
+void	launch_executer_process(t_minishell *ms)
+{
+    ft_printf("\e[1;34mTest with command:\e[m %s\n", ms->full_command);
+    ms_parser(ms);
+	ms_lexer(ms);
+	ms_executer(ms);
+    test_display_tokens_types(ms);
+    test_display_processes(ms);
+	test_close_pipe(ms);
+	test_reset(ms);
+}
+
+void	test_processes_execv(t_minishell *ms)
+{
+	printf("\e[1;34m===Testing process execv===\e[m\n");
+	test_run_command(ms, "cat Makefile | wc -l", &launch_executer_process);
+}
+
 void test_executer(t_minishell *ms, int debug)
 {
 	if (debug == TEST_EXECUTER_PROCESSES_BUILD)
@@ -106,6 +124,8 @@ void test_executer(t_minishell *ms, int debug)
 		test_processes_errors(ms);
 	else if (debug == TEST_EXECUTER_PROCESSES_PIPE)
 		test_processes_pipe(ms);
+	else if (debug == TEST_EXECUTER_PROCESSES_EXECV)
+		test_processes_execv(ms);
     else if (debug == TEST_EXECUTER  || debug == TEST_ALL)
     {
 	    printf("===Testing EXECUTER===\n");

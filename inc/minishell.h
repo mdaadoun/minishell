@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/11 18:54:18 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/12 06:50:33 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -346,7 +346,8 @@ typedef enum e_tests
 	TEST_BUILTIN_UNSET = 34,
 	TEST_EXECUTER_PROCESSES_BUILD = 41,
 	TEST_EXECUTER_PROCESSES_ERROR = 42,
-	TEST_EXECUTER_PROCESSES_PIPE = 43
+	TEST_EXECUTER_PROCESSES_PIPE = 43,
+	TEST_EXECUTER_PROCESSES_EXECV = 44
 }	t_tests;
 
 # ifndef DEBUG
