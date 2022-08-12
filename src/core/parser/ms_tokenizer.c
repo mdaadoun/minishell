@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 10:55:29 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/11 13:59:56 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/12 07:19:21 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
  * The new token is added at the end of the token structure.
-*/
+ */
 static void	push_after_last_token(t_token *first, t_token *last)
 {
 	t_token	*tmp;
@@ -28,7 +28,7 @@ static void	push_after_last_token(t_token *first, t_token *last)
 
 /*
  * Return a pointer to the allocated memory for a new t_token element.
-*/
+ */
 t_token	*ms_create_new_token(t_minishell *ms)
 {
 	t_token	*token;
@@ -47,7 +47,7 @@ t_token	*ms_create_new_token(t_minishell *ms)
 
 /*
  * Check if it the first token
-*/
+ */
 void	ms_add_token(t_minishell *ms, char *content, t_token_type type)
 {
 	t_token	*token;

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 09:04:20 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/09 09:32:35 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/12 07:18:29 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  *      	* Check token is external or builtin programs
  *      3. Redirections types
  *      4. check last NO_TYPE if string arg or option
-*/
+ */
 void ms_lexer(t_minishell *ms)
 {
 	ms_analyze_command(ms, ms->first_token);

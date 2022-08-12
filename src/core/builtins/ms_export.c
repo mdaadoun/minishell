@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/10 07:14:24 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/12 07:17:39 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	ft_add_variable(t_minishell *ms, t_variable *env)
 /*
  *	set the export attribute for variables
  *  Dynamic structure of variables
-*/
+ */
 t_uint8 ms_export(t_minishell *ms, char *cmd)
 {
 	char	**arg;
@@ -80,5 +80,5 @@ t_uint8 ms_export(t_minishell *ms, char *cmd)
 			ind++;
 		}
 	}
-    return (0);
+	return (0);
 }

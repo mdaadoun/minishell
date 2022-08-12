@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 11:37:03 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/11 11:19:44 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/12 07:19:25 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  *		Set the ms global error and the process internal error.
  *		In the case where there is only one process, the shell will stop.
  *		In the case of multiple processes, the internal error will be used.
-*/
+ */
 static void check_bad_commands(t_minishell *ms)
 {
 	t_process	*process;
@@ -30,7 +30,7 @@ static void check_bad_commands(t_minishell *ms)
 	while (process)
 	{
 		if (process->types_line[0] != TYPE_EXTERNAL_COMMAND && \
-		process->types_line[0] != TYPE_BUILTIN_COMMAND)
+				process->types_line[0] != TYPE_BUILTIN_COMMAND)
 		{
 			ms_set_error(process->internal_error, err_key, err_msg);
 			ms_set_error(ms->global_error, err_key, err_msg);
@@ -48,10 +48,10 @@ static void check_syntax_pipes(t_minishell *ms)
 /*
  *	From token type, find:
  *		1. if command exist (if NO_TYPE instead of BUILTIN or EXTERNAL)
-			Check each command and find out errors If valid syntax, checking errors and ignore if not
+ Check each command and find out errors If valid syntax, checking errors and ignore if not
  * 		2. if syntax correct (pipes next to each other)
  * 		3. redirection error ??
-*/
+ */
 void ms_checking_for_errors(t_minishell *ms)
 {
 	check_bad_commands(ms);

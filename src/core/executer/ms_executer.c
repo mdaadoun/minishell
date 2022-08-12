@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 13:46:11 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/11 11:34:23 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/12 07:17:05 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
  *      4. If no global error, start the processes for each command
  *          Note: Each process could still have internal errors.
  *      5. Free the processes.
-*/
+ */
 void ms_executer(t_minishell *ms)
 {
-    ms_build_processes(ms);
-    ms_checking_for_errors(ms);
-    ms_start_processes(ms);
+	ms_build_processes(ms);
+	ms_checking_for_errors(ms);
+	ms_start_processes(ms);
 }

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:05:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/12 07:10:38 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/12 07:17:00 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	add_process(t_process *proc)
 
 /*
  * Create an array of the token type for each process.
-*/
+ */
 static void	build_type_line(t_minishell *ms)
 {
 	t_token_type	*types_line;
@@ -106,10 +106,10 @@ void	create_pipes(t_minishell *ms)
 
 /*
  *  build each commands from tokens
-	// start by counting processes with pipe, if any pipe raise flag: has_pipe
-	// then build each commands from token as a char ** and type as a int * 
+// start by counting processes with pipe, if any pipe raise flag: has_pipe
+// then build each commands from token as a char ** and type as a int * 
  *
-*/
+ */
 void	ms_build_processes(t_minishell *ms)
 {
 	char		*command;
@@ -245,7 +245,7 @@ static void	close_pipe(t_minishell *ms)
  * 2. or launch builtin
  * 3. or print error
  *
-*/
+ */
 void	ms_start_processes(t_minishell *ms)
 {
 	bool		run_pipeline;

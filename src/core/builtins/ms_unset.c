@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/10 09:08:04 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/12 07:17:48 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_uint8 ms_unset(t_minishell *ms, char *cmd)
 		{
 			dif = ft_strlen(env->name) - ft_strlen(arg[ind]);
 			if (dif != 0)
-				{
+			{
 				env = env->next;
 				continue;
 			}

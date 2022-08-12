@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:07:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/11 18:55:28 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/12 07:19:36 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * 		bin_paths: the binary paths from env
  * @params:
  *      ms  :   the main minishell data structure to free.
-*/
+ */
 void	ms_initialize_minishell(t_minishell **ms, t_error *error, char **envp)
 {
 	char *buf;
@@ -51,14 +51,14 @@ void	ms_initialize_minishell(t_minishell **ms, t_error *error, char **envp)
  *		2. Get line from input with readline.
  *		3. The Ctrl-D is controlled with "if (!ms->full_command)"
  *		4. Add the line to the history.
-*/
+ */
 static void display_prompt_and_wait(t_minishell *ms)
 {
 	printf("\e[1;38m%s\e[m", ms->cwd_path);
 	ms->full_command = readline(">");
 	if (!ms->full_command)
-    {
-        ft_printf("exit\n");
+	{
+		ft_printf("exit\n");
 		// ms_set_error(ms->global_error, NO_ERROR, NULL);
 		exit(ms_free_before_exit(ms));
 	}
@@ -72,7 +72,7 @@ static void display_prompt_and_wait(t_minishell *ms)
  *			2) Lexer: Lexical analysis of tokens (evaluation).
  *			3) Executer: Fork processes, run and print result.
  *			4) Loop: Free data and wait for the next command.
-*/
+ */
 int	main(int argc, char **argv, char **envp)
 {
 	t_minishell *ms;
@@ -91,7 +91,7 @@ int	main(int argc, char **argv, char **envp)
 			ms_lexer(ms);
 			ms_executer(ms);
 		}
-    	ms_free_all_processes(ms);
+		ms_free_all_processes(ms);
 		ms_free_last_command(ms);
 		ms_set_error(ms->global_error, NO_ERROR, NULL);
 	}

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/08 17:13:00 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/12 07:17:27 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 // run a program in a modified environment
 t_uint8 ms_env(t_minishell *ms)
 {
-    int ind;
+	int ind;
 	t_variable *env;
 
-    ind = 0;
-    while(ms->envp[ind])
+	ind = 0;
+	while(ms->envp[ind])
 		ft_printf("%s\n", ms->envp[ind++]);
 	env = ms->first_var;
 	while (env)
@@ -27,5 +27,5 @@ t_uint8 ms_env(t_minishell *ms)
 		ft_printf("%s=%s\n", env->name, env->content);
 		env = env->next;
 	}
-    return (0);
+	return (0);
 }
