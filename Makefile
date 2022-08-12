@@ -6,7 +6,7 @@
 #    By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/20 08:44:56 by mdaadoun          #+#    #+#              #
-#    Updated: 2022/08/11 12:32:43 by mdaadoun         ###   ########.fr        #
+#    Updated: 2022/08/12 08:06:07 by mdaadoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,10 +88,9 @@ ft_dlstlast.c ft_lstnew_str.c ft_lstdelone_str.c ft_lstclear_str.c ft_lstadd_bac
 
 
 DEBUG_FLAGS = -g3 -ggdb -I. -D DEBUG=1 #-fsanitize=address  -fsanitize=leak
-V_ARG	=  --suppressions=.valgrind_ignore_readline --track-origins=yes --leak-check=full --show-leak-kinds=all -s
+V_ARG	=  --suppressions=.valgrind_ignore_readline --track-origins=yes --leak-check=full --show-leak-kinds=all -s 
 TEST_SRCS = src/test/test_builtin.c src/test/test_main.c src/test/test_parser.c src/test/test_lexer.c \
-src/test/test_executer.c src/test/test_utils.c
- 
+src/test/test_executer.c src/test/test_utils.c src/test/test_launcher.c
 ARGS = 
 
 debug: fclean

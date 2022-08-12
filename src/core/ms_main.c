@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:07:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/12 07:19:36 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/12 08:05:31 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	main(int argc, char **argv, char **envp)
 	t_error		error;
 
 	if (DEBUG)
-		run_test(argc, argv, envp);
+		test_start(argc, argv, envp);
 	ms_initialize_minishell(&ms, &error, envp);
 	ms_initialize_signals();
 	while (ms->full_command)

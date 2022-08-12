@@ -143,11 +143,19 @@ void test_display_errors(t_minishell *ms)
 	}
 }
 
-void test_run_command(t_minishell *ms, char *str, void (*function)())
+
+void	test_display_local_env(t_minishell *ms)
 {
-    ms->full_command = ft_strdup(str);
-	(*function)(ms);
+	t_variable	*env;
+
+	env = ms->first_var;
+	while (env)
+	{
+		ft_printf("%s=%s\n", env->name, env->content);
+		env = env->next;
+	}
 }
+
 
 void test_reset(t_minishell *ms)
 {

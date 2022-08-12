@@ -1,5 +1,13 @@
 #include "../../inc/minishell.h"
 
+
+void test_run_command(t_minishell *ms, char *str, int debug)
+{
+    ms->full_command = ft_strdup(str);
+    ft_printf("\n\e[1;34mTest command:\e[m %s\n", ms->full_command);
+    test_launcher(ms, debug);
+}
+
 static void set_and_run_tests(t_minishell *ms, int debug)
 {
     test_parser(ms, debug);
@@ -57,9 +65,8 @@ void	free_test(t_minishell *ms)
 	free(ms);
 }
 
-void run_test(int argc, char **argv, char **envp)
+void test_start(int argc, char **argv, char **envp)
 {
-    // char *line;
 	t_minishell *ms;
 	t_error		error;
     int     debug;
@@ -74,7 +81,7 @@ void run_test(int argc, char **argv, char **envp)
         }
         else if (!ft_strncmp(argv[1], "c", 1))
         {
-            ft_printf("give a command");
+            ft_printf("test a specific command");
         }
         else
         {

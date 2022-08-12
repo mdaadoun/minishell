@@ -7,17 +7,17 @@ Objective : Write a shell
 - [x] display **prompt**
 > Afficher un prompt en l’attente d’une nouvelle commande.
 
-- [ ] Launch any **program** (using path env to find programs) 
+- [x] Launch any **program** (using path env to find programs) 
 >    Chercher et lancer le bon exécutable (en se basant sur la variable d’environnement PATH, ou sur un chemin relatif ou absolu).
 
 - [ ] **History**
     * access global history ? add/clear
 > Posséder un historique fonctionnel.
 
-- [ ] **single quote '**
+- [x] **single quote '**
 > Gérer ' (single quote) qui doit empêcher le shell d’interpréter les méta-caractères présents dans la séquence entre guillemets.
 
-- [ ] **double quote "**
+- [x] **double quote "**
 > Gérer " (double quote) qui doit empêcher le shell d’interpréter les méta-caractères présents dans la séquence entre guillemets sauf le $ (signe dollar)
 
 * [ ] **redirections**
@@ -34,7 +34,7 @@ Objective : Write a shell
 * [ ] **pipes: |**
 > Implémenter les pipes (caractère |). La sortie de chaque commande de la pipeline est connectée à l’entrée de la commande suivante grâce à un pipe.
 
-* [ ] **env variables: $**
+* [x] **env variables: $**
 > Gérer les variables d’environnement (un $ suivi d’une séquence de caractères) qui doivent être substituées par leur contenu.
 
 * [ ] **$?**
@@ -51,14 +51,14 @@ Objective : Write a shell
 > * ctrl-D quitte le shell.
 > * ctrl-\ ne fait rien.
 
-* [ ] **builtins commands**
+* [x] **builtins commands**
     * [ ] **echo -n**
     * [ ] **cd**
-    * [ ] **pwd**
-    * [ ] **export**
-    * [ ] **unset**
-    * [ ] **env**
-    * [ ] **exit**
+    * [x] **pwd**
+    * [x] **export**
+    * [x] **unset**
+    * [x] **env**
+    * [x] **exit**
 
 >Votre shell doit implémenter les builtins suivantes :
 > * echo et l’option -n

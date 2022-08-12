@@ -6,7 +6,11 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2022/08/12 09:04:45 by dlaidet          ###   ########.fr       */
+=======
+/*   Updated: 2022/08/12 09:26:13 by mdaadoun         ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +60,9 @@ typedef unsigned long long	t_uint64;
 \e[0;38m|\e[m\e[1;36m ██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║     ██║      \e[m\e[0;38m|\e[m\n\
 \e[0;38m|\e[m\e[1;34m ██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗ \e[m\e[0;38m|\e[m\n\
 \e[0;38m|\e[m\e[1;34m ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝ \e[m\e[0;38m|\e[m\n\
-\e[0;38m\\=========================\e[0;34mm\e[m\e[0;36mdaadoun\e[m&&\e[0;34md\e[m\e[0;36mlaidet\e[m===========================/\e[m\n\n"
+\e[0;38m\\========================= \
+\e[0;34mm\e[m\e[0;36mdaadoun\e[m&&\e[0;34md\e[m\e[0;36mlaidet\e[m \
+===========================/\e[m\n\n"
 
 //=====================
 // Minishell structures
@@ -335,6 +341,7 @@ typedef enum e_tests
 	TEST_PARSER_PIPES = 12,
 	TEST_PARSER_ENV = 13,
 	TEST_PARSER_REDIRECT = 14,
+	TEST_PARSER_REDIRECTIONS = 15,
 	TEST_LEXER_BUILTINS = 21,
 	TEST_LEXER_EXTERNALS = 22,
 	TEST_LEXER_PIPES = 23,
@@ -351,16 +358,21 @@ typedef enum e_tests
 }	t_tests;
 
 # ifndef DEBUG
-# 	define DEBUG 0
+#  define DEBUG 0
 # endif
 
-void	test_run_command(t_minishell *ms, char *str, void (*function)());
+void	test_start(int argc, char **argv, char **envp);
+void	test_run_command(t_minishell *ms, char *str, int debug);
+void	test_launcher(t_minishell *ms, int debug);
+
 void	test_reset(t_minishell *ms);
+
 void	test_display_tokens(t_minishell *ms);
 void	test_display_tokens_types(t_minishell *ms);
 void	test_display_processes(t_minishell *ms);
 void	test_display_errors(t_minishell *ms);
-void	run_test(int argc, char **argv, char **envp);
+void	test_display_local_env(t_minishell *ms);
+
 void	test_builtin(t_minishell *ms, int debug);
 void	test_lexer(t_minishell *ms, int debug);
 void	test_parser(t_minishell *ms, int debug);

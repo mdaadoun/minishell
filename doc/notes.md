@@ -1,7 +1,5 @@
 
 
-valgrind --suppressions=.valgrind_ignore_readline --track-origins=yes --leak-check=full --show-leak-kinds=all -s ./minishell
-
 
 ## Commentaires style
 
