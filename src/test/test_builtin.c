@@ -34,6 +34,44 @@ static void	test_export(t_minishell *ms)
 	launch_export(ms, "export seeker");
 }
 
+// ECHO TEST
+// static void	test_echo(t_minishell *ms)
+// {
+// 'echo test tout'
+// 'echo test      tout'
+// 'echo -n test tout'
+// 'echo -n -n -n test tout'
+// }
+
+// CD TESTS
+// static void	test_cd(t_minishell *ms)
+// {
+// 'cd .. ; pwd'
+// 'cd /Users ; pwd'
+// 'cd ; pwd'
+// 'mkdir test_dir ; cd test_dir ; rm -rf ../test_dir ; cd . ; pwd ; cd . ; pwd ; cd .. ; pwd'
+// }
+
+// CD EXIT
+// static void	test_exit(t_minishell *ms)
+// {
+// "exit 42"
+// "exit 42 53 68"
+// "exit 259"
+// "exit 9223372036854775807"
+// "exit -9223372036854775808"
+// "exit 9223372036854775808"
+// "exit -9223372036854775810"
+// "exit -4"
+// "exit wrong"
+// "exit wrong_command"
+// "gdagadgag"
+// "ls -Z"
+// "cd gdhahahad"
+// "ls -la | wtf"
+// }
+
+
 void test_builtin(t_minishell *ms, int debug)
 {
 	if (debug == TEST_BUILTIN)

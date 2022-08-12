@@ -6,7 +6,7 @@
 #    By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/20 08:44:56 by mdaadoun          #+#    #+#              #
-#    Updated: 2022/08/12 08:06:07 by mdaadoun         ###   ########.fr        #
+#    Updated: 2022/08/12 12:05:19 by mdaadoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,20 +98,20 @@ debug: fclean
 	@$(CC) $(FLAGS) $(DEBUG_FLAGS) $(addprefix $(DIR)/,$(SRCS)) $(TEST_SRCS) $(addprefix $(DIR_LIB)/,$(DEBUG_SRCS)) -o $(NAME) $(READLINE_FLAGS) 
 	@echo "$(G)$(NAME) debug program created.$(D)"
 
-valgrind: debug
+valgrind:
 	@echo "$(B)Starting memory test.$(D)"
 	valgrind $(V_ARG) ./$(NAME)
 	@echo "$(G)Test done.$(D)"
 
-debug_bonus: fclean
-	@echo "$(B)Starting debug compilation.$(D)"
-	@$(CC) $(FLAGS) $(DEBUG_FLAGS) $(addprefix $(DIR)/,$(SRCS)) $(TEST_SRCS) $(addprefix $(DIR_LIB)/,$(DEBUG_SRCS)) -o $(NAME_BONUS) $(READLINE_FLAGS)
-	@echo "$(G)$(NAME_BONUS) debug program created.$(D)"
+# debug_bonus: fclean
+# 	@echo "$(B)Starting debug compilation.$(D)"
+# 	@$(CC) $(FLAGS) $(DEBUG_FLAGS) $(addprefix $(DIR)/,$(SRCS)) $(TEST_SRCS) $(addprefix $(DIR_LIB)/,$(DEBUG_SRCS)) -o $(NAME_BONUS) $(READLINE_FLAGS)
+# 	@echo "$(G)$(NAME_BONUS) debug program created.$(D)"
 
-valgrind_bonus: debug_bonus
-	@echo "$(B)Starting memory test.$(D)"
-	valgrind $(V_ARG) ./$(NAME_BONUS)
-	@echo "$(G)Test done.$(D)"
+# valgrind_bonus: debug_bonus
+# 	@echo "$(B)Starting memory test.$(D)"
+# 	valgrind $(V_ARG) ./$(NAME_BONUS)
+# 	@echo "$(G)Test done.$(D)"
 
 run:
 	./${NAME} ${ARGS}

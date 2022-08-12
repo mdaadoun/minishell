@@ -22,6 +22,37 @@ static void	test_parsing_env(t_minishell *ms, int debug)
 	test_run_command(ms, "export a=$BA", debug);
 	test_run_command(ms, "echo \"$LOGNAME\"", debug);
 	test_run_command(ms, "echo \'$LOGNAME\'", debug);
+	test_run_command(ms, "echo test     \\    test", debug);
+	test_run_command(ms, "echo \"test", debug);
+	test_run_command(ms, "echo $TEST", debug);
+	test_run_command(ms, "echo \"$TEST\"", debug);
+	test_run_command(ms, "\"echo '$TEST'\"", debug);
+	test_run_command(ms, "echo \"$TEST$TEST$TEST\"", debug);
+	test_run_command(ms, "echo \"$TEST$TEST=lol$TEST\"", debug);
+	test_run_command(ms, "echo \"   $TEST lol $TEST\"", debug);
+	test_run_command(ms, "echo $TEST$TEST$TEST", debug);
+	test_run_command(ms, "echo $TEST$TEST=lol$TEST""lol", debug);
+	test_run_command(ms, "echo    $TEST lol $TEST", debug);
+	test_run_command(ms, "echo test "" test "" test", debug);
+	test_run_command(ms, "echo \"\\$TEST\"", debug);
+	test_run_command(ms, "echo \"$=TEST\"", debug);
+	test_run_command(ms, "echo \"$\"", debug);
+	test_run_command(ms, "echo \"$?TEST\"", debug);
+	test_run_command(ms, "echo $TEST $TEST", debug);
+	test_run_command(ms, "echo \"$1TEST\"", debug);
+	test_run_command(ms, "echo \"$T1TEST\"", debug);
+	//  'export ='
+	//  'export 1TEST= ; env | sort | grep -v SHLVL | grep -v _='
+	//  'export TEST ; export | sort | grep -v SHLVL | grep -v _= | grep -v OLDPWD'
+	//  'export ""="" ;  env | sort | grep -v SHLVL | grep -v _='
+	//  'export TES=T="" ; env | sort | grep -v SHLVL | grep -v _='
+	//  'export TE+S=T="" ; env | sort | grep -v SHLVL | grep -v _='
+	//  'export TEST=LOL ; echo $TEST ; env | sort | grep -v SHLVL | grep -v _='
+	//  'export TEST=LOL ; echo $TEST$TEST$TEST=lol$TEST'
+	//  'export TEST=LOL; export TEST+=LOL ; echo $TEST ; env | sort | grep -v SHLVL | grep -v _='
+	//  'env | sort | grep -v SHLVL | grep -v _='
+	//  'export | sort | grep -v SHLVL | grep -v _= | grep -v OLDPWD'
+	//  'export TEST="ls       -l     - a" ; echo $TEST ; $LS ; ' 'env | sort | grep -v SHLVL | grep -v _='
 }
 
 static void	test_parsing_pipe(t_minishell *ms, int debug)

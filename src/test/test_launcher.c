@@ -39,7 +39,7 @@ void test_launcher(t_minishell *ms, int debug)
 			ms_analyze_command(ms, ms->first_token);
 			if (ms->first_token->type == TYPE_EXTERNAL_COMMAND)
 				ft_printf("%s is a valid command of type %d (external).\n", ms->first_token->content, ms->first_token->type);
-			if (ms->first_token->type == TYPE_BUILTIN_COMMAND)
+			else if (ms->first_token->type == TYPE_BUILTIN_COMMAND)
 				ft_printf("%s is a valid command of type %d (builtin).\n", ms->first_token->content, ms->first_token->type);
 			else
 				ft_printf("%s is not a valid command.\n", ms->first_token->content);
@@ -101,7 +101,6 @@ void test_launcher(t_minishell *ms, int debug)
 	if (next)
 	{
 		ms_executer(ms);
-		test_close_pipe(ms);
 		if (debug == TEST_EXECUTER || debug == TEST_EXECUTER_PROCESSES_EXECV)
 			next = false;
 	}

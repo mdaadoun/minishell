@@ -52,12 +52,12 @@ Objective : Write a shell
 > * ctrl-\ ne fait rien.
 
 * [x] **builtins commands**
-    * [ ] **echo -n**
+    * [ ] **echo -n** (fork)
     * [ ] **cd**
-    * [x] **pwd**
+    * [x] **pwd** (fork)
     * [x] **export**
     * [x] **unset**
-    * [x] **env**
+    * [x] **env** (fork)
     * [x] **exit**
 
 >Votre shell doit implémenter les builtins suivantes :

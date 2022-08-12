@@ -4,7 +4,7 @@
 void test_run_command(t_minishell *ms, char *str, int debug)
 {
     ms->full_command = ft_strdup(str);
-    ft_printf("\n\e[1;34mTest command:\e[m %s\n", ms->full_command);
+    ft_printf("\n================================\n\e[1;34mTest command:\e[m %s\n================================\n", ms->full_command);
     test_launcher(ms, debug);
 }
 
