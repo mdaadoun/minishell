@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/12 13:45:11 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/12 14:18:13 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,16 @@ t_uint8	ms_export(t_minishell *ms, char *cmd)
 		}
 	}
 	return (0);
+}
+
+void ms_copy_env(t_minishell *ms)
+{
+	int ind;
+
+	ind = 0;
+	while(ms->envp[ind])
+	{
+		ft_add_variable(ms, ft_create_variable(ms->envp[ind]));
+		ind++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/12 09:38:39 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/12 14:21:10 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,6 +225,7 @@ void	ms_initialize_minishell(t_minishell **ms, t_error *error, char **envp);
 */
 
 void	ft_remove_env(t_minishell *ms, t_variable *last, t_variable *current);
+void	ms_copy_env(t_minishell *ms);
 
 t_uint8	ms_echo(char *cmd);
 t_uint8	ms_cd(t_minishell *ms, char *cmd);

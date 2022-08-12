@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 11:37:03 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/12 08:08:49 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/12 14:20:18 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,20 @@ static void check_bad_commands(t_minishell *ms)
 }
 
 // For each token, if 2 pipe next to each other, pipe error
-static void check_syntax_pipes(t_minishell *ms)
+static void check_bad_syntax(t_minishell *ms)
 {
-	(void) ms;
+	t_token *token;
+	t_err_key	err_key;
+
+	err_key = ERROR_SYNTAX;
+	token = ms->first_token;
+	while (token)
+	{
+		if (token->type == TYPE_PIPE )
+			if (token->next && token->next->type == TYPE_PIPE)
+				ms_set_error(ms->global_error, err_key, MSG_ERROR_SYNTAX_PIPE);
+		token = token->next;
+	}
 }
 
 /*
@@ -55,7 +66,7 @@ static void check_syntax_pipes(t_minishell *ms)
 void ms_checking_for_errors(t_minishell *ms)
 {
 	check_bad_commands(ms);
-	check_syntax_pipes(ms);
+	check_bad_syntax(ms);
 	// check_syntax_redirections(ms);
 	// IF command builtin echo and option is not n OR if there is an option ERROR OPTION
 	// FOR EACH builtin, check if arguments are valid, exemple for echo, one argument, one equal sign

@@ -27,7 +27,7 @@ void	test_processes_errors(t_minishell *ms, int debug)
 	test_run_command(ms, ";; test", debug);
 	test_run_command(ms, "| test", debug);
 	test_run_command(ms, "echo > <", debug);
-	test_run_command(ms, "echo | |", debug);
+	test_run_command(ms, "echo hello | |", debug);
 	test_run_command(ms, "<", debug);
 }
 
