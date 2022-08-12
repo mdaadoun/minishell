@@ -114,6 +114,7 @@ void	test_processes_execv(t_minishell *ms)
 {
 	printf("\e[1;34m===Testing process execv===\e[m\n");
 	test_run_command(ms, "cat Makefile | wc -l", &launch_executer_process);
+	test_run_command(ms, "cat Makefile | wc -l | wc -l", &launch_executer_process);
 }
 
 void test_executer(t_minishell *ms, int debug)

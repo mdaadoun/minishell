@@ -97,6 +97,9 @@ void test_display_processes(t_minishell *ms)
 			j++;
 		}
 		ft_printf("\e[m\n");
+		ft_printf("\tProcess: \e[0;36m%p\e[m\n", process);
+		ft_printf("\tProcess next: \e[0;36m%p\e[m\n", process->next);
+		ft_printf("\tProcess prev: \e[0;36m%p\e[m\n", process->prev);
 		process = process->next;
 		i++;
 	}
