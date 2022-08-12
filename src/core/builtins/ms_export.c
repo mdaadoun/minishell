@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/12 10:27:42 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/12 13:45:11 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static size_t	ft_count(char **str)
 
 static t_variable	*ft_create_variable(char	*str)
 {
-	size_t	ind;
+	size_t		ind;
 	t_variable	*env;
 
 	ind = 0;
@@ -62,7 +62,7 @@ static void	ft_add_variable(t_minishell *ms, t_variable *env)
  *	set the export attribute for variables
  *  Dynamic structure of variables
  */
-t_uint8 ms_export(t_minishell *ms, char *cmd)
+t_uint8	ms_export(t_minishell *ms, char *cmd)
 {
 	char	**arg;
 	size_t	ind;
