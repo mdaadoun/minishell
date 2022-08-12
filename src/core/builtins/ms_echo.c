@@ -6,17 +6,15 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/12 07:17:23 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/12 09:03:54 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
 // display a line of text
-t_uint8 ms_echo(char **args, char option)
+t_uint8 ms_echo(char *cmd)
 {
-	(void) args;
-	(void) option;
-	ft_printf("echo\n");
+	ft_printf("%s\n", cmd);
 	return (0);
 }

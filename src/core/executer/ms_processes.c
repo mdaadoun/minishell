@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:05:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/12 07:17:00 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/12 09:02:50 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,8 @@ void	ms_build_processes(t_minishell *ms)
 	{
 		if (token->type == TYPE_EXTERNAL_COMMAND)
 			process->exec_path = token->external_path;
+		if (token->type == TYPE_BUILTIN_COMMAND)
+			process->builtin = token->builtin;
 		if (token->type == TYPE_PIPE)
 		{
 			if (!ms->has_pipe)
@@ -164,46 +166,43 @@ void	ms_build_processes(t_minishell *ms)
 	build_type_line(ms);
 }
 
-// close pipe
-// static void	ft_close_pipe(int pipe[2])
-// {
-// 	close(pipe[0]);
-// 	close(pipe[1]);
-// }
+static void	execv_builtin(t_minishell *ms, t_process *proc)
+{
+	if (proc->builtin == BIN_ECHO)
+		ms_echo(proc->command_line);
+	if (proc->builtin == BIN_CD)
+		ms_cd(ms, proc->command_line);
+	if (proc->builtin == BIN_PWD)
+		ms_pwd();
+	if (proc->builtin == BIN_EXPORT)
+		ms_export(ms, proc->command_line);
+	if (proc->builtin == BIN_UNSET)
+		ms_unset(ms, proc->command_line);
+	if (proc->builtin == BIN_ENV)
+		ms_env(ms);
+	if (proc->builtin == BIN_EXIT)
+		ms_exit(ms);
+}
 
-//child function
-// static void	run_external(int in, int out)
-// {
-// 	dup2(out, 1);
-// // close 0 or 1 in certain case
-// 	dup2(in, 0);
-// // build command or check command
-// // cmd == path + core cmd
-// // arg == core cmd + arg
-// // envp == environement variable
-// 	execve(cmd, arg, envp);
-// }
-
-static void	run_process(t_process *process)
+static void	run_process(t_minishell *ms, t_process *process)
 {
 	char	**arg;
 
-	if (process->pipe_out != 1)
-	{
-		dup2(process->pipe_out, 1);
-		if (process->next)
-			close(process->next->pipe_in);
-	}
-	if (process->pipe_in != 0)
-	{
-		dup2(process->pipe_in, 0);
-		if (process->prev)
-			close(process->prev->pipe_out);
-	}
+//	if (process->pipe_in != 0)
+//	{
+	dup2(process->pipe_in, 0);
+	if (process->prev)
+		close(process->prev->pipe_out);
+//	}
+//	if (process->pipe_out != 1)
+//	{
+	dup2(process->pipe_out, 1);
+	if (process->next)
+		close(process->next->pipe_in);
+//	}
 	if (process->types_line[0] == TYPE_BUILTIN_COMMAND)
 	{
-		ft_printf("%d,%d\n", process->pipe_out, process->next->pipe_in);
-		ft_printf("run builtin\n");
+		execv_builtin(ms, process);
 	}
 	else if (process->types_line[0] == TYPE_EXTERNAL_COMMAND)
 	{
@@ -261,7 +260,7 @@ void	ms_start_processes(t_minishell *ms)
 		{
 			run_pipeline = check_global_error(ms);
 			if (run_pipeline)
-				run_process(process);
+				run_process(ms, process);
 			else
 				exit(EXIT_FAILURE);
 		}

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/12 07:17:39 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/12 09:29:45 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,6 @@ t_uint8 ms_export(t_minishell *ms, char *cmd)
 			ind++;
 		}
 	}
+	ft_printf("Env: %p\n", ms->first_var);
 	return (0);
 }

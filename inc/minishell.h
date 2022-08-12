@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/12 06:50:33 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/12 09:04:45 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,7 @@ typedef struct s_process {
 	char				*exec_path;
 	char				**envp;
 	t_token_type		*types_line;
-
+	t_builtins			builtin;
 	char				option;
 	pid_t				pid;
 	struct s_process	*prev;
@@ -224,8 +224,8 @@ void	ms_initialize_minishell(t_minishell **ms, t_error *error, char **envp);
 
 void	ft_remove_env(t_minishell *ms, t_variable *last, t_variable *current);
 
-t_uint8	ms_echo(char **args, char option);
-t_uint8	ms_cd(char **args);
+t_uint8	ms_echo(char *cmd);
+t_uint8	ms_cd(t_minishell *ms, char *cmd);
 t_uint8	ms_pwd(void);
 t_uint8	ms_export(t_minishell *ms, char *cmd);
 t_uint8	ms_unset(t_minishell *ms, char *cmd);
