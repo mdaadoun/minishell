@@ -6,13 +6,13 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:43:46 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/12 12:12:28 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/14 09:20:23 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-static bool is_builtin(t_token *command, char *name_bin, t_builtins index_bin)
+static bool	is_builtin(t_token *command, char *name_bin, t_builtins index_bin)
 {
 	if (!ft_strncmp(name_bin, command->content, ft_strlen(command->content)))
 	{
@@ -22,9 +22,9 @@ static bool is_builtin(t_token *command, char *name_bin, t_builtins index_bin)
 	return (false);
 }
 
-static bool check_if_builtin(t_token *command)
+static bool	check_if_builtin(t_token *command)
 {
-	bool flag;
+	bool	flag;
 
 	flag = false;
 	if (is_builtin(command, "cd", BIN_CD))
@@ -49,17 +49,16 @@ static bool check_if_builtin(t_token *command)
 	return (false);
 }
 
-
 /*
  * If the token is an external command:
  *      The type of token become TYPE_EXTERNAL_COMMAND
  *      The content of token become the path to the external command
  */
-static bool check_if_external(t_minishell *ms, t_token *command)
+static bool	check_if_external(t_minishell *ms, t_token *command)
 {
 	char	*tmp_path;
 	char	*command_path;
-	char    **path;
+	char	**path;
 
 	if (command->content[0] == '/' || command->content[0] == '~')
 	{
@@ -95,9 +94,9 @@ static bool check_if_external(t_minishell *ms, t_token *command)
 // check if the command is external or builtin, 
 //      * tag correct type, return true
 //      * error, return false
-void ms_analyze_command(t_minishell *ms, t_token *cmd)
+void	ms_analyze_command(t_minishell *ms, t_token *cmd)
 {
-	t_token *command;
+	t_token	*command;
 
 	command = cmd;
 	if (command)

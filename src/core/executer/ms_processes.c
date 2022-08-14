@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:05:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/12 11:39:23 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/14 10:11:12 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ static bool	is_builtin_fork(t_process *proc)
 		return (false);
 	if (proc->builtin == BIN_UNSET)
 		return (false);
-	if(proc->builtin == BIN_EXIT)
+	if (proc->builtin == BIN_EXIT)
 		return (false);
 	return (false);
 }
@@ -285,11 +285,13 @@ void	ms_start_processes(t_minishell *ms)
 	{
 		if (is_fork(process))
 		{
-			if(process->pid == 0)
+			if (process->pid == 0)
 			{
 				run_pipeline = check_global_error(ms);
 				if (run_pipeline)
+				{
 					run_process_fork(ms, process);
+				}
 				else
 					exit(EXIT_FAILURE);
 			}

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 13:48:48 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/12 07:19:30 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/14 08:38:38 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
  * Free memory related to the last command.
  */
-void ms_free_last_command(t_minishell *ms)
+void	ms_free_last_command(t_minishell *ms)
 {
 	if (ms)
 	{
@@ -34,9 +34,9 @@ void ms_free_last_command(t_minishell *ms)
  * @return:
  *      EXIT_SUCCESS or EXIT_FAILURE depending error.
  */
-int    ms_free_before_exit(t_minishell *ms)
+int	ms_free_before_exit(t_minishell *ms)
 {
-	int  i;
+	int	i;
 
 	i = 0;
 	if (ms)
@@ -45,11 +45,8 @@ int    ms_free_before_exit(t_minishell *ms)
 			free(ms->cwd_path);
 		if (ms->bin_paths)
 		{
-			while(ms->bin_paths[i])
-			{
-				free(ms->bin_paths[i]);
-				i++;
-			}
+			while (ms->bin_paths[i])
+				free(ms->bin_paths[i++]);
 			free(ms->bin_paths);
 		}
 		ms_free_last_command(ms);
@@ -69,10 +66,10 @@ int    ms_free_before_exit(t_minishell *ms)
 /*
  * Free all the tokens of the ms structure.
  */
-void ms_free_all_tokens(t_minishell *ms)
+void	ms_free_all_tokens(t_minishell *ms)
 {
-	t_token *token;
-	t_token *swp;
+	t_token	*token;
+	t_token	*swp;
 
 	token = ms->first_token;
 	while (token)
@@ -87,9 +84,9 @@ void ms_free_all_tokens(t_minishell *ms)
 	ms->first_token = NULL;
 }
 
-void ms_free_all_processes(t_minishell *ms)
+void	ms_free_all_processes(t_minishell *ms)
 {
-	t_process 	*process;
+	t_process	*process;
 	t_process	*swp;
 
 	ms->has_pipe = false;

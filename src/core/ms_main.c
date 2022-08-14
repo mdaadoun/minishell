@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:07:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/12 14:07:07 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/14 08:39:32 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
  */
 void	ms_initialize_minishell(t_minishell **ms, t_error *error, char **envp)
 {
-	char *buf;
+	char	*buf;
 
 	if (!DEBUG)
 		ft_printf("%s", MINISHELL_LOGO);
@@ -39,7 +39,6 @@ void	ms_initialize_minishell(t_minishell **ms, t_error *error, char **envp)
 		ms_set_error((*ms)->global_error, ERROR_MALLOC, MSG_ERROR_MALLOC);
 		exit(ms_free_before_exit(*ms));
 	}
-	
 	(*ms)->envp = envp;
 	(*ms)->cwd_path = getcwd(buf, 1024);
 	(*ms)->bin_paths = ft_split(getenv("PATH"), ':');
@@ -53,7 +52,7 @@ void	ms_initialize_minishell(t_minishell **ms, t_error *error, char **envp)
  *		3. The Ctrl-D is controlled with "if (!ms->full_command)"
  *		4. Add the line to the history.
  */
-static void display_prompt_and_wait(t_minishell *ms)
+static void	display_prompt_and_wait(t_minishell *ms)
 {
 	printf("\e[1;38m%s\e[m", ms->cwd_path);
 	ms->full_command = readline(">");
@@ -76,7 +75,7 @@ static void display_prompt_and_wait(t_minishell *ms)
  */
 int	main(int argc, char **argv, char **envp)
 {
-	t_minishell *ms;
+	t_minishell	*ms;
 	t_error		error;
 
 	if (DEBUG)

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/12 14:18:03 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/14 08:24:36 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // run a program in a modified environment
 t_uint8	ms_env(t_minishell *ms)
 {
-	t_variable *env;
+	t_variable	*env;
 
 	env = ms->first_var;
 	while (env)

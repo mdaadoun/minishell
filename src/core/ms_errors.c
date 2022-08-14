@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 11:37:03 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/12 14:20:18 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/14 08:35:59 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
  *		In the case where there is only one process, the shell will stop.
  *		In the case of multiple processes, the internal error will be used.
  */
-static void check_bad_commands(t_minishell *ms)
+static void	check_bad_commands(t_minishell *ms)
 {
 	t_process	*process;
 	t_err_key	err_key;
-	char 		*err_msg;
+	char		*err_msg;
 
 	err_key = ERROR_COMMAND;
 	err_msg = MSG_ERROR_COMMAND;
@@ -40,16 +40,16 @@ static void check_bad_commands(t_minishell *ms)
 }
 
 // For each token, if 2 pipe next to each other, pipe error
-static void check_bad_syntax(t_minishell *ms)
+static void	check_bad_syntax(t_minishell *ms)
 {
-	t_token *token;
+	t_token		*token;
 	t_err_key	err_key;
 
 	err_key = ERROR_SYNTAX;
 	token = ms->first_token;
 	while (token)
 	{
-		if (token->type == TYPE_PIPE )
+		if (token->type == TYPE_PIPE)
 			if (token->next && token->next->type == TYPE_PIPE)
 				ms_set_error(ms->global_error, err_key, MSG_ERROR_SYNTAX_PIPE);
 		token = token->next;
@@ -73,7 +73,7 @@ void ms_checking_for_errors(t_minishell *ms)
 }
 
 // set the error to the shell.
-void ms_set_error(t_error *error, t_err_key err_key, char *err_msg)
+void	ms_set_error(t_error *error, t_err_key err_key, char *err_msg)
 {
 	if (err_key)
 	{

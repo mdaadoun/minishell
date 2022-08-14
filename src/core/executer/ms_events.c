@@ -6,13 +6,11 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:28:29 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/11 15:51:18 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/14 10:10:14 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../../../inc/minishell.h"
-
 
 static void	cancel_process(int signo)
 {

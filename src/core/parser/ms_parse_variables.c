@@ -6,7 +6,7 @@
 /*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 11:06:35 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/10 08:07:33 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/14 09:13:18 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	ms_swap_env(t_minishell *ms)
 {
-	t_token	*tok;
-	size_t	ind;
-	size_t	lenv;
-	char	*s1;
-	char	*s2;
-	char	*env;
-	char	*new;
-	t_variable *var;
+	t_token		*tok;
+	size_t		ind;
+	size_t		lenv;
+	char		*s1;
+	char		*s2;
+	char		*env;
+	char		*new;
+	t_variable	*var;
 
 	tok = ms->first_token;
 	while (tok)
@@ -29,7 +29,7 @@ void	ms_swap_env(t_minishell *ms)
 		if (tok->type == TYPE_S_QUOTE_STRING)
 		{
 			tok = tok->next;
-			continue;
+			continue ;
 		}
 		ind = 0;
 		while (tok->content[ind])
@@ -38,7 +38,7 @@ void	ms_swap_env(t_minishell *ms)
 			{
 				lenv = 0;
 				s1 = ft_substr(tok->content, 0, ind);
-				while (tok->content[ind + lenv] && tok->content[ind +lenv] != ' ')
+				while (tok->content[ind + lenv] && tok->content[ind + lenv] != ' ')
 					lenv++;
 				s2 = ft_substr(tok->content, ind + 1, lenv);
 				env = getenv(s2);
@@ -50,7 +50,7 @@ void	ms_swap_env(t_minishell *ms)
 						if (strcmp(s2, var->name))
 						{
 							env = var->content;
-							break;
+							break ;
 						}
 					}
 				}

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 09:04:20 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/12 07:18:29 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/14 09:15:49 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  *      3. Redirections types
  *      4. check last NO_TYPE if string arg or option
  */
-void ms_lexer(t_minishell *ms)
+void	ms_lexer(t_minishell *ms)
 {
 	ms_analyze_command(ms, ms->first_token);
 	ms_analyze_pipes(ms);
