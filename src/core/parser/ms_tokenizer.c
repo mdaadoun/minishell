@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 10:55:29 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/12 07:19:21 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/16 13:40:00 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
  * The new token is added at the end of the token structure.
  */
-static void	push_after_last_token(t_token *first, t_token *last)
+static void	append_token(t_token *first, t_token *last)
 {
 	t_token	*tmp;
 
@@ -58,15 +58,15 @@ void	ms_add_token(t_minishell *ms, char *content, t_token_type type)
 	if (!ms->first_token)
 		ms->first_token = token;
 	else
-		push_after_last_token(ms->first_token, token);
+		append_token(ms->first_token, token);
 }
 
-// create a function to add a token next to a given token
-void	ms_append_token(t_token *before_token, t_token *add_token)
+// add a second token next to a given first token
+void	ms_push_token(t_token *first_token, t_token *second_token)
 {
-	add_token->next = before_token->next;
-	add_token->prev = before_token;
-	before_token->next = add_token;
+	second_token->next = first_token->next;
+	second_token->prev = first_token;
+	first_token->next = second_token;
 }
 
 // delete token, connect prev to next and return next token

@@ -30,7 +30,7 @@ void test_launcher(t_minishell *ms, int debug)
 	test_display_tokens(ms);
 	if (debug == TEST_PARSER || debug == TEST_PARSER_QUOTES \
 	|| debug == TEST_PARSER_ENV || debug == TEST_PARSER_PIPES \
-	|| debug == TEST_PARSER_REDIRECTIONS)
+	|| debug == TEST_PARSER_REDIRECTIONS || debug == TEST_PARSER_ARGUMENTS)
 		next = false;
 	if (next)
 	{

@@ -6,7 +6,7 @@
 #    By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/20 08:44:56 by mdaadoun          #+#    #+#              #
-#    Updated: 2022/08/12 13:33:25 by dlaidet          ###   ########.fr        #
+#    Updated: 2022/08/16 09:30:07 by mdaadoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ builtins/ms_cd.c builtins/ms_echo.c builtins/ms_env.c builtins/ms_exit.c \
 builtins/ms_export.c builtins/ms_pwd.c builtins/ms_unset.c \
 executer/ms_executer.c executer/ms_events.c executer/ms_processes.c \
 parser/ms_parser.c parser/ms_tokenizer.c  parser/ms_parse_pipes.c \
-parser/ms_parse_variables.c parser/ms_parse_quotes.c \
+parser/ms_parse_variables.c parser/ms_parse_quotes.c parser/ms_parse_redirections.c \
 lexer/ms_lexer.c lexer/ms_analyze_command.c lexer/ms_analyze_pipes.c \
 lexer/ms_analyze_redirections.c lexer/ms_analyze_arguments.c
 
@@ -90,7 +90,7 @@ ft_dlstlast.c ft_lstnew_str.c ft_lstdelone_str.c ft_lstclear_str.c ft_lstadd_bac
 DEBUG_FLAGS = -g3 -ggdb -I. -D DEBUG=1 #-fsanitize=address  -fsanitize=leak
 V_ARG	=  --suppressions=.valgrind_ignore_readline --track-origins=yes --leak-check=full --show-leak-kinds=all -s 
 TEST_SRCS = src/test/test_builtin.c src/test/test_main.c src/test/test_parser.c src/test/test_lexer.c \
-src/test/test_executer.c src/test/test_utils.c src/test/test_launcher.c
+src/test/test_executer.c src/test/test_utils.c src/test/test_launcher.c src/test/test_lists.c
 ARGS = 
 
 debug: fclean

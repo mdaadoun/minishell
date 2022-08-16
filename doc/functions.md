@@ -96,15 +96,15 @@ char *getcwd(char *buf, size_t size);
 ### Terminal functions
 
 * **isatty** :
-> test whether a file descriptor refers to a terminal [man](https://man7.org/linux/man-pages/man3/isatty.3.html)
+> test whether a file descriptor refers to a terminal. [man](https://man7.org/linux/man-pages/man3/isatty.3.html)
 * **ttyname** : 
-> [man](https://www.man7.org/linux/man-pages/man3/ttyname.3.html)
+> return name of a terminal. [man](https://www.man7.org/linux/man-pages/man3/ttyname.3.html)
 * **ttyslot** :
-> [man](https://man7.org/linux/man-pages/man3/ttyslot.3.html)
+> find the slot of the current user's terminal in some file. [man](https://man7.org/linux/man-pages/man3/ttyslot.3.html)
 * **ioctl** : 
-> [man](https://man7.org/linux/man-pages/man2/ioctl.2.html)
+> control device. [man](https://man7.org/linux/man-pages/man2/ioctl.2.html)
 * **getenv** : 
-> Return a pointer to environment variable passed in parameter.  [man](http://manpagesfr.free.fr/man/man3/getenv.3.html)
+> Return a pointer to environment variable passed in parameter. [man](http://manpagesfr.free.fr/man/man3/getenv.3.html)
 * **tcsetattr**
 * **tcgetattr**
 * **tgetent**

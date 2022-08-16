@@ -6,52 +6,92 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 14:15:26 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/14 09:10:46 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/16 15:42:24 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-void	ms_parse_pipe(t_minishell *ms)
+static int get_length(char *string, int start)
 {
-	t_token	*tok;
-	t_token	*tmp;
-	size_t	ind;
-	char	*str;
+	int length;
 
-	tok = ms->first_token;
-	while (tok)
+	length = 0;
+	while (string[start] != '\0' && string[start] != '|')
 	{
-		if (tok->type != 0)
+		length++;
+		start++;
+	}
+	return (length);
+}
+
+/* 
+ *	Replace the given token with new token separated by pipes 
+*/
+static void  rebuild_pipes_token(t_minishell *ms, t_token *token)
+{
+	t_token	*first_token;
+	t_token	*second_token;
+	char	*string;
+	int		index;
+	int 	start;
+
+	start = 0;
+	index = 0;
+	string = token->content;
+	first_token = token;
+	while (string[index])
+	{
+		if (string[index] == '|')
 		{
-			tok = tok->next;
+			if (index == 0)
+				first_token->content = ft_substr(string, start, get_length(string, start) + 1);
+			else
+			{
+				first_token->content = ft_substr(string, start, get_length(string, start));
+				second_token = ms_create_new_token(ms);
+				ms_push_token(first_token, second_token);
+				first_token = second_token;
+				start = start + get_length(string, start);
+				first_token->content = ft_substr(string, start, get_length(string, start) + 1);
+				if (!string[index + 1])
+					break;
+			}
+			second_token = ms_create_new_token(ms);
+			ms_push_token(first_token, second_token);
+			first_token = second_token;
+			start++;
+		}
+		index++;
+		if (!string[index])
+			first_token->content = ft_substr(string, start, get_length(string, start));
+	}
+	free(string);
+}
+
+/*
+ * Parse the pipes which are not already parsed (the ones not separated from space)
+*/
+void	ms_parse_pipes(t_minishell *ms)
+{
+	t_token	*token;
+	size_t	i;
+
+	token = ms->first_token;
+	while (token)
+	{
+		if (token->type != NO_TYPE)
+		{
+			token = token->next;
 			continue ;
 		}
-		ind = 0;
-		while (tok->content[ind])
+		i = 0;
+		while (token->content[i] && ft_strlen(token->content) > 1)
 		{
-			if (tok->content[ind] == '|')
-			{
-				if (ind == 0)
-					break ;
-				str = ft_substr(tok->content, 0, ind);
-				tmp = ms_create_new_token(ms);
-				tmp->content = str;
-				ms_append_token(tok->prev, tmp);
-				tok->prev = tmp;
-				str = ft_substr(tok->content, ind, 1);
-				tmp = ms_create_new_token(ms);
-				tmp->content = str;
-				ms_append_token(tok->prev, tmp);
-				tok->prev = tmp;
-				tmp->type = TYPE_PIPE;
-				ind++;
-				str = ft_substr(tok->content, ind, ft_strlen(&tok->content[ind]));
-				free(tok->content);
-				tok->content = str;
-			}
-			ind++;
+			if (token->content[i] == '|')
+				rebuild_pipes_token(ms, token);
+			i++;
 		}
-		tok = tok->next;
+		token = token->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/12 14:21:10 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/16 13:34:06 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,8 @@ typedef struct s_token
 */
 
 typedef struct s_process {
+	bool				has_redirection;
+	int					redirected_fd; //file path given to redirect
 	int					pipe_in;
 	int					pipe_out;
 	int					nb_tokens;
@@ -250,10 +252,11 @@ void	ms_initialize_signals(void);
  *          
 */
 
+t_token	*ms_create_new_token(t_minishell *ms);
 void	ms_replace_token(t_token *old, t_token *new);
 t_token	*ms_delete_token(t_token *token);
 void	ms_add_token(t_minishell *ms, char *content, t_token_type type);
-void	ms_append_token(t_token *before_token, t_token *add_token);
+void	ms_push_token(t_token *first_token, t_token *second_token);
 
 /*
  *  Parser:
@@ -262,15 +265,15 @@ void	ms_append_token(t_token *before_token, t_token *add_token);
  *			core/parser/ms_parse_variables.c
  *			core/parser/ms_parse_quotes.c
  *			core/parser/ms_parse_pipes.c
+ *			core/parser/ms_parse_redirections.c
  *          
 */
 
 void	ms_parser(t_minishell *ms);
-void	ms_check_quotes(char *str);
-t_token	*ms_create_new_token(t_minishell *ms);
+// void	ms_check_quotes(char *str);
 void	ms_parse_quotes(t_minishell *ms);
 void	ms_swap_env(t_minishell *ms);
-void	ms_parse_pipe(t_minishell *ms);
+void	ms_parse_pipes(t_minishell *ms);
 void	ms_parse_redirections(t_minishell *ms);
 
 /*
@@ -337,7 +340,7 @@ typedef enum e_tests
 	TEST_PARSER_QUOTES = 11,
 	TEST_PARSER_PIPES = 12,
 	TEST_PARSER_ENV = 13,
-	TEST_PARSER_REDIRECT = 14,
+	TEST_PARSER_ARGUMENTS = 14,
 	TEST_PARSER_REDIRECTIONS = 15,
 	TEST_LEXER_BUILTINS = 21,
 	TEST_LEXER_EXTERNALS = 22,
@@ -374,5 +377,11 @@ void	test_builtin(t_minishell *ms, int debug);
 void	test_lexer(t_minishell *ms, int debug);
 void	test_parser(t_minishell *ms, int debug);
 void	test_executer(t_minishell *ms, int debug);
+
+void	test_quotes(t_minishell *ms, int debug);
+void	test_env(t_minishell *ms, int debug);
+void	test_pipes(t_minishell *ms, int debug);
+void	test_redirections(t_minishell *ms, int debug);
+void	test_arguments(t_minishell *ms, int debug);
 
 #endif

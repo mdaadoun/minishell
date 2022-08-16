@@ -1,8 +1,17 @@
 # TODO
 
-* test "sad | das| | asd| Asd| sda |" - check: Invalid read of size 1
-
-* catch the $variables in the " "
+* parsing des redirections
+* lexer pipes
+* lexer redirections
+* si < > << >> tagger process
+* si >> DELIMITER, ouvrir un here doc, copy the content, and close when DELIMITER found
+* reprendre les erreurs valgrind
+	* when parsing only
+	* test "sad | das| | asd| Asd| sda |" - check: Invalid read of size 1
+	* ./minishell 2 -> segmentation fault
+* revoir le parsing des variables, env, export
+* single and double quotes are Tagged indifferently SINGLE_QUOTE_STRING TYPE, need to fix to get DOUBLE QUOTE TYPE
+	* catch the $variables in the " "
 
 * build each command from tokens and count processes
 
@@ -23,6 +32,8 @@ test
 EOF
 
 * range the structure for memory optimization, bigger to lower byte in order
+
+* builtin echo
 
 ## signals handling
 

@@ -10,6 +10,10 @@ static void print_type(int t)
         ft_printf("ARG_OPTION");
 	else if (t == TYPE_PIPE)
         ft_printf("PIPE");
+	else if (t == TYPE_S_QUOTE_STRING)
+        ft_printf("SINGLE_QUOTE_STRING");
+	else if (t == TYPE_D_QUOTE_STRING)
+        ft_printf("DOUBLE_QUOTE_STRING");
 	else if (t == TYPE_EXTERNAL_COMMAND)
         ft_printf("EXTERNAL_COMMAND");
 	else if (t == TYPE_BUILTIN_COMMAND)
