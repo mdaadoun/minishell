@@ -25,7 +25,7 @@
 * free processes structure
 
 * redirection and heredocs !!
-<< EOF
+echo << EOF
 test
 test
 test

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/16 13:34:06 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/17 08:06:31 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -314,6 +314,8 @@ int		ms_free_before_exit(t_minishell *ms);
 void	ms_free_last_command(t_minishell *ms);
 void	ms_free_all_tokens(t_minishell *ms);
 void	ms_free_all_processes(t_minishell *ms);
+void	ms_free_env(t_minishell *ms);
+
 
 //=========================================
 // Minishell testing functions & structures

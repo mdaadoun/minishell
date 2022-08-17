@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:07:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/16 10:19:06 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/17 08:11:19 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ int	main(int argc, char **argv, char **envp)
 		if (ft_strlen(ms->full_command))
 		{
 			ms_parser(ms);
-			// ms_lexer(ms);
-			// ms_executer(ms);
+			ms_lexer(ms);
+			ms_executer(ms);
 		}
 		ms_free_all_processes(ms);
 		ms_free_last_command(ms);
