@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:43:46 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/14 09:20:23 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/17 11:00:17 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,9 @@ static bool	check_if_builtin(t_token *command)
 	return (false);
 }
 
-/*
- * If the token is an external command:
- *      The type of token become TYPE_EXTERNAL_COMMAND
- *      The content of token become the path to the external command
- */
-static bool	check_if_external(t_minishell *ms, t_token *command)
+static bool	check_absolute_path(t_token *command)
 {
-	char	*tmp_path;
 	char	*command_path;
-	char	**path;
 
 	if (command->content[0] == '/' || command->content[0] == '~')
 	{
@@ -70,6 +63,22 @@ static bool	check_if_external(t_minishell *ms, t_token *command)
 			return (true);
 		}
 	}
+	return (false);
+}
+
+/*
+ * If the token is an external command:
+ *      The type of token become TYPE_EXTERNAL_COMMAND
+ *      The content of token become the path to the external command
+ */
+static bool	check_if_external(t_minishell *ms, t_token *command)
+{
+	char	*tmp_path;
+	char	*command_path;
+	char	**path;
+
+	if (check_absolute_path(command) == true)
+		return (true);
 	path = ms->bin_paths;
 	while (*path)
 	{
