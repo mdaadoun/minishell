@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/17 14:32:21 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/17 15:51:36 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,12 +178,6 @@ typedef struct s_token
  *  Executer structures:
 */
 
-// typedef struct s_redirection {
-// 	int						redirected_fd; // file path given to redirect
-// 	char					*file_path;
-// 	struct s_redirection	*next;
-// }						t_redirection;
-
 typedef struct s_process {
 	bool				has_redirection;
 	char				*redirected_filepath;
@@ -258,7 +252,6 @@ void	ms_initialize_signals(void);
  *  Tokens:
  *      Files :
  *			core/parser/ms_tokenization.c
- *          
 */
 
 t_token	*ms_create_new_token(t_minishell *ms);
@@ -275,7 +268,6 @@ void	ms_push_token(t_token *first_token, t_token *second_token);
  *			core/parser/ms_parse_quotes.c
  *			core/parser/ms_parse_pipes.c
  *			core/parser/ms_parse_redirections.c
- *          
 */
 
 void	ms_parser(t_minishell *ms);
@@ -311,7 +303,7 @@ void	ms_analyze_arguments(t_minishell *ms);
 
 void	ms_executer(t_minishell *ms);
 void	ms_build_processes(t_minishell *ms);
-void 	ms_build_redirections(t_minishell *ms, t_token *token,	t_process *process);
+void 	ms_build_redirections(t_token *token, t_process *process);
 void	ms_start_processes(t_minishell *ms);
 void	create_pipes(t_minishell *ms);
 

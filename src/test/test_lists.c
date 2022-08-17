@@ -124,10 +124,10 @@ void	test_redirections(t_minishell *ms, int debug)
 	// test_run_command(ms, ">>> < >> '< << > <<< > > < < <<<' >>>> <<<< > file | cat", debug);
 	// test_run_command(ms, "cat < ls", debug);
 	// test_run_command(ms, "cat < ls > ls", debug);
-	test_run_command(ms, "cat << EOF", debug);
+	// test_run_command(ms, "cat << EOF", debug);
 	// test_run_command(ms, "cat << EOF1 << EOF2", debug);
 	// test_run_command(ms, "cat << EOF1 << EOF2<<EOF3", debug);
-	// test_run_command(ms, "cat << EOF1 << EOF2<<EOF3<<", debug);
+	test_run_command(ms, "cat << EOF1 << EOF2<<EOF3<<", debug);
 	// test_run_command(ms, "cat << EOF1 | cat << EOF2", debug);
 	// test_run_command(ms, "|cat<<EOF1|cat<<EOF2|", debug);
 	// test_run_command(ms, ">>cat<<EOF1|cat<<EOF2<<", debug);
