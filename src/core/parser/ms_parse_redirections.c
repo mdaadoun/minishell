@@ -6,23 +6,23 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 10:57:46 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/16 16:57:00 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/17 10:22:02 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-
-static int get_length(char *string, int start)
+static int	get_length(char *string, int start)
 {
-	int length;
+	int	length;
 
 	length = 0;
 	if (string[start] == '<' && string[start +1] == '<')
 		length++;
 	if (string[start] == '>' && string[start +1] == '>')
 		length++;
-	while (string[start] != '\0' && string[start] != '<' && string[start] != '>')
+	while (string[start] != '\0' && \
+	string[start] != '<' && string[start] != '>')
 	{
 		length++;
 		start++;
@@ -30,59 +30,58 @@ static int get_length(char *string, int start)
 	return (length);
 }
 
-
-static void rebuild_redirection_tokens(t_minishell *ms, t_token *token)
+static void	rebuild_redirection_tokens(t_minishell *ms, t_token *token)
 {
-	t_token	*first_token;
-	t_token	*second_token;
-	char	*string;
-	int		index;
-	int 	start;
+	t_token	*tok1;
+	t_token	*tok2;
+	char	*str;
+	int		ind;
+	int		sta;
 
-	start = 0;
-	index = 0;
-	string = token->content;
-	first_token = token;
-	while (string[index])
+	sta = 0;
+	ind = 0;
+	str = token->content;
+	tok1 = token;
+	while (str[ind])
 	{
-		if (string[index] == '<' || string[index] == '>')
+		if (str[ind] == '<' || str[ind] == '>')
 		{
-			if (index == 0)
-				first_token->content = ft_substr(string, start, get_length(string, start) + 1);
+			if (ind == 0)
+				tok1->content = ft_substr(str, sta, get_length(str, sta) + 1);
 			else
 			{
-				first_token->content = ft_substr(string, start, get_length(string, start));
-				second_token = ms_create_new_token(ms);
-				ms_push_token(first_token, second_token);
-				first_token = second_token;
-				start = start + get_length(string, start);
-				first_token->content = ft_substr(string, start, get_length(string, start) + 1);
-				if (!string[index + 1])
-					break;
+				tok1->content = ft_substr(str, sta, get_length(str, sta));
+				tok2 = ms_create_new_token(ms);
+				ms_push_token(tok1, tok2);
+				tok1 = tok2;
+				sta = sta + get_length(str, sta);
+				tok1->content = ft_substr(str, sta, get_length(str, sta) + 1);
+				if (!str[ind + 1])
+					break ;
 			}
-			second_token = ms_create_new_token(ms);
-			ms_push_token(first_token, second_token);
-			first_token = second_token;
-			start++;
+			tok2 = ms_create_new_token(ms);
+			ms_push_token(tok1, tok2);
+			tok1 = tok2;
+			sta++;
 		}
-		if (	(string[index] == '>' && string[index + 1] == '>') || \
-				(string[index] == '<' && string[index + 1] == '<') )
-			{
-				index += 2;
-				start++;
-			}
+		if ((str[ind] == '>' && str[ind + 1] == '>') || \
+				(str[ind] == '<' && str[ind + 1] == '<'))
+		{
+			ind += 2;
+			sta++;
+		}
 		else
-			index++;
-		if (!string[index])
-			first_token->content = ft_substr(string, start, get_length(string, start));
+			ind++;
+		if (!str[ind])
+			tok1->content = ft_substr(str, sta, get_length(str, sta));
 	}
-	free(string);
+	free(str);
 }
 
 /*
  *	Review all token and find out if there is redirections operators (< << >> >)
  *		Ignore tokens that are already tagged SINGLE or DOUBLE quote
-*/
+ */
 void	ms_parse_redirections(t_minishell *ms)
 {
 	t_token	*token;
@@ -92,7 +91,7 @@ void	ms_parse_redirections(t_minishell *ms)
 	while (token)
 	{
 		if (token->type == TYPE_S_QUOTE_STRING || \
-			token->type == TYPE_D_QUOTE_STRING)
+				token->type == TYPE_D_QUOTE_STRING)
 		{
 			token = token->next;
 			continue ;
@@ -101,9 +100,9 @@ void	ms_parse_redirections(t_minishell *ms)
 		while (token->content[i] && ft_strlen(token->content) > 1)
 		{
 			if (ft_strlen(token->content) == 2)
-				if ( (token->content[i] == '>' && token->content[i + 1] == '>') || \
-					 (token->content[i] == '<' && token->content[i + 1] == '<') )
-					break;
+				if ((token->content[i] == '>' && token->content[i + 1] == '>') \
+				|| (token->content[i] == '<' && token->content[i + 1] == '<'))
+					break ;
 			if (token->content[i] == '>' || token->content[i] == '<')
 				rebuild_redirection_tokens(ms, token);
 			i++;

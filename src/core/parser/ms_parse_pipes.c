@@ -6,15 +6,15 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 14:15:26 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/16 15:42:24 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/17 10:23:57 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-static int get_length(char *string, int start)
+static int	get_length(char *string, int start)
 {
-	int length;
+	int	length;
 
 	length = 0;
 	while (string[start] != '\0' && string[start] != '|')
@@ -28,13 +28,13 @@ static int get_length(char *string, int start)
 /* 
  *	Replace the given token with new token separated by pipes 
 */
-static void  rebuild_pipes_token(t_minishell *ms, t_token *token)
+static void	rebuild_pipes_token(t_minishell *ms, t_token *token)
 {
 	t_token	*first_token;
 	t_token	*second_token;
 	char	*string;
 	int		index;
-	int 	start;
+	int		start;
 
 	start = 0;
 	index = 0;
@@ -55,7 +55,7 @@ static void  rebuild_pipes_token(t_minishell *ms, t_token *token)
 				start = start + get_length(string, start);
 				first_token->content = ft_substr(string, start, get_length(string, start) + 1);
 				if (!string[index + 1])
-					break;
+					break ;
 			}
 			second_token = ms_create_new_token(ms);
 			ms_push_token(first_token, second_token);
