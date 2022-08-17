@@ -6,7 +6,7 @@
 #    By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/20 08:44:56 by mdaadoun          #+#    #+#              #
-#    Updated: 2022/08/16 09:30:07 by mdaadoun         ###   ########.fr        #
+#    Updated: 2022/08/17 09:02:24 by mdaadoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,12 @@ NAME = minishell
 SRCS = ms_main.c ms_free.c ms_errors.c \
 builtins/ms_cd.c builtins/ms_echo.c builtins/ms_env.c builtins/ms_exit.c \
 builtins/ms_export.c builtins/ms_pwd.c builtins/ms_unset.c \
-executer/ms_executer.c executer/ms_events.c executer/ms_processes.c \
 parser/ms_parser.c parser/ms_tokenizer.c  parser/ms_parse_pipes.c \
 parser/ms_parse_variables.c parser/ms_parse_quotes.c parser/ms_parse_redirections.c \
 lexer/ms_lexer.c lexer/ms_analyze_command.c lexer/ms_analyze_pipes.c \
-lexer/ms_analyze_redirections.c lexer/ms_analyze_arguments.c
+lexer/ms_analyze_redirections.c lexer/ms_analyze_arguments.c \
+executer/ms_executer.c executer/ms_events.c executer/ms_processes.c \
+executer/ms_redirections.c
 
 DIR = src/core
 OBJS = $(addprefix $(DIR)/,$(SRCS:%.c=%.o))

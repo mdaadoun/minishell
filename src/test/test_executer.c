@@ -31,12 +31,6 @@ void	test_processes_errors(t_minishell *ms, int debug)
 	test_run_command(ms, "<", debug);
 }
 
-void	test_processes_pipe(t_minishell *ms, int debug)
-{
-	test_run_command(ms, "env | wc", debug);
-	test_run_command(ms, "env | wc | wc -l", debug);
-}
-
 void	test_processes_execv(t_minishell *ms, int debug)
 {
 	printf("\e[1;34m===Testing process execv===\e[m\n");
@@ -54,10 +48,13 @@ void test_executer(t_minishell *ms, int debug)
 	else if (debug == TEST_EXECUTER_PROCESSES_PIPE)
 	{
 		printf("\e[1;34m===Testing processes pipe===\e[m\n");
-		test_processes_pipe(ms, debug);
+		test_pipes(ms, debug);
 	}
 	else if (debug == TEST_EXECUTER_PROCESSES_REDIRECTION)
-		test_processes_redirections(ms, debug);
+	{
+		printf("\e[1;34m===Testing processes redirections===\e[m\n");
+		test_redirections(ms, debug);
+	}
 	else if (debug == TEST_EXECUTER_PROCESSES_EXECV)
 		test_processes_execv(ms, debug);
     else if (debug == TEST_EXECUTER  || debug == TEST_ALL)
@@ -65,7 +62,8 @@ void test_executer(t_minishell *ms, int debug)
 		printf("===Testing EXECUTER===\n");
 		test_processes_build(ms, debug);
 		test_processes_errors(ms, debug);
-		test_processes_pipe(ms, debug);
+		test_pipes(ms, debug);
+		test_redirections(ms, debug);
 		test_processes_execv(ms, debug);
 	}
 }

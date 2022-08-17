@@ -65,6 +65,8 @@ void	test_env(t_minishell *ms, int debug)
 
 void	test_pipes(t_minishell *ms, int debug)
 {
+	test_run_command(ms, "env | wc", debug);
+	test_run_command(ms, "env | wc | wc -l", debug);
 	test_run_command(ms, "cat Makefile|wc -l", debug);
     test_run_command(ms, "cat Makefile | wc -l", debug);
     test_run_command(ms, "cat 'Makefile|wc' -l", debug);
@@ -113,14 +115,15 @@ void	test_redirections(t_minishell *ms, int debug)
 	// test_run_command(ms, "echo test > ls | cat ls", debug);
 	// test_run_command(ms, "echo test > ls >> ls >> ls | echo test >> ls | cat ls", debug);
 	// test_run_command(ms, "> lol echo test lol | cat lol", debug);
-	test_run_command(ms, ">lol echo > test>lol>test>>lol>test mdr >lol test >test | cat test", debug);
-	test_run_command(ms, ">lol echo '> test>lol>test>>\"lol>test\" mdr >lol test >test' | cat test", debug);
-	test_run_command(ms, ">lol echo \"> test>lol>test>>'lol>test' mdr >lol test >test'\" | cat test", debug);
+	// test_run_command(ms, ">lol echo > test>lol>test>>lol>test mdr >lol test >test | cat test", debug);
+	// test_run_command(ms, ">lol echo '> test>lol>test>>\"lol>test\" mdr >lol test >test' | cat test", debug);
+	// test_run_command(ms, ">lol echo \"> test>lol>test>>'lol>test' mdr >lol test >test'\" | cat test", debug);
 	// test_run_command(ms, ">>> < >> < << > <<< > > < < <<< >>>> <<<< > file | cat", debug);
 	// test_run_command(ms, ">>> < >> < \"<< > <<< >\" > < < <<< >>>> <<<< > file | cat", debug);
 	// test_run_command(ms, ">>> < >> '< << > <<< > > < < <<<' >>>> <<<< > file | cat", debug);
 	// test_run_command(ms, "cat < ls", debug);
 	// test_run_command(ms, "cat < ls > ls", debug);
+	test_run_command(ms, "cat << EOF", debug);
 	// test_run_command(ms, "cat << EOF1 | cat << EOF2", debug);
 	// test_run_command(ms, "|cat<<EOF1|cat<<EOF2|", debug);
 	// test_run_command(ms, ">>cat<<EOF1|cat<<EOF2<<", debug);

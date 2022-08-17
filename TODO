@@ -1,10 +1,13 @@
 # TODO
 
+* redirection >> open heredoc
+	* si >> DELIMITER, ouvrir un here doc, copy the content, and close when DELIMITER found
+* erreurs de syntaxe autour des redirections a reprendre
+
 * parsing des redirections
 * lexer pipes
 * lexer redirections
 * si < > << >> tagger process
-* si >> DELIMITER, ouvrir un here doc, copy the content, and close when DELIMITER found
 * reprendre les erreurs valgrind
 	* when parsing only
 	* test "sad | das| | asd| Asd| sda |" - check: Invalid read of size 1

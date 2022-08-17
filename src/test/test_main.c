@@ -49,6 +49,7 @@ void display_help()
     ft_printf("\t\e[1;33m  %d:\e[m test building processes\n", TEST_EXECUTER_PROCESSES_BUILD);
     ft_printf("\t\e[1;33m  %d:\e[m test building errors\n", TEST_EXECUTER_PROCESSES_ERROR);
     ft_printf("\t\e[1;33m  %d:\e[m test building pipes\n", TEST_EXECUTER_PROCESSES_PIPE);
+    ft_printf("\t\e[1;33m  %d:\e[m test building redirections\n", TEST_EXECUTER_PROCESSES_REDIRECTION);
     ft_printf("\t\e[1;33m  %d:\e[m test process execv\n", TEST_EXECUTER_PROCESSES_EXECV);
 }
 

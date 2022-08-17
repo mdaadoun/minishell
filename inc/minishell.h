@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/17 08:06:31 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/17 09:01:26 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,9 +175,15 @@ typedef struct s_token
  *  Executer structures:
 */
 
+typedef struct s_redirection {
+	int					redirected_fd; //file path given to redirect
+	char				*file_path;
+	char				*delimiter;
+}						t_redirection;
+
 typedef struct s_process {
 	bool				has_redirection;
-	int					redirected_fd; //file path given to redirect
+	t_redirection		*redirection;
 	int					pipe_in;
 	int					pipe_out;
 	int					nb_tokens;
@@ -297,10 +303,12 @@ void	ms_analyze_arguments(t_minishell *ms);
  *      Files :
  *			core/executer/ms_executer.c
  *			core/executer/ms_processes.c
+ *			core/executer/ms_redirections.c
 */
 
 void	ms_executer(t_minishell *ms);
 void	ms_build_processes(t_minishell *ms);
+void 	ms_build_redirections(t_minishell *ms, t_token *token,	t_process *process);
 void	ms_start_processes(t_minishell *ms);
 void	create_pipes(t_minishell *ms);
 
@@ -356,7 +364,8 @@ typedef enum e_tests
 	TEST_EXECUTER_PROCESSES_BUILD = 41,
 	TEST_EXECUTER_PROCESSES_ERROR = 42,
 	TEST_EXECUTER_PROCESSES_PIPE = 43,
-	TEST_EXECUTER_PROCESSES_EXECV = 44
+	TEST_EXECUTER_PROCESSES_REDIRECTION = 44,
+	TEST_EXECUTER_PROCESSES_EXECV = 45
 }	t_tests;
 
 # ifndef DEBUG
