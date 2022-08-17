@@ -100,9 +100,19 @@ void test_launcher(t_minishell *ms, int debug)
 	}
 	if (next)
 	{
-		ms_executer(ms);
-		if (debug == TEST_EXECUTER || debug == TEST_EXECUTER_PROCESSES_EXECV)
+		if (debug == TEST_EXECUTER_PROCESSES_REDIRECTION)
+		{
+			ft_printf("TEST_EXECUTER_PROCESSES_REDIRECTION ok\n");
 			next = false;
+		}
+	}
+	if (next)
+	{
+		if (debug == TEST_EXECUTER || debug == TEST_EXECUTER_PROCESSES_EXECV)
+		{
+			ms_executer(ms);
+			next = false;
+		}
 	}
 	test_reset(ms);
 }

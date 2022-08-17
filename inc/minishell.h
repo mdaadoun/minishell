@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/17 09:01:26 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/17 14:32:21 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@
 # include <signal.h>
 # include <assert.h>
 # include <sys/types.h>
-# include <sys/wait.h>
+# include <sys/wait.h>       
+# include <sys/stat.h>
+# include <fcntl.h>
+
 
 //======
 // Types
@@ -175,15 +178,15 @@ typedef struct s_token
  *  Executer structures:
 */
 
-typedef struct s_redirection {
-	int					redirected_fd; //file path given to redirect
-	char				*file_path;
-	char				*delimiter;
-}						t_redirection;
+// typedef struct s_redirection {
+// 	int						redirected_fd; // file path given to redirect
+// 	char					*file_path;
+// 	struct s_redirection	*next;
+// }						t_redirection;
 
 typedef struct s_process {
 	bool				has_redirection;
-	t_redirection		*redirection;
+	char				*redirected_filepath;
 	int					pipe_in;
 	int					pipe_out;
 	int					nb_tokens;
@@ -383,6 +386,7 @@ void	test_display_tokens_types(t_minishell *ms);
 void	test_display_processes(t_minishell *ms);
 void	test_display_errors(t_minishell *ms);
 void	test_display_local_env(t_minishell *ms);
+void	test_display_redirections(t_minishell *ms);
 
 void	test_builtin(t_minishell *ms, int debug);
 void	test_lexer(t_minishell *ms, int debug);

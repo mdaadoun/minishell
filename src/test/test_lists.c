@@ -3,17 +3,18 @@
 
 void	test_quotes(t_minishell *ms, int debug)
 {
-	test_run_command(ms, "'echo lol'", debug);
-	test_run_command(ms, "'hello' hello hello", debug);
-    test_run_command(ms, "'hello'", debug);
-    test_run_command(ms, "'he\"l\"lo'", debug);
-    test_run_command(ms, "test'123\"456\"123'test", debug);
-    test_run_command(ms, "test\"123'456'123\"test", debug);
-    test_run_command(ms, "test\"123'456'123\"test", debug);
-    test_run_command(ms, "'hello' hello hello", debug);
-    test_run_command(ms, "cat \"cat cat\"", debug);
-    test_run_command(ms, "cd '$home'", debug);
-    test_run_command(ms, "'$home'cd cd cd", debug);
+	test_run_command(ms, "'echo \"lol 'lol' lol\" lol'", debug);
+	// test_run_command(ms, "'echo lol'", debug);
+	// test_run_command(ms, "'hello' hello hello", debug);
+    // test_run_command(ms, "'hello'", debug);
+    // test_run_command(ms, "'he\"l\"lo'", debug);
+    // test_run_command(ms, "test'123\"456\"123'test", debug);
+    // test_run_command(ms, "test\"123'456'123\"test", debug);
+    // test_run_command(ms, "test\"123'456'123\"test", debug);
+    // test_run_command(ms, "'hello' hello hello", debug);
+    // test_run_command(ms, "cat \"cat cat\"", debug);
+    // test_run_command(ms, "cd '$home'", debug);
+    // test_run_command(ms, "'$home'cd cd cd", debug);
 }
 
 void	test_env(t_minishell *ms, int debug)
@@ -124,6 +125,9 @@ void	test_redirections(t_minishell *ms, int debug)
 	// test_run_command(ms, "cat < ls", debug);
 	// test_run_command(ms, "cat < ls > ls", debug);
 	test_run_command(ms, "cat << EOF", debug);
+	// test_run_command(ms, "cat << EOF1 << EOF2", debug);
+	// test_run_command(ms, "cat << EOF1 << EOF2<<EOF3", debug);
+	// test_run_command(ms, "cat << EOF1 << EOF2<<EOF3<<", debug);
 	// test_run_command(ms, "cat << EOF1 | cat << EOF2", debug);
 	// test_run_command(ms, "|cat<<EOF1|cat<<EOF2|", debug);
 	// test_run_command(ms, ">>cat<<EOF1|cat<<EOF2<<", debug);

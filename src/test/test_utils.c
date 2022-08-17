@@ -160,8 +160,13 @@ void	test_display_local_env(t_minishell *ms)
 	}
 }
 
+void	test_display_redirections(t_minishell *ms)
+{
+	ft_printf("Test display redirections for each process and file relinked\n");
+	(void) ms;
+}
 
-void test_reset(t_minishell *ms)
+void	test_reset(t_minishell *ms)
 {
     ms_free_all_tokens(ms);
     ms_free_all_processes(ms);

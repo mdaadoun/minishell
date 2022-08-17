@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 13:48:48 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/17 08:10:12 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/17 14:35:21 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,9 @@ void	ms_free_all_tokens(t_minishell *ms)
 	ms->first_token = NULL;
 }
 
+/* 
+ *	Free all processes and delete .heredoc file
+*/ 
 void	ms_free_all_processes(t_minishell *ms)
 {
 	t_process	*process;
@@ -116,6 +119,8 @@ void	ms_free_all_processes(t_minishell *ms)
 		free(process->command_line);
 		free(process->types_line);
 		free(process->internal_error);
+		if (process->has_redirection)
+			free(process->redirected_filepath);
 		free(process);
 		process = swp;
 	}
