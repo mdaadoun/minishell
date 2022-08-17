@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 09:03:27 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/14 09:08:10 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/17 08:50:08 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ static size_t	init_tok(t_minishell *ms, size_t ind, char *line, char c)
 	if (!check_char(line[ind + count], c))
 	{
 		content = ft_substr(line, ind, count);
-		ms_add_token(ms, content, TYPE_S_QUOTE_STRING);
+		if (c == 39)
+			ms_add_token(ms, content, TYPE_S_QUOTE_STRING);
+		else if (c == 34)
+			ms_add_token(ms, content, TYPE_D_QUOTE_STRING);
 		count++;
 	}
 	return (count);
