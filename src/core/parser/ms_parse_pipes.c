@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 14:15:26 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/17 10:46:05 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/17 14:22:36 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,33 @@ static int	get_length(char *string, int start)
 	return (length);
 }
 
+static int	pipe_build(t_minishell *ms, char *str, int ind, t_token *token)
+{
+	t_token	*tok1;
+	t_token	*tok2;
+	int		sta;
+
+	sta = 0;
+	tok1 = token;
+	if (ind == 0)
+		tok1->content = ft_substr(str, sta, get_length(str, sta) + 1);
+	else
+	{
+		tok1->content = ft_substr(str, sta, get_length(str, sta));
+		tok2 = ms_create_new_token(ms);
+		ms_push_token(tok1, tok2);
+		tok1 = tok2;
+		sta = sta + get_length(str, sta);
+		tok1->content = ft_substr(str, sta, get_length(str, sta) + 1);
+		if (!str[ind + 1])
+			return (-1);
+	}
+	return (sta);
+}
+
 /* 
  *	Replace the given token with new token separated by pipes 
-*/
+ */
 static void	rebuild_pipes_token(t_minishell *ms, t_token *token)
 {
 	t_token	*tok1;
@@ -36,27 +60,17 @@ static void	rebuild_pipes_token(t_minishell *ms, t_token *token)
 	int		ind;
 	int		sta;
 
-	sta = 0;
 	ind = 0;
+	sta = 0;
 	str = token->content;
 	tok1 = token;
 	while (str[ind])
 	{
 		if (str[ind] == '|')
 		{
-			if (ind == 0)
-				tok1->content = ft_substr(str, sta, get_length(str, sta) + 1);
-			else
-			{
-				tok1->content = ft_substr(str, sta, get_length(str, sta));
-				tok2 = ms_create_new_token(ms);
-				ms_push_token(tok1, tok2);
-				tok1 = tok2;
-				sta = sta + get_length(str, sta);
-				tok1->content = ft_substr(str, sta, get_length(str, sta) + 1);
-				if (!str[ind + 1])
-					break ;
-			}
+			sta += pipe_build(ms, str, ind, token);
+			if (sta == -1)
+				break ;
 			tok2 = ms_create_new_token(ms);
 			ms_push_token(tok1, tok2);
 			tok1 = tok2;
@@ -71,7 +85,7 @@ static void	rebuild_pipes_token(t_minishell *ms, t_token *token)
 
 /*
  * Parse the pipes which are not already parsed
-*/
+ */
 void	ms_parse_pipes(t_minishell *ms)
 {
 	t_token	*token;

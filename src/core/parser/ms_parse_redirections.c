@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 10:57:46 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/17 10:22:02 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/17 13:14:22 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	get_length(char *string, int start)
 	if (string[start] == '>' && string[start +1] == '>')
 		length++;
 	while (string[start] != '\0' && \
-	string[start] != '<' && string[start] != '>')
+			string[start] != '<' && string[start] != '>')
 	{
 		length++;
 		start++;
@@ -84,29 +84,29 @@ static void	rebuild_redirection_tokens(t_minishell *ms, t_token *token)
  */
 void	ms_parse_redirections(t_minishell *ms)
 {
-	t_token	*token;
+	t_token	*tok;
 	size_t	i;
 
-	token = ms->first_token;
-	while (token)
+	tok = ms->first_token;
+	while (tok)
 	{
-		if (token->type == TYPE_S_QUOTE_STRING || \
-				token->type == TYPE_D_QUOTE_STRING)
+		if (tok->type == TYPE_S_QUOTE_STRING || \
+			tok->type == TYPE_D_QUOTE_STRING)
 		{
-			token = token->next;
+			tok = tok->next;
 			continue ;
 		}
 		i = 0;
-		while (token->content[i] && ft_strlen(token->content) > 1)
+		while (tok->content[i] && ft_strlen(tok->content) > 1)
 		{
-			if (ft_strlen(token->content) == 2)
-				if ((token->content[i] == '>' && token->content[i + 1] == '>') \
-				|| (token->content[i] == '<' && token->content[i + 1] == '<'))
+			if (ft_strlen(tok->content) == 2)
+				if ((tok->content[i] == '>' && tok->content[i + 1] == '>') \
+					|| (tok->content[i] == '<' && tok->content[i + 1] == '<'))
 					break ;
-			if (token->content[i] == '>' || token->content[i] == '<')
-				rebuild_redirection_tokens(ms, token);
+			if (tok->content[i] == '>' || tok->content[i] == '<')
+				rebuild_redirection_tokens(ms, tok);
 			i++;
 		}
-		token = token->next;
+		tok = tok->next;
 	}
 }
