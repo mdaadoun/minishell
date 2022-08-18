@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/18 08:45:12 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/18 10:41:47 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,8 +178,17 @@ typedef struct s_token
  *  Executer structures:
 */
 
+// typedef struct s_redirection
+// {
+// 	char					*type;
+// 	char					*filepath;
+// 	struct s_redirection	*next;
+// }						t_redirection;
+
+
 typedef struct s_process {
 	bool				has_redirection;
+	// t_redirection		first_redirection;
 	char				*redirected_filepath;
 	int					pipe_in;
 	int					pipe_out;

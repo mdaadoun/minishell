@@ -10,6 +10,9 @@
 	* test "sad | das| | asd| Asd| sda |" - check: Invalid read of size 1
 	* ./minishell 2 -> segmentation fault
 
+### redirection structure
+	build a linked structure for all redirections in a process
+
 ### ERRORS: 
 	* check error and if any print and return shell
 	* erreurs de syntaxe autour des redirections a reprendre

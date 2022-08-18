@@ -114,5 +114,4 @@ void test_launcher(t_minishell *ms, int debug)
 			next = false;
 		}
 	}
-	test_reset(ms);
 }

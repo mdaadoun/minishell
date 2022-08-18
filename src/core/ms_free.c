@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 13:48:48 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/18 09:22:32 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/18 10:05:09 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	ms_free_last_command(t_minishell *ms)
 			free(process->internal_error);
 			if (process->has_redirection)
 				free(process->redirected_filepath);
+			unlink(".heredoc");
 			free(process);
 			process = swp;
 		}

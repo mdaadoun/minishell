@@ -168,9 +168,7 @@ void	test_display_redirections(t_minishell *ms)
 
 void	test_reset(t_minishell *ms)
 {
-    ms_free_all_tokens(ms);
-    ms_free_all_processes(ms);
-	free(ms->full_command);
+	ms_free_last_command(ms);
 	ms_set_error(ms->global_error, NO_ERROR, NULL);
     ft_printf("\n");
 }

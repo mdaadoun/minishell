@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:12:25 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/17 15:45:10 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/18 10:14:06 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static void open_heredoc(t_token *token, t_process *process)
 	delimiter = token->next->content;
 	line = "";
 	check = 1;
+	unlink(".heredoc");
 	while (check)
 	{
 		ms_initialize_signals();
@@ -73,18 +74,22 @@ void ms_build_redirections(t_token *token,	t_process *process)
 	err_key = ERROR_SYNTAX;
 	err_msg = MSG_ERROR_SYNTAX_REDIRECT;
 	if (token->type == TYPE_REDIRECT_DOUBLE_RIGHT || 
-		token->type == TYPE_REDIRECT_LEFT || 
 		token->type == TYPE_REDIRECT_RIGHT)
 	{
 		process->has_redirection = true;
-
 		if (token->next->type == TYPE_ARG_STRING)
 			process->redirected_filepath = strdup(token->next->content);
 		else
 			ms_set_error(process->internal_error, err_key, err_msg);
 	}
+	else if (token->type == TYPE_REDIRECT_LEFT)
+	{
+		process->has_redirection = true;
+		// check if file exist, else error message 
+	}
 	else if	(token->type == TYPE_REDIRECT_DOUBLE_LEFT)
 	{
+		process->has_redirection = true;
 		if (token->next && token->next->type == TYPE_ARG_STRING)
 			open_heredoc(token, process);
 		else

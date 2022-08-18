@@ -6,6 +6,7 @@ void test_run_command(t_minishell *ms, char *str, int debug)
     ms->full_command = ft_strdup(str);
     ft_printf("\n================================\n\e[1;34mTest command:\e[m %s\n================================\n", ms->full_command);
     test_launcher(ms, debug);
+	test_reset(ms);
 }
 
 static void set_and_run_tests(t_minishell *ms, int debug)
@@ -53,47 +54,23 @@ void display_help()
     ft_printf("\t\e[1;33m  %d:\e[m test process execv\n", TEST_EXECUTER_PROCESSES_EXECV);
 }
 
-void	free_test(t_minishell *ms)
-{
-	size_t	ind;
-
-	ind = 0;
-	while (ms->bin_paths[ind])
-	{
-		free(ms->bin_paths[ind]);
-		ind++;
-	}
-	free(ms->bin_paths);
-	free(ms->cwd_path);
-	free(ms);
-}
-
 void test_start(int argc, char **argv, char **envp)
 {
 	t_minishell *ms;
-	t_error		error;
-    int     debug;
+	t_error     error;
 
 	if (argc >= 2)
 	{
 		ms_initialize_minishell(&ms, &error, envp);
 	    ms_initialize_signals();
         if (!ft_strncmp(argv[1], "v", 1))
-        {
-            ft_printf("verbose mode");
-        }
+            ft_printf("TODO: verbose mode not by default.");
         else if (!ft_strncmp(argv[1], "c", 1))
-        {
-            ft_printf("test a specific command");
-        }
+            ft_printf("TODO: test a specific command.");
         else
-        {
-            debug = ft_atoi(argv[1]);
-            set_and_run_tests(ms, debug);
-            free_test(ms);
-        }
+            set_and_run_tests(ms, ft_atoi(argv[1]));
 	}
 	else
 		display_help();
-    exit(0);
+    exit(ms_free_before_exit(ms));
 }

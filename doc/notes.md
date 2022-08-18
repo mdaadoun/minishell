@@ -63,6 +63,9 @@ pipes[1] 4
 pipe(0-out-read=3, 1-in-write=4)
 
 |out=NULL		P1     				in=4|out=3    		P2      		in=5|out=6    	P3				in=NULL
+				hasredirection true
+				redirected file->file.txt
+				.heredoc
 				in = 0								    in = 0							in = 0
 				out = 1 								out = 1							out = 1
 				command_line	  						command_line	     	 		command_line
