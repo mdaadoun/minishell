@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:12:25 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/18 10:14:06 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/18 13:41:37 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void ms_build_redirections(t_token *token,	t_process *process)
 {
 	t_err_key 	err_key;
 	char 		*err_msg;
+	t_redirection	*redir;
 	
 	err_key = ERROR_SYNTAX;
 	err_msg = MSG_ERROR_SYNTAX_REDIRECT;
@@ -77,14 +78,16 @@ void ms_build_redirections(t_token *token,	t_process *process)
 		token->type == TYPE_REDIRECT_RIGHT)
 	{
 		process->has_redirection = true;
+		redir = ms_add_redirection(process, token->type);
 		if (token->next->type == TYPE_ARG_STRING)
-			process->redirected_filepath = strdup(token->next->content);
+			redir->filepath = strdup(token->next->content);
 		else
 			ms_set_error(process->internal_error, err_key, err_msg);
 	}
 	else if (token->type == TYPE_REDIRECT_LEFT)
 	{
 		process->has_redirection = true;
+		redir = ms_add_redirection(process, token->type);
 		// check if file exist, else error message 
 	}
 	else if	(token->type == TYPE_REDIRECT_DOUBLE_LEFT)
