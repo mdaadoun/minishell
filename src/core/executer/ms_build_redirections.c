@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_redirections.c                                  :+:      :+:    :+:   */
+/*   ms_build_redirections.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:12:25 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/18 13:41:37 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/18 15:32:59 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,9 @@ static void open_heredoc(t_token *token, t_process *process)
 		add_heredoc_line(line);
 		free(line);
 	}
-	free(process->redirected_filepath);
-	process->redirected_filepath = strdup(".heredoc");
+	(void) process;
+	// free(process->redirected_filepath);
+	// process->redirected_filepath = strdup(".heredoc");
 }
 
 /*
@@ -70,31 +71,27 @@ void ms_build_redirections(t_token *token,	t_process *process)
 {
 	t_err_key 	err_key;
 	char 		*err_msg;
-	t_redirection	*redir;
 	
 	err_key = ERROR_SYNTAX;
 	err_msg = MSG_ERROR_SYNTAX_REDIRECT;
 	if (token->type == TYPE_REDIRECT_DOUBLE_RIGHT || 
-		token->type == TYPE_REDIRECT_RIGHT)
+		token->type == TYPE_REDIRECT_RIGHT || 
+		token->type == TYPE_REDIRECT_LEFT)
 	{
 		process->has_redirection = true;
-		redir = ms_add_redirection(process, token->type);
 		if (token->next->type == TYPE_ARG_STRING)
-			redir->filepath = strdup(token->next->content);
+			ms_add_redirection(process, token->type, ft_strdup(token->next->content));
 		else
 			ms_set_error(process->internal_error, err_key, err_msg);
-	}
-	else if (token->type == TYPE_REDIRECT_LEFT)
-	{
-		process->has_redirection = true;
-		redir = ms_add_redirection(process, token->type);
-		// check if file exist, else error message 
 	}
 	else if	(token->type == TYPE_REDIRECT_DOUBLE_LEFT)
 	{
 		process->has_redirection = true;
 		if (token->next && token->next->type == TYPE_ARG_STRING)
+		{
 			open_heredoc(token, process);
+			ms_add_redirection(process, token->type, ft_strdup(".heredoc"));
+		}
 		else
 			ms_set_error(process->internal_error, err_key, err_msg);
 	}

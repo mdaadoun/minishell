@@ -14,7 +14,9 @@ static void set_and_run_tests(t_minishell *ms, int debug)
     test_parser(ms, debug);
     test_lexer(ms, debug);
 	test_builtin(ms, debug);
-	test_executer(ms, debug);
+	test_executer_build(ms, debug);
+	test_executer_errors(ms, debug);
+    test_executer_redirections(ms, debug);
 }
 
 void display_help()
@@ -45,17 +47,28 @@ void display_help()
     ft_printf("\t\e[1;33m  %d:\e[m redirections\n", TEST_LEXER_REDIRECTIONS);
     ft_printf("\t\e[1;33m  %d:\e[m builtins command\n", TEST_LEXER_BUILTINS);
     ft_printf("\t\e[1;33m  %d:\e[m external command\n", TEST_LEXER_EXTERNALS);
+    ft_printf("\t\e[1;33m%d:\e[m executer build processes\n", TEST_EXECUTER_BUILD);
+    ft_printf("\t\e[1;33m  %d:\e[m quotes\n", TEST_EXECUTER_BUILD_QUOTES);
+    ft_printf("\t\e[1;33m  %d:\e[m pipes\n", TEST_EXECUTER_BUILD_PIPES);
+    ft_printf("\t\e[1;33m  %d:\e[m env / variables\n", TEST_EXECUTER_BUILD_ENV);
+    ft_printf("\t\e[1;33m  %d:\e[m arguments\n", TEST_EXECUTER_BUILD_ARGUMENTS);
+    ft_printf("\t\e[1;33m  %d:\e[m redirections\n", TEST_EXECUTER_BUILD_REDIRECTIONS);
+    ft_printf("\t\e[1;33m  %d:\e[m builtins command\n", TEST_EXECUTER_BUILD_BUILTINS);
+    ft_printf("\t\e[1;33m  %d:\e[m external command\n", TEST_EXECUTER_BUILD_EXTERNALS);
+    ft_printf("\t\e[1;33m%d:\e[m executer errors\n", TEST_EXECUTER_ERRORS);
+    ft_printf("\t\e[1;33m  %d:\e[m quotes\n", TEST_EXECUTER_ERRORS_QUOTES);
+    ft_printf("\t\e[1;33m  %d:\e[m pipes\n", TEST_EXECUTER_ERRORS_PIPES);
+    ft_printf("\t\e[1;33m  %d:\e[m env / variables\n", TEST_EXECUTER_ERRORS_ENV);
+    ft_printf("\t\e[1;33m  %d:\e[m arguments\n", TEST_EXECUTER_ERRORS_ARGUMENTS);
+    ft_printf("\t\e[1;33m  %d:\e[m redirections\n", TEST_EXECUTER_ERRORS_REDIRECTIONS);
+    ft_printf("\t\e[1;33m  %d:\e[m builtins command\n", TEST_EXECUTER_ERRORS_BUILTINS);
+    ft_printf("\t\e[1;33m  %d:\e[m external command\n", TEST_EXECUTER_ERRORS_EXTERNALS);
+    ft_printf("\t\e[1;33m%d:\e[m executor redirections\n", TEST_EXECUTER_REDIRECTIONS);
     ft_printf("\t\e[1;33m%d:\e[m builtin command\n", TEST_BUILTIN);
     ft_printf("\t\e[1;33m  %d:\e[m pwd\n", TEST_BUILTIN_PWD);
     ft_printf("\t\e[1;33m  %d:\e[m env\n", TEST_BUILTIN_ENV);
     ft_printf("\t\e[1;33m  %d:\e[m export\n", TEST_BUILTIN_EXPORT);
     ft_printf("\t\e[1;33m  %d:\e[m unset\n", TEST_BUILTIN_UNSET);
-    ft_printf("\t\e[1;33m%d:\e[m executer\n", TEST_EXECUTER);
-    ft_printf("\t\e[1;33m  %d:\e[m test building processes\n", TEST_EXECUTER_PROCESSES_BUILD);
-    ft_printf("\t\e[1;33m  %d:\e[m test building errors\n", TEST_EXECUTER_PROCESSES_ERROR);
-    ft_printf("\t\e[1;33m  %d:\e[m test building pipes\n", TEST_EXECUTER_PROCESSES_PIPE);
-    ft_printf("\t\e[1;33m  %d:\e[m test building redirections\n", TEST_EXECUTER_PROCESSES_REDIRECTION);
-    ft_printf("\t\e[1;33m  %d:\e[m test process execv\n", TEST_EXECUTER_PROCESSES_EXECV);
 }
 
 void test_start(int argc, char **argv, char **envp)

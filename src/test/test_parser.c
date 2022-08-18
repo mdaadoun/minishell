@@ -2,14 +2,14 @@
 
 void test_parser(t_minishell *ms, int debug)
 {
-    if (debug == TEST_LEXER_BUILTINS)
+    if (debug == TEST_PARSER_BUILTINS)
     {
-        ft_printf("\n\e[1;34m===Testing builtins programs parser:===\e[m\n");
+        ft_printf("\n\e[1;31m===Testing builtins programs parser:===\e[m\n");
         test_builtins(ms, debug);
     }
-    else if (debug == TEST_LEXER_EXTERNALS)
+    else if (debug == TEST_PARSER_EXTERNALS)
     {
-        ft_printf("\n\e[1;34m===Testing externals programs parser:===\e[m\n");
+        ft_printf("\n\e[1;31m===Testing externals programs parser:===\e[m\n");
         test_externals(ms, debug);
     }
 	else if (debug == TEST_PARSER_QUOTES)
@@ -39,11 +39,13 @@ void test_parser(t_minishell *ms, int debug)
 	}
     else if (debug == TEST_PARSER || debug == TEST_ALL)
     {
-		printf("\n\e[1;32m===Testing PARSER===\e[m\n");
+		printf("\n\e[1;31m===Testing PARSER===\e[m\n");
 		test_quotes(ms, debug);
-		test_env(ms, debug);
-		test_pipes(ms, debug);
-		test_redirections(ms, debug);
-		test_arguments(ms, debug);
+        test_pipes(ms, debug);
+        test_env(ms, debug);
+        test_redirections(ms, debug);
+        test_builtins(ms, debug);
+        test_externals(ms, debug);
+        test_arguments(ms, debug);
 	}
 }

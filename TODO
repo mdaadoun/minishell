@@ -11,7 +11,8 @@
 	* ./minishell 2 -> segmentation fault
 
 ### redirection structure
-	build a linked structure for all redirections in a process
+	* build a linked structure for all redirections in a process
+	* add to tester the display for redirections
 
 ### ERRORS: 
 	* check error and if any print and return shell
@@ -35,6 +36,11 @@
 * Ctrl-D with realine
 
 ### PARSER:
+
+### LEXER:
+
+* a|b|c
+	* c is a builtin_command type ?? why ?
 
 ### EXECUTER:
 

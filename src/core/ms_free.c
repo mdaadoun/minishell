@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 13:48:48 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/18 10:05:09 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:04:38 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ms_free_last_command(t_minishell *ms)
 			free(process->types_line);
 			free(process->internal_error);
 			if (process->has_redirection)
-				free(process->redirected_filepath);
+				ms_free_all_redirections(process);
 			unlink(".heredoc");
 			free(process);
 			process = swp;
@@ -122,4 +122,20 @@ void	ms_free_all_tokens(t_minishell *ms)
 		token = swp;
 	}
 	ms->first_token = NULL;
+}
+
+void	ms_free_all_redirections(t_process *process)
+{
+	t_redirection	*redirection;
+	t_redirection	*swp;
+
+	redirection = process->first_redirection;
+	while (redirection)
+	{
+		swp = redirection->next;
+		free(redirection->filepath);
+		free(redirection);
+		redirection = swp;
+	}
+	process->first_redirection = NULL;
 }

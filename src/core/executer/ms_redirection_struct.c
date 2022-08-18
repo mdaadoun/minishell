@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_redirection_struct.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 13:00:13 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/18 13:40:54 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/18 15:12:25 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,15 @@ static void	append_redirection(t_redirection *first, t_redirection *last)
 	tmp->next = last;
 }
 
-t_redirection	*ms_add_redirection(t_process *proc, t_token_type type)
+void	ms_add_redirection(t_process *proc, t_token_type type, char *filepath)
 {
 	t_redirection	*redir;
 
 	redir = create_redirection();
 	redir->type = type;
+	redir->filepath = filepath;
 	if (!proc->first_redirection)
 		proc->first_redirection = redir;
 	else
 		append_redirection(proc->first_redirection, redir);
-	return (redir);
 }

@@ -3,6 +3,7 @@
 
 void	test_quotes(t_minishell *ms, int debug)
 {
+	// test_run_command(ms, "echo hello", debug);
 	test_run_command(ms, "'echo \"lol 'lol' lol\" lol'", debug);
 	// test_run_command(ms, "'echo lol'", debug);
 	// test_run_command(ms, "'hello' hello hello", debug);
@@ -15,6 +16,8 @@ void	test_quotes(t_minishell *ms, int debug)
     // test_run_command(ms, "cat \"cat cat\"", debug);
     // test_run_command(ms, "cd '$home'", debug);
     // test_run_command(ms, "'$home'cd cd cd", debug);
+	// test_run_command(ms, ";; test", debug);
+	// test_run_command(ms, ";", debug);
 }
 
 void	test_env(t_minishell *ms, int debug)
@@ -88,6 +91,23 @@ void	test_pipes(t_minishell *ms, int debug)
     // test_run_command(ms, "|ls|cat|", debug);
     // test_run_command(ms, "||||", debug);
     // test_run_command(ms, "| | | |", debug);
+	// test_run_command(ms, "asd | echo hello | eee eee", debug);
+	// test_run_command(ms, "echo test | asd hello | eee eee | echo hello | cat -e", debug);
+	// test_run_command(ms, "| test", debug);
+	// test_run_command(ms, "echo hello | |", debug);
+	// test_run_command(ms, "cat Makefile | wc -l", debug);
+	// test_run_command(ms, "cat Makefile | wc -l | wc -l", debug);
+	// test_run_command(ms, "env hello", debug);
+    // test_run_command(ms, "env hello", debug);
+    // test_run_command(ms, "cat cat | 'cat' $hello", debug);
+    // test_run_command(ms, "env | echo | cat | ls", debug);
+    // test_run_command(ms, "test ||| test", debug);
+    // test_run_command(ms, "cat test | echo -o test | cd cd | echo | cat ", debug);
+    // test_run_command(ms, "sad | das| | asd| Asd| sda |", debug);
+    // test_run_command(ms, "'cat' | cat | \"cat\"", debug);
+    // test_run_command(ms, "     'cat    ' |  cat   | \"     cat     \"", debug);
+    // test_run_command(ms, "'$cat' | $cat | \"$cat\"", debug);
+    // test_run_command(ms, "cd | cd", debug);
     // test_run_command(ms, "echo hi | cat | cat | cat | cat", debug);
     // test_run_command(ms, "echo | cat | ls | cd | export a | export b", debug);
     // test_run_command(ms, "echo echo cat | cat cat cat | ls ls cat | cd echo export | export cat cat | export export", debug);
@@ -103,6 +123,8 @@ void	test_pipes(t_minishell *ms, int debug)
 void	test_redirections(t_minishell *ms, int debug)
 {
     test_run_command(ms, "> > <<", debug);
+	// test_run_command(ms, "echo > <", debug);
+	// test_run_command(ms, "<", debug);
     // test_run_command(ms, "bb>cc <<dd", debug);
     // test_run_command(ms, ">>cc <<dd", debug);
 	// test_run_command(ms, "wc -l < Makefile > test", debug);
@@ -150,7 +172,6 @@ void test_arguments(t_minishell *ms, int debug)
 
 void test_builtins(t_minishell *ms, int debug)
 {
-    printf("\e[1;31m===Testing lexer if first token is builtin command===\e[m \n");
     test_run_command(ms, "echo hello", debug);
     // test_run_command(ms, "cd ..", debug);
     // test_run_command(ms, "pwd hello", debug);
@@ -163,7 +184,6 @@ void test_builtins(t_minishell *ms, int debug)
 
 void test_externals(t_minishell *ms, int debug)
 {
-    printf("\e[1;31m===Testing lexer if first token is external command===\e[m \n");
     test_run_command(ms, "test hello", debug);
     // test_run_command(ms, "cat cat", debug);
     // test_run_command(ms, "/usr/bin/cat cat cat", debug);

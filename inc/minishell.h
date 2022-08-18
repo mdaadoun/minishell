@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/18 14:44:27 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/18 16:21:40 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ typedef unsigned long long	t_uint64;
 \e[0;38m|\e[m\e[1;36m ██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║     ██║      \e[m\e[0;38m|\e[m\n\
 \e[0;38m|\e[m\e[1;34m ██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗ \e[m\e[0;38m|\e[m\n\
 \e[0;38m|\e[m\e[1;34m ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝ \e[m\e[0;38m|\e[m\n\
-\e[0;38m\\========================= \
-\e[0;34mm\e[m\e[0;36mdaadoun\e[m&&\e[0;34md\e[m\e[0;36mlaidet\e[m \
+\e[0;38m\\=========================\
+\e[0;34mm\e[m\e[0;36mdaadoun\e[m&&\e[0;34md\e[m\e[0;36mlaidet\e[m\
 ===========================/\e[m\n\n"
 
 //=====================
@@ -281,7 +281,6 @@ void	ms_push_token(t_token *first_token, t_token *second_token);
 */
 
 void	ms_parser(t_minishell *ms);
-// void	ms_check_quotes(char *str);
 void	ms_parse_quotes(t_minishell *ms);
 void	ms_swap_env(t_minishell *ms);
 void	ms_parse_pipes(t_minishell *ms);
@@ -311,10 +310,10 @@ void	ms_analyze_arguments(t_minishell *ms);
  *			core/executer/ms_redirections.c
 */
 
+void	ms_add_redirection(t_process *proc, t_token_type type, char *filepath);
 void	ms_executer(t_minishell *ms);
 void	ms_build_processes(t_minishell *ms);
-void 	ms_build_redirections(t_token *token, t_process *process);
-t_redirection	*ms_add_redirection(t_process *proc, t_token_type type);
+void	ms_build_redirections(t_token *token, t_process *process);
 void	ms_start_processes(t_minishell *ms);
 void	create_pipes(t_minishell *ms);
 
@@ -327,8 +326,8 @@ void	create_pipes(t_minishell *ms);
 int		ms_free_before_exit(t_minishell *ms);
 void	ms_free_last_command(t_minishell *ms);
 void	ms_free_all_tokens(t_minishell *ms);
+void	ms_free_all_redirections(t_process *process);
 void	ms_free_env(t_minishell *ms);
-
 
 //=========================================
 // Minishell testing functions & structures
@@ -341,7 +340,8 @@ void	ms_free_env(t_minishell *ms);
  *			test/test_utils.c
  *			test/test_parser.c
  *			test/test_lexer.c
- *			test/test_executer.c
+ *			test/test_executer_build.c
+ *			test/test_executer_errors.c
  *			test/test_builtin.c
 */
 
@@ -350,28 +350,43 @@ typedef enum e_tests
 	TEST_ALL,
 	TEST_PARSER = 1,
 	TEST_LEXER = 2,
-	TEST_BUILTIN = 3,
-	TEST_EXECUTER = 4,
+	TEST_EXECUTER_BUILD = 3,
+	TEST_EXECUTER_ERRORS = 4,
+	TEST_EXECUTER_REDIRECTIONS = 5,
+	TEST_BUILTIN = 6,
 	TEST_PARSER_QUOTES = 11,
 	TEST_PARSER_PIPES = 12,
 	TEST_PARSER_ENV = 13,
 	TEST_PARSER_ARGUMENTS = 14,
 	TEST_PARSER_REDIRECTIONS = 15,
-	TEST_LEXER_BUILTINS = 21,
-	TEST_LEXER_EXTERNALS = 22,
+	TEST_PARSER_BUILTINS = 16,
+	TEST_PARSER_EXTERNALS = 17,
+	TEST_LEXER_QUOTES = 21,
+	TEST_LEXER_PIPES = 22,
 	TEST_LEXER_ENV = 23,
-	TEST_LEXER_PIPES = 24,
+	TEST_LEXER_ARGUMENTS = 24,
 	TEST_LEXER_REDIRECTIONS = 25,
-	TEST_LEXER_ARGUMENTS = 26,
-	TEST_BUILTIN_PWD = 31,
-	TEST_BUILTIN_ENV = 32,
-	TEST_BUILTIN_EXPORT = 33,
-	TEST_BUILTIN_UNSET = 34,
-	TEST_EXECUTER_PROCESSES_BUILD = 41,
-	TEST_EXECUTER_PROCESSES_ERROR = 42,
-	TEST_EXECUTER_PROCESSES_PIPE = 43,
-	TEST_EXECUTER_PROCESSES_REDIRECTION = 44,
-	TEST_EXECUTER_PROCESSES_EXECV = 45
+	TEST_LEXER_BUILTINS = 26,
+	TEST_LEXER_EXTERNALS = 27,
+	TEST_EXECUTER_BUILD_QUOTES = 31,
+	TEST_EXECUTER_BUILD_PIPES = 32,
+	TEST_EXECUTER_BUILD_ENV = 33,
+	TEST_EXECUTER_BUILD_ARGUMENTS = 34,
+	TEST_EXECUTER_BUILD_REDIRECTIONS = 35,
+	TEST_EXECUTER_BUILD_BUILTINS = 36,
+	TEST_EXECUTER_BUILD_EXTERNALS = 37,
+	TEST_EXECUTER_ERRORS_QUOTES = 41,
+	TEST_EXECUTER_ERRORS_PIPES = 42,
+	TEST_EXECUTER_ERRORS_ENV = 43,
+	TEST_EXECUTER_ERRORS_ARGUMENTS = 44,
+	TEST_EXECUTER_ERRORS_REDIRECTIONS = 45,
+	TEST_EXECUTER_ERRORS_BUILTINS = 46,
+	TEST_EXECUTER_ERRORS_EXTERNALS = 47,
+	TEST_BUILTIN_PWD = 61,
+	TEST_BUILTIN_ENV = 62,
+	TEST_BUILTIN_EXPORT = 63,
+	TEST_BUILTIN_UNSET = 64,
+	TEST_BUILTIN_ECHO = 65
 }	t_tests;
 
 # ifndef DEBUG
@@ -394,12 +409,16 @@ void	test_display_redirections(t_minishell *ms);
 void	test_builtin(t_minishell *ms, int debug);
 void	test_lexer(t_minishell *ms, int debug);
 void	test_parser(t_minishell *ms, int debug);
-void	test_executer(t_minishell *ms, int debug);
+void	test_executer_build(t_minishell *ms, int debug);
+void	test_executer_errors(t_minishell *ms, int debug);
+void	test_executer_redirections(t_minishell *ms, int debug);
 
 void	test_quotes(t_minishell *ms, int debug);
 void	test_env(t_minishell *ms, int debug);
 void	test_pipes(t_minishell *ms, int debug);
 void	test_redirections(t_minishell *ms, int debug);
 void	test_arguments(t_minishell *ms, int debug);
+void	test_builtins(t_minishell *ms, int debug);
+void	test_externals(t_minishell *ms, int debug);
 
 #endif

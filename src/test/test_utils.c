@@ -160,15 +160,15 @@ void	test_display_local_env(t_minishell *ms)
 	}
 }
 
-void	test_display_redirections(t_minishell *ms)
-{
-	ft_printf("Test display redirections for each process and file relinked\n");
-	(void) ms;
-}
-
 void	test_reset(t_minishell *ms)
 {
 	ms_free_last_command(ms);
 	ms_set_error(ms->global_error, NO_ERROR, NULL);
     ft_printf("\n");
+}
+
+void test_display_redirections(t_minishell *ms)
+{
+	ft_printf("TODO: To display for redirections structure inside a process.\n");
+	(void) ms;
 }

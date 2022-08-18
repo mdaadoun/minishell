@@ -8,7 +8,8 @@ void test_launcher(t_minishell *ms, int debug)
 	ms_parser(ms);
 	if (debug == TEST_PARSER || debug == TEST_PARSER_QUOTES \
 	|| debug == TEST_PARSER_ENV || debug == TEST_PARSER_PIPES \
-	|| debug == TEST_PARSER_REDIRECTIONS || debug == TEST_PARSER_ARGUMENTS)
+	|| debug == TEST_PARSER_REDIRECTIONS || debug == TEST_PARSER_ARGUMENTS \
+	|| debug == TEST_PARSER_BUILTINS || debug == TEST_PARSER_EXTERNALS)
 	{
 		test_display_tokens(ms);
 		next = false;
@@ -52,7 +53,7 @@ void test_launcher(t_minishell *ms, int debug)
 	if (next)
 	{
 		ms_lexer(ms);
-		if (debug == TEST_LEXER_ARGUMENTS || debug == TEST_LEXER)
+		if (debug == TEST_LEXER_ARGUMENTS || debug == TEST_LEXER || debug == TEST_LEXER_QUOTES || debug == TEST_LEXER_ENV)
 		{
 			test_display_tokens_types(ms);
 			next = false;
@@ -61,7 +62,10 @@ void test_launcher(t_minishell *ms, int debug)
 	if (next)
 	{
     	ms_build_processes(ms);
-		if (debug == TEST_EXECUTER_PROCESSES_BUILD)
+		if (debug == TEST_EXECUTER_BUILD || debug == TEST_EXECUTER_BUILD_QUOTES \
+		|| debug == TEST_EXECUTER_BUILD_ENV || debug == TEST_EXECUTER_BUILD_PIPES \
+		|| debug == TEST_EXECUTER_BUILD_REDIRECTIONS || debug == TEST_EXECUTER_BUILD_ARGUMENTS \
+		|| debug == TEST_EXECUTER_BUILD_BUILTINS || debug == TEST_EXECUTER_BUILD_EXTERNALS)
 		{
     		test_display_processes(ms);
 			next = false;
@@ -70,7 +74,10 @@ void test_launcher(t_minishell *ms, int debug)
 	if (next)
 	{
     	ms_checking_for_errors(ms);
-		if (debug == TEST_EXECUTER_PROCESSES_ERROR)
+		if (debug == TEST_EXECUTER_ERRORS || debug == TEST_EXECUTER_ERRORS_QUOTES \
+		|| debug == TEST_EXECUTER_ERRORS_ENV || debug == TEST_EXECUTER_ERRORS_PIPES \
+		|| debug == TEST_EXECUTER_ERRORS_REDIRECTIONS || debug == TEST_EXECUTER_ERRORS_ARGUMENTS \
+		|| debug == TEST_EXECUTER_ERRORS_BUILTINS || debug == TEST_EXECUTER_ERRORS_EXTERNALS)
 		{
     		test_display_errors(ms);
 			next = false;
@@ -78,24 +85,9 @@ void test_launcher(t_minishell *ms, int debug)
 	}
 	if (next)
 	{
-		if (debug == TEST_EXECUTER_PROCESSES_PIPE)
+		if (debug == TEST_EXECUTER_REDIRECTIONS)
 		{
-			ft_printf("TEST_EXECUTER_PROCESSES_PIPE ok\n");
-			next = false;
-		}
-	}
-	if (next)
-	{
-		if (debug == TEST_EXECUTER_PROCESSES_REDIRECTION)
-		{
-			ft_printf("TEST_EXECUTER_PROCESSES_REDIRECTION ok\n");
-			next = false;
-		}
-	}
-	if (next)
-	{
-		if (debug == TEST_EXECUTER || debug == TEST_EXECUTER_PROCESSES_EXECV)
-		{
+    		test_display_redirections(ms);
 			next = false;
 		}
 	}
