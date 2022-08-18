@@ -1,58 +1,38 @@
 # TODO
 
-* redirection >> open heredoc
-	* si >> DELIMITER, ouvrir un here doc, copy the content, and close when DELIMITER found
-* erreurs de syntaxe autour des redirections a reprendre
+### valgrind
+	* cat<<EOF
+		* Invalid read of size 1
+		* ms_parse_redirections
+		* 18 bytes in 2 blocks are definitely lost
 
-* parsing des redirections
-* lexer pipes
-* lexer redirections
-* si < > << >> tagger process
-* reprendre les erreurs valgrind
 	* when parsing only
 	* test "sad | das| | asd| Asd| sda |" - check: Invalid read of size 1
 	* ./minishell 2 -> segmentation fault
-* revoir le parsing des variables, env, export
-* single and double quotes are Tagged indifferently SINGLE_QUOTE_STRING TYPE, need to fix to get DOUBLE QUOTE TYPE
-	* catch the $variables in the " "
 
-* build each command from tokens and count processes
+### ERRORS: 
+	* check error and if any print and return shell
+	* erreurs de syntaxe autour des redirections a reprendre
 
-* ERRORS: check error and if any print and return shell
+### $? 
+	* valeur retour du dernier process
 
-* $? -> valeur retour du dernier process
+### FD running processes
+	* start forking processes, add pid to each processes structure
+	* fd, stdin, stdout
+	* parent wait all processes
 
-* start forking processes, add pid to each processes structure
-* fd, stdin, stdout
-* parent wait all processes
-* free processes structure
-
-* redirection and heredocs !!
-echo << EOF
-test
-test
-test
-EOF
-
-* range the structure for memory optimization, bigger to lower byte in order
-
-* builtin echo
+## echo
+	
+	* range the structure for memory optimization, bigger to lower byte in order
 
 ## signals handling
 
-* Ctrl-C with signal
+* Ctrl-C and Ctrl-\ with signal SIGINT et SIGQUIT
 * Ctrl-D with realine
-* Ctrl-\
 
 ### PARSER:
-
-* '$variable' et "$variable"
 
 ### EXECUTER:
 
 ### TESTER:
-
-display_commands(ms);
-afficher les commands lines sous forme texte, token, ligne type par type 
-ex: BUILTIN ARG_TEXT PIPE EXTERNAL PIPE NOTYPE
-afficher les commands lines sous forme texte, ms->command_lines (char**)
