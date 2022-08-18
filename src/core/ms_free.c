@@ -6,21 +6,43 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 13:48:48 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/17 14:35:21 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/18 09:22:32 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
 /*
- * Free memory related to the last command.
+ *	Free memory related to the last command.
+ *	Reset processes data to start anew
+ *	Free all processes
+ * 		delete .heredoc file if present
  */
 void	ms_free_last_command(t_minishell *ms)
 {
+	t_process	*process;
+	t_process	*swp;
+
 	if (ms)
 	{
+		ms->has_pipe = false;
+		ms->nb_processes = 0;
+		process = ms->first_process;
+		while (process)
+		{
+			swp = process->next;
+			free(process->command_line);
+			free(process->types_line);
+			free(process->internal_error);
+			if (process->has_redirection)
+				free(process->redirected_filepath);
+			free(process);
+			process = swp;
+		}
+		ms->first_process = NULL;
 		if (ms->full_command)
 			free(ms->full_command);
+		ms->full_command = NULL;
 		ms_free_all_tokens(ms);
 	}
 }
@@ -50,7 +72,6 @@ int	ms_free_before_exit(t_minishell *ms)
 			free(ms->bin_paths);
 		}
 		ms_free_last_command(ms);
-		ms_free_all_processes(ms);
 		ms_free_env(ms);
 		if (ms->global_error->flag)
 		{
@@ -100,29 +121,4 @@ void	ms_free_all_tokens(t_minishell *ms)
 		token = swp;
 	}
 	ms->first_token = NULL;
-}
-
-/* 
- *	Free all processes and delete .heredoc file
-*/ 
-void	ms_free_all_processes(t_minishell *ms)
-{
-	t_process	*process;
-	t_process	*swp;
-
-	ms->has_pipe = false;
-	ms->nb_processes = 0;
-	process = ms->first_process;
-	while (process)
-	{
-		swp = process->next;
-		free(process->command_line);
-		free(process->types_line);
-		free(process->internal_error);
-		if (process->has_redirection)
-			free(process->redirected_filepath);
-		free(process);
-		process = swp;
-	}
-	ms->first_process = NULL;
 }

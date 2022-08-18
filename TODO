@@ -36,3 +36,23 @@
 ### EXECUTER:
 
 ### TESTER:
+
+* tester using now the same set of test, should display only what is asked
+* tester should work with valgrind the same way as the main program to test if everything is free
+
+
+### Commenting, refactoring and cleaning code.
+- []: ms_main.c
+- []: ms_free.c
+- []: ms_errors.c
+	PARSER
+	-[]: ms_paser.c
+	-...
+	LEXER
+	-[]: ms_lexer.c
+	-...
+	EXECUTER
+	-[]: ms_executer.c
+	-...
+	BUILTINS
+	-...

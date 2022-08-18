@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:07:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/17 08:58:32 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/18 09:28:11 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ static void	display_prompt_and_wait(t_minishell *ms)
 
 /*
  *	>> MINISHELL <<
- *		REPL : READ > EVALUATE > PRINT > LOOP
+ *		REPL method : READ > EVALUATE > PRINT > LOOP
  *			1) Parser: Data structure of tokens (tokenization).
  *			2) Lexer: Lexical analysis of tokens (evaluation).
- *			3) Executer: Fork processes, run and print result.
+ *			3) Executer: Build processes, run pipeline and print result if any.
  *			4) Loop: Free data and wait for the next command.
  */
 int	main(int argc, char **argv, char **envp)
@@ -83,7 +83,7 @@ int	main(int argc, char **argv, char **envp)
 		test_start(argc, argv, envp);
 	ms_initialize_minishell(&ms, &error, envp);
 	ms_initialize_signals();
-	while (ms->full_command)
+	while (true)
 	{
 		display_prompt_and_wait(ms);
 		if (ft_strlen(ms->full_command))
@@ -92,7 +92,6 @@ int	main(int argc, char **argv, char **envp)
 			ms_lexer(ms);
 			ms_executer(ms);
 		}
-		ms_free_all_processes(ms);
 		ms_free_last_command(ms);
 		ms_set_error(ms->global_error, NO_ERROR, NULL);
 	}

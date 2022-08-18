@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/17 15:51:36 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/18 08:45:12 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -316,7 +316,6 @@ void	create_pipes(t_minishell *ms);
 int		ms_free_before_exit(t_minishell *ms);
 void	ms_free_last_command(t_minishell *ms);
 void	ms_free_all_tokens(t_minishell *ms);
-void	ms_free_all_processes(t_minishell *ms);
 void	ms_free_env(t_minishell *ms);
 
 
