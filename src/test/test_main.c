@@ -38,6 +38,7 @@ void display_help()
     ft_printf("\t\e[1;33m%d:\e[m lexer\n", TEST_LEXER);
     ft_printf("\t\e[1;33m  %d:\e[m builtins command\n", TEST_LEXER_BUILTINS);
     ft_printf("\t\e[1;33m  %d:\e[m external command\n", TEST_LEXER_EXTERNALS);
+    ft_printf("\t\e[1;33m  %d:\e[m env\n", TEST_LEXER_ENV);
     ft_printf("\t\e[1;33m  %d:\e[m pipes\n", TEST_LEXER_PIPES);
     ft_printf("\t\e[1;33m  %d:\e[m redirections\n", TEST_LEXER_REDIRECTIONS);
     ft_printf("\t\e[1;33m  %d:\e[m arguments\n", TEST_LEXER_ARGUMENTS);
@@ -69,8 +70,9 @@ void test_start(int argc, char **argv, char **envp)
             ft_printf("TODO: test a specific command.");
         else
             set_and_run_tests(ms, ft_atoi(argv[1]));
+        exit(ms_free_before_exit(ms));
 	}
 	else
 		display_help();
-    exit(ms_free_before_exit(ms));
+    exit(0);
 }

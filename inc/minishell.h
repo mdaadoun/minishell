@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/18 10:41:47 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/18 11:24:48 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -357,9 +357,10 @@ typedef enum e_tests
 	TEST_PARSER_REDIRECTIONS = 15,
 	TEST_LEXER_BUILTINS = 21,
 	TEST_LEXER_EXTERNALS = 22,
-	TEST_LEXER_PIPES = 23,
-	TEST_LEXER_REDIRECTIONS = 24,
-	TEST_LEXER_ARGUMENTS = 25,
+	TEST_LEXER_ENV = 23,
+	TEST_LEXER_PIPES = 24,
+	TEST_LEXER_REDIRECTIONS = 25,
+	TEST_LEXER_ARGUMENTS = 26,
 	TEST_BUILTIN_PWD = 31,
 	TEST_BUILTIN_ENV = 32,
 	TEST_BUILTIN_EXPORT = 33,

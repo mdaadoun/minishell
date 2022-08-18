@@ -1,25 +1,25 @@
 #include "../../inc/minishell.h"
 
 
-static void	test_close_pipe(t_minishell *ms)
-{
-	t_process *proc;
+// static void	test_close_pipe(t_minishell *ms)
+// {
+// 	t_process *proc;
 
-	proc = ms->first_process;
-	if (proc == ms->first_process)
-	{
-		close(proc->pipe_out);
-		close(proc->next->pipe_in);
-	}
-	else if (proc->next == 0)
-		return ;
-	else
-	{
-		close(proc->pipe_out);
-		close(proc->next->pipe_in);
-	}
-	proc = proc->next;
-}
+// 	proc = ms->first_process;
+// 	if (proc == ms->first_process)
+// 	{
+// 		close(proc->pipe_out);
+// 		close(proc->next->pipe_in);
+// 	}
+// 	else if (proc->next == 0)
+// 		return ;
+// 	else
+// 	{
+// 		close(proc->pipe_out);
+// 		close(proc->next->pipe_in);
+// 	}
+// 	proc = proc->next;
+// }
 
 void test_launcher(t_minishell *ms, int debug)
 {
@@ -93,8 +93,8 @@ void test_launcher(t_minishell *ms, int debug)
 	{
 		if (debug == TEST_EXECUTER_PROCESSES_PIPE)
 		{
-			create_pipes(ms);
-			test_close_pipe(ms);
+			// create_pipes(ms);
+			// test_close_pipe(ms);
 			next = false;
 		}
 	}

@@ -40,6 +40,11 @@ void test_lexer(t_minishell *ms, int debug)
         test_builtins(ms, debug);
     else if (debug == TEST_LEXER_EXTERNALS)
         test_externals(ms, debug);
+    else if (debug == TEST_LEXER_ENV)
+    {
+        ft_printf("\e[1;34mTest lexer env:\e[m\n");
+        test_env(ms, debug);
+    }
     else if (debug == TEST_LEXER_PIPES)
     {
         ft_printf("\e[1;34mTest lexer pipes:\e[m\n");

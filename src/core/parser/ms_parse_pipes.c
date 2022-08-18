@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 14:15:26 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/17 14:53:27 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/18 11:02:05 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,10 @@ void	ms_parse_pipes(t_minishell *ms)
 		while (token->content[i] && ft_strlen(token->content) > 1)
 		{
 			if (token->content[i] == '|')
+			{
 				rebuild_pipes_token(ms, token);
+				break;
+			}
 			i++;
 		}
 		token = token->next;
