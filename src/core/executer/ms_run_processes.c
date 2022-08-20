@@ -6,7 +6,7 @@
 /*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 08:01:33 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/19 08:15:46 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/20 07:31:08 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ void	ms_start_processes(t_minishell *ms)
 					redir = redir->next;
 				}
 			}
-			ft_printf("%s\n", proc->command_line);
 			if (proc->types_line[0] == TYPE_EXTERNAL_COMMAND)
 				execve(proc->exec_path, arg, proc->envp);
 			else if (proc->types_line[0] == TYPE_BUILTIN_COMMAND)
