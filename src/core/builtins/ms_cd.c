@@ -6,16 +6,16 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:28:14 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/12 09:05:36 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/19 08:13:55 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
 // change the working directory
-t_uint8	ms_cd(t_minishell *ms, char *cmd)
+t_uint8	ms_cd(t_minishell *ms, char **arg)
 {
-	ft_printf("%s\n", cmd);
+	(void)arg;
 	(void)ms;
 	return (0);
 }

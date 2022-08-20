@@ -6,7 +6,7 @@
 /*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 08:01:33 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/18 14:48:19 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/19 08:15:46 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,34 @@ static void	init_fd_redirection(t_process *proc)
 	while (redir)
 	{
 		if (redir->type == TYPE_REDIRECT_RIGHT)
-		{
-		redir->fd = open(redir->filepath, O_WRONLY | O_TRUNC | O_CREAT, 0644);	
-		}
+			redir->fd = open(redir->filepath, O_WRONLY | O_TRUNC | O_CREAT, 0644);	
 		else if (redir->type == TYPE_REDIRECT_LEFT)
-		{
 			redir->fd = open(redir->filepath, O_RDONLY);
-		}
+		else if (redir->type == TYPE_REDIRECT_DOUBLE_RIGHT)
+			redir->fd = open(redir->filepath, O_WRONLY | O_APPEND | O_CREAT, 0644);
 		redir = redir->next;
 	}
+}
+
+static void	exec_builtin(t_minishell *ms, t_builtins built, char **arg)
+{
+	if (built == BIN_ECHO)
+		ms_echo(arg);
+	else if (built == BIN_CD)
+		ms_cd(ms, arg);
+	else if (built == BIN_PWD)
+		ms_pwd();
+	else if (built == BIN_EXPORT)
+		ms_export(ms, arg);
+	else if (built == BIN_UNSET)
+		ms_unset(ms, arg);
+	else if (built == BIN_ENV)
+		ms_env(ms);
+	else if (built == BIN_EXIT)
+		ms_exit(ms);
+	else if (built == BIN_NULL)
+		exit(-1);
+	exit(0);
 }
 
 void	ms_start_processes(t_minishell *ms)
@@ -85,13 +104,11 @@ void	ms_start_processes(t_minishell *ms)
 				while (redir)
 				{
 					if (redir->type == TYPE_REDIRECT_RIGHT)
-					{
 						dup2(redir->fd, 1);
-					}
-					if (redir->type == TYPE_REDIRECT_LEFT)
-					{
+					else if (redir->type == TYPE_REDIRECT_LEFT)
 						dup2(redir->fd, 0);
-					}
+					else if (redir->type == TYPE_REDIRECT_DOUBLE_RIGHT)
+						dup2(redir->fd, 1);
 					redir = redir->next;
 				}
 			}
@@ -99,9 +116,7 @@ void	ms_start_processes(t_minishell *ms)
 			if (proc->types_line[0] == TYPE_EXTERNAL_COMMAND)
 				execve(proc->exec_path, arg, proc->envp);
 			else if (proc->types_line[0] == TYPE_BUILTIN_COMMAND)
-			{
-				ft_printf("Builtin Command\n");
-			}
+				exec_builtin(ms, proc->builtin, arg);
 		}
 		if (!arg)
 			free_arg(arg);
@@ -109,6 +124,15 @@ void	ms_start_processes(t_minishell *ms)
 			close(proc->pipe_in);
 		if (proc->pipe_out != 1)
 			close(proc->pipe_out);
+		if (proc->has_redirection == true)
+		{
+			redir = proc->first_redirection;
+			while (redir)
+			{
+				close(redir->fd);
+				redir = redir->next;
+			}
+		}
 		proc = proc->next;
 	}
 	proc = ms->first_process;

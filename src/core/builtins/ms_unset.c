@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/14 08:33:49 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/19 08:12:28 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,11 @@ static void	check_env(t_minishell *ms, char *arg, t_variable *env)
 }
 
 // unset values and attributes of variables and functions
-t_uint8	ms_unset(t_minishell *ms, char *cmd)
+t_uint8	ms_unset(t_minishell *ms, char **arg)
 {
 	t_variable	*env;
-	char		**arg;
 	size_t		ind;
 
-	arg = ft_split(cmd, ' ');
 	if (ft_count(arg) == 1)
 		return (ft_printf("Printf ERROR: Not enough arguments\n"));
 	ind = 1;
