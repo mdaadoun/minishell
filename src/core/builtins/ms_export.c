@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/19 08:14:40 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/20 07:57:55 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ static void	ft_add_variable(t_minishell *ms, t_variable *env)
 	{
 		var = ms->first_var;
 		while (var->next)
+		{
+//			ft_printf("%s=%s\n", var->name, var->content);
 			var = var->next;
+		}
 		var->next = env;
 	}
 }

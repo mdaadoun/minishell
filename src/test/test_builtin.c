@@ -1,14 +1,33 @@
 #include "../../inc/minishell.h"
 
+static void	arg_free(char **arg)
+{
+	int	ind;
+
+	ind = 0;
+	while (arg[ind])
+	{
+		free(arg[ind]);
+		ind++;
+	}
+	free(arg);
+}
+
 static void	launch_unset(t_minishell *ms, char *export, char *unset)
 {
-	ms_export(ms, export);
+	char	**arg;
+
+	arg = ft_split(export, ' ');
+	ms_export(ms, arg);
+	arg_free(arg);
 	ft_printf("==============================================================\n");
 	ft_printf("Local ENV before UNSET\n");
 	test_display_local_env(ms);
 	ft_printf("==============================================================\n");
 	ft_printf("Local ENV after UNSET \"%s\"\n", unset);
-	ms_unset(ms, unset);
+	arg = ft_split(unset, ' ');
+	ms_unset(ms, arg);
+	arg_free(arg);
 	test_display_local_env(ms);
 	ft_printf("==============================================================\n");
 }
@@ -21,9 +40,13 @@ static void	test_unset(t_minishell *ms)
 
 static void	launch_export(t_minishell *ms, char *export)
 {
+	char	**arg;
+
 	ft_printf("==============================================================\n");
 	ft_printf("Local ENV after EXPORT \"%s\"\n", export);
-	ms_export(ms, export);
+	arg = ft_split(export, ' ');
+	ms_export(ms, arg);
+	arg_free(arg);
 	test_display_local_env(ms);
 	ft_printf("==============================================================\n");
 }
