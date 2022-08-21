@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/19 08:13:12 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/21 07:27:52 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,12 +194,11 @@ typedef struct s_process {
 	int					pipe_out;
 	int					nb_tokens;
 	char				*command_line;
-	char				*full_command_line;
+	char				**cmd;
 	char				*exec_path;
 	char				**envp;
 	t_token_type		*types_line;
 	t_builtins			builtin;
-	char				option;
 	pid_t				pid;
 	struct s_process	*prev;
 	struct s_process	*next;
@@ -314,6 +313,7 @@ void	ms_add_redirection(t_process *proc, t_token_type type, char *filepath);
 void	ms_executer(t_minishell *ms);
 void	ms_build_processes(t_minishell *ms);
 void	ms_build_redirections(t_token *token, t_process *process);
+void	ms_build_proc(t_minishell *ms);
 void	ms_start_processes(t_minishell *ms);
 void	create_pipes(t_minishell *ms);
 

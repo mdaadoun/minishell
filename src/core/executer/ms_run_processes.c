@@ -6,24 +6,11 @@
 /*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 08:01:33 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/20 07:31:08 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/21 09:21:41 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
-
-static void	free_arg(char **arg)
-{
-	int	ind;
-
-	ind = 0;
-	while (arg[ind])
-	{
-		free(arg[ind]);
-		ind++;
-	}
-	free(arg);
-}
 
 static void	init_fd_redirection(t_process *proc)
 {
@@ -67,7 +54,6 @@ void	ms_start_processes(t_minishell *ms)
 {
 	t_process	*proc;
 	int			pip[2];
-	char		**arg;
 	t_redirection	*redir;
 
 	proc = ms->first_process;
@@ -88,7 +74,6 @@ void	ms_start_processes(t_minishell *ms)
 		}
 		if (proc->has_redirection == true)
 			init_fd_redirection(proc);
-		arg = ft_split(proc->command_line, ' ');
 		proc->pid = fork();
 		if (proc->pid == 0)
 		{
@@ -113,12 +98,10 @@ void	ms_start_processes(t_minishell *ms)
 				}
 			}
 			if (proc->types_line[0] == TYPE_EXTERNAL_COMMAND)
-				execve(proc->exec_path, arg, proc->envp);
+				execve(proc->exec_path, proc->cmd, proc->envp);
 			else if (proc->types_line[0] == TYPE_BUILTIN_COMMAND)
-				exec_builtin(ms, proc->builtin, arg);
+				exec_builtin(ms, proc->builtin, proc->cmd);
 		}
-		if (!arg)
-			free_arg(arg);
 		if (proc->pipe_in != 0)
 			close(proc->pipe_in);
 		if (proc->pipe_out != 1)
