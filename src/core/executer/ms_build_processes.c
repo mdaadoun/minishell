@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 07:47:41 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/22 09:35:45 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/22 10:17:24 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,7 @@ void	ms_build_proc(t_minishell *ms)
 			ind++;
 			proc->nb_tokens++;
 		}
-		else if (is_redirect(tok) < 4)
+		else if (is_redirect(tok) != 0)
 			tok = tok->next;
 
 		tok = tok->next;
