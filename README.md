@@ -10,8 +10,7 @@ Objective : Write a shell
 - [x] Launch any **program** (using path env to find programs) 
 >    Chercher et lancer le bon exécutable (en se basant sur la variable d’environnement PATH, ou sur un chemin relatif ou absolu).
 
-- [ ] **History**
-    * access global history ? add/clear
+- [x] **History**
 > Posséder un historique fonctionnel.
 
 - [x] **single quote '**
@@ -20,11 +19,11 @@ Objective : Write a shell
 - [x] **double quote "**
 > Gérer " (double quote) qui doit empêcher le shell d’interpréter les méta-caractères présents dans la séquence entre guillemets sauf le $ (signe dollar)
 
-* [ ] **redirections**
-    * [ ] **<**
-    * [ ] **>**
-    * [ ] **<<**
-    * [ ] **>>**
+* [x] **redirections**
+    * [x] **<**
+    * [x] **>**
+    * [x] **<<**
+    * [x] **>>**
 >Implémenter les redirections :
 > - < doit rediriger l’entrée.  
 > - \> doit rediriger la sortie.  
@@ -40,10 +39,10 @@ Objective : Write a shell
 * [ ] **$?**
 > Gérer $? qui doit être substitué par le statut de sortie de la dernière pipeline exécutée au premier plan.
 
-* [ ] **Interactive commands**
-    * [ ] **ctrl-C**
-    * [ ] **ctrl-D**
-    * [ ] **ctrl-\\**
+* [x] **Interactive commands**
+    * [x] **ctrl-C**
+    * [x] **ctrl-D**
+    * [x] **ctrl-\\**
 
 > Gérer ctrl-C, ctrl-D et ctrl-\ qui doivent fonctionner comme dans bash.
 > En mode interactif :
@@ -52,8 +51,8 @@ Objective : Write a shell
 > * ctrl-\ ne fait rien.
 
 * [x] **builtins commands**
-    * [ ] **echo -n**
-    * [ ] **cd**
+    * [x] **echo -n**
+    * [x] **cd**
     * [x] **pwd**
     * [x] **export**
     * [x] **unset**

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:43:46 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/17 11:00:17 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/22 15:38:39 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static bool	is_builtin(t_token *command, char *name_bin, t_builtins index_bin)
 {
-	if (!ft_strncmp(name_bin, command->content, ft_strlen(command->content)))
+	if (!ft_strncmp(name_bin, command->content, ft_strlen(name_bin) + 1))
 	{
 		command->builtin = index_bin;
 		return (true);

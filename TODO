@@ -1,6 +1,7 @@
 # TODO
 
 * reprendre build_type_line pour retirer les redirections et avoir une bonne commande lorsque: '> file echo hello'
+* the exit command don't work
 
 ### valgrind
 	* test "sad | das| | asd| Asd| sda |" - check: Invalid read of size 1
@@ -17,21 +18,14 @@
 ### $? 
 	* valeur retour du dernier process
 
-## echo
-	
-	* range the structure for memory optimization, bigger to lower byte in order
-
 ## signals handling
-
-* Ctrl-C and Ctrl-\ with signal SIGINT et SIGQUIT
-* Ctrl-D with realine
+	* Block ^\ when Ctrl-\ is used
 
 ### PARSER:
 
 ### LEXER:
-
-* a|b|c
-	* c is a builtin_command type ?? why ?
+	* a|b|c|e|p|pw|ec|un|ex
+		* builtin_command type evaluated, check the strcmp!
 
 ### EXECUTER:
 
@@ -56,3 +50,6 @@
 	-...
 	BUILTINS
 	-...
+
+
+* range the structure for memory optimization, bigger to lower byte in order

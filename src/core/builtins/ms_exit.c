@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/12 13:44:48 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/22 15:37:36 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,5 @@
 // cause the shell to exit
 void	ms_exit(t_minishell *ms)
 {
-	ft_printf("\n");
-	exit (ms_free_before_exit(ms));
+	exit(ms_free_before_exit(ms));
 }

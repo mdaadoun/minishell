@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 08:01:33 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/22 11:36:10 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/22 15:37:32 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ static bool	is_builtin_fork(t_builtins built)
 	if (built == BIN_EXPORT)
 		return (false);
 	if (built == BIN_UNSET)
+		return (false);
+	if (built == BIN_EXIT)
 		return (false);
 	return (true);
 }
