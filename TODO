@@ -11,6 +11,7 @@
 	* ./minishell 2 -> segmentation fault
 
 ### redirection structure
+	* '> file echo hello' & 'echo hello > file' do the same
 	* build a linked structure for all redirections in a process
 	* add to tester the display for redirections
 

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 13:48:48 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/18 15:04:38 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/22 09:08:19 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ void	ms_free_last_command(t_minishell *ms)
 {
 	t_process	*process;
 	t_process	*swp;
+	int			idx;
 
+	idx = 0;
 	if (ms)
 	{
 		ms->has_pipe = false;
@@ -31,7 +33,9 @@ void	ms_free_last_command(t_minishell *ms)
 		while (process)
 		{
 			swp = process->next;
-			free(process->command_line);
+			while (process->cmd[idx])
+				free(process->cmd[idx++]);
+			free(process->cmd);
 			free(process->types_line);
 			free(process->internal_error);
 			if (process->has_redirection)

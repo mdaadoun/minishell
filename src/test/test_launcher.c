@@ -61,7 +61,8 @@ void test_launcher(t_minishell *ms, int debug)
 	}
 	if (next)
 	{
-    	ms_build_processes(ms);
+    	// ms_build_processes(ms);
+    	ms_build_proc(ms);
 		if (debug == TEST_EXECUTER_BUILD || debug == TEST_EXECUTER_BUILD_QUOTES \
 		|| debug == TEST_EXECUTER_BUILD_ENV || debug == TEST_EXECUTER_BUILD_PIPES \
 		|| debug == TEST_EXECUTER_BUILD_REDIRECTIONS || debug == TEST_EXECUTER_BUILD_ARGUMENTS \
