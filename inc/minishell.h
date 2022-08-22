@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/22 11:42:56 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/22 16:41:54 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef unsigned long long	t_uint64;
 # define MSG_ERROR_BUILTIN_ARGUMENT "The arguments are not valid."
 # define MSG_ERROR_SYNTAX_PIPE "The syntax with pipes is not valid."
 # define MSG_ERROR_SYNTAX_REDIRECT "The syntax with redirections is not valid."
+# define MSG_ERROR_PATH "No such file or directory."
 
 typedef enum e_err_key {
 	NO_ERROR,
@@ -86,7 +87,8 @@ typedef enum e_err_key {
 	ERROR_COMMAND,
 	ERROR_BUILTIN_OPTION,
 	ERROR_BUILTIN_ARGUMENT,
-	ERROR_SYNTAX
+	ERROR_SYNTAX,
+	ERROR_PATH
 }			t_err_key;
 
 typedef struct s_error {
@@ -216,6 +218,7 @@ typedef struct s_process {
 
 void	ms_checking_for_errors(t_minishell *ms);
 void	ms_set_error(t_error *error, t_err_key err_key, char *err_msg);
+void	ms_print_error(t_minishell *ms);
 
 /*
  * Main functions

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:07:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/22 14:46:45 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/22 16:40:55 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ int	main(int argc, char **argv, char **envp)
 			ms_executer(ms);
 		}
 		ms_free_last_command(ms);
+		if (ms->global_error->flag)
+			ms_print_error(ms);
 		ms_set_error(ms->global_error, NO_ERROR, NULL);
 	}
 	return (ms_free_before_exit(ms));

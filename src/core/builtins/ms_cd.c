@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:28:14 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/22 14:33:01 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/22 16:29:55 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_uint8	ms_cd(t_minishell *ms, char **arg)
 	int	ret;
 	t_variable	*env;
 	char	*str;
+	char	cwd[PATH_MAX];
 
 	if (!arg[1] || !ft_strncmp(arg[1], "~", 2))
 	{
@@ -54,7 +55,7 @@ t_uint8	ms_cd(t_minishell *ms, char **arg)
 		free(ms->cwd_path);
 		ms->cwd_path = ft_strdup(env->content);
 	}
-	if (!strncmp(arg[1], "-", 2))
+	else if (!strncmp(arg[1], "-", 2))
 	{
 		env = get_struct_env(ms->first_var, "OLDPWD", 5);
 		str = ft_strdup(env->content);
@@ -67,11 +68,14 @@ t_uint8	ms_cd(t_minishell *ms, char **arg)
 	{
 		update_old_pwd(ms);
 		ret = chdir(arg[1]);
-//		free(ms->cwd_path);
-//		env = get_struct_env(ms->first_var, "PWD", 4);
-//		ms->cwd_path = ft_strdup(env->content);
+		if (ret == 0)
+		{
+			env = get_struct_env(ms->first_var, "PWD", 4);
+			free(ms->cwd_path);
+			ms->cwd_path = ft_strdup(getcwd(cwd, PATH_MAX));
+		}
 	}
 	if (ret != 0)
-		ft_printf("TODO: Printf Error cd builtin\n");
+		ms_set_error(ms->global_error, ERROR_PATH, MSG_ERROR_PATH);
 	return (ret);
 }

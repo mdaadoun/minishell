@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 11:37:03 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/16 19:36:50 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/22 16:42:12 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,11 @@ void	ms_set_error(t_error *error, t_err_key err_key, char *err_msg)
 		error->length = 0;
 		error->key = err_key;
 	}
+}
+
+
+void ms_print_error(t_minishell *ms)
+{
+	write(2, ms->global_error->msg, ft_strlen(ms->global_error->msg));
+	write(2, "\n", 1);
 }
