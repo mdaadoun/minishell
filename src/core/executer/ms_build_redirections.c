@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:12:25 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/22 11:29:45 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/22 11:53:14 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void ms_build_redirections(t_token *token,	t_process *process)
 		token->type == TYPE_REDIRECT_LEFT)
 	{
 		process->has_redirection = true;
-		if (token->next->type == TYPE_ARG_STRING)
+		if (token->next && token->next->type == TYPE_ARG_STRING)
 			ms_add_redirection(process, token->type, ft_strdup(token->next->content));
 		else
 			ms_set_error(process->internal_error, err_key, err_msg);

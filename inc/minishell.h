@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/22 10:46:43 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/22 11:42:56 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ typedef enum e_token_type
 	TYPE_D_QUOTE_STRING,
 	TYPE_ARG_STRING,
 	TYPE_ARG_OPTION,
+	TYPE_ARG_REDIRECT,
 	TYPE_PIPE,
 	TYPE_EXTERNAL_COMMAND,
 	TYPE_BUILTIN_COMMAND,

@@ -89,10 +89,14 @@ void test_display_processes(t_minishell *ms)
 		ft_printf("%d:\n", i);
 		ft_printf("\tNumber of tokens: \e[0;36m%d\e[m\n", process->nb_tokens);
 		ft_printf("\tProcess id: \e[0;36m%d\e[m\n", process->pid);
-		// ft_printf("\tThe command line: \e[0;36m%s\e[m\n", process->command_line);
-		ft_printf("\tTODO: The command line! \e[0;36m\e[m\n");
-		ft_printf("\tPipe In: \e[0;36m%d\e[m\n", process->pipe_in);
-		ft_printf("\tPipe Out: \e[0;36m%d\e[m\n", process->pipe_out);
+		j = 0;
+		ft_printf("\tThe command line: ");
+		while(process->cmd[j])
+		{
+			ft_printf(" %s", process->cmd[j]);
+			j++;
+		}
+		ft_printf("\e[m\n");
 		ft_printf("\tThe type line: \e[0;36m");
 		j = 0;
 		while (j < process->nb_tokens)
@@ -101,6 +105,9 @@ void test_display_processes(t_minishell *ms)
 			ft_printf(" ");
 			j++;
 		}
+		ft_printf("\e[m\n");
+		ft_printf("\tPipe In: \e[0;36m%d\e[m\n", process->pipe_in);
+		ft_printf("\tPipe Out: \e[0;36m%d\e[m\n", process->pipe_out);
 		ft_printf("\e[m\n");
 		ft_printf("\tProcess: \e[0;36m%p\e[m\n", process);
 		ft_printf("\tProcess next: \e[0;36m%p\e[m\n", process->next);
