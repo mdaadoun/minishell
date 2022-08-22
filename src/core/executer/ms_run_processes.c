@@ -6,7 +6,7 @@
 /*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 08:01:33 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/21 09:21:41 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/22 08:45:13 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,20 @@ static void	init_fd_redirection(t_process *proc)
 			redir->fd = open(redir->filepath, O_WRONLY | O_APPEND | O_CREAT, 0644);
 		redir = redir->next;
 	}
+
+}
+static bool	is_builtin_fork(t_builtins built)
+{
+	if (built == BIN_CD)
+		return (false);
+	if (built == BIN_EXPORT)
+		return (false);
+	if (built == BIN_UNSET)
+		return (false);
+	return (true);
 }
 
-static void	exec_builtin(t_minishell *ms, t_builtins built, char **arg)
+static void	execv_builtin(t_minishell *ms, t_builtins built, char **arg)
 {
 	if (built == BIN_ECHO)
 		ms_echo(arg);
@@ -47,7 +58,86 @@ static void	exec_builtin(t_minishell *ms, t_builtins built, char **arg)
 		ms_exit(ms);
 	else if (built == BIN_NULL)
 		exit(-1);
-	exit(0);
+	if (is_builtin_fork(built) == true)
+		exit(0);
+}
+
+static void	set_redir_fd(t_redirection *redir)
+{
+	while (redir)
+	{
+		if (redir->type == TYPE_REDIRECT_RIGHT)
+			dup2(redir->fd, 1);
+		else if (redir->type == TYPE_REDIRECT_LEFT)
+			dup2(redir->fd, 0);
+		else if (redir->type == TYPE_REDIRECT_DOUBLE_RIGHT)
+			dup2(redir->fd, 1);
+		redir = redir->next;
+	}
+}
+
+static void	exec_external(t_process *proc)
+{
+	t_redirection	*redir;
+
+	proc->pid = fork();
+	if (proc->pid == 0)
+	{
+		dup2(proc->pipe_in, 0);
+		if (proc->pipe_in != 0)
+			close(proc->prev->pipe_out);
+		dup2(proc->pipe_out, 1);
+		if (proc->pipe_out != 1)
+			close(proc->next->pipe_in);
+		if (proc->has_redirection == true)
+			set_redir_fd(proc->first_redirection);
+		execve(proc->exec_path, proc->cmd, proc->envp);
+	}
+	if (proc->pipe_in != 0)
+		close(proc->pipe_in);
+	if (proc->pipe_out != 1)
+		close(proc->pipe_out);
+	if (proc->has_redirection == true)
+	{
+		redir = proc->first_redirection;
+		while (redir)
+		{
+			close(redir->fd);
+			redir = redir->next;
+		}
+	}
+}
+
+static void	exec_builtin(t_minishell *ms, t_process *proc)
+{
+	t_redirection	*redir;
+
+	proc->pid = fork();
+	if (proc->pid == 0)
+	{
+		dup2(proc->pipe_in, 0);
+		if (proc->pipe_in != 0)
+			close(proc->prev->pipe_out);
+		dup2(proc->pipe_out, 1);
+		if (proc->pipe_out != 1)
+			close(proc->next->pipe_in);
+		if (proc->has_redirection == true)
+			set_redir_fd(proc->first_redirection);
+		execv_builtin(ms, proc->builtin, proc->cmd);
+	}
+	if (proc->pipe_in != 0)
+		close(proc->pipe_in);
+	if (proc->pipe_out != 1)
+		close(proc->pipe_out);
+	if (proc->has_redirection == true)
+	{
+		redir = proc->first_redirection;
+		while (redir)
+		{
+			close(redir->fd);
+			redir = redir->next;
+		}
+	}
 }
 
 void	ms_start_processes(t_minishell *ms)
@@ -74,33 +164,14 @@ void	ms_start_processes(t_minishell *ms)
 		}
 		if (proc->has_redirection == true)
 			init_fd_redirection(proc);
-		proc->pid = fork();
-		if (proc->pid == 0)
+		if (proc->types_line[0] == TYPE_EXTERNAL_COMMAND)
+			exec_external(proc);
+		if (proc->types_line[0] == TYPE_BUILTIN_COMMAND)
 		{
-			dup2(proc->pipe_in, 0);
-			if (proc->pipe_in != 0)
-				close(proc->prev->pipe_out);
-			dup2(proc->pipe_out, 1);
-			if (proc->pipe_out != 1)
-				close(proc->next->pipe_in);
-			if (proc->has_redirection == true)
-			{
-				redir = proc->first_redirection;
-				while (redir)
-				{
-					if (redir->type == TYPE_REDIRECT_RIGHT)
-						dup2(redir->fd, 1);
-					else if (redir->type == TYPE_REDIRECT_LEFT)
-						dup2(redir->fd, 0);
-					else if (redir->type == TYPE_REDIRECT_DOUBLE_RIGHT)
-						dup2(redir->fd, 1);
-					redir = redir->next;
-				}
-			}
-			if (proc->types_line[0] == TYPE_EXTERNAL_COMMAND)
-				execve(proc->exec_path, proc->cmd, proc->envp);
-			else if (proc->types_line[0] == TYPE_BUILTIN_COMMAND)
-				exec_builtin(ms, proc->builtin, proc->cmd);
+			if (is_builtin_fork(proc->builtin) == true)
+				exec_builtin(ms, proc);
+			else
+				execv_builtin(ms, proc->builtin, proc->cmd);
 		}
 		if (proc->pipe_in != 0)
 			close(proc->pipe_in);

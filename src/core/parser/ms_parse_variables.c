@@ -6,13 +6,13 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 11:06:35 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/18 11:52:58 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/22 08:48:18 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-static char	*ft_get_env(t_minishell *ms, char *str)
+char	*ft_get_env(t_minishell *ms, char *str)
 {
 	t_variable	*env;
 
