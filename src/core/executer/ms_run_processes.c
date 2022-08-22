@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_run_processes.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 08:01:33 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/22 08:45:13 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/22 09:14:14 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ static void	execv_builtin(t_minishell *ms, t_builtins built, char **arg)
 	else if (built == BIN_EXIT)
 		ms_exit(ms);
 	else if (built == BIN_NULL)
-		exit(-1);
+		exit(ms_free_before_exit(ms));
 	if (is_builtin_fork(built) == true)
-		exit(0);
+		exit(ms_free_before_exit(ms));
 }
 
 static void	set_redir_fd(t_redirection *redir)

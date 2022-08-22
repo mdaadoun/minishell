@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 07:47:41 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/22 09:05:59 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/22 09:35:45 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ static size_t	count_tok(t_token *tok)
 			nb++;
 		tok = tok->next;
 	}
-	return (nb);
+	return (nb + 1);
 }
 
 void	ms_build_proc(t_minishell *ms)
