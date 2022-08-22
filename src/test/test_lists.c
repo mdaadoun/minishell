@@ -72,6 +72,7 @@ void	test_env(t_minishell *ms, int debug)
 
 void	test_pipes(t_minishell *ms, int debug)
 {
+	test_run_command(ms, "a|b|c|e|p|pw|ec|un|ex", debug);
 	test_run_command(ms, "a a d|bd w|c a w", debug);
 	test_run_command(ms, "env | wc", debug);
 	test_run_command(ms, "env | wc | wc -l", debug);
@@ -175,6 +176,7 @@ void test_arguments(t_minishell *ms, int debug)
 
 void test_builtins(t_minishell *ms, int debug)
 {
+    test_run_command(ms, "exit", debug);
     test_run_command(ms, "echo hello", debug);
     // test_run_command(ms, "cd ..", debug);
     // test_run_command(ms, "pwd hello", debug);
