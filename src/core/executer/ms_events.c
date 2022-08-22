@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:28:29 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/22 10:28:27 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/22 14:11:50 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,17 @@
 
 static void	cancel_process(int signo)
 {
+	char	*buf;
+	char 	*cwd_path;
+
+	buf = (char *)ft_calloc(sizeof(char), 1024);
+	cwd_path = getcwd(buf, 1024);
 	if (signo == SIGINT)
-		printf("\nYou pressed Ctrl+C\n");
+		printf("\n\e[1;38m%s\e[m>", cwd_path);
 	if (signo == SIGQUIT)
-		printf("\nYou pressed Ctrl+\\\n");
+		return ;
+	// free(buf);
+	free(cwd_path);
 }
 
 void	ms_initialize_signals(void)
