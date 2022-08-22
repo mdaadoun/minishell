@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:28:29 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/18 13:43:39 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/22 10:28:27 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static void	cancel_process(int signo)
 		printf("\nYou pressed Ctrl+C\n");
 	if (signo == SIGQUIT)
 		printf("\nYou pressed Ctrl+\\\n");
-		// return ;
 }
 
 void	ms_initialize_signals(void)

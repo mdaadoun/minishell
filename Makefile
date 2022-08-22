@@ -6,7 +6,7 @@
 #    By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/20 08:44:56 by mdaadoun          #+#    #+#              #
-#    Updated: 2022/08/18 16:35:19 by mdaadoun         ###   ########.fr        #
+#    Updated: 2022/08/22 10:26:58 by dlaidet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ lexer/ms_lexer.c lexer/ms_analyze_command.c lexer/ms_analyze_pipes.c \
 lexer/ms_analyze_redirections.c lexer/ms_analyze_arguments.c \
 executer/ms_executer.c executer/ms_events.c executer/ms_build_redirections.c \
 executer/ms_build_processes.c executer/ms_run_processes.c \
-executer/ms_redirection_struct.c
+executer/ms_redirection_struct.c utils/utils_variable.c
 
 DIR = src/core
 OBJS = $(addprefix $(DIR)/,$(SRCS:%.c=%.o))
