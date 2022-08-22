@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 07:47:41 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/22 10:29:39 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/22 11:18:44 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	ms_build_proc(t_minishell *ms)
 			add_process(proc);
 			proc->envp = ms->envp;
 			proc = proc->next;
-			proc->cmd = (char **)ft_calloc(sizeof(char *), count_tok(tok));
+			proc->cmd = (char **)ft_calloc(sizeof(char *), count_tok(tok->next));
 			proc->envp = ms->envp;
 			ms->nb_processes++;
 			ind = 0;

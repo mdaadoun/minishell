@@ -72,15 +72,15 @@ void	test_env(t_minishell *ms, int debug)
 
 void	test_pipes(t_minishell *ms, int debug)
 {
-	test_run_command(ms, "a|b|c", debug);
-	// test_run_command(ms, "env | wc", debug);
-	// test_run_command(ms, "env | wc | wc -l", debug);
-	// test_run_command(ms, "cat Makefile|wc -l", debug);
-    // test_run_command(ms, "cat Makefile | wc -l", debug);
-    // test_run_command(ms, "cat 'Makefile|wc' -l", debug);
-    // test_run_command(ms, "| | | | |", debug);
-    // test_run_command(ms, "'hello' | hello | hello", debug);
-    // test_run_command(ms, "cat | | \"cat | cat\"", debug);
+	test_run_command(ms, "a a d|bd w|c a w", debug);
+	test_run_command(ms, "env | wc", debug);
+	test_run_command(ms, "env | wc | wc -l", debug);
+	test_run_command(ms, "cat Makefile|wc -l", debug);
+    test_run_command(ms, "cat Makefile | wc -l", debug);
+    test_run_command(ms, "cat 'Makefile|wc' -l", debug);
+    test_run_command(ms, "| | | | |", debug);
+    test_run_command(ms, "'hello' | hello | hello", debug);
+    test_run_command(ms, "cat | | \"cat | cat\"", debug);
     // test_run_command(ms, "||cd | '$home'", debug);
     // test_run_command(ms, "'$home'cd | cd | cd", debug);
     // test_run_command(ms, "|", debug);
@@ -89,6 +89,7 @@ void	test_pipes(t_minishell *ms, int debug)
     // test_run_command(ms, "|cat|ls", debug);
     // test_run_command(ms, "ls|cat|", debug);
     // test_run_command(ms, "|ls|cat|", debug);
+    // test_run_command(ms, "sad | das| | asd| Asd| sda |", debug);
     // test_run_command(ms, "||||", debug);
     // test_run_command(ms, "| | | |", debug);
 	// test_run_command(ms, "asd | echo hello | eee eee", debug);
@@ -123,8 +124,10 @@ void	test_pipes(t_minishell *ms, int debug)
 void	test_redirections(t_minishell *ms, int debug)
 {
     test_run_command(ms, "> > <<", debug);
-	// test_run_command(ms, "echo > <", debug);
-	// test_run_command(ms, "<", debug);
+	test_run_command(ms, "echo > <", debug);
+	test_run_command(ms, "<", debug);
+	test_run_command(ms, "> file echo hello", debug);
+	test_run_command(ms, "echo hello > file", debug);
     // test_run_command(ms, "bb>cc <<dd", debug);
     // test_run_command(ms, ">>cc <<dd", debug);
 	// test_run_command(ms, "wc -l < Makefile > test", debug);

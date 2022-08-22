@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:12:25 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/18 15:32:59 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/22 11:29:45 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void add_heredoc_line(char *line)
  *		get the delimiter, and wait for the delimiter
  *		each line are added to a temporary file .heredoc
 */
-static void open_heredoc(t_token *token, t_process *process)
+static void open_heredoc(t_token *token)
 {
 	char	*line;
 	char	*delimiter;
@@ -53,9 +53,6 @@ static void open_heredoc(t_token *token, t_process *process)
 		add_heredoc_line(line);
 		free(line);
 	}
-	(void) process;
-	// free(process->redirected_filepath);
-	// process->redirected_filepath = strdup(".heredoc");
 }
 
 /*
@@ -89,7 +86,7 @@ void ms_build_redirections(t_token *token,	t_process *process)
 		process->has_redirection = true;
 		if (token->next && token->next->type == TYPE_ARG_STRING)
 		{
-			open_heredoc(token, process);
+			open_heredoc(token);
 			ms_add_redirection(process, token->type, ft_strdup(".heredoc"));
 		}
 		else

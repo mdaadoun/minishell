@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 10:57:46 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/17 13:14:22 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/22 09:46:46 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	rebuild_redirection_tokens(t_minishell *ms, t_token *token)
 				tok1->content = ft_substr(str, sta, get_length(str, sta) + 1);
 			else
 			{
-				tok1->content = ft_substr(str, sta, get_length(str, sta));
+				tok1->content = ft_substr(str, sta, get_length(str, sta) + 1);
 				tok2 = ms_create_new_token(ms);
 				ms_push_token(tok1, tok2);
 				tok1 = tok2;
@@ -73,7 +73,7 @@ static void	rebuild_redirection_tokens(t_minishell *ms, t_token *token)
 		else
 			ind++;
 		if (!str[ind])
-			tok1->content = ft_substr(str, sta, get_length(str, sta));
+			tok1->content = ft_substr(str, sta, get_length(str, sta) + 1);
 	}
 	free(str);
 }

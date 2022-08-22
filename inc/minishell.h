@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/22 10:26:21 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/22 10:46:43 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,6 @@ typedef struct s_redirection
 	int						fd;
 	struct s_redirection	*next;
 }						t_redirection;
-
 
 typedef struct s_process {
 	bool				has_redirection;

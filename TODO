@@ -1,14 +1,9 @@
 # TODO
 
-### valgrind
-	* cat<<EOF
-		* Invalid read of size 1
-		* ms_parse_redirections
-		* 18 bytes in 2 blocks are definitely lost
+* reprendre build_type_line pour retirer les redirections et avoir une bonne commande lorsque: '> file echo hello'
 
-	* when parsing only
+### valgrind
 	* test "sad | das| | asd| Asd| sda |" - check: Invalid read of size 1
-	* ./minishell 2 -> segmentation fault
 
 ### redirection structure
 	* '> file echo hello' & 'echo hello > file' do the same
@@ -21,11 +16,6 @@
 
 ### $? 
 	* valeur retour du dernier process
-
-### FD running processes
-	* start forking processes, add pid to each processes structure
-	* fd, stdin, stdout
-	* parent wait all processes
 
 ## echo
 	

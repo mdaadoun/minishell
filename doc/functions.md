@@ -102,10 +102,13 @@ char *getcwd(char *buf, size_t size);
 > return name of a terminal. [man](https://www.man7.org/linux/man-pages/man3/ttyname.3.html)
 * **ttyslot** :
 > find the slot of the current user's terminal in some file. [man](https://man7.org/linux/man-pages/man3/ttyslot.3.html)
+
 * **ioctl** : 
 > control device. [man](https://man7.org/linux/man-pages/man2/ioctl.2.html)
 * **getenv** : 
 > Return a pointer to environment variable passed in parameter. [man](http://manpagesfr.free.fr/man/man3/getenv.3.html)
+
+
 * **tcsetattr**
 * **tcgetattr**
 * **tgetent**

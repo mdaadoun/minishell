@@ -90,6 +90,7 @@ void test_display_processes(t_minishell *ms)
 		ft_printf("\tNumber of tokens: \e[0;36m%d\e[m\n", process->nb_tokens);
 		ft_printf("\tProcess id: \e[0;36m%d\e[m\n", process->pid);
 		// ft_printf("\tThe command line: \e[0;36m%s\e[m\n", process->command_line);
+		ft_printf("\tTODO: The command line! \e[0;36m\e[m\n");
 		ft_printf("\tPipe In: \e[0;36m%d\e[m\n", process->pipe_in);
 		ft_printf("\tPipe Out: \e[0;36m%d\e[m\n", process->pipe_out);
 		ft_printf("\tThe type line: \e[0;36m");
