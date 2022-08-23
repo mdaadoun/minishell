@@ -16,44 +16,10 @@ void test_launcher(t_minishell *ms, int debug)
 	}
 	if (next)
 	{
-		if (debug == TEST_LEXER_BUILTINS || debug == TEST_LEXER_EXTERNALS)
-		{
-			ms_analyze_command(ms, ms->first_token);
-			if (ms->first_token->type == TYPE_EXTERNAL_COMMAND)
-				ft_printf("%s is a valid command of type %d (external).\n", ms->first_token->content, ms->first_token->type);
-			else if (ms->first_token->type == TYPE_BUILTIN_COMMAND)
-				ft_printf("%s is a valid command of type %d (builtin).\n", ms->first_token->content, ms->first_token->type);
-			else
-				ft_printf("%s is not a valid command.\n", ms->first_token->content);
-			test_display_tokens_types(ms);
-			next = false;
-		}
-	}
-	if (next)
-	{
-		if (debug == TEST_LEXER_PIPES)
-		{
-			ms_analyze_command(ms, ms->first_token);
-    		ms_analyze_pipes(ms);
-			test_display_tokens_types(ms);
-			next = false;
-		}
-	}
-	if (next)
-	{
-		if (debug == TEST_LEXER_REDIRECTIONS)
-		{
-			ms_analyze_command(ms, ms->first_token);
-    		ms_analyze_pipes(ms);
-    		ms_analyze_redirections(ms);
-			test_display_tokens_types(ms);
-			next = false;
-		}
-	}
-	if (next)
-	{
-		ms_lexer(ms);
-		if (debug == TEST_LEXER_ARGUMENTS || debug == TEST_LEXER || debug == TEST_LEXER_QUOTES || debug == TEST_LEXER_ENV)
+		ms_analyzer(ms);
+		if (debug == TEST_ANALYZER_BUILTINS || debug == TEST_ANALYZER_EXTERNALS \
+		|| debug == TEST_ANALYZER_ARGUMENTS || debug == TEST_ANALYZER || debug == TEST_ANALYZER_QUOTES \
+		|| debug == TEST_ANALYZER_ENV || debug == TEST_ANALYZER_PIPES || debug == TEST_ANALYZER_REDIRECTIONS)
 		{
 			test_display_tokens_types(ms);
 			next = false;
@@ -61,8 +27,7 @@ void test_launcher(t_minishell *ms, int debug)
 	}
 	if (next)
 	{
-    	// ms_build_processes(ms);
-    	ms_build_proc(ms);
+    	ms_build_processes(ms);
 		if (debug == TEST_EXECUTER_BUILD || debug == TEST_EXECUTER_BUILD_QUOTES \
 		|| debug == TEST_EXECUTER_BUILD_ENV || debug == TEST_EXECUTER_BUILD_PIPES \
 		|| debug == TEST_EXECUTER_BUILD_REDIRECTIONS || debug == TEST_EXECUTER_BUILD_ARGUMENTS \

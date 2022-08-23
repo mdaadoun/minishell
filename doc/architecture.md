@@ -6,7 +6,7 @@
 
 ### 1) parser -> Tokenization
 
-### 2) Lexer, lexical analyzer
+### 2) analyzer, lexical analyzer
 
 ### 3) Executor, printing the result
 

@@ -6,21 +6,21 @@
 #    By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/20 08:44:56 by mdaadoun          #+#    #+#              #
-#    Updated: 2022/08/22 10:26:58 by dlaidet          ###   ########.fr        #
+#    Updated: 2022/08/23 16:52:31 by mdaadoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
-SRCS = ms_main.c ms_free.c ms_errors.c \
+SRCS = ms_main.c utils/ms_utils_free.c utils/ms_utils_errors.c \
 builtins/ms_cd.c builtins/ms_echo.c builtins/ms_env.c builtins/ms_exit.c \
 builtins/ms_export.c builtins/ms_pwd.c builtins/ms_unset.c \
 parser/ms_parser.c parser/ms_tokenizer.c  parser/ms_parse_pipes.c \
 parser/ms_parse_variables.c parser/ms_parse_quotes.c parser/ms_parse_redirections.c \
-lexer/ms_lexer.c lexer/ms_analyze_command.c lexer/ms_analyze_pipes.c \
-lexer/ms_analyze_redirections.c lexer/ms_analyze_arguments.c \
+analyzer/ms_analyzer.c analyzer/ms_analyze_command.c analyzer/ms_analyze_pipes.c \
+analyzer/ms_analyze_redirections.c analyzer/ms_analyze_arguments.c \
 executer/ms_executer.c executer/ms_events.c executer/ms_build_redirections.c \
 executer/ms_build_processes.c executer/ms_run_processes.c \
-executer/ms_redirection_struct.c utils/utils_variable.c
+executer/ms_redirection_struct.c utils/ms_utils_variable.c utils/ms_utils_processes.c\
 
 DIR = src/core
 OBJS = $(addprefix $(DIR)/,$(SRCS:%.c=%.o))
@@ -48,28 +48,14 @@ $(NAME): $(OBJS)
 	@$(CC) $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(READLINE_FLAGS)
 	@echo "$(G)$(NAME) program created.$(D)"
 
-NAME_BONUS = minishell_bonus
-SRCS_BONUS = ms_main_bonus.c
-DIR_BONUS = src/bonus
-OBJS_BONUS = $(addprefix $(DIR_BONUS)/,$(SRCS_BONUS:%.c=%.o))
-
-$(NAME_BONUS): $(OBJS_BONUS)
-	@make -sC src/libft
-	@echo "$(B)Building $(NAME) program with bonus.$(D)"
-	@$(CC) $(FLAGS) $(OBJS_BONUS) $(LIBFT) -o $(NAME_BONUS) $(READLINE_FLAGS)
-	@rm $(NAME); mv $(NAME_BONUS) $(NAME)
-	@echo "$(G)$(NAME) program with bonus created.$(D)"
-
-bonus: $(NAME_BONUS)
-
 clean:
 	@echo "$(R)Remove all object files.$(D)"
-	@$(RM) $(OBJS) $(OBJS_BONUS) 
+	@$(RM) $(OBJS)
 	@make clean -sC src/libft
 
 fclean: clean
-	@echo "$(R)Remove $(NAME) and $(NAME_BONUS) programs if present.$(D)"
-	@$(RM) $(NAME) $(NAME_BONUS)
+	@echo "$(R)Remove $(NAME) programs if present.$(D)"
+	@$(RM) $(NAME)
 	@make fclean -sC src/libft
 
 re: fclean all
@@ -91,9 +77,9 @@ ft_dlstlast.c ft_lstnew_str.c ft_lstdelone_str.c ft_lstclear_str.c ft_lstadd_bac
 
 DEBUG_FLAGS = -g3 -ggdb -I. -D DEBUG=1 #-fsanitize=address  -fsanitize=leak
 V_ARG	=  --suppressions=.valgrind_ignore_readline --track-origins=yes --leak-check=full --show-leak-kinds=all -s 
-TEST_SRCS = src/test/test_builtin.c src/test/test_main.c src/test/test_parser.c src/test/test_lexer.c \
+TEST_SRCS = src/test/test_builtin.c src/test/test_main.c src/test/test_parser.c src/test/test_analyzer.c \
 src/test/test_executer_build.c src/test/test_executer_errors.c src/test/test_executer_redirections.c \
-src/test/test_launcher.c src/test/test_lists.c src/test/test_utils.c
+src/test/test_launcher.c src/test/test_lists.c src/test/test_displays.c
 ARGS = 
 
 debug: fclean
@@ -106,17 +92,7 @@ valgrind:
 	valgrind $(V_ARG) ./$(NAME)
 	@echo "$(G)Test done.$(D)"
 
-# debug_bonus: fclean
-# 	@echo "$(B)Starting debug compilation.$(D)"
-# 	@$(CC) $(FLAGS) $(DEBUG_FLAGS) $(addprefix $(DIR)/,$(SRCS)) $(TEST_SRCS) $(addprefix $(DIR_LIB)/,$(DEBUG_SRCS)) -o $(NAME_BONUS) $(READLINE_FLAGS)
-# 	@echo "$(G)$(NAME_BONUS) debug program created.$(D)"
-
-# valgrind_bonus: debug_bonus
-# 	@echo "$(B)Starting memory test.$(D)"
-# 	valgrind $(V_ARG) ./$(NAME_BONUS)
-# 	@echo "$(G)Test done.$(D)"
-
 run:
 	./${NAME} ${ARGS}
 
-.PHONY:  all clean fclean re run bonus debug test debug_bonus test_bonus
+.PHONY:  all clean fclean re run debug test

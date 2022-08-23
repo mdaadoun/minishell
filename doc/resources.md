@@ -47,7 +47,7 @@
 * [Single UNIX Specification](https://en.wikipedia.org/wiki/Single_UNIX_Specification)
 * [List of Unix commands](https://en.wikipedia.org/wiki/List_of_Unix_commands)
 
-* [Lexer](https://en.wikipedia.org/wiki/Lexical_analysis)
+* [analyzer](https://en.wikipedia.org/wiki/Lexical_analysis)
 * [Parser](https://en.wikipedia.org/wiki/Parsing#Parser)
     * [Top-down_parsing](https://en.wikipedia.org/wiki/Top-down_parsing)]
         * [Recursive descent parser](https://en.wikipedia.org/wiki/Recursive_descent_parser)
@@ -69,6 +69,3 @@
 * [Unix Processes in C playlist](https://www.youtube.com/playlist?list=PLfqABt5AS4FkW5mOn2Tn9ZZLLDwA3kZUY)
 * [Bash wiki](https://wiki.bash-hackers.org/syntax/basicgrammar)
 * [Terminal colors](https://chrisyeh96.github.io/2020/03/28/terminal-colors.html)
-
-## Discussions:
-* ctrl-C signal handler : https://app.slack.com/client/T039P7U66/CMX2R5JSW/thread/CMX2R5JSW-1659104268.134569

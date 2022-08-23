@@ -28,6 +28,10 @@ static void print_type(int t)
         ft_printf("REDIRECT_RIGHT");
 	else if (t == TYPE_REDIRECT_DOUBLE_RIGHT)
         ft_printf("REDIRECT_DOUBLE_RIGHT");
+	else if (t == TYPE_ARG_REDIRECT_FILE)
+        ft_printf("TYPE_ARG_REDIRECT_FILE");
+	else if (t == TYPE_ARG_DELIMITER)
+        ft_printf("TYPE_ARG_DELIMITER");
 }
 
 // display all the tokens as a list
@@ -76,18 +80,11 @@ void test_display_processes(t_minishell *ms)
 	i = 1;
 	process = ms->first_process;
     ft_printf("\e[1;34mThe processes are:\e[m \n");
-	ft_printf("Has pipes: ");
-
-	if (ms->has_pipe)
-		ft_printf("\e[0;32myes\e[m\n");
-	else
-		ft_printf("\e[0;31mno\e[m\n");
-
-	ft_printf("Nb of processes: \e[0;33m%d\e[m\n", ms->nb_processes);
 	while (process)
 	{
 		ft_printf("%d:\n", i);
-		ft_printf("\tNumber of tokens: \e[0;36m%d\e[m\n", process->nb_tokens);
+		// ft_printf("\tNumber of tokens: \e[0;36m%d\e[m\n", process->nb_tokens);
+		ft_printf("\tProcess: \e[0;36m%p\e[m\n", process);
 		ft_printf("\tProcess id: \e[0;36m%d\e[m\n", process->pid);
 		j = 0;
 		ft_printf("\tThe command line: ");
@@ -96,20 +93,23 @@ void test_display_processes(t_minishell *ms)
 			ft_printf(" %s", process->cmd[j]);
 			j++;
 		}
+		ft_printf("\n\tExec path: %s", process->exec_path);
 		ft_printf("\e[m\n");
 		ft_printf("\tThe type line: \e[0;36m");
 		j = 0;
-		while (j < process->nb_tokens)
+		if (process->types_line)
 		{
-			print_type(process->types_line[j]);
-			ft_printf(" ");
-			j++;
+			while (process->types_line[j])
+			{
+				print_type(process->types_line[j]);
+				ft_printf(" ");
+				j++;
+			}
 		}
 		ft_printf("\e[m\n");
 		ft_printf("\tPipe In: \e[0;36m%d\e[m\n", process->pipe_in);
 		ft_printf("\tPipe Out: \e[0;36m%d\e[m\n", process->pipe_out);
 		ft_printf("\e[m\n");
-		ft_printf("\tProcess: \e[0;36m%p\e[m\n", process);
 		ft_printf("\tProcess next: \e[0;36m%p\e[m\n", process->next);
 		ft_printf("\tProcess prev: \e[0;36m%p\e[m\n", process->prev);
 		process = process->next;
@@ -155,7 +155,6 @@ void test_display_errors(t_minishell *ms)
 	}
 }
 
-
 void	test_display_local_env(t_minishell *ms)
 {
 	t_variable	*env;
@@ -177,6 +176,21 @@ void	test_reset(t_minishell *ms)
 
 void test_display_redirections(t_minishell *ms)
 {
+	t_process *process;
+	int i;
+
+	i = 1;
+	process = ms->first_process;
+	while (process)
+	{
+		ft_printf("Process %d:\n", i);
+		if (process->has_redirection)
+			ft_printf("has redirection!\n");
+		else
+			ft_printf("has no redirection!\n");
+		process = process->next;
+		i++;
+	}
 	ft_printf("TODO: To display for redirections structure inside a process.\n");
 	(void) ms;
 }

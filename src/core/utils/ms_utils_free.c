@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_free.c                                          :+:      :+:    :+:   */
+/*   ms_utils_free.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 13:48:48 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/22 11:08:16 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/23 15:20:12 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "../../../inc/minishell.h"
 
 /*
  *	Free memory related to the last command.
@@ -26,8 +26,6 @@ void	ms_free_last_command(t_minishell *ms)
 
 	if (ms)
 	{
-		ms->has_pipe = false;
-		ms->nb_processes = 0;
 		process = ms->first_process;
 		while (process)
 		{
@@ -53,13 +51,12 @@ void	ms_free_last_command(t_minishell *ms)
 }
 
 /*
- *  Free all the process allocated memory and print error message.
- *  
- * @params:
- *      ms      :   the main minishell data structure to free.
- *      err_key :   the error number to get the correct err msg.
- * @return:
- *      EXIT_SUCCESS or EXIT_FAILURE depending error.
+ *	Free all the process allocated memory and print error message if any.
+ *
+ *	@params:
+ *		ms : the main minishell data structure to free.
+ *	@return:
+ *		EXIT_SUCCESS or EXIT_FAILURE depending error.
  */
 int	ms_free_before_exit(t_minishell *ms)
 {
@@ -90,7 +87,9 @@ int	ms_free_before_exit(t_minishell *ms)
 	return (EXIT_SUCCESS);
 }
 
-
+/*
+ *	Free all variables from the local copied environment.
+*/
 void	ms_free_env(t_minishell *ms)
 {
 	t_variable *variable;
@@ -109,7 +108,7 @@ void	ms_free_env(t_minishell *ms)
 
 /*
  * Free all the tokens of the ms structure.
- */
+*/
 void	ms_free_all_tokens(t_minishell *ms)
 {
 	t_token	*token;
@@ -128,6 +127,9 @@ void	ms_free_all_tokens(t_minishell *ms)
 	ms->first_token = NULL;
 }
 
+/*
+ * Free all the redirection structure of the given process.
+*/
 void	ms_free_all_redirections(t_process *process)
 {
 	t_redirection	*redirection;

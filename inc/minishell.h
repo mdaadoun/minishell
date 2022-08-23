@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/22 16:41:54 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/23 16:52:03 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 # include <sys/wait.h>       
 # include <sys/stat.h>
 # include <fcntl.h>
-
 
 //======
 // Types
@@ -76,6 +75,8 @@ typedef unsigned long long	t_uint64;
 # define MSG_ERROR_COMMAND "The command doesn't exist."
 # define MSG_ERROR_BUILTIN_OPTION "The option is not valid."
 # define MSG_ERROR_BUILTIN_ARGUMENT "The arguments are not valid."
+# define MSG_ERROR_MISSING_ARGS "There is not enough arguments."
+# define MSG_ERROR_EXTRA_ARGS "There is too much arguments."
 # define MSG_ERROR_SYNTAX_PIPE "The syntax with pipes is not valid."
 # define MSG_ERROR_SYNTAX_REDIRECT "The syntax with redirections is not valid."
 # define MSG_ERROR_PATH "No such file or directory."
@@ -87,6 +88,8 @@ typedef enum e_err_key {
 	ERROR_COMMAND,
 	ERROR_BUILTIN_OPTION,
 	ERROR_BUILTIN_ARGUMENT,
+	ERROR_MISSING_ARGS,
+	ERROR_EXTRA_ARGS,
 	ERROR_SYNTAX,
 	ERROR_PATH
 }			t_err_key;
@@ -104,6 +107,11 @@ typedef struct s_error {
  *		bin_paths:		path where to find all binary.
  *		envp: 			the env data.
  *		full_command:	last line read from input.
+ *		first_token:	the entry point to the token structure.
+ *		first_process:	the entry point to the processes structure.
+ *		first_var:		the entry point to the environment structure.
+ *		global_error:	the shell global error structure.
+ *		(see process internal errors)
 */
 
 typedef struct s_minishell {
@@ -111,9 +119,6 @@ typedef struct s_minishell {
 	char				**bin_paths;
 	char				**envp;
 	char				*full_command;
-	bool				has_pipe;
-	int					nb_pipes;
-	t_uint8				nb_processes;
 	struct s_token		*first_token;
 	struct s_variable	*first_var;
 	struct s_process	*first_process;
@@ -132,8 +137,7 @@ typedef enum e_builtins {
 	BIN_EXPORT,
 	BIN_UNSET,
 	BIN_ENV,
-	BIN_EXIT,
-	BIN_HISTORY,
+	BIN_EXIT
 }	t_builtins;
 
 typedef struct s_variable {
@@ -153,7 +157,8 @@ typedef enum e_token_type
 	TYPE_D_QUOTE_STRING,
 	TYPE_ARG_STRING,
 	TYPE_ARG_OPTION,
-	TYPE_ARG_REDIRECT,
+	TYPE_ARG_REDIRECT_FILE,
+	TYPE_ARG_DELIMITER,
 	TYPE_PIPE,
 	TYPE_EXTERNAL_COMMAND,
 	TYPE_BUILTIN_COMMAND,
@@ -161,16 +166,13 @@ typedef enum e_token_type
 	TYPE_REDIRECT_LEFT,
 	TYPE_REDIRECT_DOUBLE_LEFT,
 	TYPE_REDIRECT_RIGHT,
-	TYPE_REDIRECT_DOUBLE_RIGHT,
-	TYPE_AND,
-	TYPE_OR,
-	TYPE_WILDCARD
+	TYPE_REDIRECT_DOUBLE_RIGHT
 }	t_token_type;
 
 typedef struct s_token
 {
-	char				*content;
 	enum e_token_type	type;
+	char				*content;
 	char				*external_path;
 	t_builtins			builtin;
 	struct s_token		*prev;
@@ -194,7 +196,7 @@ typedef struct s_process {
 	t_redirection		*first_redirection;
 	int					pipe_in;
 	int					pipe_out;
-	int					nb_tokens;
+	int					nb_tokens; //CLEAN
 	char				**cmd;
 	char				*exec_path;
 	char				**envp;
@@ -211,9 +213,17 @@ typedef struct s_process {
 //====================
 
 /*
+ * Main functions
+ *		files:
+ *			core/ms_main.c
+*/
+
+void	ms_initialize_minishell(t_minishell **ms, t_error *error, char **envp);
+
+/*
  *	Errors functions:
  *		files :	
- *			core/ms_errors.c
+ *			core/utils/ms_utils_errors.c
 */
 
 void	ms_checking_for_errors(t_minishell *ms);
@@ -221,12 +231,16 @@ void	ms_set_error(t_error *error, t_err_key err_key, char *err_msg);
 void	ms_print_error(t_minishell *ms);
 
 /*
- * Main functions
- *		files:
- *			core/ms_main.c
+ *	Environment functions:
+ *		files :	
+ *			core/utils/ms_utils_variable.c
 */
 
-void	ms_initialize_minishell(t_minishell **ms, t_error *error, char **envp);
+void		ms_copy_env(t_minishell *ms);
+char		*ft_get_env(t_minishell *ms, char *str);
+void		ft_replace_variable(t_minishell *ms, t_variable *env);
+void		ft_add_variable(t_minishell *ms, t_variable *env);
+t_variable	*ft_create_variable(char *str);
 
 /*
  *  Builtin commands functions:
@@ -239,14 +253,6 @@ void	ms_initialize_minishell(t_minishell **ms, t_error *error, char **envp);
  *			core/builtin/ms_pwd.c
  *			core/builtin/ms_unset.c
 */
-
-void	ft_remove_env(t_minishell *ms, t_variable *last, t_variable *current);
-void	ms_copy_env(t_minishell *ms);
-char	*ft_get_env(t_minishell *ms, char *str);
-
-void	ft_replace_variable(t_minishell *ms, t_variable *env);
-void	ft_add_variable(t_minishell *ms, t_variable *env);
-t_variable	*ft_create_variable(char	*str);
 
 t_uint8	ms_echo(char **arg);
 t_uint8	ms_cd(t_minishell *ms, char **arg);
@@ -293,16 +299,16 @@ void	ms_parse_pipes(t_minishell *ms);
 void	ms_parse_redirections(t_minishell *ms);
 
 /*
- *  Lexical Analyzer:
+ *  Analyzer:
  *      Files :
- *          core/lexer/ms_lexer.c
- *          core/lexer/ms_analyze_command.c
- *          core/lexer/ms_analyze_pipes.c
- *          core/lexer/ms_analyze_redirections.c
- *          core/lexer/ms_analyze_arguments.c
+ *          core/analyzer/ms_analyzer.c
+ *          core/analyzer/ms_analyze_command.c
+ *          core/analyzer/ms_analyze_pipes.c
+ *          core/analyzer/ms_analyze_redirections.c
+ *          core/analyzer/ms_analyze_arguments.c
 */
 
-void	ms_lexer(t_minishell *ms);
+void	ms_analyzer(t_minishell *ms);
 void	ms_analyze_command(t_minishell *ms, t_token *cmd);
 void	ms_analyze_pipes(t_minishell *ms);
 void	ms_analyze_redirections(t_minishell *ms);
@@ -318,16 +324,23 @@ void	ms_analyze_arguments(t_minishell *ms);
 
 void	ms_add_redirection(t_process *proc, t_token_type type, char *filepath);
 void	ms_executer(t_minishell *ms);
-// void	ms_build_processes(t_minishell *ms);
 void	ms_build_redirections(t_token *token, t_process *process);
-void	ms_build_proc(t_minishell *ms);
+void	ms_build_processes(t_minishell *ms);
 void	ms_start_processes(t_minishell *ms);
-void	create_pipes(t_minishell *ms);
+bool	ms_is_redirection(t_token *tok);
+
+/*
+ *  Utils processes:
+ *      Files :
+ *			core/utils/ms_utils_processes.c
+*/
+
+void	ms_build_type_lines(t_minishell *ms);
 
 /*
  *	Memory:
  *		files :	
- *			core/ms_free.c
+ *			core/utils/ms_utils_free.c
 */
 
 int		ms_free_before_exit(t_minishell *ms);
@@ -346,7 +359,7 @@ void	ms_free_env(t_minishell *ms);
  *			test/test_main.c
  *			test/test_utils.c
  *			test/test_parser.c
- *			test/test_lexer.c
+ *			test/test_analyzer.c
  *			test/test_executer_build.c
  *			test/test_executer_errors.c
  *			test/test_builtin.c
@@ -356,7 +369,7 @@ typedef enum e_tests
 {
 	TEST_ALL,
 	TEST_PARSER = 1,
-	TEST_LEXER = 2,
+	TEST_ANALYZER = 2,
 	TEST_EXECUTER_BUILD = 3,
 	TEST_EXECUTER_ERRORS = 4,
 	TEST_EXECUTER_REDIRECTIONS = 5,
@@ -368,13 +381,13 @@ typedef enum e_tests
 	TEST_PARSER_REDIRECTIONS = 15,
 	TEST_PARSER_BUILTINS = 16,
 	TEST_PARSER_EXTERNALS = 17,
-	TEST_LEXER_QUOTES = 21,
-	TEST_LEXER_PIPES = 22,
-	TEST_LEXER_ENV = 23,
-	TEST_LEXER_ARGUMENTS = 24,
-	TEST_LEXER_REDIRECTIONS = 25,
-	TEST_LEXER_BUILTINS = 26,
-	TEST_LEXER_EXTERNALS = 27,
+	TEST_ANALYZER_QUOTES = 21,
+	TEST_ANALYZER_PIPES = 22,
+	TEST_ANALYZER_ENV = 23,
+	TEST_ANALYZER_ARGUMENTS = 24,
+	TEST_ANALYZER_REDIRECTIONS = 25,
+	TEST_ANALYZER_BUILTINS = 26,
+	TEST_ANALYZER_EXTERNALS = 27,
 	TEST_EXECUTER_BUILD_QUOTES = 31,
 	TEST_EXECUTER_BUILD_PIPES = 32,
 	TEST_EXECUTER_BUILD_ENV = 33,
@@ -414,7 +427,7 @@ void	test_display_local_env(t_minishell *ms);
 void	test_display_redirections(t_minishell *ms);
 
 void	test_builtin(t_minishell *ms, int debug);
-void	test_lexer(t_minishell *ms, int debug);
+void	test_analyzer(t_minishell *ms, int debug);
 void	test_parser(t_minishell *ms, int debug);
 void	test_executer_build(t_minishell *ms, int debug);
 void	test_executer_errors(t_minishell *ms, int debug);

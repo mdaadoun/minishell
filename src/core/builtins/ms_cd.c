@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:28:14 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/22 16:29:55 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/23 16:00:48 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,25 @@ static void	update_old_pwd(t_minishell *ms)
 	tmp->content = ft_strdup(env->content);
 }
 
+static bool	args_are_valid(t_minishell *ms, char **arg)
+{
+	int i;
+	t_err_key	err_key;
+	char		*err_msg;
+
+	err_key = ERROR_EXTRA_ARGS;
+	err_msg = MSG_ERROR_EXTRA_ARGS;
+	i = 0;
+	while (arg[i])
+		i++;
+	if (i > 2)
+	{
+		ms_set_error(ms->global_error, err_key, err_msg);
+		return (false);
+	}
+	return (true);
+}
+
 /*
  *	change the working directory
  *	update env OLDPWD
@@ -46,7 +65,9 @@ t_uint8	ms_cd(t_minishell *ms, char **arg)
 	char	*str;
 	char	cwd[PATH_MAX];
 
-	if (!arg[1] || !ft_strncmp(arg[1], "~", 2))
+	if (!args_are_valid(ms, arg))
+		return (1);
+	else if (!arg[1] || !ft_strncmp(arg[1], "~", 2))
 	{
 		//look for '~'
 		env = get_struct_env(ms->first_var, "HOME", 5);

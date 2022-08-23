@@ -1,10 +1,21 @@
 # TODO
 
-* reprendre build_type_line pour retirer les redirections et avoir une bonne commande lorsque: '> file echo hello'
-* the exit command don't work
+* heredoc broken, plus de prompt ??? Ctrl-D
+* reprendre la structure des redirections pas de doublon, un seul heredoc, le dernier est enregistre dans la structure ? a verifier avec bash
+* reprendre la gestion des errors.
+
+##
+	* 'cd -' the switching between folders dont work
+
+### unset/export/env
+	* export a=1; env; echo $a; unset a
+		*sometimes work, sometines not (use valgrind) why ??
 
 ### valgrind
-	* test "sad | das| | asd| Asd| sda |" - check: Invalid read of size 1
+	* test "sad | das| | asd| Asd| sda |"
+		* check: Invalid read of size 1
+	* >><><>>
+		* valgrind error and create 9 tokens instead of 5
 
 ### redirection structure
 	* '> file echo hello' & 'echo hello > file' do the same
@@ -22,8 +33,12 @@
 	* Block ^\ when Ctrl-\ is used
 
 ### PARSER:
+	* echo"hello"
+	* test't'
+	* cd"-"
+		will work with minishell but shouldn't, probably need to stick some token together when there is quotes.
 
-### LEXER:
+### analyzer:
 	* a|b|c|e|p|pw|ec|un|ex
 		* builtin_command type evaluated, check the strcmp!
 
@@ -42,8 +57,8 @@
 	PARSER
 	-[]: ms_paser.c
 	-...
-	LEXER
-	-[]: ms_lexer.c
+	analyzer
+	-[]: ms_analyzer.c
 	-...
 	EXECUTER
 	-[]: ms_executer.c

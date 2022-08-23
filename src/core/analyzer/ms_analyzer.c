@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_lexer.c                                         :+:      :+:    :+:   */
+/*   ms_analyzer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 09:04:20 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/16 19:35:22 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/23 10:00:47 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 /*
  * analyze each token following this order and set types:
- *		1. Check if first token is valid command
- *      2. Tag all Pipes and check if next token is a valid token
- *      	* Check token is external or builtin programs
- *      3. Redirections types
- *      4. check last NO_TYPE if string arg or option
+ *      1. Tag the redirections types.
+ *      2. Tag all Pipes
+ *      	* and check if next token is external or builtin programs
+ *		3. Check if first token is a valid command.
+ *      4. Check last NO_TYPE if string arg or option.
  */
-void	ms_lexer(t_minishell *ms)
+void	ms_analyzer(t_minishell *ms)
 {
-	ms_analyze_command(ms, ms->first_token);
-	ms_analyze_pipes(ms);
 	ms_analyze_redirections(ms);
+	ms_analyze_pipes(ms);
+	ms_analyze_command(ms, ms->first_token);
 	ms_analyze_arguments(ms);
 }

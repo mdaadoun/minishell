@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_errors.c                                        :+:      :+:    :+:   */
+/*   ms_utils_errors.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 11:37:03 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/22 16:42:12 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/23 15:20:16 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "../../../inc/minishell.h"
 
 /*
  * Check each process for bad commands, if found:
@@ -94,6 +94,7 @@ void	ms_set_error(t_error *error, t_err_key err_key, char *err_msg)
 
 void ms_print_error(t_minishell *ms)
 {
-	write(2, ms->global_error->msg, ft_strlen(ms->global_error->msg));
-	write(2, "\n", 1);
+	write(2, "\e[0;31mError: ", 14);
+	write(2, ms->global_error->msg, ms->global_error->length);
+	write(2, "\e[m\n", 4);
 }

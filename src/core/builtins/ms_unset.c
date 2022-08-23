@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/19 08:12:28 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/23 16:07:56 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static size_t	ft_count(char **str)
 	return (ind);
 }
 
-void	ft_remove_env(t_minishell *ms, t_variable *last, t_variable *current)
+static void	ft_remove_env(t_minishell *ms, t_variable *last, t_variable *current)
 {
 	if (last == 0)
 		ms->first_var = current->next;
@@ -57,9 +57,16 @@ t_uint8	ms_unset(t_minishell *ms, char **arg)
 {
 	t_variable	*env;
 	size_t		ind;
+	t_err_key	err_key;
+	char		*err_msg;
 
+	err_key = ERROR_MISSING_ARGS;
+	err_msg = MSG_ERROR_MISSING_ARGS;
 	if (ft_count(arg) == 1)
-		return (ft_printf("Printf ERROR: Not enough arguments\n"));
+	{
+		ms_set_error(ms->global_error, err_key, err_msg);
+		return (1);
+	}
 	ind = 1;
 	while (arg[ind])
 	{

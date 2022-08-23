@@ -12,7 +12,7 @@ void test_run_command(t_minishell *ms, char *str, int debug)
 static void set_and_run_tests(t_minishell *ms, int debug)
 {
     test_parser(ms, debug);
-    test_lexer(ms, debug);
+    test_analyzer(ms, debug);
 	test_builtin(ms, debug);
 	test_executer_build(ms, debug);
 	test_executer_errors(ms, debug);
@@ -39,14 +39,14 @@ void display_help()
     ft_printf("\t\e[1;33m  %d:\e[m redirections\n", TEST_PARSER_REDIRECTIONS);
     ft_printf("\t\e[1;33m  %d:\e[m builtins programs\n", TEST_PARSER_BUILTINS);
     ft_printf("\t\e[1;33m  %d:\e[m externals programs\n", TEST_PARSER_EXTERNALS);
-    ft_printf("\t\e[1;33m%d:\e[m lexer\n", TEST_LEXER);
-    ft_printf("\t\e[1;33m  %d:\e[m quotes\n", TEST_LEXER_QUOTES);
-    ft_printf("\t\e[1;33m  %d:\e[m pipes\n", TEST_LEXER_PIPES);
-    ft_printf("\t\e[1;33m  %d:\e[m env / variables\n", TEST_LEXER_ENV);
-    ft_printf("\t\e[1;33m  %d:\e[m arguments\n", TEST_LEXER_ARGUMENTS);
-    ft_printf("\t\e[1;33m  %d:\e[m redirections\n", TEST_LEXER_REDIRECTIONS);
-    ft_printf("\t\e[1;33m  %d:\e[m builtins command\n", TEST_LEXER_BUILTINS);
-    ft_printf("\t\e[1;33m  %d:\e[m external command\n", TEST_LEXER_EXTERNALS);
+    ft_printf("\t\e[1;33m%d:\e[m analyzer\n", TEST_ANALYZER);
+    ft_printf("\t\e[1;33m  %d:\e[m quotes\n", TEST_ANALYZER_QUOTES);
+    ft_printf("\t\e[1;33m  %d:\e[m pipes\n", TEST_ANALYZER_PIPES);
+    ft_printf("\t\e[1;33m  %d:\e[m env / variables\n", TEST_ANALYZER_ENV);
+    ft_printf("\t\e[1;33m  %d:\e[m arguments\n", TEST_ANALYZER_ARGUMENTS);
+    ft_printf("\t\e[1;33m  %d:\e[m redirections\n", TEST_ANALYZER_REDIRECTIONS);
+    ft_printf("\t\e[1;33m  %d:\e[m builtins command\n", TEST_ANALYZER_BUILTINS);
+    ft_printf("\t\e[1;33m  %d:\e[m external command\n", TEST_ANALYZER_EXTERNALS);
     ft_printf("\t\e[1;33m%d:\e[m executer build processes\n", TEST_EXECUTER_BUILD);
     ft_printf("\t\e[1;33m  %d:\e[m quotes\n", TEST_EXECUTER_BUILD_QUOTES);
     ft_printf("\t\e[1;33m  %d:\e[m pipes\n", TEST_EXECUTER_BUILD_PIPES);

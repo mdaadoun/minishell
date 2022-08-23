@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 10:57:46 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/22 09:46:46 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/23 12:22:07 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static int	get_length(char *string, int start)
 	int	length;
 
 	length = 0;
-	if (string[start] == '<' && string[start +1] == '<')
+	if (string[start] == '<' && string[start + 1] == '<')
 		length++;
-	if (string[start] == '>' && string[start +1] == '>')
+	if (string[start] == '>' && string[start + 1] == '>')
 		length++;
 	while (string[start] != '\0' && \
 			string[start] != '<' && string[start] != '>')

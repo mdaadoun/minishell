@@ -3,8 +3,15 @@
 
 void	test_quotes(t_minishell *ms, int debug)
 {
-	// test_run_command(ms, "echo hello", debug);
-	test_run_command(ms, "'echo \"lol 'lol' lol\" lol'", debug);
+	test_run_command(ms, "echo hello", debug);
+	test_run_command(ms, "echo\"hello\"", debug);
+	test_run_command(ms, "cd\"-\"", debug);
+	test_run_command(ms, "echo\"hello\"", debug);
+	// test_run_command(ms, "echo \"hello\"", debug);
+	// test_run_command(ms, "test't'", debug);
+	// test_run_command(ms, "\"echo hello\"", debug);
+	// test_run_command(ms, "\"echo\" hello", debug);
+	// test_run_command(ms, "'echo \"lol 'lol' lol\" lol'", debug);
 	// test_run_command(ms, "'echo lol'", debug);
 	// test_run_command(ms, "'hello' hello hello", debug);
     // test_run_command(ms, "'hello'", debug);
@@ -16,6 +23,8 @@ void	test_quotes(t_minishell *ms, int debug)
     // test_run_command(ms, "cat \"cat cat\"", debug);
     // test_run_command(ms, "cd '$home'", debug);
     // test_run_command(ms, "'$home'cd cd cd", debug);
+    // test_run_command(ms, "cd \"$home\"", debug);
+    // test_run_command(ms, "\"$home\"cd cd cd", debug);
 	// test_run_command(ms, ";; test", debug);
 	// test_run_command(ms, ";", debug);
 }
@@ -23,13 +32,13 @@ void	test_quotes(t_minishell *ms, int debug)
 void	test_env(t_minishell *ms, int debug)
 {
 	test_run_command(ms, "echo $PAGER", debug);
-	// test_run_command(ms, "echo \"hello $PAGER\"", debug);
-	// test_run_command(ms, "echo $PAGER $PAGER \"coucou $PAGER hello $PAGER\"", debug);
-	// test_run_command(ms, "echo $PAGER $PAGER \"coucou$PAGERhello$PAGER\"", debug);
-	// test_run_command(ms, "echo $BA", debug);
-	// test_run_command(ms, "$BA", debug);
-	// test_run_command(ms, "$BA echo", debug);
-	// test_run_command(ms, "export a=$BA", debug);
+	test_run_command(ms, "echo \"hello $PAGER\"", debug);
+	test_run_command(ms, "echo $PAGER $PAGER \"coucou $PAGER hello $PAGER\"", debug);
+	test_run_command(ms, "echo $PAGER $PAGER \"coucou$PAGERhello$PAGER\"", debug);
+	test_run_command(ms, "echo $BA", debug);
+	test_run_command(ms, "$BA", debug);
+	test_run_command(ms, "$BA echo", debug);
+	test_run_command(ms, "export a=$BA", debug);
 	// test_run_command(ms, "echo \"$LOGNAME\"", debug);
 	// test_run_command(ms, "echo \'$LOGNAME\'", debug);
 	// test_run_command(ms, "echo test     \\    test", debug);
@@ -125,16 +134,21 @@ void	test_pipes(t_minishell *ms, int debug)
 void	test_redirections(t_minishell *ms, int debug)
 {
     test_run_command(ms, "> > <<", debug);
+    test_run_command(ms, "> | > | <<", debug);
+    test_run_command(ms, "> file1 | > file2 | << file", debug);
+	test_run_command(ms, "echo hello > file << EOF | echo hello > file1 > file2 | cat << EOF2", debug);
 	test_run_command(ms, "echo > <", debug);
 	test_run_command(ms, "<", debug);
 	test_run_command(ms, "> file echo hello", debug);
-	test_run_command(ms, "echo hello > file", debug);
+	// test_run_command(ms, "echo hello > file", debug);
+	// test_run_command(ms, "echo hello > file | echo hello > file", debug);
     // test_run_command(ms, "bb>cc <<dd", debug);
     // test_run_command(ms, ">>cc <<dd", debug);
 	// test_run_command(ms, "wc -l < Makefile > test", debug);
 	// test_run_command(ms, "wc -l < Makefile < Makefile > test1 > test2", debug);
     // test_run_command(ms, ">cc <<dd>", debug);
     // test_run_command(ms, "<<dxd>>", debug);
+    // test_run_command(ms, ">><><>>", debug);
     // test_run_command(ms, ">cc <<dxd>>dcd>>ded<<dsd>dda<aa>><><>><<><><<<>", debug);
     // test_run_command(ms, ">><><>><<><><<<>", debug);
     // test_run_command(ms, "aa >dd bb>cc dd<<dd", debug);
@@ -168,9 +182,9 @@ void	test_redirections(t_minishell *ms, int debug)
 void test_arguments(t_minishell *ms, int debug)
 {
     test_run_command(ms, "cat hello -o adsld | asd", debug);
-    // test_run_command(ms, "echo -la rmasd | export -l asd", debug);
-    // test_run_command(ms, "ls hello test | cat cat", debug);
-    // test_run_command(ms, "cat -o | ls ls | cat cat cat -cat", debug);
+    test_run_command(ms, "echo -la rmasd | export -l asd", debug);
+    test_run_command(ms, "ls hello test | cat cat", debug);
+    test_run_command(ms, "cat -o | ls ls | cat cat cat -cat", debug);
 }
 
 
@@ -178,21 +192,21 @@ void test_builtins(t_minishell *ms, int debug)
 {
     test_run_command(ms, "exit", debug);
     test_run_command(ms, "echo hello", debug);
-    // test_run_command(ms, "cd ..", debug);
-    // test_run_command(ms, "pwd hello", debug);
-    // test_run_command(ms, "export hello", debug);
-    // test_run_command(ms, "unset hello", debug);
-    // test_run_command(ms, "env hello", debug);
-    // test_run_command(ms, "exit hello", debug);
-    // test_run_command(ms, "history hello", debug);
+    test_run_command(ms, "cd ..", debug);
+    test_run_command(ms, "pwd hello", debug);
+    test_run_command(ms, "export hello", debug);
+    test_run_command(ms, "unset hello", debug);
+    test_run_command(ms, "env hello", debug);
+    test_run_command(ms, "exit hello", debug);	
+    test_run_command(ms, "history hello", debug);
 }
 
 void test_externals(t_minishell *ms, int debug)
 {
     test_run_command(ms, "test hello", debug);
-    // test_run_command(ms, "cat cat", debug);
-    // test_run_command(ms, "/usr/bin/cat cat cat", debug);
-    // test_run_command(ms, "cat cat", debug);
+    test_run_command(ms, "cat cat", debug);
+    test_run_command(ms, "/usr/bin/cat cat cat", debug);
+    test_run_command(ms, "cat cat", debug);
     // test_run_command(ms, "ls", debug);
     // test_run_command(ms, "/usr/bin/ls ls", debug);
     // test_run_command(ms, "asd", debug);

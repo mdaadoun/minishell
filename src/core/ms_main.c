@@ -6,18 +6,14 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:07:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/22 16:40:55 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/23 14:54:18 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
 /*
- * Alloc memory and prepare starting data for the minishell.
- * 		cwd_path: current working directory
- * 		bin_paths: the binary paths from env
- * @params:
- *      ms  :   the main minishell data structure to free.
+ *	Initialization of the minishell main data structure.
  */
 void	ms_initialize_minishell(t_minishell **ms, t_error *error, char **envp)
 {
@@ -47,8 +43,8 @@ void	ms_initialize_minishell(t_minishell **ms, t_error *error, char **envp)
 }
 
 /*
- * Steps for the prompt:
- *		1. Display working directory prompt 
+ *	Steps for the prompt and catching input:
+ *		1. Display working directory prompt.
  *		2. Get line from input with readline.
  *		3. The Ctrl-D is controlled with "if (!ms->full_command)"
  *		4. Add the line to the history.
@@ -67,19 +63,24 @@ static void	display_prompt_and_wait(t_minishell *ms)
 	if (!ms->full_command)
 	{
 		ft_printf("exit\n");
-		// ms_set_error(ms->global_error, NO_ERROR, NULL);
 		exit(ms_free_before_exit(ms));
 	}
 	add_history(ms->full_command);
 }
 
 /*
+ *
  *	>> MINISHELL <<
- *		REPL method : READ > EVALUATE > PRINT > LOOP
- *			1) Parser: Data structure of tokens (tokenization).
- *			2) Lexer: Lexical analysis of tokens (evaluation).
- *			3) Executer: Build processes, run pipeline and print result if any.
- *			4) Loop: Free data and wait for the next command.
+ *		1. Initialize the minishell main data structure.
+ *		2. Initialize signals.
+ *		3. Infinite loop:
+ *			1) Display the prompt and wait for input.
+ *			2) Parser: Data structure of tokens (tokenization).
+ *			3) Analyzer: Lexical analysis of tokens (evaluation).
+ *			4) Executer: Build processes, run pipeline and print result if any.
+ *			5) Free data from the last command.
+ *			6) Print error if any and reset error data for the next loop.
+ *
  */
 int	main(int argc, char **argv, char **envp)
 {
@@ -96,7 +97,7 @@ int	main(int argc, char **argv, char **envp)
 		if (ft_strlen(ms->full_command))
 		{
 			ms_parser(ms);
-			ms_lexer(ms);
+			ms_analyzer(ms);
 			ms_executer(ms);
 		}
 		ms_free_last_command(ms);

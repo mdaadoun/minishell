@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:43:46 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/22 15:38:39 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/23 10:56:22 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	ms_analyze_command(t_minishell *ms, t_token *cmd)
 	t_token	*command;
 
 	command = cmd;
-	if (command)
+	if (command && !ms_is_redirection(command))
 	{
 		check_if_builtin(command);
 		if (command->type != TYPE_BUILTIN_COMMAND)
