@@ -51,7 +51,10 @@ void test_launcher(t_minishell *ms, int debug)
 	}
 	if (next)
 	{
-		if (debug == TEST_EXECUTER_REDIRECTIONS)
+		if (debug == TEST_EXECUTER_REDIRECTIONS || debug == TEST_EXECUTER_REDIRECTIONS_QUOTES \
+		|| debug == TEST_EXECUTER_REDIRECTIONS_PIPES || debug == TEST_EXECUTER_REDIRECTIONS_ENV \
+		|| debug == TEST_EXECUTER_REDIRECTIONS_ARGUMENTS || debug == TEST_EXECUTER_REDIRECTIONS_REDIRECTIONS \
+		|| debug == TEST_EXECUTER_REDIRECTIONS_BUILTINS || debug == TEST_EXECUTER_REDIRECTIONS_EXTERNALS)
 		{
     		test_display_redirections(ms);
 			next = false;

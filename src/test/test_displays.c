@@ -175,7 +175,8 @@ void	test_reset(t_minishell *ms)
 
 void test_display_redirections(t_minishell *ms)
 {
-	t_process *process;
+	t_process 		*process;
+	t_redirection	*redirection;
 	int i;
 
 	i = 1;
@@ -184,12 +185,19 @@ void test_display_redirections(t_minishell *ms)
 	{
 		ft_printf("Process %d:\n", i);
 		if (process->has_redirection)
-			ft_printf("has redirection!\n");
+		{
+			redirection = process->first_redirection;
+			while (redirection)
+			{
+				ft_printf("\tRedirection type: ");
+				print_type(redirection->type);
+				ft_printf("\n\tRedirection filepath: %s\n", redirection->filepath);
+				redirection = redirection->next;
+			}
+		}
 		else
 			ft_printf("has no redirection!\n");
 		process = process->next;
 		i++;
 	}
-	ft_printf("TODO: To display for redirections structure inside a process.\n");
-	(void) ms;
 }

@@ -14,7 +14,7 @@ void test_parser(t_minishell *ms, int debug)
     }
 	else if (debug == TEST_PARSER_QUOTES)
 	{
-		printf("\n\e[1;31m===Testing quotes parser:===\n");
+		printf("\n\e[1;31m===Testing quotes parser:===\e[m\n");
 		test_quotes(ms, debug);
 	}
 	else if (debug == TEST_PARSER_ENV)

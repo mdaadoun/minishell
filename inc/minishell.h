@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/24 08:50:24 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/24 10:29:55 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -401,6 +401,13 @@ typedef enum e_tests
 	TEST_EXECUTER_ERRORS_REDIRECTIONS = 45,
 	TEST_EXECUTER_ERRORS_BUILTINS = 46,
 	TEST_EXECUTER_ERRORS_EXTERNALS = 47,
+	TEST_EXECUTER_REDIRECTIONS_QUOTES = 51,
+	TEST_EXECUTER_REDIRECTIONS_PIPES = 52,
+	TEST_EXECUTER_REDIRECTIONS_ENV = 53,
+	TEST_EXECUTER_REDIRECTIONS_ARGUMENTS = 54,
+	TEST_EXECUTER_REDIRECTIONS_REDIRECTIONS = 55,
+	TEST_EXECUTER_REDIRECTIONS_BUILTINS = 56,
+	TEST_EXECUTER_REDIRECTIONS_EXTERNALS = 57,
 	TEST_BUILTIN_PWD = 61,
 	TEST_BUILTIN_ENV = 62,
 	TEST_BUILTIN_EXPORT = 63,

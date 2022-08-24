@@ -64,6 +64,13 @@ void display_help()
     ft_printf("\t\e[1;33m  %d:\e[m builtins command\n", TEST_EXECUTER_ERRORS_BUILTINS);
     ft_printf("\t\e[1;33m  %d:\e[m external command\n", TEST_EXECUTER_ERRORS_EXTERNALS);
     ft_printf("\t\e[1;33m%d:\e[m executor redirections\n", TEST_EXECUTER_REDIRECTIONS);
+    ft_printf("\t\e[1;33m  %d:\e[m quotes\n", TEST_EXECUTER_REDIRECTIONS_QUOTES);
+    ft_printf("\t\e[1;33m  %d:\e[m pipes\n", TEST_EXECUTER_REDIRECTIONS_PIPES);
+    ft_printf("\t\e[1;33m  %d:\e[m env / variables\n", TEST_EXECUTER_REDIRECTIONS_ENV);
+    ft_printf("\t\e[1;33m  %d:\e[m arguments\n", TEST_EXECUTER_REDIRECTIONS_ARGUMENTS);
+    ft_printf("\t\e[1;33m  %d:\e[m redirections\n", TEST_EXECUTER_REDIRECTIONS_REDIRECTIONS);
+    ft_printf("\t\e[1;33m  %d:\e[m builtins command\n", TEST_EXECUTER_REDIRECTIONS_BUILTINS);
+    ft_printf("\t\e[1;33m  %d:\e[m external command\n", TEST_EXECUTER_REDIRECTIONS_EXTERNALS);
     ft_printf("\t\e[1;33m%d:\e[m builtin command\n", TEST_BUILTIN);
     ft_printf("\t\e[1;33m  %d:\e[m pwd\n", TEST_BUILTIN_PWD);
     ft_printf("\t\e[1;33m  %d:\e[m env\n", TEST_BUILTIN_ENV);

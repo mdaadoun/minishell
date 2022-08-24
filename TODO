@@ -1,10 +1,13 @@
 # TODO
 
-* reprendre la structure des redirections pas de doublon, un seul heredoc, le dernier est enregistre dans la structure ? a verifier avec bash
-* reprendre la gestion des errors.
+reprendre parsing
+* echo"hello"
+* test't'
+* cd"-"
+	will work with minishell but shouldn't, probably need to stick some token together when there is quotes.
 
-##
-	* 'cd -' the switching between folders dont work
+* 'cd -' the switching between folders dont work
+* reprendre la gestion des erreurs.
 
 ### unset/export/env
 	* export a=1; env; echo $a; unset a
@@ -31,11 +34,6 @@
 ## signals handling
 	* Block ^\ when Ctrl-\ is used
 
-### PARSER:
-	* echo"hello"
-	* test't'
-	* cd"-"
-		will work with minishell but shouldn't, probably need to stick some token together when there is quotes.
 
 ### analyzer:
 	* a|b|c|e|p|pw|ec|un|ex
