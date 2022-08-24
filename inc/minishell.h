@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/23 16:52:03 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/24 08:50:24 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,7 +196,6 @@ typedef struct s_process {
 	t_redirection		*first_redirection;
 	int					pipe_in;
 	int					pipe_out;
-	int					nb_tokens; //CLEAN
 	char				**cmd;
 	char				*exec_path;
 	char				**envp;

@@ -83,7 +83,6 @@ void test_display_processes(t_minishell *ms)
 	while (process)
 	{
 		ft_printf("%d:\n", i);
-		// ft_printf("\tNumber of tokens: \e[0;36m%d\e[m\n", process->nb_tokens);
 		ft_printf("\tProcess: \e[0;36m%p\e[m\n", process);
 		ft_printf("\tProcess id: \e[0;36m%d\e[m\n", process->pid);
 		j = 0;

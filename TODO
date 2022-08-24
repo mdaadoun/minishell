@@ -1,6 +1,5 @@
 # TODO
 
-* heredoc broken, plus de prompt ??? Ctrl-D
 * reprendre la structure des redirections pas de doublon, un seul heredoc, le dernier est enregistre dans la structure ? a verifier avec bash
 * reprendre la gestion des errors.
 

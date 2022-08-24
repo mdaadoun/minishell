@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 07:47:41 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/23 16:50:18 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/24 08:50:31 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ void	ms_build_processes(t_minishell *ms)
 		{
 			proc->cmd[ind] = ft_strdup(tok->content);
 			ind++;
-			proc->nb_tokens++;
 		}
 		else if (is_redirect(tok) != 0)
 			tok = tok->next;

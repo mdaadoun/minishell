@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:12:25 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/23 17:51:16 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/24 08:48:58 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void ms_build_redirections(t_token *token,	t_process *process)
 	else if	(token->type == TYPE_REDIRECT_DOUBLE_LEFT)
 	{
 		process->has_redirection = true;
-		if (token->next && token->next->type == TYPE_ARG_STRING)
+		if (token->next && token->next->type == TYPE_ARG_DELIMITER)
 		{
 			open_heredoc(token);
 			ms_add_redirection(process, token->type, ft_strdup(".heredoc"));
