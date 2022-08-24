@@ -6,7 +6,7 @@
 #    By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/20 08:44:56 by mdaadoun          #+#    #+#              #
-#    Updated: 2022/08/24 07:34:04 by mdaadoun         ###   ########.fr        #
+#    Updated: 2022/08/24 16:56:27 by mdaadoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ LIBFT = $(DIR_LIB)/libft.a
 CC = gcc
 AR = ar rcs
 RM = rm -f
-FLAGS = -Wall -Wextra -Werror -g # -fsanitize=address
+FLAGS = -Wall -Wextra -Werror # -g # -fsanitize=address
 READLINE_FLAGS = -L/usr/local/lib -I/usr/local/include -lreadline
 
 R = \033[38;5;1m
@@ -54,7 +54,7 @@ clean:
 	@make clean -sC src/libft
 
 fclean: clean
-	@echo "$(R)Remove $(NAME) programs if present.$(D)"
+	@echo "$(R)Remove $(NAME) program if present.$(D)"
 	@$(RM) $(NAME)
 	@make fclean -sC src/libft
 
