@@ -1,18 +1,5 @@
 # TODO
 
-reprendre parsing
-* echo"hello"
-* test't'
-* cd"-"
-	will work with minishell but shouldn't, probably need to stick some token together when there is quotes.
-
-* 'cd -' the switching between folders dont work
-* reprendre la gestion des erreurs.
-
-### unset/export/env
-	* export a=1; env; echo $a; unset a
-		*sometimes work, sometines not (use valgrind) why ??
-
 ### valgrind
 	* test "sad | das| | asd| Asd| sda |"
 		* check: Invalid read of size 1

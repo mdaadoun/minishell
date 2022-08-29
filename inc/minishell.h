@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/24 16:02:50 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/29 11:24:33 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,7 @@ typedef struct s_token
 	t_builtins			builtin;
 	struct s_token		*prev;
 	struct s_token		*next;
+	bool				no_space;
 }						t_token;
 
 /*
@@ -272,14 +273,16 @@ void	ms_initialize_signals(void);
 /*
  *  Tokens:
  *      Files :
- *			core/parser/ms_tokenization.c
+ *			core/utils/ms_utils_tokenizer.c
+ *			core/utils/ms_utils_extra.c
 */
 
 t_token	*ms_create_new_token(t_minishell *ms);
 void	ms_replace_token(t_token *old, t_token *new);
 t_token	*ms_delete_token(t_token *token);
-void	ms_add_token(t_minishell *ms, char *content, t_token_type type);
+void	ms_add_token(t_minishell *ms, char *content, t_token_type type, bool no_space);
 void	ms_push_token(t_token *first_token, t_token *second_token);
+void 	ms_combine_token(t_token *first_token, t_token *second_token);
 
 /*
  *  Parser:

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 10:55:29 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/16 13:40:00 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/29 10:44:22 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,14 @@ t_token	*ms_create_new_token(t_minishell *ms)
 /*
  * Check if it the first token
  */
-void	ms_add_token(t_minishell *ms, char *content, t_token_type type)
+void	ms_add_token(t_minishell *ms, char *content, t_token_type type, bool no_space)
 {
 	t_token	*token;
 
 	token = ms_create_new_token(ms);
 	token->content = content;
 	token->type = type;
+	token->no_space = no_space;
 	if (!ms->first_token)
 		ms->first_token = token;
 	else

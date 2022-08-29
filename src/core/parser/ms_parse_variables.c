@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 11:06:35 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/22 11:26:15 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/29 10:28:25 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,15 @@ void	ms_swap_env(t_minishell *ms)
 {
 	t_token		*tok;
 	size_t		ind;
+	// bool		in_double;
+	// bool		in_single;
 
+	// in_double = false;
+	// in_single = false;
 	tok = ms->first_token;
 	while (tok)
 	{
+
 		if (tok->type != TYPE_S_QUOTE_STRING)
 		{
 			ind = 0;
@@ -85,6 +90,42 @@ void	ms_swap_env(t_minishell *ms)
 					ind++;
 			}
 		}
+		// if (tok->type == TYPE_D_QUOTE_STRING)
+		// {
+		// 	ind = 0;
+		// 	while (tok->content[ind])
+		// 	{
+		// 		if (tok->content[ind] == '$')
+		// 			swap(ms, tok, ind);
+		// 		else	
+		// 			ind++;
+		// 	}
+		// }
+		// if (tok->type != TYPE_S_QUOTE_STRING)
+		// {
+		// 	ind = 0;
+		// 	while (tok->content[ind])
+		// 	{
+		// 		if (tok->content[ind] == '\'' && !in_double)
+		// 		{
+		// 			if (in_single)
+		// 				in_single = false;
+		// 			else
+		// 				in_single = true;
+		// 		}
+		// 		if (tok->content[ind] == '\"' && !in_single)
+		// 		{
+		// 			if (in_double)
+		// 				in_double = false;
+		// 			else
+		// 				in_double = true;
+		// 		}
+		// 		if (tok->content[ind] == '$' && !in_single)
+		// 			swap(ms, tok, ind);
+		// 		else	
+		// 			ind++;
+		// 	}
+		// }
 		tok = tok->next;
 	}
 }

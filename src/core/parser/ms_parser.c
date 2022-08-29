@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 09:03:27 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/17 08:03:36 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/29 11:30:28 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,20 @@ void	clean_tokens(t_minishell *ms)
 	}
 }
 
+static void	combine_tokens(t_minishell *ms)
+{
+	t_token	*token;
+
+	token = ms->first_token;
+	while (token)
+	{
+		if (token->no_space)
+			ms_combine_token(token, token->next);
+		else
+			token = token->next;
+	}
+}
+
 // build data structure from line 
 // read command line and build tokens structure 
 // (space "" '' $ |)
@@ -44,5 +58,6 @@ void	ms_parser(t_minishell *ms)
 	ms_swap_env(ms);
 	ms_parse_pipes(ms);
 	ms_parse_redirections(ms);
+	combine_tokens(ms);
 	clean_tokens(ms);
 }

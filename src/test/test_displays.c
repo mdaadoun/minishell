@@ -50,6 +50,7 @@ void test_display_tokens_types(t_minishell *ms)
     	ft_printf("\e[m\n");
         if (token->type == TYPE_EXTERNAL_COMMAND)
             ft_printf("\tExternal binary path: \e[0;32m%s\e[m\n", token->external_path);
+
         token = token->next;
         i++;
     }
@@ -65,6 +66,7 @@ void test_display_tokens(t_minishell *ms)
     while (token)
     {
         ft_printf("%d:\n\tContent: \e[0;36m%s\e[m\n", i, token->content);
+        ft_printf("\n\tNo space: \e[0;36m%d\e[m\n", token->no_space);
         token = token->next;
         i++;
     }
