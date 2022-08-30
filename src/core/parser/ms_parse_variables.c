@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 11:06:35 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/30 07:22:46 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/30 10:30:30 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static size_t	ft_strlen_space(char *str)
 	size_t	ind;
 
 	ind = 0;
-	while (str[ind] && str[ind] != ' ' && str[ind] != '$')
+	while (str[ind] && str[ind] != ' ' && str[ind] != '$' \
+	&& str[ind] != '\'' && str[ind] != '\"')
 		ind++;
 	return (ind);
 }
