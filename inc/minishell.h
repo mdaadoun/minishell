@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/30 11:19:34 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/30 14:23:04 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +212,7 @@ typedef struct s_process {
 
 void	ms_build_env_tab(t_minishell *ms);
 void	ms_free_envp(char **envp);
+t_variable	*ft_get_struct_env(t_minishell *ms, char *str);
 
 /*
  * Main functions

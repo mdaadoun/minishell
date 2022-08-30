@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 10:55:29 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/30 11:19:39 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/30 14:22:53 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,23 @@ int	ms_free_before_exit(t_minishell *ms)
 		free(ms);
 	}
 	return (EXIT_SUCCESS);
+}
+
+t_variable	*ft_get_struct_env(t_minishell *ms, char *str)
+{
+	t_variable	*env;
+
+	env = ms->first_var;
+	while (env)
+	{
+		if (ft_strlen(env->name) != ft_strlen(str))
+		{
+			env = env->next;
+			continue ;
+		}
+		if (!ft_strncmp(env->name, str, ft_strlen(env->name)))
+			return (env);
+		env = env->next;
+	}
+	return (0);
 }

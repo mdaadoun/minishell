@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/30 10:12:16 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/30 14:24:05 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_uint8	ms_export(t_minishell *ms, char **arg)
 {
 	size_t		ind;
 	t_variable	*env;
-	char		*str;
+	t_variable	*find;
 
 	ind = ft_count(arg);
 	if (ind == 1)
@@ -59,8 +59,8 @@ t_uint8	ms_export(t_minishell *ms, char **arg)
 		while (arg[ind])
 		{
 			env = ft_create_variable(arg[ind]);
-			str = ft_get_env(ms, env->name);
-			if (str == 0)
+			find = ft_get_struct_env(ms, env->name);
+			if (find == 0)
 				ft_add_variable(ms, env);
 			else
 				ft_replace_variable(ms, env);
