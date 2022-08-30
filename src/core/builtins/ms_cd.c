@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:28:14 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/30 07:26:58 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/30 08:32:53 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ t_uint8	ms_cd(t_minishell *ms, char **arg)
 	{
 		env = get_struct_env(ms->first_var, "OLDPWD", 7);
 		ret = chdir(env->content);
+		write(1, env->content, ft_strlen(env->content));
+		write(1, "\n", 1);
 		update_pwd(ms);
 	}
 	else

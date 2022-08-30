@@ -6,7 +6,7 @@
 #    By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/20 08:44:56 by mdaadoun          #+#    #+#              #
-#    Updated: 2022/08/29 11:31:53 by mdaadoun         ###   ########.fr        #
+#    Updated: 2022/08/30 07:48:07 by mdaadoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,14 +14,14 @@ NAME = minishell
 SRCS = ms_main.c \
 utils/ms_utils_free.c utils/ms_utils_errors.c \
 utils/ms_utils_extra.c utils/ms_utils_tokenizer.c \
-utils/ms_utils_variable.c utils/ms_utils_processes.c \
+utils/ms_utils_variable.c utils/ms_utils_processes.c utils/ms_utils_events.c \
 builtins/ms_cd.c builtins/ms_echo.c builtins/ms_env.c builtins/ms_exit.c \
 builtins/ms_export.c builtins/ms_pwd.c builtins/ms_unset.c \
 parser/ms_parser.c parser/ms_parse_pipes.c \
 parser/ms_parse_variables.c parser/ms_parse_quotes.c parser/ms_parse_redirections.c \
 analyzer/ms_analyzer.c analyzer/ms_analyze_command.c analyzer/ms_analyze_pipes.c \
 analyzer/ms_analyze_redirections.c analyzer/ms_analyze_arguments.c \
-executer/ms_executer.c executer/ms_events.c executer/ms_build_redirections.c \
+executer/ms_executer.c executer/ms_build_redirections.c \
 executer/ms_build_processes.c executer/ms_run_processes.c \
 executer/ms_redirection_struct.c 
 
@@ -32,7 +32,7 @@ LIBFT = $(DIR_LIB)/libft.a
 CC = gcc
 AR = ar rcs
 RM = rm -f
-FLAGS = -Wall -Wextra -Werror -g # -fsanitize=address
+FLAGS = -Wall -Wextra -Werror # -g # -fsanitize=address
 READLINE_FLAGS = -L/usr/local/lib -I/usr/local/include -lreadline
 
 R = \033[38;5;1m

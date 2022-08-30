@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/30 07:20:36 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/30 07:50:16 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,7 +265,7 @@ void	ms_exit(t_minishell *ms);
 /*
  *  Signal handling:
  *		Files :
- *			core/executer/ms_events.c
+ *			core/utils/ms_utils_events.c.c
 */
 
 void	ms_initialize_signals(void);

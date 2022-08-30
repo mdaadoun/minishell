@@ -1,5 +1,15 @@
 # TODO
 
+* bug affichage des lignes
+
+* $?
+	* valeur retour du dernier process
+> Execute a simple command with an absolute path like /bin/ls or any other command with arguments but without
+quotes and double quotes then execute echo $?
+
+* ls^C pour faire une refresh du buffer ? 
+
+
 ### valgrind
 	* test "sad | das| | asd| Asd| sda |"
 		* check: Invalid read of size 1
@@ -7,24 +17,12 @@
 		* valgrind error and create 9 tokens instead of 5
 
 ### redirection structure
-	* '> file echo hello' & 'echo hello > file' do the same
 	* build a linked structure for all redirections in a process
 	* add to tester the display for redirections
 
 ### ERRORS: 
 	* check error and if any print and return shell
 	* erreurs de syntaxe autour des redirections a reprendre
-
-### $? 
-	* valeur retour du dernier process
-
-## signals handling
-	* Block ^\ when Ctrl-\ is used
-
-
-### analyzer:
-	* a|b|c|e|p|pw|ec|un|ex
-		* builtin_command type evaluated, check the strcmp!
 
 ### EXECUTER:
 
