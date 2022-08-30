@@ -1,5 +1,17 @@
 # TODO
 
+* export segmentation fault
+	export a
+	export a = 1
+
+* unset behavior to review
+
+* unset PATH not working
+> Try command ls or other with PATH unset and command need to not work
+
+
+* double redirection to review
+
 * bug affichage des lignes
 
 * $?
@@ -10,14 +22,7 @@ quotes and double quotes then execute echo $?
 * cat > ^C
 	double prompt
 
-* unset PATH not working
-> Try command ls or other with PATH unset and command need to not work
-
-* echo "'$USER'"
-> print only ' but need to print 'USER_VALUE'
-
-* export segmentation fault
-	export a
-	export a = 1
+* cwd_path dans ms a supprimer
+	remplacer par la variable d'env PWD
 
 * range the structure for memory optimization, bigger to lower byte in order ?

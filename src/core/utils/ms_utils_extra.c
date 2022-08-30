@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 10:55:29 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/30 10:19:01 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/30 11:19:39 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,10 @@ void	ms_combine_token(t_token *first_token, t_token *second_token)
  */
 int	ms_free_before_exit(t_minishell *ms)
 {
-	int	i;
-
-	i = 0;
 	if (ms)
 	{
 		if (ms->cwd_path)
 			free(ms->cwd_path);
-		if (ms->bin_paths)
-		{
-			while (ms->bin_paths[i])
-				free(ms->bin_paths[i++]);
-			free(ms->bin_paths);
-		}
 		ms_free_last_command(ms);
 		ms_free_env(ms);
 		if (ms->envp)

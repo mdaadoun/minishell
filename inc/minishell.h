@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/30 10:11:00 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/30 11:19:34 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ typedef struct s_error {
 /*
  *	Main structure:
  *		cwd_path:		the current working directory.
- *		bin_paths:		path where to find all binary.
  *		envp: 			the env data.
  *		full_command:	last line read from input.
  *		first_token:	the entry point to the token structure.
@@ -116,7 +115,6 @@ typedef struct s_error {
 
 typedef struct s_minishell {
 	char				*cwd_path;
-	char				**bin_paths;
 	char				**envp;
 	char				*full_command;
 	struct s_token		*first_token;
