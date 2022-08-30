@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:43:46 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/23 10:56:22 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/30 10:48:23 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static bool	check_if_external(t_minishell *ms, t_token *command)
 
 	if (check_absolute_path(command) == true)
 		return (true);
-	path = ms->bin_paths;
+	path = ft_split(ft_get_env(ms, "PATH"), ':');
 	while (*path)
 	{
 		tmp_path = ft_strjoin(*path, "/");

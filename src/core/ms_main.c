@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:07:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/30 10:03:24 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/30 10:43:44 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ms_initialize_minishell(t_minishell **ms, t_error *error, char **envp)
 		exit(ms_free_before_exit(*ms));
 	}
 	(*ms)->cwd_path = getcwd(buf, 1024);
-	(*ms)->bin_paths = ft_split(getenv("PATH"), ':');
+//	(*ms)->bin_paths = ft_split(getenv("PATH"), ':');
 	(*ms)->full_command = "";
 	ms_copy_env(*ms, envp);
 	ms_build_env_tab((*ms));
