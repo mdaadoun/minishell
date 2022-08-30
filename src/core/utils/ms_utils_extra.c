@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 10:55:29 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/30 09:40:51 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/30 10:11:23 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	ms_free_before_exit(t_minishell *ms)
 		}
 		ms_free_last_command(ms);
 		ms_free_env(ms);
+		ms_free_envp(ms->envp);
 		if (ms->global_error->flag)
 		{
 			write(2, ms->global_error->msg, ms->global_error->length);

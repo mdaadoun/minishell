@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/30 10:03:32 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/30 10:11:00 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +212,9 @@ typedef struct s_process {
 // Minishell functions
 //====================
 
+void	ms_build_env_tab(t_minishell *ms);
+void	ms_free_envp(char **envp);
+
 /*
  * Main functions
  *		files:
@@ -219,7 +222,6 @@ typedef struct s_process {
 */
 
 void	ms_initialize_minishell(t_minishell **ms, t_error *error, char **envp);
-void	ms_build_env_tab(t_minishell *ms);
 
 /*
  *	Errors functions:

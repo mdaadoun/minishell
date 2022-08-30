@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/23 16:07:56 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/30 10:13:37 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void	check_env(t_minishell *ms, char *arg, t_variable *env)
 		else if (!ft_strncmp(arg, env->name, ft_strlen(env->name)))
 		{
 			ft_remove_env(ms, last, env);
+			ms_build_env_tab(ms);
 			break ;
 		}
 		last = env;

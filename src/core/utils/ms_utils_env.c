@@ -6,7 +6,7 @@
 /*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 09:43:39 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/30 09:59:41 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/30 10:13:54 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static size_t	envlen(t_variable *env)
 	return (len);
 }
 
-static void	free_envp(char **envp)
+void	ms_free_envp(char **envp)
 {
 	size_t	ind;
 
@@ -57,7 +57,7 @@ static void	set_envp(char **envp, t_variable *env)
 void	ms_build_env_tab(t_minishell *ms)
 {
 	if (ms->envp)
-		free_envp(ms->envp);
+		ms_free_envp(ms->envp);
 	ms->envp = ft_calloc(sizeof(char *), envlen(ms->first_var));
 	set_envp(ms->envp, ms->first_var);
 }
