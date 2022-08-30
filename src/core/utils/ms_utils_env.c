@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_utils_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 09:43:39 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/30 10:13:54 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/30 10:20:10 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,6 @@ void	ms_build_env_tab(t_minishell *ms)
 {
 	if (ms->envp)
 		ms_free_envp(ms->envp);
-	ms->envp = ft_calloc(sizeof(char *), envlen(ms->first_var));
+	ms->envp = ft_calloc(sizeof(char *), envlen(ms->first_var) + 1);
 	set_envp(ms->envp, ms->first_var);
 }
