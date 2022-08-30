@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 09:03:27 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/29 11:13:25 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/30 07:20:00 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,44 +28,37 @@ static int	check_quote_space(char c)
 
 static size_t	init_tok(t_minishell *ms, size_t ind, char *line, char c)
 {
-	char	*content;
-	size_t	count;
-	bool	no_space;
+	size_t			count;
+	bool			no_space;
+	t_token_type	type;
 
 	no_space = false;
 	count = 0;
+	type = NO_TYPE;
 	while (check_char(line[ind + count], c) && line[ind + count])
 		count++;
 	if (!check_char(line[ind + count], c))
 	{
-		content = ft_substr(line, ind, count);
 		if (c == '\'')
-		{
-			if (line[ind + count + 1] && line[ind + count + 1] != ' ')
-				no_space = true;
-			ms_add_token(ms, content, TYPE_S_QUOTE_STRING, no_space);
-		}
+			type = TYPE_S_QUOTE_STRING;
 		else if (c == '"')
+			type = TYPE_D_QUOTE_STRING;
+		if (type != NO_TYPE)
 		{
 			if (line[ind + count + 1] && line[ind + count + 1] != ' ')
 				no_space = true;
-			ms_add_token(ms, content, TYPE_D_QUOTE_STRING, no_space);
+			ms_add_token(ms, ft_substr(line, ind, count), type, no_space);
 		}
 		count++;
 	}
 	return (count);
 }
 
-void	ms_parse_quotes(t_minishell *ms)
+void	ms_parse_quotes(t_minishell *ms, char *line, size_t ind)
 {
-	size_t	ind;
 	size_t	count;	
-	char	*line;
-	char	*content;
 	bool	no_space;
 
-	line = ms->full_command;
-	ind = 0;
 	while (line[ind])
 	{
 		count = 0;
@@ -82,8 +75,7 @@ void	ms_parse_quotes(t_minishell *ms)
 				count++;
 			if (line[ind + count] && line[ind + count] != ' ')
 				no_space = true;
-			content = ft_substr(line, ind, count);
-			ms_add_token(ms, content, NO_TYPE, no_space);
+			ms_add_token(ms, ft_substr(line, ind, count), NO_TYPE, no_space);
 		}
 		ind += count;
 	}

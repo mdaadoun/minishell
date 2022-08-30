@@ -6,16 +6,15 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:49:41 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/23 17:37:09 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/30 06:49:15 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-
-static int8_t count_tokens(t_token *token)
+static int8_t	count_tokens(t_token *token)
 {
-	int8_t nb;
+	int8_t	nb;
 
 	nb = 0;
 	while (token && token->type != TYPE_PIPE)
@@ -26,7 +25,6 @@ static int8_t count_tokens(t_token *token)
 			nb++;
 		token = token->next;
 	}
-
 	return (nb);
 }
 
@@ -43,7 +41,7 @@ void	ms_build_type_lines(t_minishell *ms)
 
 	process = ms->first_process;
 	token = ms->first_token;
-	while(process)
+	while (process)
 	{
 		nb_tokens = count_tokens(token) + 1;
 		types_line = (t_token_type *) ft_calloc(sizeof(int), (size_t)nb_tokens);

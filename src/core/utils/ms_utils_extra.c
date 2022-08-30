@@ -6,13 +6,13 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 10:55:29 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/29 11:29:43 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/30 06:52:38 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-void 	ms_combine_token(t_token *first_token, t_token *second_token)
+void	ms_combine_token(t_token *first_token, t_token *second_token)
 {
 	char	*tmp;
 

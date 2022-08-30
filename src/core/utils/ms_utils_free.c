@@ -6,11 +6,30 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 13:48:48 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/23 15:20:12 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/30 06:58:33 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
+
+static t_process	*free_process(t_process *process)
+{
+	t_process	*swp;
+	int			idx;
+
+	swp = process->next;
+	idx = 0;
+	while (process->cmd[idx])
+		free(process->cmd[idx++]);
+	free(process->cmd);
+	free(process->types_line);
+	free(process->internal_error);
+	if (process->has_redirection)
+		ms_free_all_redirections(process);
+	unlink(".heredoc");
+	free(process);
+	return (swp);
+}
 
 /*
  *	Free memory related to the last command.
@@ -21,27 +40,12 @@
 void	ms_free_last_command(t_minishell *ms)
 {
 	t_process	*process;
-	t_process	*swp;
-	int			idx;
 
 	if (ms)
 	{
 		process = ms->first_process;
 		while (process)
-		{
-			swp = process->next;
-			idx = 0;
-			while (process->cmd[idx])
-				free(process->cmd[idx++]);
-			free(process->cmd);
-			free(process->types_line);
-			free(process->internal_error);
-			if (process->has_redirection)
-				ms_free_all_redirections(process);
-			unlink(".heredoc");
-			free(process);
-			process = swp;
-		}
+			process = free_process(process);
 		ms->first_process = NULL;
 		if (ms->full_command)
 			free(ms->full_command);
@@ -92,8 +96,8 @@ int	ms_free_before_exit(t_minishell *ms)
 */
 void	ms_free_env(t_minishell *ms)
 {
-	t_variable *variable;
-	t_variable *tmp;
+	t_variable	*variable;
+	t_variable	*tmp;
 
 	variable = ms->first_var;
 	while (variable)

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:07:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/23 14:54:18 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/30 06:47:44 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void	ms_initialize_minishell(t_minishell **ms, t_error *error, char **envp)
  */
 static void	display_prompt_and_wait(t_minishell *ms)
 {
-	char *prompt;
-	char *swp;
+	char	*prompt;
+	char	*swp;
 
 	prompt = ft_strjoin("\e[0;34m", ms->cwd_path);
 	swp = prompt;

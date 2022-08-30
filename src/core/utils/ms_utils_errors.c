@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 11:37:03 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/23 15:20:16 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/30 07:00:14 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	check_bad_syntax(t_minishell *ms)
  * 		2. if syntax correct (pipes next to each other)
  * 		3. redirection error ??
  */
-void ms_checking_for_errors(t_minishell *ms)
+void	ms_checking_for_errors(t_minishell *ms)
 {
 	check_bad_commands(ms);
 	check_bad_syntax(ms);
@@ -91,8 +91,7 @@ void	ms_set_error(t_error *error, t_err_key err_key, char *err_msg)
 	}
 }
 
-
-void ms_print_error(t_minishell *ms)
+void	ms_print_error(t_minishell *ms)
 {
 	write(2, "\e[0;31mError: ", 14);
 	write(2, ms->global_error->msg, ms->global_error->length);

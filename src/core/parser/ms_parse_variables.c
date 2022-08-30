@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 11:06:35 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/29 10:28:25 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/30 07:22:46 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	ms_swap_env(t_minishell *ms)
 			{
 				if (tok->content[ind] == '$')
 					swap(ms, tok, ind);
-				else	
+				else
 					ind++;
 			}
 		}

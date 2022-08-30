@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 09:03:27 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/29 11:30:28 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/30 07:19:49 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	combine_tokens(t_minishell *ms)
 // (space "" '' $ |)
 void	ms_parser(t_minishell *ms)
 {
-	ms_parse_quotes(ms);
+	ms_parse_quotes(ms, ms->full_command, 0);
 	ms_swap_env(ms);
 	ms_parse_pipes(ms);
 	ms_parse_redirections(ms);

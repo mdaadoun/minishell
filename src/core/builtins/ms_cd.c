@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:28:14 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/29 09:19:57 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/30 07:26:58 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static t_variable	*get_struct_env(t_variable *env, char *name, size_t len)
 	while (env)
 	{
 		if (!ft_strncmp(env->name, name, len))
-			break;
+			break ;
 		env = env->next;
 	}
 	return (env);
@@ -26,7 +26,7 @@ static t_variable	*get_struct_env(t_variable *env, char *name, size_t len)
 static void	update_pwd(t_minishell *ms)
 {
 	t_variable	*old;
-	char	cwd[PATH_MAX];
+	char		cwd[PATH_MAX];
 
 	old = get_struct_env(ms->first_var, "OLDPWD", 7);
 	free(old->content);
@@ -36,7 +36,7 @@ static void	update_pwd(t_minishell *ms)
 
 static bool	args_are_valid(t_minishell *ms, char **arg)
 {
-	int i;
+	int			i;
 	t_err_key	err_key;
 	char		*err_msg;
 
@@ -68,7 +68,7 @@ t_uint8	ms_cd(t_minishell *ms, char **arg)
 	}
 	else if (!strncmp(arg[1], "-", 2))
 	{
-		env = get_struct_env(ms->first_var, "OLDPWD", 5);
+		env = get_struct_env(ms->first_var, "OLDPWD", 7);
 		ret = chdir(env->content);
 		update_pwd(ms);
 	}
