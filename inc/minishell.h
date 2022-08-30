@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/30 09:28:40 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/30 10:03:32 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,6 +219,7 @@ typedef struct s_process {
 */
 
 void	ms_initialize_minishell(t_minishell **ms, t_error *error, char **envp);
+void	ms_build_env_tab(t_minishell *ms);
 
 /*
  *	Errors functions:
@@ -236,7 +237,7 @@ void	ms_print_error(t_minishell *ms);
  *			core/utils/ms_utils_variable.c
 */
 
-void		ms_copy_env(t_minishell *ms);
+void		ms_copy_env(t_minishell *ms, char **envp);
 char		*ft_get_env(t_minishell *ms, char *str);
 void		ft_replace_variable(t_minishell *ms, t_variable *env);
 void		ft_add_variable(t_minishell *ms, t_variable *env);

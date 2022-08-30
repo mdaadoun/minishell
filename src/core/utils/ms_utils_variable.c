@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 10:21:22 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/23 15:17:19 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/30 09:58:50 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,14 @@ void	ft_replace_variable(t_minishell *ms, t_variable *env)
 	}
 }
 
-void	ms_copy_env(t_minishell *ms)
+void	ms_copy_env(t_minishell *ms, char **envp)
 {
 	int	ind;
 
 	ind = 0;
-	while (ms->envp[ind])
+	while (envp[ind])
 	{
-		ft_add_variable(ms, ft_create_variable(ms->envp[ind]));
+		ft_add_variable(ms, ft_create_variable(envp[ind]));
 		ind++;
 	}
 }
