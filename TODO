@@ -7,7 +7,8 @@
 > Execute a simple command with an absolute path like /bin/ls or any other command with arguments but without
 quotes and double quotes then execute echo $?
 
-* ls^C pour faire une refresh du buffer ?
+* cat > ^C
+	double prompt
 
 * unset PATH not working
 > Try command ls or other with PATH unset and command need to not work
@@ -15,44 +16,8 @@ quotes and double quotes then execute echo $?
 * echo "'$USER'"
 > print only ' but need to print 'USER_VALUE'
 
+* export segmentation fault
+	export a
+	export a = 1
 
-### valgrind
-	* test "sad | das| | asd| Asd| sda |"
-		* check: Invalid read of size 1
-	* >><><>>
-		* valgrind error and create 9 tokens instead of 5
-
-### redirection structure
-	* build a linked structure for all redirections in a process
-	* add to tester the display for redirections
-
-### ERRORS: 
-	* check error and if any print and return shell
-	* erreurs de syntaxe autour des redirections a reprendre
-
-### EXECUTER:
-
-### TESTER:
-
-* tester using now the same set of test, should display only what is asked
-* tester should work with valgrind the same way as the main program to test if everything is free
-
-
-### Commenting, refactoring and cleaning code.
-- []: ms_main.c
-- []: ms_free.c
-- []: ms_errors.c
-	PARSER
-	-[]: ms_paser.c
-	-...
-	analyzer
-	-[]: ms_analyzer.c
-	-...
-	EXECUTER
-	-[]: ms_executer.c
-	-...
-	BUILTINS
-	-...
-
-
-* range the structure for memory optimization, bigger to lower byte in order
+* range the structure for memory optimization, bigger to lower byte in order ?

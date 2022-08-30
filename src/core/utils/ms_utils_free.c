@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 13:48:48 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/30 06:58:33 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/30 09:40:29 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,43 +52,6 @@ void	ms_free_last_command(t_minishell *ms)
 		ms->full_command = NULL;
 		ms_free_all_tokens(ms);
 	}
-}
-
-/*
- *	Free all the process allocated memory and print error message if any.
- *
- *	@params:
- *		ms : the main minishell data structure to free.
- *	@return:
- *		EXIT_SUCCESS or EXIT_FAILURE depending error.
- */
-int	ms_free_before_exit(t_minishell *ms)
-{
-	int	i;
-
-	i = 0;
-	if (ms)
-	{
-		if (ms->cwd_path)
-			free(ms->cwd_path);
-		if (ms->bin_paths)
-		{
-			while (ms->bin_paths[i])
-				free(ms->bin_paths[i++]);
-			free(ms->bin_paths);
-		}
-		ms_free_last_command(ms);
-		ms_free_env(ms);
-		if (ms->global_error->flag)
-		{
-			write(2, ms->global_error->msg, ms->global_error->length);
-			write(2, "\n", 1);
-			free(ms);
-			return (EXIT_FAILURE);
-		}
-		free(ms);
-	}
-	return (EXIT_SUCCESS);
 }
 
 /*

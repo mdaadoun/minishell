@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:07:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/30 08:20:12 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/30 09:28:52 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ static void	display_prompt_and_wait(t_minishell *ms)
 	free(swp);
 	ms->full_command = readline(prompt);
 	free(prompt);
-	rl_on_new_line();
-	rl_replace_line("", 0);
 	if (!ms->full_command)
 	{
 		ft_printf("exit\n");
