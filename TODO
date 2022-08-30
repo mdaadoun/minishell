@@ -13,6 +13,7 @@
 * double redirection to review
 
 * bug affichage des lignes
+> Don't need to take care of it
 
 * $?
 	* valeur retour du dernier process

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 09:43:39 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/30 10:20:10 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/30 13:19:19 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ static void	set_envp(char **envp, t_variable *env)
 	while (env)
 	{
 		var = ft_strjoin(env->name, "=");
-		envp[ind] = ft_strjoin(var, env->content);
+		if (env->content)
+			envp[ind] = ft_strjoin(var, env->content);
+		else
+			envp[ind] = ft_strdup(var);
 		free(var);
 		ind++;
 		env = env->next;
