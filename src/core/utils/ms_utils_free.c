@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 13:48:48 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/30 09:40:29 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/30 15:57:58 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	ms_free_last_command(t_minishell *ms)
 {
 	t_process	*process;
 
+	g_sig->in_process = false;
 	if (ms)
 	{
 		process = ms->first_process;

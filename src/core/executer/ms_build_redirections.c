@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:12:25 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/24 09:38:43 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/30 18:19:42 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,13 @@ static void open_heredoc(t_token *token)
 	line = "";
 	check = 1;
 	unlink(".heredoc");
+	g_sig->in_heredoc = true;
 	while (check)
 	{
-		ms_initialize_signals();
+		// ms_initialize_signals();
 		line = readline("> ");
 		if (!line)
-		{
-			ft_printf("TODO: Ctlr-D exit heredoc, free all processes.\n");
 			break;
-		}
 		check = ft_strncmp(line, delimiter, ft_strlen(delimiter) + 1);
 		if (!check)
 			break;
@@ -68,6 +66,7 @@ void ms_build_redirections(t_token *token,	t_process *process)
 {
 	t_err_key 	err_key;
 	char 		*err_msg;
+	pid_t		pid;
 	
 	err_key = ERROR_SYNTAX;
 	err_msg = MSG_ERROR_SYNTAX_REDIRECT;
@@ -86,7 +85,13 @@ void ms_build_redirections(t_token *token,	t_process *process)
 		process->has_redirection = true;
 		if (token->next && token->next->type == TYPE_ARG_DELIMITER)
 		{
-			open_heredoc(token);
+			pid = fork();
+			if (pid == 0)
+			{
+				open_heredoc(token);
+				// exit(0);
+			}
+			waitpid(pid, NULL, 0);
 			ms_add_redirection(process, token->type, ft_strdup(".heredoc"));
 		}
 		else

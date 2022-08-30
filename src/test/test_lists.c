@@ -4,7 +4,9 @@
 void	test_quotes(t_minishell *ms, int debug)
 {
 
-	test_run_command(ms, "\"$a\"ls'$b'", debug);
+	test_run_command(ms, "'$USER'", debug);
+	test_run_command(ms, "\"'$USER'\"", debug);
+	// test_run_command(ms, "\"$a\"ls'$b'", debug);
 	// test_run_command(ms, "test'test'", debug);
 	// test_run_command(ms, "\"$a $b\"ls'$b $a'", debug);
 	// test_run_command(ms, "test\"test\"", debug);

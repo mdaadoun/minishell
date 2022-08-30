@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/30 14:23:04 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/30 14:51:16 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 //==========
 
 # include "libft.h"
-# include <stdio.h>
 # include <limits.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -122,6 +121,18 @@ typedef struct s_minishell {
 	struct s_process	*first_process;
 	struct s_error		*global_error;
 }	t_minishell;
+
+
+/*
+ *  Signal structure:
+*/
+
+typedef struct s_signal {
+	bool in_heredoc;
+	bool in_process;
+} t_signal;
+
+t_signal *g_sig;
 
 /*
  *  Builtin commands structures:
