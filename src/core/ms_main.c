@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:07:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/31 09:50:49 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/31 11:52:42 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,18 @@
  */
 void	ms_initialize_minishell(t_minishell **ms, t_error *error, char **envp)
 {
-	char	*buf;
-
 	ft_printf("%s", MINISHELL_LOGO);
-	g_sig =  ft_calloc(sizeof(t_signal), 1);
+	g_sig.in_child = false;
+	g_sig.in_heredoc = false;
+	g_sig.in_process = false;
 	*ms = (t_minishell *) ft_calloc(sizeof(t_minishell), 1);
-	if (!*ms || !g_sig)
+	if (!*ms)
 	{
 		write(2, MSG_ERROR_MALLOC, 41);
 		exit(EXIT_FAILURE);
 	}
 	error->flag = false;
 	(*ms)->global_error = error;
-	buf = (char *)ft_calloc(sizeof(char), 1024);
-	if (!buf)
-	{
-		ms_set_error((*ms)->global_error, ERROR_MALLOC, MSG_ERROR_MALLOC);
-		exit(ms_free_before_exit(*ms));
-	}
-	(*ms)->cwd_path = getcwd(buf, 1024);
 	(*ms)->full_command = "";
 	ms_copy_env(*ms, envp);
 	(*ms)->envp = NULL;
@@ -53,8 +46,10 @@ static void	display_prompt_and_wait(t_minishell *ms)
 {
 	char	*prompt;
 	char	*swp;
+	t_variable	*env;
 
-	prompt = ft_strjoin("\e[0;34m", ms->cwd_path);
+	env = ft_get_struct_env(ms, "PWD");
+	prompt = ft_strjoin("\e[0;34m", env->content);
 	swp = prompt;
 	prompt = ft_strjoin(prompt, "\e[m\e[0;36m>\e[m");
 	free(swp);

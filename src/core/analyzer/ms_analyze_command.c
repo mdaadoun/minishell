@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:43:46 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/30 10:48:23 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/31 11:59:53 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,15 @@ static bool	check_if_external(t_minishell *ms, t_token *command)
 	char	*tmp_path;
 	char	*command_path;
 	char	**path;
+	int		i;
 
+	i = 0;
 	if (check_absolute_path(command) == true)
 		return (true);
 	path = ft_split(ft_get_env(ms, "PATH"), ':');
-	while (*path)
+	while (path[i])
 	{
-		tmp_path = ft_strjoin(*path, "/");
+		tmp_path = ft_strjoin(path[i], "/");
 		command_path = ft_strjoin(tmp_path, command->content);
 		free(tmp_path);
 		if (access(command_path, 0) == 0)
@@ -91,12 +93,14 @@ static bool	check_if_external(t_minishell *ms, t_token *command)
 			if (command->external_path)
 				free (command->external_path);
 			command->external_path = command_path;
+			ms_free_double_pointer(path);
 			return (true);
 		}
 		else
 			free(command_path);
-		path++;
+		i++;
 	}
+	ms_free_double_pointer(path);
 	return (false);
 }
 

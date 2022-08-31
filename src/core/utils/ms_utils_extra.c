@@ -6,11 +6,25 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 10:55:29 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/30 14:22:53 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/31 12:01:16 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
+
+
+void	ms_free_double_pointer(char **data)
+{
+	size_t	ind;
+
+	ind = 0;
+	while (data[ind])
+	{
+		free(data[ind]);
+		ind++;
+	}
+	free(data);
+}
 
 void	ms_combine_token(t_token *first_token, t_token *second_token)
 {
@@ -35,12 +49,10 @@ int	ms_free_before_exit(t_minishell *ms)
 {
 	if (ms)
 	{
-		if (ms->cwd_path)
-			free(ms->cwd_path);
 		ms_free_last_command(ms);
 		ms_free_env(ms);
 		if (ms->envp)
-			ms_free_envp(ms->envp);
+			ms_free_double_pointer(ms->envp);
 		if (ms->global_error->flag)
 		{
 			write(2, ms->global_error->msg, ms->global_error->length);

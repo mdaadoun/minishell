@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:28:29 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/31 10:02:42 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/31 11:51:21 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ static void	cancel_process(int signo)
 {
 	if (signo == SIGINT)
 	{
-		if (g_sig->in_heredoc)
+		if (g_sig.in_heredoc)
 		{
-			g_sig->in_heredoc = false;	
+			g_sig.in_heredoc = false;	
 			exit(0);
 		}
 		else
 		{
-			if (!g_sig->in_child)
+			if (!g_sig.in_child)
 				write(1, "\n", 1);
-			if (g_sig->in_process)
-				g_sig->in_process = false;
+			if (g_sig.in_process)
+				g_sig.in_process = false;
 			else
 			{
 				rl_on_new_line();
@@ -42,7 +42,7 @@ static void	cancel_process(int signo)
 	}
 	if (signo == SIGQUIT)
 	{
-		if (!g_sig->in_child)
+		if (!g_sig.in_child)
 			ft_printf("\b\b  \b\b");
 		return ;
 	}

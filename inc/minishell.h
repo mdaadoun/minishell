@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/31 09:58:07 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/31 12:00:57 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include <sys/wait.h>       
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <signal.h>
 
 //======
 // Types
@@ -113,7 +114,7 @@ typedef struct s_error {
 */
 
 typedef struct s_minishell {
-	char				*cwd_path;
+	// char				*cwd_path;
 	char				**envp;
 	char				*full_command;
 	struct s_token		*first_token;
@@ -134,7 +135,7 @@ typedef struct s_signal {
 	bool in_process;
 } t_signal;
 
-t_signal *g_sig;
+t_signal g_sig;
 
 /*
  *  Builtin commands structures:
@@ -224,7 +225,6 @@ typedef struct s_process {
 //====================
 
 void	ms_build_env_tab(t_minishell *ms);
-void	ms_free_envp(char **envp);
 t_variable	*ft_get_struct_env(t_minishell *ms, char *str);
 
 /*
@@ -298,6 +298,7 @@ t_token	*ms_delete_token(t_token *token);
 void	ms_add_token(t_minishell *ms, char *content, t_token_type type, bool no_space);
 void	ms_push_token(t_token *first_token, t_token *second_token);
 void 	ms_combine_token(t_token *first_token, t_token *second_token);
+void	ms_free_double_pointer(char **data);
 
 /*
  *  Parser:
