@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:28:14 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/31 11:37:17 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/31 17:24:07 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,41 +54,47 @@ static bool	args_are_valid(t_minishell *ms, char **arg)
 	if (i > 2)
 	{
 		ms_set_error(ms->global_error, err_key, err_msg);
+		ms->exit_status = 1;
 		return (false);
 	}
 	return (true);
 }
 
-t_uint8	ms_cd(t_minishell *ms, char **arg)
+void	ms_cd(t_minishell *ms, char **arg)
 {
 	int			ret;
 	t_variable	*env;
 	char		*path;
 
-	if (!args_are_valid(ms, arg))
-		return (1);
-	else if (!arg[1] || !ft_strncmp(arg[1], "~", 1))
+	if (args_are_valid(ms, arg))
 	{
-		env = get_struct_env(ms->first_var, "HOME", 5);
-		path = ft_strjoin(env->content, &arg[1][1]);
-		ret = chdir(path);
-		update_pwd(path, ms, false);
+		if (!arg[1] || !ft_strncmp(arg[1], "~", 1))
+		{
+			env = get_struct_env(ms->first_var, "HOME", 5);
+			path = ft_strjoin(env->content, &arg[1][1]);
+			ret = chdir(path);
+			update_pwd(path, ms, false);
+		}
+		else if (!strncmp(arg[1], "-", 2))
+		{
+			env = get_struct_env(ms->first_var, "OLDPWD", 7);
+			ret = chdir(env->content);
+			write(1, env->content, ft_strlen(env->content));
+			write(1, "\n", 1);
+			update_pwd(env->content, ms, true);
+		}
+		else
+		{
+			ret = chdir(arg[1]);
+			if (ret == 0)
+				update_pwd(NULL, ms, false);
+		}
+		if (ret != 0)
+		{
+			ms_set_error(ms->global_error, ERROR_PATH, MSG_ERROR_PATH);
+			ms->exit_status = 1;
+		}
+		else
+			ms->exit_status = 0;
 	}
-	else if (!strncmp(arg[1], "-", 2))
-	{
-		env = get_struct_env(ms->first_var, "OLDPWD", 7);
-		ret = chdir(env->content);
-		write(1, env->content, ft_strlen(env->content));
-		write(1, "\n", 1);
-		update_pwd(env->content, ms, true);
-	}
-	else
-	{
-		ret = chdir(arg[1]);
-		if (ret == 0)
-			update_pwd(NULL, ms, false);
-	}
-	if (ret != 0)
-		ms_set_error(ms->global_error, ERROR_PATH, MSG_ERROR_PATH);
-	return (ret);
 }

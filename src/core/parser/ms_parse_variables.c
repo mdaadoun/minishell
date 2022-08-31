@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 11:06:35 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/30 14:21:01 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/31 16:29:03 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,7 @@ static void	swap(t_minishell *ms, t_token *tok, size_t ind)
 	s1 = ft_substr(tok->content, 0, ind);
 	lenv = ft_strlen_space(&tok->content[ind + 1]);
 	if (lenv == 1 && tok->content[ind + 1] == '?')
-	{
-		//function to get return of the last program
-		tmp = "0";
-	}
+		tmp = ft_itoa(ms->exit_status);
 	else
 	{
 		s2 = ft_substr(tok->content, ind + 1, lenv);
@@ -71,11 +68,7 @@ void	ms_swap_env(t_minishell *ms)
 {
 	t_token		*tok;
 	size_t		ind;
-	// bool		in_double;
-	// bool		in_single;
 
-	// in_double = false;
-	// in_single = false;
 	tok = ms->first_token;
 	while (tok)
 	{

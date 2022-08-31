@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/31 14:48:17 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/31 17:11:59 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,13 +115,13 @@ typedef struct s_error {
 */
 
 typedef struct s_minishell {
-	// char				*cwd_path;
 	char				**envp;
 	char				*full_command;
 	struct s_token		*first_token;
 	struct s_variable	*first_var;
 	struct s_process	*first_process;
 	struct s_error		*global_error;
+	int					exit_status;
 }	t_minishell;
 
 
@@ -273,7 +273,7 @@ t_variable	*ft_create_variable(char *str);
 */
 
 t_uint8		ms_echo(char **arg);
-t_uint8		ms_cd(t_minishell *ms, char **arg);
+void		ms_cd(t_minishell *ms, char **arg);
 t_uint8		ms_pwd(void);
 t_uint8		ms_export(t_minishell *ms, char **arg);
 t_uint8		ms_unset(t_minishell *ms, char **arg);

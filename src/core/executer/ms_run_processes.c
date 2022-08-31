@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 08:01:33 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/22 15:37:32 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/31 17:47:34 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,9 +148,10 @@ static void	exec_builtin(t_minishell *ms, t_process *proc)
 
 void	ms_start_processes(t_minishell *ms)
 {
-	t_process	*proc;
-	int			pip[2];
 	t_redirection	*redir;
+	t_process		*proc;
+	int				pip[2];
+	int				status;
 
 	proc = ms->first_process;
 	while (proc)
@@ -197,7 +198,10 @@ void	ms_start_processes(t_minishell *ms)
 	proc = ms->first_process;
 	while (proc)
 	{
-		waitpid(proc->pid, NULL, 0);
+		waitpid(proc->pid, &status, 0);
+		if (!ms->global_error->flag)
+			if (WIFEXITED(status))
+				ms->exit_status = WEXITSTATUS(status);
 		proc = proc->next;
 	}
 }
