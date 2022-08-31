@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:12:25 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/30 18:19:42 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/31 09:55:01 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,8 @@ static void open_heredoc(t_token *token)
 	line = "";
 	check = 1;
 	unlink(".heredoc");
-	g_sig->in_heredoc = true;
 	while (check)
 	{
-		// ms_initialize_signals();
 		line = readline("> ");
 		if (!line)
 			break;
@@ -88,10 +86,15 @@ void ms_build_redirections(t_token *token,	t_process *process)
 			pid = fork();
 			if (pid == 0)
 			{
+				g_sig->in_heredoc = true;
 				open_heredoc(token);
-				// exit(0);
+				g_sig->in_heredoc = false;	
+				exit (0);
 			}
-			waitpid(pid, NULL, 0);
+			else
+				g_sig->in_child = true;
+			waitpid(pid, NULL, 0);	
+			g_sig->in_child = false;		
 			ms_add_redirection(process, token->type, ft_strdup(".heredoc"));
 		}
 		else

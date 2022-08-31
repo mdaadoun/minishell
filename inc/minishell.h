@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/30 14:51:16 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/31 09:58:07 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,9 +125,11 @@ typedef struct s_minishell {
 
 /*
  *  Signal structure:
+ *		Used to deal with Ctrl-C in the heredoc
 */
 
 typedef struct s_signal {
+	bool in_child;
 	bool in_heredoc;
 	bool in_process;
 } t_signal;

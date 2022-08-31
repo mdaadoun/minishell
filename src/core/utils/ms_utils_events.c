@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:28:29 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/30 17:48:51 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/31 09:56:07 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,15 @@ static void	cancel_process(int signo)
 {
 	if (signo == SIGINT)
 	{
-		write(1, "\n", 1);
 		if (g_sig->in_heredoc)
 		{
-			g_sig->in_heredoc = false;
+			g_sig->in_heredoc = false;	
 			exit(0);
 		}
 		else
 		{
+			if (!g_sig->in_child)
+				write(1, "\n", 1);
 			if (g_sig->in_process)
 				g_sig->in_process = false;
 			else

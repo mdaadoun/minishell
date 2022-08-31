@@ -6,22 +6,11 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:07:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/30 17:12:43 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/31 09:50:49 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-t_signal *g_sig;
-
-// int test(struct _IO_FILE *file)
-// {
-// 	rl_on_new_line();
-// 	rl_replace_line("", 0);
-// 	rl_redisplay();
-// 	(void) file;
-// 	return (0);
-// }
 
 /*
  *	Initialization of the minishell main data structure.
@@ -32,7 +21,6 @@ void	ms_initialize_minishell(t_minishell **ms, t_error *error, char **envp)
 
 	ft_printf("%s", MINISHELL_LOGO);
 	g_sig =  ft_calloc(sizeof(t_signal), 1);
-	// rl_getc_function = test;
 	*ms = (t_minishell *) ft_calloc(sizeof(t_minishell), 1);
 	if (!*ms || !g_sig)
 	{
