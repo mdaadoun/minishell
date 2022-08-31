@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:28:29 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/31 09:56:07 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/31 10:02:42 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ static void	cancel_process(int signo)
 	}
 	if (signo == SIGQUIT)
 	{
-		ft_printf("\b\b  \b\b");
+		if (!g_sig->in_child)
+			ft_printf("\b\b  \b\b");
 		return ;
 	}
 }
