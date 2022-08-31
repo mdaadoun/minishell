@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/30 14:46:17 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/31 10:26:25 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,19 @@
 
 static void	print_env_export(t_minishell *ms)
 {
-	t_variable	*env;
+	char	**envp;
+	size_t	ind;
+
+	ms_sorting_env(ms);
+	envp = ms->envp;
+	ind = 0;
+	while (envp[ind])
+	{
+		ft_putstr_fd(envp[ind], 1);
+		ft_putchar_fd('\n', 1);
+		ind++;
+	}
+/*	t_variable	*env;
 
 	env = ms->first_var;
 	while (env)
@@ -25,7 +37,7 @@ static void	print_env_export(t_minishell *ms)
 		ft_putstr_fd(env->content, 1);
 		ft_putstr_fd("\"\n", 1);
 		env = env->next;
-	}
+	}*/
 }
 
 static size_t	ft_count(char **str)

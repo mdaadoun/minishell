@@ -6,13 +6,13 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 09:43:39 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/31 12:01:20 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/31 12:07:13 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-static size_t	envlen(t_variable *env)
+size_t	ms_envlen(t_variable *env)
 {
 	size_t	len;
 
@@ -48,6 +48,6 @@ void	ms_build_env_tab(t_minishell *ms)
 {
 	if (ms->envp)
 		ms_free_double_pointer(ms->envp);
-	ms->envp = ft_calloc(sizeof(char *), envlen(ms->first_var) + 1);
+	ms->envp = ft_calloc(sizeof(char *), ms_envlen(ms->first_var) + 1);
 	set_envp(ms->envp, ms->first_var);
 }

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/31 12:00:57 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/08/31 12:06:39 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,6 +226,8 @@ typedef struct s_process {
 
 void	ms_build_env_tab(t_minishell *ms);
 t_variable	*ft_get_struct_env(t_minishell *ms, char *str);
+size_t		ms_envlen(t_variable *env);
+void		ms_sorting_env(t_minishell *ms);
 
 /*
  * Main functions
@@ -233,7 +235,7 @@ t_variable	*ft_get_struct_env(t_minishell *ms, char *str);
  *			core/ms_main.c
 */
 
-void	ms_initialize_minishell(t_minishell **ms, t_error *error, char **envp);
+void		ms_initialize_minishell(t_minishell **ms, t_error *error, char **envp);
 
 /*
  *	Errors functions:
@@ -241,9 +243,9 @@ void	ms_initialize_minishell(t_minishell **ms, t_error *error, char **envp);
  *			core/utils/ms_utils_errors.c
 */
 
-void	ms_checking_for_errors(t_minishell *ms);
-void	ms_set_error(t_error *error, t_err_key err_key, char *err_msg);
-void	ms_print_error(t_minishell *ms);
+void		ms_checking_for_errors(t_minishell *ms);
+void		ms_set_error(t_error *error, t_err_key err_key, char *err_msg);
+void		ms_print_error(t_minishell *ms);
 
 /*
  *	Environment functions:
@@ -269,13 +271,13 @@ t_variable	*ft_create_variable(char *str);
  *			core/builtin/ms_unset.c
 */
 
-t_uint8	ms_echo(char **arg);
-t_uint8	ms_cd(t_minishell *ms, char **arg);
-t_uint8	ms_pwd(void);
-t_uint8	ms_export(t_minishell *ms, char **arg);
-t_uint8	ms_unset(t_minishell *ms, char **arg);
-t_uint8	ms_env(t_minishell *ms);
-void	ms_exit(t_minishell *ms);
+t_uint8		ms_echo(char **arg);
+t_uint8		ms_cd(t_minishell *ms, char **arg);
+t_uint8		ms_pwd(void);
+t_uint8		ms_export(t_minishell *ms, char **arg);
+t_uint8		ms_unset(t_minishell *ms, char **arg);
+t_uint8		ms_env(t_minishell *ms);
+void		ms_exit(t_minishell *ms);
 
 /*
  *  Signal handling:
@@ -283,7 +285,7 @@ void	ms_exit(t_minishell *ms);
  *			core/utils/ms_utils_events.c.c
 */
 
-void	ms_initialize_signals(void);
+void		ms_initialize_signals(void);
 
 /*
  *  Tokens:
@@ -310,11 +312,11 @@ void	ms_free_double_pointer(char **data);
  *			core/parser/ms_parse_redirections.c
 */
 
-void	ms_parser(t_minishell *ms);
-void	ms_parse_quotes(t_minishell *ms, char *line, size_t ind);
-void	ms_swap_env(t_minishell *ms);
-void	ms_parse_pipes(t_minishell *ms);
-void	ms_parse_redirections(t_minishell *ms);
+void		ms_parser(t_minishell *ms);
+void		ms_parse_quotes(t_minishell *ms, char *line, size_t ind);
+void		ms_swap_env(t_minishell *ms);
+void		ms_parse_pipes(t_minishell *ms);
+void		ms_parse_redirections(t_minishell *ms);
 
 /*
  *  Analyzer:
@@ -326,11 +328,11 @@ void	ms_parse_redirections(t_minishell *ms);
  *          core/analyzer/ms_analyze_arguments.c
 */
 
-void	ms_analyzer(t_minishell *ms);
-void	ms_analyze_command(t_minishell *ms, t_token *cmd);
-void	ms_analyze_pipes(t_minishell *ms);
-void	ms_analyze_redirections(t_minishell *ms);
-void	ms_analyze_arguments(t_minishell *ms);
+void		ms_analyzer(t_minishell *ms);
+void		ms_analyze_command(t_minishell *ms, t_token *cmd);
+void		ms_analyze_pipes(t_minishell *ms);
+void		ms_analyze_redirections(t_minishell *ms);
+void		ms_analyze_arguments(t_minishell *ms);
 
 /*
  *  Evaluation executer:
@@ -340,12 +342,12 @@ void	ms_analyze_arguments(t_minishell *ms);
  *			core/executer/ms_redirections.c
 */
 
-void	ms_add_redirection(t_process *proc, t_token_type type, char *filepath);
-void	ms_executer(t_minishell *ms);
-void	ms_build_redirections(t_token *token, t_process *process);
-void	ms_build_processes(t_minishell *ms);
-void	ms_start_processes(t_minishell *ms);
-bool	ms_is_redirection(t_token *tok);
+void		ms_add_redirection(t_process *proc, t_token_type type, char *filepath);
+void		ms_executer(t_minishell *ms);
+void		ms_build_redirections(t_token *token, t_process *process);
+void		ms_build_processes(t_minishell *ms);
+void		ms_start_processes(t_minishell *ms);
+bool		ms_is_redirection(t_token *tok);
 
 /*
  *  Utils processes:
@@ -353,7 +355,7 @@ bool	ms_is_redirection(t_token *tok);
  *			core/utils/ms_utils_processes.c
 */
 
-void	ms_build_type_lines(t_minishell *ms);
+void		ms_build_type_lines(t_minishell *ms);
 
 /*
  *	Memory:
@@ -361,11 +363,11 @@ void	ms_build_type_lines(t_minishell *ms);
  *			core/utils/ms_utils_free.c
 */
 
-int		ms_free_before_exit(t_minishell *ms);
-void	ms_free_last_command(t_minishell *ms);
-void	ms_free_all_tokens(t_minishell *ms);
-void	ms_free_all_redirections(t_process *process);
-void	ms_free_env(t_minishell *ms);
+int			ms_free_before_exit(t_minishell *ms);
+void		ms_free_last_command(t_minishell *ms);
+void		ms_free_all_tokens(t_minishell *ms);
+void		ms_free_all_redirections(t_process *process);
+void		ms_free_env(t_minishell *ms);
 
 //=========================================
 // Minishell testing functions & structures
