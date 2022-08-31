@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/31 10:26:25 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/08/31 12:17:49 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	print_env_export(t_minishell *ms)
 	char	**envp;
 	size_t	ind;
 
-	ms_sorting_env(ms);
+//	ms_sorting_env(ms);
 	envp = ms->envp;
 	ind = 0;
 	while (envp[ind])
