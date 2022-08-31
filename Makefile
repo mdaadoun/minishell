@@ -6,7 +6,7 @@
 #    By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/20 08:44:56 by mdaadoun          #+#    #+#              #
-#    Updated: 2022/08/31 10:20:58 by dlaidet          ###   ########.fr        #
+#    Updated: 2022/08/31 14:46:10 by mdaadoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = minishell
 SRCS = ms_main.c \
 utils/ms_utils_free.c utils/ms_utils_errors.c \
 utils/ms_utils_extra.c utils/ms_utils_tokenizer.c \
-utils/ms_utils_variable.c utils/ms_utils_processes.c utils/ms_utils_events.c \
+utils/ms_utils_variable.c utils/ms_utils_processes.c utils/ms_utils_signals.c \
 utils/ms_utils_env.c utils/ms_sorting_env.c \
 builtins/ms_cd.c builtins/ms_echo.c builtins/ms_env.c builtins/ms_exit.c \
 builtins/ms_export.c builtins/ms_pwd.c builtins/ms_unset.c \

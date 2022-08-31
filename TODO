@@ -1,7 +1,5 @@
 # TODO
 
-* ^\ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 * unset behavior to review
 * unset PATH not working
 > Try command ls or other with PATH unset and command need to not work
