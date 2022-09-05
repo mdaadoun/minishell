@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 08:01:33 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/09/05 10:15:30 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/05 12:28:32 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	init_fd_redirection(t_process *proc)
 	while (redir)
 	{
 		if (redir->type == TYPE_REDIRECT_RIGHT)
-			redir->fd = open(redir->filepath, O_WRONLY | O_TRUNC | O_CREAT, 0644);	
+			redir->fd = open(redir->filepath, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 		else if (redir->type == TYPE_REDIRECT_LEFT)
 			redir->fd = open(redir->filepath, O_RDONLY);
 		else if (redir->type == TYPE_REDIRECT_DOUBLE_RIGHT)
@@ -29,8 +29,8 @@ static void	init_fd_redirection(t_process *proc)
 			redir->fd = open(redir->filepath, O_RDONLY);
 		redir = redir->next;
 	}
-
 }
+
 static bool	is_builtin_fork(t_builtins built)
 {
 	if (built == BIN_CD)

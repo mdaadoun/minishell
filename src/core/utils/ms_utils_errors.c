@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 11:37:03 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/05 10:28:23 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/05 12:31:24 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,6 @@ void	ms_checking_for_errors(t_minishell *ms)
 {
 	check_bad_commands(ms);
 	check_bad_syntax(ms);
-	// check_bad_redirections(ms);
-	// IF command builtin echo and option is not n OR if there is an option ERROR OPTION
-	// FOR EACH builtin, check if arguments are valid, exemple for echo, one argument, one equal sign
 }
 
 // set the error to the shell.

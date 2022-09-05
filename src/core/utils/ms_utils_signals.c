@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:28:29 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/05 11:34:21 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/05 12:31:53 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static void	cancel_process(int signo)
 				rl_redisplay();
 			}
 		}
-
 	}
 	if (signo == SIGQUIT)
 	{
@@ -57,7 +56,7 @@ static void	cancel_process(int signo)
 void	ms_initialize_signals(void)
 {
 	struct termios	terminal;
-	
+
 	tcgetattr(STDIN_FILENO, &terminal);
 	terminal.c_lflag &= ~(ECHOCTL);
 	tcsetattr(STDIN_FILENO, TCSANOW, &terminal);

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:07:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/05 09:15:48 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/05 12:27:02 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	ms_initialize_minishell(t_minishell **ms, t_error *error, char **envp)
  */
 static void	display_prompt_and_wait(t_minishell *ms)
 {
-	char	*prompt;
-	char	*swp;
+	char		*prompt;
+	char		*swp;
 	t_variable	*env;
 
 	env = ft_get_struct_env(ms, "PWD");

@@ -6,18 +6,17 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:12:25 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/05 11:34:59 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/05 12:24:56 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-
-static void add_heredoc_line(char *line)
+static void	add_heredoc_line(char *line)
 {
-	int fd;
+	int	fd;
 
-	fd = open(".heredoc", O_CREAT|O_WRONLY|O_APPEND, 0777);
+	fd = open(".heredoc", O_CREAT | O_WRONLY | O_APPEND, 0777);
 	write(fd, line, ft_strlen(line));
 	write(fd, "\n", 1);
 	close(fd);
@@ -28,7 +27,7 @@ static void add_heredoc_line(char *line)
  *		get the delimiter, and wait for the delimiter
  *		each line are added to a temporary file .heredoc
 */
-static void open_heredoc(void)
+static void	open_heredoc(void)
 {
 	char	*line;
 	int		check;
@@ -40,12 +39,12 @@ static void open_heredoc(void)
 	{
 		line = readline("> ");
 		if (!line)
-			break;
+			break ;
 		check = ft_strncmp(line, g_sig.delimiter, ft_strlen(g_sig.delimiter) + 1);
 		if (!check)
 		{
 			free(line);
-			break;
+			break ;
 		}
 		add_heredoc_line(line);
 		free(line);
@@ -61,16 +60,16 @@ static void open_heredoc(void)
  *		3. <
  *		4. >
 */
-void ms_build_redirections(t_minishell *ms, t_token *token,	t_process *process)
+void	ms_build_redirections(t_minishell *ms, t_token *token,	t_process *process)
 {
-	t_err_key 	err_key;
-	char 		*err_msg;
+	t_err_key	err_key;
+	char		*err_msg;
 	pid_t		pid;
-	
+
 	err_key = ERROR_SYNTAX;
 	err_msg = MSG_ERROR_SYNTAX_REDIRECT;
-	if (token->type == TYPE_REDIRECT_DOUBLE_RIGHT || 
-		token->type == TYPE_REDIRECT_RIGHT || 
+	if (token->type == TYPE_REDIRECT_DOUBLE_RIGHT || \
+		token->type == TYPE_REDIRECT_RIGHT || \
 		token->type == TYPE_REDIRECT_LEFT)
 	{
 		process->has_redirection = true;
@@ -79,7 +78,7 @@ void ms_build_redirections(t_minishell *ms, t_token *token,	t_process *process)
 		else
 			ms_set_error(process->internal_error, err_key, err_msg);
 	}
-	else if	(token->type == TYPE_REDIRECT_DOUBLE_LEFT)
+	else if (token->type == TYPE_REDIRECT_DOUBLE_LEFT)
 	{
 		process->has_redirection = true;
 		if (token->next && token->next->type == TYPE_ARG_DELIMITER)
@@ -98,8 +97,8 @@ void ms_build_redirections(t_minishell *ms, t_token *token,	t_process *process)
 			}
 			else
 				g_sig.in_child = true;
-			waitpid(pid, NULL, 0);	
-			g_sig.in_child = false;		
+			waitpid(pid, NULL, 0);
+			g_sig.in_child = false;
 			ms_add_redirection(process, token->type, ft_strdup(".heredoc"));
 		}
 		else

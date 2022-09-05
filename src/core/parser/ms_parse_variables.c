@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 11:06:35 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/31 16:29:03 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/05 12:29:19 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void	ms_swap_env(t_minishell *ms)
 	tok = ms->first_token;
 	while (tok)
 	{
-
 		if (tok->type != TYPE_S_QUOTE_STRING)
 		{
 			ind = 0;

@@ -6,12 +6,11 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/05 12:14:15 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/05 12:29:50 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
-
 
 static size_t	ft_count(char **str)
 {
@@ -26,8 +25,8 @@ static size_t	ft_count(char **str)
 // cause the shell to exit
 void	ms_exit(t_minishell *ms, char **arg)
 {
-	int nb;
-	int i;
+	int	nb;
+	int	i;
 
 	if (ft_count(arg) == 2)
 	{
@@ -38,7 +37,7 @@ void	ms_exit(t_minishell *ms, char **arg)
 			if (!ft_isdigit(arg[1][i]))
 			{
 				nb = 2;
-				break;
+				break ;
 			}
 		}
 		if (nb)

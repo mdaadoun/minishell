@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 12:07:36 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/23 16:19:23 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/05 12:29:04 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ bool	ms_is_redirection(t_token *tok)
 	if (tok->type == TYPE_REDIRECT_DOUBLE_LEFT || \
 		tok->type == TYPE_REDIRECT_LEFT || \
 		tok->type == TYPE_REDIRECT_DOUBLE_RIGHT || \
-		tok->type == TYPE_REDIRECT_RIGHT )
+		tok->type == TYPE_REDIRECT_RIGHT)
 		return (true);
 	return (false);
 }
 
-static void set_redirect_type(t_minishell *ms, t_token *tok, t_token_type type)
+static void	set_redirect_type(t_minishell *ms, t_token *tok, t_token_type type)
 {
 	tok->type = type;
 	if (tok->next)
