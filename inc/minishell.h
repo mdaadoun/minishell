@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/05 14:57:51 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/05 16:16:29 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -299,6 +299,7 @@ void		ms_initialize_signals(void);
  * 		core/utils/ms_utils_is.c
  */
 
+bool		is_empty_command(t_minishell *ms);
 bool		is_builtin_fork(t_builtins built);
 int			is_redirect(t_token *tok);
 

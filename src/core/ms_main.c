@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:07:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/05 12:27:02 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/05 16:18:49 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	main(int argc, char **argv, char **envp)
 	t_minishell	*ms;
 	t_error		error;
 
-	if (DEBUG)
+	if (DEBUG) // REMOVE BEFORE PUSH
 		test_start(argc, argv, envp);
 	ms_initialize_minishell(&ms, &error, envp);
 	ms_initialize_signals();
@@ -100,7 +100,7 @@ int	main(int argc, char **argv, char **envp)
 			ms_executer(ms);
 		}
 		ms_free_last_command(ms);
-		if (ms->global_error->flag)
+		if (ms->global_error->flag && ms->global_error->key != ERROR_SILENT)
 			ms_print_error(ms);
 		ms_set_error(ms->global_error, NO_ERROR, NULL);
 	}
