@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 10:21:22 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/09/05 08:26:44 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/05 08:39:57 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ t_variable	*ft_create_variable(t_minishell *ms, char	*str)
 	env->name = ft_substr(str, 0, ind);
 	if (str[ind] == '+' && str[ind + 1] == '=')
 	{
-		ind++;
+		ind += 2;
 		tmp = ft_substr(str, ind, ft_strlen(&str[ind]));
 		env->content = ft_strjoin(ft_get_env(ms, env->name), tmp);
 		free(tmp);
 	}
-	if (str[ind] == '=')
+	else if (str[ind] == '=')
 	{
 		ind++;
 		env->content = ft_substr(str, ind, ft_strlen(&str[ind]));
