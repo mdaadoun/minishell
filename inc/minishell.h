@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/05 12:15:33 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/05 13:44:43 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,6 +293,13 @@ void		ms_exit(t_minishell *ms, char **arg);
 */
 
 void		ms_initialize_signals(void);
+
+/*
+ * 	Files :
+ * 		core/utils/ms_utils_is.c
+ */
+
+bool	is_builtin_fork(t_builtins built);
 
 /*
  *  Tokens:

@@ -6,7 +6,7 @@
 #    By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/20 08:44:56 by mdaadoun          #+#    #+#              #
-#    Updated: 2022/09/05 09:34:32 by mdaadoun         ###   ########.fr        #
+#    Updated: 2022/09/05 13:45:40 by dlaidet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ SRCS = ms_main.c \
 utils/ms_utils_free.c utils/ms_utils_errors.c \
 utils/ms_utils_extra.c utils/ms_utils_tokenizer.c \
 utils/ms_utils_variable.c utils/ms_utils_processes.c utils/ms_utils_signals.c \
-utils/ms_utils_env.c utils/ms_sorting_env.c \
+utils/ms_utils_env.c utils/ms_sorting_env.c utils/ms_utils_is.c\
 builtins/ms_cd.c builtins/ms_echo.c builtins/ms_env.c builtins/ms_exit.c \
 builtins/ms_export.c builtins/ms_pwd.c builtins/ms_unset.c \
 parser/ms_parser.c parser/ms_parse_pipes.c \

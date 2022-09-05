@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 08:01:33 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/09/05 12:28:32 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/05 13:42:48 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,21 @@
 
 static void	init_fd_redirection(t_process *proc)
 {
-	t_redirection	*redir;
+	t_redirection	*red;
 
-	redir = proc->first_redirection;
-	while (redir)
+	red = proc->first_redirection;
+	while (red)
 	{
-		if (redir->type == TYPE_REDIRECT_RIGHT)
-			redir->fd = open(redir->filepath, O_WRONLY | O_TRUNC | O_CREAT, 0644);
-		else if (redir->type == TYPE_REDIRECT_LEFT)
-			redir->fd = open(redir->filepath, O_RDONLY);
-		else if (redir->type == TYPE_REDIRECT_DOUBLE_RIGHT)
-			redir->fd = open(redir->filepath, O_WRONLY | O_APPEND | O_CREAT, 0644);
-		else if (redir->type == TYPE_REDIRECT_DOUBLE_LEFT)
-			redir->fd = open(redir->filepath, O_RDONLY);
-		redir = redir->next;
+		if (red->type == TYPE_REDIRECT_RIGHT)
+			red->fd = open(red->filepath, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+		else if (red->type == TYPE_REDIRECT_LEFT)
+			red->fd = open(red->filepath, O_RDONLY);
+		else if (red->type == TYPE_REDIRECT_DOUBLE_RIGHT)
+			red->fd = open(red->filepath, O_WRONLY | O_APPEND | O_CREAT, 0644);
+		else if (red->type == TYPE_REDIRECT_DOUBLE_LEFT)
+			red->fd = open(red->filepath, O_RDONLY);
+		red = red->next;
 	}
-}
-
-static bool	is_builtin_fork(t_builtins built)
-{
-	if (built == BIN_CD)
-		return (false);
-	if (built == BIN_EXPORT)
-		return (false);
-	if (built == BIN_UNSET)
-		return (false);
-	if (built == BIN_EXIT)
-		return (false);
-	return (true);
 }
 
 static void	execv_builtin(t_minishell *ms, t_builtins built, char **arg)

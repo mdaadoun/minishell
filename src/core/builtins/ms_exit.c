@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/05 13:32:02 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/05 13:45:58 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,6 @@ static void	run_exit(t_minishell *ms, char **arg)
 // cause the shell to exit
 void	ms_exit(t_minishell *ms, char **arg)
 {
-	int	nb;
-	int	i;
-
 	if (ft_count_tab_string(arg) == 2)
 	{
 		run_exit(ms, arg);
