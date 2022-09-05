@@ -6,24 +6,32 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 10:21:22 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/30 14:46:44 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/05 08:26:44 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-t_variable	*ft_create_variable(char	*str)
+t_variable	*ft_create_variable(t_minishell *ms, char	*str)
 {
 	size_t		ind;
 	t_variable	*env;
+	char		*tmp;
 
-	ind = 0;
-	env = ft_calloc(sizeof(t_variable), 1);
-	while (str[ind] && str[ind] != '=')
-		ind++;
+	ind = ft_strlen_arg(str, '=');
 	if (str[ind] == 0)
 		return (0);
+	env = ft_calloc(sizeof(t_variable), 1);
+	if (str[ind - 1] == '+')
+		ind--;
 	env->name = ft_substr(str, 0, ind);
+	if (str[ind] == '+' && str[ind + 1] == '=')
+	{
+		ind++;
+		tmp = ft_substr(str, ind, ft_strlen(&str[ind]));
+		env->content = ft_strjoin(ft_get_env(ms, env->name), tmp);
+		free(tmp);
+	}
 	if (str[ind] == '=')
 	{
 		ind++;
@@ -75,7 +83,7 @@ void	ms_copy_env(t_minishell *ms, char **envp)
 	ind = 0;
 	while (envp[ind])
 	{
-		ft_add_variable(ms, ft_create_variable(envp[ind]));
+		ft_add_variable(ms, ft_create_variable(ms, envp[ind]));
 		ind++;
 	}
 }

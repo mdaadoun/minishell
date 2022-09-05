@@ -6,25 +6,24 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/05 07:34:02 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/05 08:29:32 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-static size_t	strlen_arg(char *str, char c)
+static int	check_arg(char *str)
 {
-	size_t	len;
+	char	c;
 
-	len = 0;
-	while (str[len] && str[len] != c)
-		len++;
-	return (len);
-}
-
-static void	ft_putnstr_fd(char *str, size_t len, int fd)
-{
-	write(fd, str, len);
+	c = str[0];
+	if (c >= 'a' && c <= 'z')
+		return (0);
+	else if (c >= 'A' && c <= 'Z')
+		return (0);
+	else if (c == '_')
+		return (0);
+	return (-1);
 }
 
 static void	print_env_export(t_minishell *ms)
@@ -39,7 +38,7 @@ static void	print_env_export(t_minishell *ms)
 	while (envp[ind])
 	{
 		ft_putstr_fd("declare -x ", 1);
-		len = strlen_arg(envp[ind], '=');
+		len = ft_strlen_arg(envp[ind], '=');
 		ft_putnstr_fd(envp[ind], len, 1);
 		ft_putstr_fd("=\"", 1);
 		ft_putstr_fd(&envp[ind][len + 1], 1);
@@ -70,15 +69,22 @@ t_uint8	ms_export(t_minishell *ms, char **arg)
 	t_variable	*env;
 	t_variable	*find;
 
-	ind = ft_count(arg);
-	if (ind == 1)
+	if (ft_count(arg) == 1)
 		print_env_export(ms);
 	else
 	{
 		ind = 1;
 		while (arg[ind])
 		{
-			env = ft_create_variable(arg[ind]);
+			if (check_arg(arg[ind]) == -1)
+			{
+				ft_putstr_fd("export: `", 1);
+				ft_putstr_fd(arg[ind], 1);
+				ft_putstr_fd("\': not a valid identifier\n", 1);
+				ind++;
+				continue ;
+			}
+			env = ft_create_variable(ms, arg[ind]);
 			if (env != 0)
 			{
 				find = ft_get_struct_env(ms, env->name);

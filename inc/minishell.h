@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/31 17:11:59 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/05 08:24:09 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,7 +225,7 @@ typedef struct s_process {
 // Minishell functions
 //====================
 
-void	ms_build_env_tab(t_minishell *ms);
+void		ms_build_env_tab(t_minishell *ms);
 t_variable	*ft_get_struct_env(t_minishell *ms, char *str);
 size_t		ms_envlen(t_variable *env);
 void		ms_sorting_env(t_minishell *ms);
@@ -258,7 +258,7 @@ void		ms_copy_env(t_minishell *ms, char **envp);
 char		*ft_get_env(t_minishell *ms, char *str);
 void		ft_replace_variable(t_minishell *ms, t_variable *env);
 void		ft_add_variable(t_minishell *ms, t_variable *env);
-t_variable	*ft_create_variable(char *str);
+t_variable	*ft_create_variable(t_minishell *ms, char	*str);
 
 /*
  *  Builtin commands functions:
