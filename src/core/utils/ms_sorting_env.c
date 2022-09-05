@@ -6,11 +6,26 @@
 /*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 07:16:24 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/31 10:37:59 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/05 07:01:35 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
+
+static int	ft_strcmp(const char *s1, const char *s2)
+{
+	int	a;
+	int	compt;
+
+	compt = 0;
+	a = 0;
+	while (a == 0 && (s1[compt] != '\0' || s2[compt] != '\0'))
+	{
+		a = s1[compt] - s2[compt];
+		compt++;
+	}
+	return (a);
+}
 
 static size_t	envplen(char **envp)
 {
@@ -36,27 +51,11 @@ void	ms_sorting_env(t_minishell *ms)
 	char	**envp;
 	size_t	len;
 	size_t	ind;
-	size_t	it;
-	size_t	let;
 
 	envp = ms->envp;
 	len = envplen(envp);
 	ind = 0;
-	let = 0;
 	while (ind < len)
 	{
-		it = ind + 1;
-		while (envp[ind][let] < envp[it][let] && it < len)
-			it++;
-		while (envp[ind][let] == envp[it][let] && envp[ind][let] && envp[it][let])
-			let++;
-		if (envp[ind][let] > envp[it][let])
-		{
-			swap_envp(&envp[ind], &envp[it]);
-			ind = 0;
-			let = 0;
-		}
-		else
-			ind++;
 	}
 }
