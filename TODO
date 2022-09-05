@@ -1,5 +1,12 @@
 # TODO
 
+* export
+	*need to support '+='
+	export a=10
+	a=10
+	export a+=test
+	a=10test
+
 * $?
 	* set return value for all builtins
 	
