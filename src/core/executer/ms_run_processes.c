@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 08:01:33 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/09/05 09:26:33 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/05 10:15:30 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	execv_builtin(t_minishell *ms, t_builtins built, char **arg)
 	else if (built == BIN_ENV)
 		ms_env(ms);
 	else if (built == BIN_EXIT)
-		ms_exit(ms);
+		ms_exit(ms, arg);
 	else if (built == BIN_NULL)
 		exit(ms_free_before_exit(ms));
 	if (is_builtin_fork(built) == true)

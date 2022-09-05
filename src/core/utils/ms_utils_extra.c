@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 10:55:29 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/31 12:01:16 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/05 10:36:28 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,26 @@ void	ms_combine_token(t_token *first_token, t_token *second_token)
  */
 int	ms_free_before_exit(t_minishell *ms)
 {
+	int ret;
+
+	ret = ms->exit_status;
 	if (ms)
 	{
 		ms_free_last_command(ms);
 		ms_free_env(ms);
 		if (ms->envp)
 			ms_free_double_pointer(ms->envp);
-		if (ms->global_error->flag)
+		if (ms->global_error->flag && ms->global_error->key != ERROR_SILENT)
 		{
+			write(2, "\e[0;31mError: ", 14);
 			write(2, ms->global_error->msg, ms->global_error->length);
-			write(2, "\n", 1);
+			write(2, "\e[m\n", 4);
 			free(ms);
-			return (EXIT_FAILURE);
+			return (ret);
 		}
 		free(ms);
 	}
-	return (EXIT_SUCCESS);
+	return (ret);
 }
 
 t_variable	*ft_get_struct_env(t_minishell *ms, char *str)

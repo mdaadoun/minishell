@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:28:29 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/31 15:00:37 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/05 11:34:21 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ static void	cancel_process(int signo)
 		if (g_sig.in_heredoc)
 		{
 			write(1, "^C", 2);
-			g_sig.in_heredoc = false;	
+			g_sig.in_heredoc = false;
+			if (g_sig.delimiter)
+				free(g_sig.delimiter);
 			exit(0);
 		}
 		else

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 09:03:27 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/30 07:19:49 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/05 10:44:56 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	combine_tokens(t_minishell *ms)
 	token = ms->first_token;
 	while (token)
 	{
-		if (token->no_space)
+		if (token->no_space && token->next)
 			ms_combine_token(token, token->next);
 		else
 			token = token->next;

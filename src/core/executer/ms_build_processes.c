@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 07:47:41 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/24 08:50:31 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/05 11:00:42 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	ms_build_processes(t_minishell *ms)
 			proc->exec_path = tok->external_path;
 		if (tok->type == TYPE_BUILTIN_COMMAND)
 			proc->builtin = tok->builtin;
-		ms_build_redirections(tok, proc);
+		ms_build_redirections(ms, tok, proc);
 		if (tok->type == TYPE_PIPE)
 		{
 			add_process(proc);

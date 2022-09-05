@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 11:37:03 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/30 07:00:14 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/05 10:28:23 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ void	ms_set_error(t_error *error, t_err_key err_key, char *err_msg)
 	{
 		error->flag = true;
 		error->msg = err_msg;
-		error->length = ft_strlen(err_msg);
+		if (err_msg)
+			error->length = ft_strlen(err_msg);
 		error->key = err_key;
 	}
 	else

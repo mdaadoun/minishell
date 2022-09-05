@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/05 09:28:01 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/05 12:15:33 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <signal.h>
-#include <termios.h>
+# include <termios.h>
 
 //======
 // Types
@@ -77,11 +77,12 @@ typedef unsigned long long	t_uint64;
 # define MSG_ERROR_BUILTIN_OPTION "The option is not valid."
 # define MSG_ERROR_BUILTIN_ARGUMENT "The arguments are not valid."
 # define MSG_ERROR_MISSING_ARGS "There is not enough arguments."
-# define MSG_ERROR_EXTRA_ARGS "There is too much arguments."
+# define MSG_ERROR_EXTRA_ARGS "There is too many arguments."
 # define MSG_ERROR_SYNTAX_PIPE "The syntax with pipes is not valid."
 # define MSG_ERROR_SYNTAX_REDIRECT "The syntax with redirections is not valid."
 # define MSG_ERROR_PATH "No such file or directory."
 # define MSG_ERROR_EXPORT "Not a valid identifier to export."
+# define MSG_ERROR_EXIT_ARG "Numeric argument expected."
 
 typedef enum e_err_key {
 	NO_ERROR,
@@ -94,7 +95,9 @@ typedef enum e_err_key {
 	ERROR_EXTRA_ARGS,
 	ERROR_SYNTAX,
 	ERROR_EXPORT,
-	ERROR_PATH
+	ERROR_PATH,
+	ERROR_SILENT,
+	ERROR_EXIT_ARG
 }			t_err_key;
 
 typedef struct s_error {
@@ -133,9 +136,10 @@ typedef struct s_minishell {
 */
 
 typedef struct s_signal {
-	bool in_child;
-	bool in_heredoc;
-	bool in_process;
+	char	*delimiter;
+	bool	in_child;
+	bool	in_heredoc;
+	bool	in_process;
 } t_signal;
 
 t_signal g_sig;
@@ -280,7 +284,7 @@ void		ms_pwd(t_minishell *ms);
 void		ms_export(t_minishell *ms, char **arg);
 void		ms_unset(t_minishell *ms, char **arg);
 void		ms_env(t_minishell *ms);
-void		ms_exit(t_minishell *ms);
+void		ms_exit(t_minishell *ms, char **arg);
 
 /*
  *  Signal handling:
@@ -347,7 +351,7 @@ void		ms_analyze_arguments(t_minishell *ms);
 
 void		ms_add_redirection(t_process *proc, t_token_type type, char *filepath);
 void		ms_executer(t_minishell *ms);
-void		ms_build_redirections(t_token *token, t_process *process);
+void		ms_build_redirections(t_minishell *ms, t_token *token, t_process *process);
 void		ms_build_processes(t_minishell *ms);
 void		ms_start_processes(t_minishell *ms);
 bool		ms_is_redirection(t_token *tok);

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:12:25 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/31 11:51:21 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/05 11:34:59 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,11 @@ static void add_heredoc_line(char *line)
  *		get the delimiter, and wait for the delimiter
  *		each line are added to a temporary file .heredoc
 */
-static void open_heredoc(t_token *token)
+static void open_heredoc(void)
 {
 	char	*line;
-	char	*delimiter;
 	int		check;
 
-	delimiter = token->next->content;
 	line = "";
 	check = 1;
 	unlink(".heredoc");
@@ -43,9 +41,12 @@ static void open_heredoc(t_token *token)
 		line = readline("> ");
 		if (!line)
 			break;
-		check = ft_strncmp(line, delimiter, ft_strlen(delimiter) + 1);
+		check = ft_strncmp(line, g_sig.delimiter, ft_strlen(g_sig.delimiter) + 1);
 		if (!check)
+		{
+			free(line);
 			break;
+		}
 		add_heredoc_line(line);
 		free(line);
 	}
@@ -60,7 +61,7 @@ static void open_heredoc(t_token *token)
  *		3. <
  *		4. >
 */
-void ms_build_redirections(t_token *token,	t_process *process)
+void ms_build_redirections(t_minishell *ms, t_token *token,	t_process *process)
 {
 	t_err_key 	err_key;
 	char 		*err_msg;
@@ -87,8 +88,12 @@ void ms_build_redirections(t_token *token,	t_process *process)
 			if (pid == 0)
 			{
 				g_sig.in_heredoc = true;
-				open_heredoc(token);
-				g_sig.in_heredoc = false;	
+				g_sig.delimiter = ft_strdup(token->next->content);
+				ms_free_last_command(ms);
+				ms_free_before_exit(ms);
+				open_heredoc();
+				g_sig.in_heredoc = false;
+				free(g_sig.delimiter);
 				exit (0);
 			}
 			else
