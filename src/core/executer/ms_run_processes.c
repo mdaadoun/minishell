@@ -6,30 +6,11 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 08:01:33 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/09/05 13:42:48 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/05 14:10:22 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
-
-static void	init_fd_redirection(t_process *proc)
-{
-	t_redirection	*red;
-
-	red = proc->first_redirection;
-	while (red)
-	{
-		if (red->type == TYPE_REDIRECT_RIGHT)
-			red->fd = open(red->filepath, O_WRONLY | O_TRUNC | O_CREAT, 0644);
-		else if (red->type == TYPE_REDIRECT_LEFT)
-			red->fd = open(red->filepath, O_RDONLY);
-		else if (red->type == TYPE_REDIRECT_DOUBLE_RIGHT)
-			red->fd = open(red->filepath, O_WRONLY | O_APPEND | O_CREAT, 0644);
-		else if (red->type == TYPE_REDIRECT_DOUBLE_LEFT)
-			red->fd = open(red->filepath, O_RDONLY);
-		red = red->next;
-	}
-}
 
 static void	execv_builtin(t_minishell *ms, t_builtins built, char **arg)
 {
@@ -51,22 +32,6 @@ static void	execv_builtin(t_minishell *ms, t_builtins built, char **arg)
 		exit(ms_free_before_exit(ms));
 	if (is_builtin_fork(built) == true)
 		exit(ms_free_before_exit(ms));
-}
-
-static void	set_redir_fd(t_redirection *redir)
-{
-	while (redir)
-	{
-		if (redir->type == TYPE_REDIRECT_RIGHT)
-			dup2(redir->fd, 1);
-		else if (redir->type == TYPE_REDIRECT_LEFT)
-			dup2(redir->fd, 0);
-		else if (redir->type == TYPE_REDIRECT_DOUBLE_RIGHT)
-			dup2(redir->fd, 1);
-		else if (redir->type == TYPE_REDIRECT_DOUBLE_LEFT)
-			dup2(redir->fd, 0);
-		redir = redir->next;
-	}
 }
 
 static void	exec_external(t_process *proc)

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 07:47:41 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/09/05 11:00:42 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/05 14:58:04 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,6 @@ static void	add_process(t_process *proc)
 	new_process->internal_error = (t_error *)ft_calloc(sizeof(t_error), 1);
 	proc->next = new_process;
 	new_process->prev = proc;
-}
-
-static int	is_redirect(t_token *tok)
-{
-	if (tok->type == TYPE_REDIRECT_LEFT)
-		return (1);
-	else if (tok->type == TYPE_REDIRECT_RIGHT)
-		return (2);
-	else if (tok->type == TYPE_REDIRECT_DOUBLE_RIGHT)
-		return (3);
-	else if (tok->type == TYPE_REDIRECT_DOUBLE_LEFT)
-		return (4);
-	return (0);
 }
 
 static size_t	count_tok(t_token *tok)

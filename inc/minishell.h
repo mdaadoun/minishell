@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/05 13:44:43 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/05 14:57:51 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -299,7 +299,16 @@ void		ms_initialize_signals(void);
  * 		core/utils/ms_utils_is.c
  */
 
-bool	is_builtin_fork(t_builtins built);
+bool		is_builtin_fork(t_builtins built);
+int			is_redirect(t_token *tok);
+
+/*
+ * Files :
+ * 		core/utils/ms_utils_redirection.c
+ */
+
+void		init_fd_redirection(t_process *proc);
+void		set_redir_fd(t_redirection *redir);
 
 /*
  *  Tokens:
@@ -308,13 +317,13 @@ bool	is_builtin_fork(t_builtins built);
  *			core/utils/ms_utils_extra.c
 */
 
-t_token	*ms_create_new_token(t_minishell *ms);
-void	ms_replace_token(t_token *old, t_token *new);
-t_token	*ms_delete_token(t_token *token);
-void	ms_add_token(t_minishell *ms, char *content, t_token_type type, bool no_space);
-void	ms_push_token(t_token *first_token, t_token *second_token);
-void 	ms_combine_token(t_token *first_token, t_token *second_token);
-void	ms_free_double_pointer(char **data);
+t_token		*ms_create_new_token(t_minishell *ms);
+void		ms_replace_token(t_token *old, t_token *new);
+t_token		*ms_delete_token(t_token *token);
+void		ms_add_token(t_minishell *ms, char *content, t_token_type type, bool no_space);
+void		ms_push_token(t_token *first_token, t_token *second_token);
+void		ms_combine_token(t_token *first_token, t_token *second_token);
+void		ms_free_double_pointer(char **data);
 
 /*
  *  Parser:
