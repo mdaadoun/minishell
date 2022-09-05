@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:07:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/31 11:52:42 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/05 09:15:48 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ static void	display_prompt_and_wait(t_minishell *ms)
 	t_variable	*env;
 
 	env = ft_get_struct_env(ms, "PWD");
-	prompt = ft_strjoin("\e[0;34m", env->content);
+	if (!env)
+		prompt = ft_strjoin("\e[0;34m", "");
+	else
+		prompt = ft_strjoin("\e[0;34m", env->content);
 	swp = prompt;
 	prompt = ft_strjoin(prompt, "\e[m\e[0;36m>\e[m");
 	free(swp);

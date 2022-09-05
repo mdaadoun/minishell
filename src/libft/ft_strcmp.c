@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_env.c                                           :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/05 09:27:04 by mdaadoun         ###   ########.fr       */
+/*   Created: 2022/09/05 09:11:35 by mdaadoun          #+#    #+#             */
+/*   Updated: 2022/09/05 09:11:38 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../inc/minishell.h"
+#include "../../inc/libft.h"
 
-// run a program in a modified environment
-void	ms_env(t_minishell *ms)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	t_variable	*env;
+	int	a;
+	int	compt;
 
-	env = ms->first_var;
-	while (env)
+	compt = 0;
+	a = 0;
+	while (a == 0 && (s1[compt] != '\0' || s2[compt] != '\0'))
 	{
-		ft_putstr_fd(env->name, 1);
-		ft_putchar_fd('=', 1);
-		ft_putstr_fd(env->content, 1);
-		ft_putchar_fd('\n', 1);
-		env = env->next;
+		a = s1[compt] - s2[compt];
+		compt++;
 	}
-	ms->exit_status = 0;
+	return (a);
 }

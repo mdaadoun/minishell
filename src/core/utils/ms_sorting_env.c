@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ms_sorting_env.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 07:16:24 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/09/05 07:16:36 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/05 09:11:24 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
-
-static int	ft_strcmp(const char *s1, const char *s2)
-{
-	int	a;
-	int	compt;
-
-	compt = 0;
-	a = 0;
-	while (a == 0 && (s1[compt] != '\0' || s2[compt] != '\0'))
-	{
-		a = s1[compt] - s2[compt];
-		compt++;
-	}
-	return (a);
-}
 
 static size_t	envplen(char **envp)
 {

@@ -152,7 +152,10 @@ void	test_pipes(t_minishell *ms, int debug)
 
 void	test_redirections(t_minishell *ms, int debug)
 {
-    test_run_command(ms, "echo hello1 > file1 | echo hello2 > file2", debug);
+	// test_run_command(ms, "echo hello > file << EOF", debug);
+	// test_run_command(ms, "echo hello > file1 > file2", debug);
+	// test_run_command(ms, "echo hello > file << EOF | echo hello > file1 > file2 | cat << EOF2", debug);
+    // test_run_command(ms, "echo hello1 > file1 | echo hello2 > file2", debug);
     // test_run_command(ms, "> file1 | > file2 | << file", debug);
 	// test_run_command(ms, "echo hello > file", debug);
 	// test_run_command(ms, "> file echo hello", debug);
@@ -160,7 +163,6 @@ void	test_redirections(t_minishell *ms, int debug)
     // test_run_command(ms, "> > <<", debug);
     // test_run_command(ms, "> | > | <<", debug);
     // test_run_command(ms, "> file1 | > file2 | << file", debug);
-	// test_run_command(ms, "echo hello > file << EOF | echo hello > file1 > file2 | cat << EOF2", debug);
 	// test_run_command(ms, "echo > <", debug);
 	// test_run_command(ms, "<", debug);
 	// test_run_command(ms, "echo hello > file | echo hello > file", debug);

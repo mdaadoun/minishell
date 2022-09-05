@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/05 08:24:09 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/05 09:28:01 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef unsigned long long	t_uint64;
 # define MSG_ERROR_SYNTAX_PIPE "The syntax with pipes is not valid."
 # define MSG_ERROR_SYNTAX_REDIRECT "The syntax with redirections is not valid."
 # define MSG_ERROR_PATH "No such file or directory."
+# define MSG_ERROR_EXPORT "Not a valid identifier to export."
 
 typedef enum e_err_key {
 	NO_ERROR,
@@ -92,6 +93,7 @@ typedef enum e_err_key {
 	ERROR_MISSING_ARGS,
 	ERROR_EXTRA_ARGS,
 	ERROR_SYNTAX,
+	ERROR_EXPORT,
 	ERROR_PATH
 }			t_err_key;
 
@@ -272,12 +274,12 @@ t_variable	*ft_create_variable(t_minishell *ms, char	*str);
  *			core/builtin/ms_unset.c
 */
 
-t_uint8		ms_echo(char **arg);
+void		ms_echo(t_minishell *ms, char **arg);
 void		ms_cd(t_minishell *ms, char **arg);
-t_uint8		ms_pwd(void);
-t_uint8		ms_export(t_minishell *ms, char **arg);
-t_uint8		ms_unset(t_minishell *ms, char **arg);
-t_uint8		ms_env(t_minishell *ms);
+void		ms_pwd(t_minishell *ms);
+void		ms_export(t_minishell *ms, char **arg);
+void		ms_unset(t_minishell *ms, char **arg);
+void		ms_env(t_minishell *ms);
 void		ms_exit(t_minishell *ms);
 
 /*

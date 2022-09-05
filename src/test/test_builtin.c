@@ -98,26 +98,13 @@ static void	test_export(t_minishell *ms)
 void test_builtin(t_minishell *ms, int debug)
 {
 	if (debug == TEST_BUILTIN)
-		ms_pwd();
+		ms_pwd(ms);
 	if (debug == TEST_BUILTIN_PWD)
-		ms_pwd();
+		ms_pwd(ms);
 	if (debug == TEST_BUILTIN_ENV)
 		ms_env(ms);
 	if (debug == TEST_BUILTIN_EXPORT || debug == TEST_ALL)
 		test_export(ms);
 	if (debug == TEST_BUILTIN_UNSET)
 		test_unset(ms);
-/*    int test;
-
-    test = 0;
-    ft_printf("Testing the builtin functions.\n");
-    test = ms_echo(argv, 'n');
-    test = ms_cd(argv);
-    test = ms_pwd(argv);
-    test = ms_export(argv);
-    test = ms_unset(argv);
-    test =  ms_env(envp);
-    test = ms_exit();
-    if (test)
-        ft_printf("builtin test error\n");*/
 }

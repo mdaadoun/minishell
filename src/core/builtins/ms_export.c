@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/05 08:29:32 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/05 09:30:03 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static size_t	ft_count(char **str)
  *  check for existing env
  *  replace or create new env
  */
-t_uint8	ms_export(t_minishell *ms, char **arg)
+void	ms_export(t_minishell *ms, char **arg)
 {
 	size_t		ind;
 	t_variable	*env;
@@ -78,9 +78,7 @@ t_uint8	ms_export(t_minishell *ms, char **arg)
 		{
 			if (check_arg(arg[ind]) == -1)
 			{
-				ft_putstr_fd("export: `", 1);
-				ft_putstr_fd(arg[ind], 1);
-				ft_putstr_fd("\': not a valid identifier\n", 1);
+				ms_set_error(ms->global_error, ERROR_EXPORT, MSG_ERROR_EXPORT);
 				ind++;
 				continue ;
 			}
@@ -97,5 +95,8 @@ t_uint8	ms_export(t_minishell *ms, char **arg)
 		}
 		ms_build_env_tab(ms);
 	}
-	return (0);
+	if (ms->global_error->flag)
+		ms->exit_status = 1;
+	else
+		ms->exit_status = 0;
 }

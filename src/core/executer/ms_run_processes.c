@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 08:01:33 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/31 17:47:34 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/05 09:26:33 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ static bool	is_builtin_fork(t_builtins built)
 static void	execv_builtin(t_minishell *ms, t_builtins built, char **arg)
 {
 	if (built == BIN_ECHO)
-		ms_echo(arg);
+		ms_echo(ms, arg);
 	else if (built == BIN_CD)
 		ms_cd(ms, arg);
 	else if (built == BIN_PWD)
-		ms_pwd();
+		ms_pwd(ms);
 	else if (built == BIN_EXPORT)
 		ms_export(ms, arg);
 	else if (built == BIN_UNSET)
@@ -199,9 +199,10 @@ void	ms_start_processes(t_minishell *ms)
 	while (proc)
 	{
 		waitpid(proc->pid, &status, 0);
-		if (!ms->global_error->flag)
-			if (WIFEXITED(status))
-				ms->exit_status = WEXITSTATUS(status);
+		if (proc->types_line[0] == TYPE_EXTERNAL_COMMAND)
+			if (!ms->global_error->flag)
+				if (WIFEXITED(status))
+					ms->exit_status = WEXITSTATUS(status);
 		proc = proc->next;
 	}
 }
