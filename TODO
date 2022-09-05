@@ -1,18 +1,5 @@
 # TODO
 
-* export
-	*need to support '+='
-	export a=10
-	a=10
-	export a+=test
-	a=10test
-
-	*careful to first letters
-	need to be: 
-	>= 'a' || <= 'z'
-	>= 'A' || <= 'Z'
-	'_'
-
 * $?
 	* set return value for all builtins
 	
