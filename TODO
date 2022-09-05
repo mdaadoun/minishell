@@ -7,6 +7,12 @@
 	export a+=test
 	a=10test
 
+	*careful to first letters
+	need to be: 
+	>= 'a' || <= 'z'
+	>= 'A' || <= 'Z'
+	'_'
+
 * $?
 	* set return value for all builtins
 	

@@ -6,7 +6,7 @@
 /*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 07:16:24 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/09/05 07:01:35 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/05 07:16:36 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,30 @@ static size_t	envplen(char **envp)
 	return (len);
 }
 
-static void	swap_envp(char **s1, char **s2)
-{
-	char	*tmp;
-
-	tmp = *s1;
-	s1 = s2;
-	s2 = &tmp;
-}
-
 void	ms_sorting_env(t_minishell *ms)
 {
 	char	**envp;
 	size_t	len;
 	size_t	ind;
+	size_t	var;
+	char	*tmp;
 
 	envp = ms->envp;
 	len = envplen(envp);
 	ind = 0;
 	while (ind < len)
 	{
+		var = ind + 1;
+		while (var < len)
+		{
+			if (ft_strcmp(envp[ind], envp[var]) > 0)
+			{
+				tmp = envp[ind];
+				envp[ind] = envp[var];
+				envp[var] = tmp;
+			}
+			var++;
+		}
+		ind++;
 	}
 }
