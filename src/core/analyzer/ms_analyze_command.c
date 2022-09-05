@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:43:46 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/31 11:59:53 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/05 09:46:29 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static bool	check_absolute_path(t_token *command)
 			command->external_path = command_path;
 			return (true);
 		}
+		free(command_path);
 	}
 	return (false);
 }
