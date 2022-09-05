@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 11:37:03 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/05 12:31:24 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/05 13:10:58 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ static void	check_bad_syntax(t_minishell *ms)
 /*
  *	From token type, find:
  *		1. if command exist (if NO_TYPE instead of BUILTIN or EXTERNAL)
- Check each command and find out errors If valid syntax, checking errors and ignore if not
+ *			Check each command and find out errors If valid syntax, \
+ *			checking errors and ignore if not
  * 		2. if syntax correct (pipes next to each other)
  * 		3. redirection error ??
  */

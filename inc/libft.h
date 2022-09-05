@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 10:54:43 by pi                #+#    #+#             */
-/*   Updated: 2022/09/05 09:12:07 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/05 13:27:19 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void			ft_putnstr_fd(char *str, size_t len, int fd);
 void			ft_putendl_fd(char *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
 size_t			ft_char_in_set(char c, char const *set);
+size_t			ft_count_tab_string(char **tab);
 
 // LIST
 typedef struct s_list

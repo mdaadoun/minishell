@@ -6,13 +6,13 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/05 09:32:52 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/05 13:29:02 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-static void	ft_remove_env(t_minishell *ms, t_variable *last, t_variable *current)
+static void	ft_rm_env(t_minishell *ms, t_variable *last, t_variable *current)
 {
 	if (last == 0)
 		ms->first_var = current->next;
@@ -32,7 +32,7 @@ static void	check_env(t_minishell *ms, char *arg, t_variable *env)
 	{
 		if (!ft_strcmp(arg, env->name))
 		{
-			ft_remove_env(ms, last, env);
+			ft_rm_env(ms, last, env);
 			ms_build_env_tab(ms);
 			break ;
 		}

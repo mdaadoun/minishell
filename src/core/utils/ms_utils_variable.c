@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 10:21:22 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/09/05 09:00:33 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/05 13:04:59 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,31 +17,27 @@ t_variable	*ft_create_variable(t_minishell *ms, char	*str)
 	size_t		ind;
 	t_variable	*env;
 	char		*tmp;
-	char		*val;
 
 	ind = ft_strlen_arg(str, '=');
 	if (str[ind] == 0)
 		return (0);
 	env = ft_calloc(sizeof(t_variable), 1);
-	if (str[ind - 1] == '+')
-		ind--;
-	env->name = ft_substr(str, 0, ind);
-	if (str[ind] == '+' && str[ind + 1] == '=')
+	if (str[ind - 1] == '+' && str[ind] == '=')
 	{
-		ind += 2;
-		tmp = ft_substr(str, ind, ft_strlen(&str[ind]));
-		val = ft_get_env(ms, env->name);
-		if (!val)
-			val = "";
-		env->content = ft_strjoin(val, tmp);
+		env->name = ft_substr(str, 0, ind - 1);
+		tmp = ft_substr(str, ind + 1, ft_strlen(&str[ind + 1]));
+		env->content = ft_get_env(ms, env->name);
+		if (!env->content)
+			env->content = "";
+		env->content = ft_strjoin(env->content, tmp);
 		free(tmp);
 	}
 	else if (str[ind] == '=')
 	{
+		env->name = ft_substr(str, 0, ind);
 		ind++;
 		env->content = ft_substr(str, ind, ft_strlen(&str[ind]));
 	}
-	env->next = 0;
 	return (env);
 }
 

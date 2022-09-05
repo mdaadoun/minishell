@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/05 09:30:03 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/05 13:28:15 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,38 @@ static void	print_env_export(t_minishell *ms)
 	}
 }
 
-static size_t	ft_count(char **str)
+static void	check_flag_error(t_minishell *ms)
 {
-	size_t	ind;
+	if (ms->global_error->flag)
+		ms->exit_status = 1;
+	else
+		ms->exit_status = 0;
+}
 
-	ind = 0;
-	while (str[ind])
+static void	run_export(t_minishell *ms, char **arg, size_t ind)
+{
+	t_variable	*env;
+	t_variable	*find;
+
+	while (arg[ind])
+	{
+		if (check_arg(arg[ind]) == -1)
+		{
+			ms_set_error(ms->global_error, ERROR_EXPORT, MSG_ERROR_EXPORT);
+			ind++;
+			continue ;
+		}
+		env = ft_create_variable(ms, arg[ind]);
+		if (env != 0)
+		{
+			find = ft_get_struct_env(ms, env->name);
+			if (find == 0)
+				ft_add_variable(ms, env);
+			else
+				ft_replace_variable(ms, env);
+		}
 		ind++;
-	return (ind);
+	}
 }
 
 /*
@@ -65,38 +89,12 @@ static size_t	ft_count(char **str)
  */
 void	ms_export(t_minishell *ms, char **arg)
 {
-	size_t		ind;
-	t_variable	*env;
-	t_variable	*find;
-
-	if (ft_count(arg) == 1)
+	if (ft_count_tab_string(arg) == 1)
 		print_env_export(ms);
 	else
 	{
-		ind = 1;
-		while (arg[ind])
-		{
-			if (check_arg(arg[ind]) == -1)
-			{
-				ms_set_error(ms->global_error, ERROR_EXPORT, MSG_ERROR_EXPORT);
-				ind++;
-				continue ;
-			}
-			env = ft_create_variable(ms, arg[ind]);
-			if (env != 0)
-			{
-				find = ft_get_struct_env(ms, env->name);
-				if (find == 0)
-					ft_add_variable(ms, env);
-				else
-					ft_replace_variable(ms, env);
-			}
-			ind++;
-		}
+		run_export(ms, arg, 1);
 		ms_build_env_tab(ms);
 	}
-	if (ms->global_error->flag)
-		ms->exit_status = 1;
-	else
-		ms->exit_status = 0;
+	check_flag_error(ms);
 }

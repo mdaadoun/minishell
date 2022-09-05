@@ -6,11 +6,20 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:28:29 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/05 12:31:53 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/05 13:07:39 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
+
+static void	sig_heredoc(void)
+{
+	write(1, "^C", 2);
+	g_sig.in_heredoc = false;
+	if (g_sig.delimiter)
+		free(g_sig.delimiter);
+	exit(0);
+}
 
 /*
  *		1. If Ctrl+C, display back the prompt (need the current working dir).
@@ -22,11 +31,7 @@ static void	cancel_process(int signo)
 	{
 		if (g_sig.in_heredoc)
 		{
-			write(1, "^C", 2);
-			g_sig.in_heredoc = false;
-			if (g_sig.delimiter)
-				free(g_sig.delimiter);
-			exit(0);
+			sig_heredoc();
 		}
 		else
 		{
