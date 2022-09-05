@@ -6,38 +6,46 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/05 07:08:23 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/05 07:34:02 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
+static size_t	strlen_arg(char *str, char c)
+{
+	size_t	len;
+
+	len = 0;
+	while (str[len] && str[len] != c)
+		len++;
+	return (len);
+}
+
+static void	ft_putnstr_fd(char *str, size_t len, int fd)
+{
+	write(fd, str, len);
+}
+
 static void	print_env_export(t_minishell *ms)
 {
 	char	**envp;
 	size_t	ind;
+	size_t	len;
 
 	ms_sorting_env(ms);
 	envp = ms->envp;
 	ind = 0;
 	while (envp[ind])
 	{
-		ft_putstr_fd(envp[ind], 1);
-		ft_putchar_fd('\n', 1);
+		ft_putstr_fd("declare -x ", 1);
+		len = strlen_arg(envp[ind], '=');
+		ft_putnstr_fd(envp[ind], len, 1);
+		ft_putstr_fd("=\"", 1);
+		ft_putstr_fd(&envp[ind][len + 1], 1);
+		ft_putstr_fd("\"\n", 1);
 		ind++;
 	}
-/*	t_variable	*env;
-
-	env = ms->first_var;
-	while (env)
-	{
-		ft_putstr_fd("declare -x ", 1);
-		ft_putstr_fd(env->name, 1);
-		ft_putstr_fd("=\"", 1);
-		ft_putstr_fd(env->content, 1);
-		ft_putstr_fd("\"\n", 1);
-		env = env->next;
-	}*/
 }
 
 static size_t	ft_count(char **str)
