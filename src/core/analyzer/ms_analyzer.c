@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 09:04:20 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/05 15:34:08 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/06 10:30:59 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ void	ms_analyzer(t_minishell *ms)
 {
 	ms_analyze_redirections(ms);
 	ms_analyze_pipes(ms);
-	ms_analyze_command(ms, ms->first_token);
-	ms_analyze_arguments(ms);
+	if (!ms->global_error->flag)
+	{
+		ms_analyze_command(ms, ms->first_token);
+		ms_analyze_arguments(ms);
+	}
 }

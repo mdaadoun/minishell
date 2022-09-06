@@ -1,8 +1,5 @@
 # TODO
 
-* segmentation fault
-	"|  <  |  >> < > | echo hello"
-
 * clear, top
 	* TERM environment variable not set. (The env is ok ?)
 

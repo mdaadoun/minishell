@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 13:46:11 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/06 09:16:26 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/06 10:31:37 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@
 void	ms_executer(t_minishell *ms)
 {
 	g_sig.in_process = true;
-	ms_build_processes(ms);
+
+	if (!ms->global_error->flag)
+		ms_build_processes(ms);
 	if (g_sig.exit_status != 130)
 		ms_checking_for_errors(ms);
 	if (!ms->global_error->flag)
