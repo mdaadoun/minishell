@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:28:14 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/06 07:23:52 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/06 13:30:50 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,38 +52,45 @@ static bool	args_are_valid(t_minishell *ms, char **arg)
 	return (true);
 }
 
-void	ms_cd(t_minishell *ms, char **arg)
+static int	bonus_cd(t_minishell *ms, char **arg, char *var, bool flag)
 {
 	int			ret;
 	t_variable	*env;
 	char		*path;
 
+	env = ft_get_struct_env(ms, var);
+	if (env)
+	{
+		if (flag == true)
+		{
+			if (arg[1])
+				path = ft_strjoin(env->content, &arg[1][1]);
+			else
+				path = ft_strjoin(env->content, "");
+			ret = chdir(path);
+			update_pwd(path, ms, false);
+		}
+		else
+		{
+			ret = chdir(env->content);
+			write(1, env->content, ft_strlen(env->content));
+			write(1, "\n", 1);
+			update_pwd(env->content, ms, true);
+		}
+	}
+	return (ret);
+}
+
+void	ms_cd(t_minishell *ms, char **arg)
+{
+	int	ret;
+
 	if (args_are_valid(ms, arg))
 	{
 		if (!arg[1] || !ft_strncmp(arg[1], "~", 1))
-		{
-			env = ft_get_struct_env(ms, "HOME");
-			if (env)
-			{
-				if (arg[1])
-					path = ft_strjoin(env->content, &arg[1][1]);
-				else
-					path = ft_strjoin(env->content, "");
-				ret = chdir(path);
-				update_pwd(path, ms, false);
-			}
-		}
+			ret = bonus_cd(ms, arg, "HOME", true);
 		else if (!strncmp(arg[1], "-", 2))
-		{
-			env = ft_get_struct_env(ms, "OLDPWD");
-			if (env)
-			{
-				ret = chdir(env->content);
-				write(1, env->content, ft_strlen(env->content));
-				write(1, "\n", 1);
-				update_pwd(env->content, ms, true);
-			}
-		}
+			ret = bonus_cd(ms, arg, "OLDPWD", false);
 		else
 		{
 			ret = chdir(arg[1]);
