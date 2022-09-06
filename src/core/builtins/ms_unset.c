@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/05 13:29:02 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/06 07:23:52 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,5 @@ void	ms_unset(t_minishell *ms, char **arg)
 		check_env(ms, arg[ind], env);
 		ind++;
 	}
-	ms->exit_status = 0;
+	g_sig.exit_status = 0;
 }

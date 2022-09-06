@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 10:55:29 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/05 12:30:20 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/06 07:23:52 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	ms_free_before_exit(t_minishell *ms)
 {
 	int	ret;
 
-	ret = ms->exit_status;
+	ret = g_sig.exit_status;
 	if (ms)
 	{
 		ms_free_last_command(ms);

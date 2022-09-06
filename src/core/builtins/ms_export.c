@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/05 13:28:15 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/06 07:23:52 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ static void	print_env_export(t_minishell *ms)
 static void	check_flag_error(t_minishell *ms)
 {
 	if (ms->global_error->flag)
-		ms->exit_status = 1;
+		g_sig.exit_status = 1;
 	else
-		ms->exit_status = 0;
+		g_sig.exit_status = 0;
 }
 
 static void	run_export(t_minishell *ms, char **arg, size_t ind)

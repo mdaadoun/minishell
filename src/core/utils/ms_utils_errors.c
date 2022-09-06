@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 11:37:03 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/05 16:20:17 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/06 07:23:52 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	check_bad_commands(t_minishell *ms)
 		if (process->types_line[0] != TYPE_EXTERNAL_COMMAND && \
 				process->types_line[0] != TYPE_BUILTIN_COMMAND)
 		{
-			ms->exit_status = 127;
+			g_sig.exit_status = 127;
 			ms_set_error(process->internal_error, err_key, err_msg);
 			ms_set_error(ms->global_error, err_key, err_msg);
 		}

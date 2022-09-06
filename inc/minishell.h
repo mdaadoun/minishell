@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/06 08:04:33 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/06 08:13:30 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,6 @@ typedef struct s_minishell {
 	struct s_variable	*first_var;
 	struct s_process	*first_process;
 	struct s_error		*global_error;
-	int					exit_status;
 }	t_minishell;
 
 
@@ -136,6 +135,7 @@ typedef struct s_minishell {
 */
 
 typedef struct s_signal {
+	int		exit_status;
 	char	*delimiter;
 	bool	in_child;
 	bool	in_heredoc;
@@ -278,9 +278,9 @@ t_variable	*ft_create_variable(t_minishell *ms, char	*str);
  *			core/builtin/ms_unset.c
 */
 
-void		ms_echo(t_minishell *ms, char **arg);
+void		ms_echo(char **arg);
 void		ms_cd(t_minishell *ms, char **arg);
-void		ms_pwd(t_minishell *ms);
+void		ms_pwd(void);
 void		ms_export(t_minishell *ms, char **arg);
 void		ms_unset(t_minishell *ms, char **arg);
 void		ms_env(t_minishell *ms);

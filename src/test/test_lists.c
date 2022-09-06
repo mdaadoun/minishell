@@ -102,7 +102,6 @@ void	test_env(t_minishell *ms, int debug)
 void	test_pipes(t_minishell *ms, int debug)
 {
 	test_run_command(ms, "|  <  |  >> < > | echo hello", debug);
-	
 	// test_run_command(ms, "a|b|c|e|p|pw|ec|un|ex", debug);
 	// test_run_command(ms, "a a d|bd w|c a w", debug);
 	// test_run_command(ms, "env | wc", debug);

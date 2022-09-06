@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:28:14 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/05 09:19:05 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/06 07:23:52 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static bool	args_are_valid(t_minishell *ms, char **arg)
 	if (i > 2)
 	{
 		ms_set_error(ms->global_error, err_key, err_msg);
-		ms->exit_status = 1;
+		g_sig.exit_status = 1;
 		return (false);
 	}
 	return (true);
@@ -93,9 +93,9 @@ void	ms_cd(t_minishell *ms, char **arg)
 		if (ret != 0)
 		{
 			ms_set_error(ms->global_error, ERROR_PATH, MSG_ERROR_PATH);
-			ms->exit_status = 1;
+			g_sig.exit_status = 1;
 		}
 		else
-			ms->exit_status = 0;
+			g_sig.exit_status = 0;
 	}
 }
