@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/06 08:29:32 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/06 10:03:58 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -316,7 +316,6 @@ void		set_redir_fd(t_redirection *redir);
  *      Files :
  *			core/utils/ms_utils_tokenizer.c
  *			core/utils/ms_utils_extra.c
- *			core/utils/ms_utils_token.c
 */
 
 t_token		*ms_create_new_token(t_minishell *ms);
@@ -327,7 +326,6 @@ void		ms_add_token(t_minishell *ms, char *content,
 void		ms_push_token(t_token *first_token, t_token *second_token);
 void		ms_combine_token(t_token *first_token, t_token *second_token);
 void		ms_free_double_pointer(char **data);
-size_t		count_tok(t_token *tok);
 
 /*
  *  Parser:

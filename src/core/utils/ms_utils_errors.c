@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 11:37:03 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/06 07:23:52 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/06 09:15:51 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,12 @@ void	ms_set_error(t_error *error, t_err_key err_key, char *err_msg)
 
 void	ms_print_error(t_minishell *ms)
 {
-	write(2, "\e[0;31mError: ", 14);
-	write(2, ms->global_error->msg, ms->global_error->length);
-	write(2, "\e[m\n", 4);
+	if (ms->global_error->flag && \
+		ms->global_error->key != ERROR_SILENT && \
+		g_sig.exit_status != 130)
+	{
+		write(2, "\e[0;31mError: ", 14);
+		write(2, ms->global_error->msg, ms->global_error->length);
+		write(2, "\e[m\n", 4);
+	}
 }

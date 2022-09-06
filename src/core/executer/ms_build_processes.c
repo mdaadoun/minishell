@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 07:47:41 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/09/06 09:09:10 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/06 10:04:53 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,39 +22,27 @@ static void	add_process(t_process *proc)
 	new_process->prev = proc;
 }
 
-static t_token	*builder(t_minishell *ms, t_token *tok, t_process *proc)
+static size_t	count_tok(t_token *tok)
 {
-	size_t	ind;
+	size_t	nb;
 
-	ind = 0;
-	if (tok->type == TYPE_EXTERNAL_COMMAND)
-		proc->exec_path = tok->external_path;
-	if (tok->type == TYPE_BUILTIN_COMMAND)
-		proc->builtin = tok->builtin;
-	ms_build_redir(ms, tok, proc);
-	if (tok->type == TYPE_PIPE)
+	nb = 0;
+	while (tok && tok->type != TYPE_PIPE)
 	{
-		add_process(proc);
-		proc->envp = ms->envp;
-		proc = proc->next;
-		proc->cmd = (char **)ft_calloc(sizeof(char *), count_tok(tok->next));
-		proc->envp = ms->envp;
-		ind = 0;
+		if (is_redirect(tok) == 0)
+			nb++;
+		tok = tok->next;
 	}
-	else if (is_redirect(tok) == 0)
-		proc->cmd[ind++] = ft_strdup(tok->content);
-	else if (is_redirect(tok) != 0)
-		tok = tok->next;
-	if (tok)
-		tok = tok->next;
-	return (tok);
+	return (nb + 1);
 }
 
 void	ms_build_processes(t_minishell *ms)
 {
 	t_process	*proc;
 	t_token		*tok;
+	size_t		ind;
 
+	ind = 0;
 	tok = ms->first_token;
 	proc = (t_process *)ft_calloc(sizeof(t_process), 1);
 	if (!proc)
@@ -66,6 +54,30 @@ void	ms_build_processes(t_minishell *ms)
 	proc->cmd = (char **)ft_calloc(sizeof(char *), count_tok(tok));
 	ms->first_process = proc;
 	while (tok)
-		tok = builder(ms, tok, proc);
+	{
+		if (tok->type == TYPE_EXTERNAL_COMMAND)
+			proc->exec_path = tok->external_path;
+		if (tok->type == TYPE_BUILTIN_COMMAND)
+			proc->builtin = tok->builtin;
+		ms_build_redir(ms, tok, proc);
+		if (tok->type == TYPE_PIPE)
+		{
+			add_process(proc);
+			proc->envp = ms->envp;
+			proc = proc->next;
+			proc->cmd = (char **)ft_calloc(sizeof(char *), count_tok(tok->next));
+			proc->envp = ms->envp;
+			ind = 0;
+		}
+		else if (is_redirect(tok) == 0)
+		{
+			proc->cmd[ind] = ft_strdup(tok->content);
+			ind++;
+		}
+		else if (is_redirect(tok) != 0)
+			tok = tok->next;
+		if (tok)
+			tok = tok->next;
+	}
 	ms_build_type_lines(ms);
 }
