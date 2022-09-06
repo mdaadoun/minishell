@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 07:47:41 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/09/06 08:59:54 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/06 09:09:10 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,7 @@ void	ms_build_processes(t_minishell *ms)
 {
 	t_process	*proc;
 	t_token		*tok;
-	size_t		ind;
 
-	ind = 0;
 	tok = ms->first_token;
 	proc = (t_process *)ft_calloc(sizeof(t_process), 1);
 	if (!proc)
