@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 07:47:41 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/09/06 10:33:59 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/06 14:16:01 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static size_t	count_tok(t_token *tok)
 static t_process	*new_proc(t_minishell *ms, t_process *proc, t_token *tok)
 {
 	add_process(proc);
-	proc->envp = ms->envp;
 	proc = proc->next;
 	proc->cmd = (char **)ft_calloc(sizeof(char *), count_tok(tok->next));
 	proc->envp = ms->envp;
@@ -89,6 +88,7 @@ void	ms_build_processes(t_minishell *ms)
 	}
 	proc->internal_error = (t_error *)ft_calloc(sizeof(t_error), 1);
 	proc->cmd = (char **)ft_calloc(sizeof(char *), count_tok(tok));
+	proc->envp = ms->envp;
 	ms->first_process = proc;
 	builder(ms, tok, proc);
 	ms_build_type_lines(ms);
