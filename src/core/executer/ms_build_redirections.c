@@ -6,19 +6,20 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:12:25 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/06 08:10:38 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/06 14:28:43 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-static void	add_heredoc_line(char *line)
+static void	add_heredoc_line(char *line, bool nl)
 {
 	int	fd;
 
 	fd = open(".heredoc", O_CREAT | O_WRONLY | O_APPEND, 0777);
 	write(fd, line, ft_strlen(line));
-	write(fd, "\n", 1);
+	if (nl)
+		write(fd, "\n", 1);
 	close(fd);
 }
 
@@ -36,6 +37,7 @@ static void	open_heredoc(void)
 	line = "";
 	check = 1;
 	unlink(".heredoc");
+	add_heredoc_line(line, false);
 	while (check)
 	{
 		line = readline("> ");
@@ -48,7 +50,7 @@ static void	open_heredoc(void)
 			free(line);
 			break ;
 		}
-		add_heredoc_line(line);
+		add_heredoc_line(line, true);
 		free(line);
 	}
 }

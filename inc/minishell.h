@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/06 14:17:04 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/06 14:40:42 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,7 +280,7 @@ t_variable	*ft_create_variable(t_minishell *ms, char	*str);
 
 void		ms_echo(char **arg);
 void		ms_cd(t_minishell *ms, char **arg);
-void		ms_pwd(void);
+void		ms_pwd(t_minishell *ms, char **arg);
 void		ms_export(t_minishell *ms, char **arg);
 void		ms_unset(t_minishell *ms, char **arg);
 void		ms_env(t_minishell *ms);

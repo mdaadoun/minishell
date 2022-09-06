@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/06 07:52:24 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/06 14:27:01 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,31 @@ void	ms_echo(char **arg)
 {
 	int	ind;
 	int	n;
+	int i;
 
 	ind = 1;
 	n = 0;
 	if (nb_arg(arg) > 1)
 	{
-		while (arg[ind] && ft_strncmp(arg[ind], "-n", 3) == 0)
+
+		// while (arg[ind] && ft_strncmp(arg[ind], "-n", 2) == 0)
+		// {
+		// 	n = 1;
+		// 	ind++;
+		// }
+		if (arg[ind][0] == '-')
 		{
-			n = 1;
-			ind++;
+			i = 1;
+			while (arg[ind][i])
+			{
+				n = 1;
+				if (arg[ind][i] != 'n')
+				{
+					n = 0;
+					break;
+				}
+				i++;
+			}
 		}
 		while (arg[ind])
 		{
