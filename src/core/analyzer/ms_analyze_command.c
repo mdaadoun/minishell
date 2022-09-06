@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:43:46 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/05 09:46:29 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/06 10:33:31 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,11 @@ void	ms_analyze_command(t_minishell *ms, t_token *cmd)
 	if (command && !ms_is_redirection(command))
 	{
 		check_if_builtin(command);
+		if (command->type == TYPE_PIPE)
+		{
+			g_sig.exit_status = 1;
+			ms_set_error(ms->global_error, ERROR_SYNTAX, MSG_ERROR_SYNTAX_PIPE);
+		}
 		if (command->type != TYPE_BUILTIN_COMMAND)
 			check_if_external(ms, command);
 		if (command->type != TYPE_EXTERNAL_COMMAND \
