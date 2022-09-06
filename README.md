@@ -30,13 +30,13 @@ Objective : Write a shell
 > - << doit recevoir un délimiteur et lire l’input donné jusqu’à rencontrer une ligne contenant le délimiteur. Cependant, l’historique n’a pas à être mis à jour !
 > - \>\> doit rediriger la sortie en mode append.
 
-* [ ] **pipes: |**
+* [x] **pipes: |**
 > Implémenter les pipes (caractère |). La sortie de chaque commande de la pipeline est connectée à l’entrée de la commande suivante grâce à un pipe.
 
 * [x] **env variables: $**
 > Gérer les variables d’environnement (un $ suivi d’une séquence de caractères) qui doivent être substituées par leur contenu.
 
-* [ ] **$?**
+* [x] **$?**
 > Gérer $? qui doit être substitué par le statut de sortie de la dernière pipeline exécutée au premier plan.
 
 * [x] **Interactive commands**

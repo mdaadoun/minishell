@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:12:25 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/06 14:28:43 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/06 17:11:42 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ static void	run_heredoc(t_minishell *ms, t_token *token, t_process *proc)
 	proc->has_redirection = true;
 	if (token->next && token->next->type == TYPE_ARG_DELIMITER)
 	{
+		g_sig.exit_status = 0;
 		pid = fork();
 		if (pid == 0)
 			child_heredoc(ms, token);

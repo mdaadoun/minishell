@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/06 14:27:01 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/06 17:51:10 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ms_echo(char **arg)
 {
 	int	ind;
 	int	n;
-	int i;
+	int	i;
 
 	ind = 1;
 	n = 0;

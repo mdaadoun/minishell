@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/06 16:37:23 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/06 17:47:17 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,19 @@ static void	run_exit(t_minishell *ms, char **arg)
 // cause the shell to exit
 void	ms_exit(t_minishell *ms, char **arg)
 {
-	int nb;
+	int			nb;
+	t_err_key	err_key;
+	char		*err_msg;
 
+	err_key = ERROR_EXTRA_ARGS;
+	err_msg = MSG_ERROR_EXTRA_ARGS;
 	nb = ft_count_tab_string(arg);
 	if (nb >= 2)
 	{
 		run_exit(ms, arg);
 		if (g_sig.exit_status != 2 && nb > 2)
 		{
-			ms_set_error(ms->global_error, ERROR_EXTRA_ARGS, MSG_ERROR_EXTRA_ARGS);
+			ms_set_error(ms->global_error, err_key, err_msg);
 			g_sig.exit_status = 1;
 		}
 		else
