@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 13:40:46 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/09/06 08:15:09 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/06 10:59:21 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,41 @@ int	is_redirect(t_token *tok)
 	else if (tok->type == TYPE_REDIRECT_DOUBLE_LEFT)
 		return (1);
 	return (0);
+}
+
+bool	is_builtin(t_token *command, char *name_bin, t_builtins index_bin)
+{
+	if (!ft_strncmp(name_bin, command->content, ft_strlen(name_bin) + 1))
+	{
+		command->builtin = index_bin;
+		return (true);
+	}
+	return (false);
+}
+
+bool	check_if_builtin(t_token *command)
+{
+	bool	flag;
+
+	flag = false;
+	if (is_builtin(command, "cd", BIN_CD))
+		flag = true;
+	else if (is_builtin(command, "echo", BIN_ECHO))
+		flag = true;
+	else if (is_builtin(command, "export", BIN_EXPORT))
+		flag = true;
+	else if (is_builtin(command, "env", BIN_ENV))
+		flag = true;
+	else if (is_builtin(command, "exit", BIN_EXIT))
+		flag = true;
+	else if (is_builtin(command, "pwd", BIN_PWD))
+		flag = true;
+	else if (is_builtin(command, "unset", BIN_UNSET))
+		flag = true;
+	if (flag)
+	{
+		command->type = TYPE_BUILTIN_COMMAND;
+		return (true);
+	}
+	return (false);
 }

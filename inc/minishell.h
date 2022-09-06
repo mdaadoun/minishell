@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/06 10:03:58 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/06 10:59:48 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -302,6 +302,8 @@ void		ms_initialize_signals(void);
 bool		is_empty_command(t_minishell *ms);
 bool		is_builtin_fork(t_builtins built);
 int			is_redirect(t_token *tok);
+bool		is_builtin(t_token *command, char *name_bin, t_builtins index_bin);
+bool		check_if_builtin(t_token *command);
 
 /*
  * Files :

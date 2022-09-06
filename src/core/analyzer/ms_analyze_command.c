@@ -6,48 +6,11 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:43:46 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/06 10:37:12 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/06 11:02:34 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
-
-static bool	is_builtin(t_token *command, char *name_bin, t_builtins index_bin)
-{
-	if (!ft_strncmp(name_bin, command->content, ft_strlen(name_bin) + 1))
-	{
-		command->builtin = index_bin;
-		return (true);
-	}
-	return (false);
-}
-
-static bool	check_if_builtin(t_token *command)
-{
-	bool	flag;
-
-	flag = false;
-	if (is_builtin(command, "cd", BIN_CD))
-		flag = true;
-	else if (is_builtin(command, "echo", BIN_ECHO))
-		flag = true;
-	else if (is_builtin(command, "export", BIN_EXPORT))
-		flag = true;
-	else if (is_builtin(command, "env", BIN_ENV))
-		flag = true;
-	else if (is_builtin(command, "exit", BIN_EXIT))
-		flag = true;
-	else if (is_builtin(command, "pwd", BIN_PWD))
-		flag = true;
-	else if (is_builtin(command, "unset", BIN_UNSET))
-		flag = true;
-	if (flag)
-	{
-		command->type = TYPE_BUILTIN_COMMAND;
-		return (true);
-	}
-	return (false);
-}
 
 static bool	check_absolute_path(t_token *command)
 {
@@ -65,6 +28,15 @@ static bool	check_absolute_path(t_token *command)
 		free(command_path);
 	}
 	return (false);
+}
+
+static void	build_exernal(t_token *command, char *command_path, char **path)
+{
+	command->type = TYPE_EXTERNAL_COMMAND;
+	if (command->external_path)
+		free (command->external_path);
+	command->external_path = command_path;
+	ms_free_double_pointer(path);
 }
 
 /*
@@ -90,11 +62,7 @@ static bool	check_if_external(t_minishell *ms, t_token *command)
 		free(tmp_path);
 		if (access(command_path, 0) == 0)
 		{
-			command->type = TYPE_EXTERNAL_COMMAND;
-			if (command->external_path)
-				free (command->external_path);
-			command->external_path = command_path;
-			ms_free_double_pointer(path);
+			build_exernal(command, command_path, path);
 			return (true);
 		}
 		else
