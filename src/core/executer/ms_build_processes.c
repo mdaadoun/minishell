@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 07:47:41 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/09/06 10:04:53 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/06 10:33:59 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,21 @@ static size_t	count_tok(t_token *tok)
 	return (nb + 1);
 }
 
-void	ms_build_processes(t_minishell *ms)
+static t_process	*new_proc(t_minishell *ms, t_process *proc, t_token *tok)
 {
-	t_process	*proc;
-	t_token		*tok;
-	size_t		ind;
+	add_process(proc);
+	proc->envp = ms->envp;
+	proc = proc->next;
+	proc->cmd = (char **)ft_calloc(sizeof(char *), count_tok(tok->next));
+	proc->envp = ms->envp;
+	return (proc);
+}
+
+static void	builder(t_minishell *ms, t_token *tok, t_process *proc)
+{
+	size_t	ind;
 
 	ind = 0;
-	tok = ms->first_token;
-	proc = (t_process *)ft_calloc(sizeof(t_process), 1);
-	if (!proc)
-	{
-		ms_set_error(ms->global_error, ERROR_MALLOC, MSG_ERROR_MALLOC);
-		exit(ms_free_before_exit(ms));
-	}
-	proc->internal_error = (t_error *)ft_calloc(sizeof(t_error), 1);
-	proc->cmd = (char **)ft_calloc(sizeof(char *), count_tok(tok));
-	ms->first_process = proc;
 	while (tok)
 	{
 		if (tok->type == TYPE_EXTERNAL_COMMAND)
@@ -62,11 +60,7 @@ void	ms_build_processes(t_minishell *ms)
 		ms_build_redir(ms, tok, proc);
 		if (tok->type == TYPE_PIPE)
 		{
-			add_process(proc);
-			proc->envp = ms->envp;
-			proc = proc->next;
-			proc->cmd = (char **)ft_calloc(sizeof(char *), count_tok(tok->next));
-			proc->envp = ms->envp;
+			proc = new_proc(ms, proc, tok);
 			ind = 0;
 		}
 		else if (is_redirect(tok) == 0)
@@ -79,5 +73,23 @@ void	ms_build_processes(t_minishell *ms)
 		if (tok)
 			tok = tok->next;
 	}
+}
+
+void	ms_build_processes(t_minishell *ms)
+{
+	t_process	*proc;
+	t_token		*tok;
+
+	tok = ms->first_token;
+	proc = (t_process *)ft_calloc(sizeof(t_process), 1);
+	if (!proc)
+	{
+		ms_set_error(ms->global_error, ERROR_MALLOC, MSG_ERROR_MALLOC);
+		exit(ms_free_before_exit(ms));
+	}
+	proc->internal_error = (t_error *)ft_calloc(sizeof(t_error), 1);
+	proc->cmd = (char **)ft_calloc(sizeof(char *), count_tok(tok));
+	ms->first_process = proc;
+	builder(ms, tok, proc);
 	ms_build_type_lines(ms);
 }
