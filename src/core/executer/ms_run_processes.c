@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 08:01:33 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/09/06 07:42:04 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/06 11:27:58 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,18 @@ static void	execv_builtin(t_minishell *ms, t_builtins built, char **arg)
 		exit(ms_free_before_exit(ms));
 }
 
+static void	dup_pipe(t_process *proc)
+{
+	dup2(proc->pipe_in, 0);
+	if (proc->pipe_in != 0)
+		close(proc->prev->pipe_out);
+	dup2(proc->pipe_out, 1);
+	if (proc->pipe_out != 1)
+		close(proc->next->pipe_in);
+	if (proc->has_redirection == true)
+		set_redir_fd(proc->first_redirection);
+}
+
 static void	exec_external(t_process *proc)
 {
 	t_redirection	*redir;
@@ -41,14 +53,7 @@ static void	exec_external(t_process *proc)
 	proc->pid = fork();
 	if (proc->pid == 0)
 	{
-		dup2(proc->pipe_in, 0);
-		if (proc->pipe_in != 0)
-			close(proc->prev->pipe_out);
-		dup2(proc->pipe_out, 1);
-		if (proc->pipe_out != 1)
-			close(proc->next->pipe_in);
-		if (proc->has_redirection == true)
-			set_redir_fd(proc->first_redirection);
+		dup_pipe(proc);
 		execve(proc->exec_path, proc->cmd, proc->envp);
 	}
 	if (proc->pipe_in != 0)
@@ -73,14 +78,7 @@ static void	exec_builtin(t_minishell *ms, t_process *proc)
 	proc->pid = fork();
 	if (proc->pid == 0)
 	{
-		dup2(proc->pipe_in, 0);
-		if (proc->pipe_in != 0)
-			close(proc->prev->pipe_out);
-		dup2(proc->pipe_out, 1);
-		if (proc->pipe_out != 1)
-			close(proc->next->pipe_in);
-		if (proc->has_redirection == true)
-			set_redir_fd(proc->first_redirection);
+		dup_pipe(proc);
 		execv_builtin(ms, proc->builtin, proc->cmd);
 	}
 	if (proc->pipe_in != 0)
