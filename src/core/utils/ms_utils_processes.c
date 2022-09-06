@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:49:41 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/06 10:02:33 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/06 13:13:59 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,21 @@ static int8_t	count_tokens(t_token *token)
 	return (nb);
 }
 
+static bool	check(t_token_type type)
+{
+	if (type != TYPE_ARG_DELIMITER)
+		return (true);
+	if (type != TYPE_ARG_REDIRECT_FILE)
+		return (true);
+	return (false);
+}
+
+static void	run_error(t_minishell *ms, t_err_key err_key, char *err_msg)
+{
+	ms_set_error(ms->global_error, err_key, err_msg);
+	exit(ms_free_before_exit(ms));
+}
+
 /*
  * Create an array of the token type for each process.
  */
@@ -36,30 +51,20 @@ void	ms_build_type_lines(t_minishell *ms)
 	t_token_type	*types_line;
 	t_process		*process;
 	t_token			*token;
-	int8_t			nb_tokens;
 	int8_t			idx;
 
 	process = ms->first_process;
 	token = ms->first_token;
 	while (process)
 	{
-		nb_tokens = count_tokens(token) + 1;
-		types_line = (t_token_type *) ft_calloc(sizeof(int), (size_t)nb_tokens);
+		types_line = ft_calloc(sizeof(int), count_tokens(token) + 1);
 		if (!types_line)
-		{
-			ms_set_error(ms->global_error, ERROR_MALLOC, MSG_ERROR_MALLOC);
-			exit(ms_free_before_exit(ms));
-		}
+			run_error(ms, ERROR_MALLOC, MSG_ERROR_MALLOC);
 		idx = 0;
 		while (token && token->type != TYPE_PIPE)
 		{		
-			if (token->type != TYPE_ARG_DELIMITER && \
-			token->type != TYPE_ARG_REDIRECT_FILE && \
-			!ms_is_redirection(token))
-			{
-				types_line[idx] = token->type;
-				idx++;
-			}
+			if (check(token->type) == true && !ms_is_redirection(token))
+				types_line[idx++] = token->type;
 			token = token->next;
 		}
 		if (token)
