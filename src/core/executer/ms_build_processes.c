@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 07:47:41 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/09/06 08:03:55 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/06 08:31:06 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,6 @@ static void	add_process(t_process *proc)
 	new_process->internal_error = (t_error *)ft_calloc(sizeof(t_error), 1);
 	proc->next = new_process;
 	new_process->prev = proc;
-}
-
-static size_t	count_tok(t_token *tok)
-{
-	size_t	nb;
-
-	nb = 0;
-	while (tok && tok->type != TYPE_PIPE)
-	{
-		if (is_redirect(tok) == 0)
-			nb++;
-		tok = tok->next;
-	}
-	return (nb + 1);
 }
 
 void	ms_build_processes(t_minishell *ms)
