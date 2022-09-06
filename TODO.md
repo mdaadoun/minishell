@@ -1,5 +1,7 @@
 # TODO
 
+* echo $aa a, missing space because the clean_tokens
+
 * clear, top
 	* TERM environment variable not set. (The env is ok ?)
 
