@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 11:06:35 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/09/06 10:10:34 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/06 10:39:36 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,12 @@ static void	swap(t_minishell *ms, t_token *tok, size_t ind)
 	s1 = ft_substr(tok->content, 0, ind);
 	lenv = ft_strlen_space(&tok->content[ind + 1]);
 	if (lenv == 1 && tok->content[ind + 1] == '?')
-	{
-		tmp = ft_itoa(g_sig.exit_status);
-		tmp = ft_free_join(s1, tmp, 0);
-	}
+		tmp = ft_free_join(s1, ft_itoa(g_sig.exit_status), 0);
 	else
 	{
 		s2 = ft_substr(tok->content, ind + 1, lenv);
-		tmp = ft_get_env(ms, s2);
+		tmp = ft_free_join(s1, ft_get_env(ms, s2), 1);
 		free(s2);
-		tmp = ft_free_join(s1, tmp, 1);
 	}
 	ind += lenv + 1;
 	lenv = ft_strlen(&tok->content[ind]);
