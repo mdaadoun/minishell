@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/05 16:16:29 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/06 08:04:33 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -366,9 +366,9 @@ void		ms_analyze_arguments(t_minishell *ms);
  *			core/executer/ms_redirections.c
 */
 
-void		ms_add_redirection(t_process *proc, t_token_type type, char *filepath);
+void		ms_add_redir(t_process *proc, t_token_type type, char *filepath);
 void		ms_executer(t_minishell *ms);
-void		ms_build_redirections(t_minishell *ms, t_token *token, t_process *process);
+void		ms_build_redir(t_minishell *ms, t_token *token, t_process *process);
 void		ms_build_processes(t_minishell *ms);
 void		ms_start_processes(t_minishell *ms);
 bool		ms_is_redirection(t_token *tok);

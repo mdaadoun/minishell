@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 13:00:13 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/18 15:12:25 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/06 08:06:28 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	append_redirection(t_redirection *first, t_redirection *last)
 	tmp->next = last;
 }
 
-void	ms_add_redirection(t_process *proc, t_token_type type, char *filepath)
+void	ms_add_redir(t_process *proc, t_token_type type, char *filepath)
 {
 	t_redirection	*redir;
 

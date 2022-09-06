@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:12:25 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/05 15:02:34 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/06 08:10:38 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,23 @@ static void	child_heredoc(t_minishell *ms, t_token *token)
 	exit (0);
 }
 
+static void	run_heredoc(t_minishell *ms, t_token *token, t_process *proc)
+{
+	pid_t		pid;
+
+	proc->has_redirection = true;
+	if (token->next && token->next->type == TYPE_ARG_DELIMITER)
+	{
+		pid = fork();
+		if (pid == 0)
+			child_heredoc(ms, token);
+		g_sig.in_child = true;
+		waitpid(pid, NULL, 0);
+		g_sig.in_child = false;
+		ms_add_redir(proc, token->type, ft_strdup(".heredoc"));
+	}
+}
+
 /*
  *	First check if the current token is a redirection operator.
  *	Then check differents operators:
@@ -74,11 +91,10 @@ static void	child_heredoc(t_minishell *ms, t_token *token)
  *		3. <
  *		4. >
  */
-void	ms_build_redirections(t_minishell *ms, t_token *token,	t_process *process)
+void	ms_build_redir(t_minishell *ms, t_token *token,	t_process *process)
 {
 	t_err_key	err_key;
 	char		*err_msg;
-	pid_t		pid;
 
 	err_key = ERROR_SYNTAX;
 	err_msg = MSG_ERROR_SYNTAX_REDIRECT;
@@ -86,7 +102,7 @@ void	ms_build_redirections(t_minishell *ms, t_token *token,	t_process *process)
 	{
 		process->has_redirection = true;
 		if (token->next && token->next->type == TYPE_ARG_REDIRECT_FILE)
-			ms_add_redirection(process, token->type, ft_strdup(token->next->content));
+			ms_add_redir(process, token->type, ft_strdup(token->next->content));
 		else
 			ms_set_error(process->internal_error, err_key, err_msg);
 	}
@@ -94,15 +110,7 @@ void	ms_build_redirections(t_minishell *ms, t_token *token,	t_process *process)
 	{
 		process->has_redirection = true;
 		if (token->next && token->next->type == TYPE_ARG_DELIMITER)
-		{
-			pid = fork();
-			if (pid == 0)
-				child_heredoc(ms, token);
-			g_sig.in_child = true;
-			waitpid(pid, NULL, 0);
-			g_sig.in_child = false;
-			ms_add_redirection(process, token->type, ft_strdup(".heredoc"));
-		}
+			run_heredoc(ms, token, process);
 		else
 			ms_set_error(process->internal_error, err_key, err_msg);
 	}
