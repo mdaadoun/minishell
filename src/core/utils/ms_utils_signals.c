@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:28:29 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/06 07:31:18 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/06 08:22:36 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ static void	cancel_process(int signo)
 	if (signo == SIGINT)
 	{
 		if (g_sig.in_heredoc)
-		{
 			sig_heredoc();
-		}
 		else
 		{
 			if (!g_sig.in_child)
@@ -46,7 +44,7 @@ static void	cancel_process(int signo)
 				rl_redisplay();
 			}
 		}
-		g_sig.exit_status = 130; 
+		g_sig.exit_status = 130;
 	}
 	if (signo == SIGQUIT)
 	{

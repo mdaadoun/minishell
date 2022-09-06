@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 13:40:46 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/09/05 15:09:53 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/06 08:15:09 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 // Return true if all the token are empty with space
 bool	is_empty_command(t_minishell *ms)
 {
-	t_token *token;
+	t_token	*token;
 	int		i;
 
 	token = ms->first_token;
-	while(token)
+	while (token)
 	{
 		i = 0;
 		while (token->content[i])
