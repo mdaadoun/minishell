@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 08:01:33 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/09/07 10:29:53 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/07 10:44:02 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,18 @@ static void	exec_child(t_minishell *ms, t_process *proc, bool flag)
 
 static void	wait_proc(t_minishell *ms, t_process *proc)
 {
-	int	status;
+	int		status;
+	bool	update_status;
 
+	update_status = true;
 	while (proc)
 	{
 		waitpid(proc->pid, &status, 0);
+		if (proc->has_redirection && g_sig.exit_status == 130)
+			update_status = false;
 		if (proc->types_line[0] == TYPE_EXTERNAL_COMMAND || \
 			is_builtin_fork(proc->builtin))
-			if (!ms->global_error->flag && g_sig.exit_status != 130)
+			if (!ms->global_error->flag && update_status)
 				if (WIFEXITED(status))
 					g_sig.exit_status = WEXITSTATUS(status);
 		proc = proc->next;
