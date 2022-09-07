@@ -6,7 +6,7 @@
 /*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 08:00:55 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/09/07 08:04:44 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/07 08:25:13 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,15 @@ void	close_pipe(t_process *proc)
 			close(redir->fd);
 			redir = redir->next;
 		}
+	}
+}
+
+void	init_pipe(t_process *proc)
+{
+	while (proc)
+	{
+		proc->pipe_in = 0;
+		proc->pipe_out = 1;
+		proc = proc->next;
 	}
 }
