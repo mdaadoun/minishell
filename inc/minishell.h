@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/07 08:25:55 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/07 10:20:09 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -310,6 +310,7 @@ bool		check_if_builtin(t_token *command);
  * 		core/utils/ms_utils_redirection.c
  */
 
+bool		is_double_redirect(char *str, int ind);
 void		init_fd_redirection(t_process *proc);
 void		set_redir_fd(t_redirection *redir);
 

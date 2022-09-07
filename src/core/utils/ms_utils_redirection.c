@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ms_utils_redirection.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlaidet <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 14:06:55 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/09/05 14:09:41 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/07 10:20:37 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
+
+bool is_double_redirect(char *str, int ind)
+{
+	if ((str[ind] == '>' && str[ind + 1] == '>') || \
+				(str[ind] == '<' && str[ind + 1] == '<'))
+		return (true);
+	return (false);
+}
 
 void	init_fd_redirection(t_process *proc)
 {

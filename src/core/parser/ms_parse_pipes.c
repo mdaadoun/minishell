@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 14:15:26 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/08/30 07:21:23 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/07 10:08:35 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,47 +25,56 @@ static int	get_length(char *string, int start)
 	return (length);
 }
 
-/* 
- *	Replace the given token with new token separated by pipes 
-*/
-static void	rebuild_pipes_token(t_minishell *ms, t_token *token)
+static void	create_and_push_token(t_minishell *ms, t_token **t1, t_token **t2)
 {
-	t_token	*tok1;
-	t_token	*tok2;
-	char	*str;
-	int		ind;
-	int		sta;
+	*t2 = ms_create_new_token(ms);
+	ms_push_token(*t1, *t2);
+	*t1 = *t2;
+}
 
-	sta = 0;
+static void	rebuild_pipes_token(t_minishell *ms, t_token *t1, \
+t_token *t2, char *str)
+{
+	int		sta;
+	int		ind;
+
 	ind = 0;
-	str = token->content;
-	tok1 = token;
+	sta = 0;
 	while (str[ind])
 	{
 		if (str[ind] == '|')
 		{
-			if (ind == 0)
-				tok1->content = ft_substr(str, sta, get_length(str, sta) + 1);
-			else
+			if (ind != 0)
 			{
-				tok1->content = ft_substr(str, sta, get_length(str, sta));
-				tok2 = ms_create_new_token(ms);
-				ms_push_token(tok1, tok2);
-				tok1 = tok2;
+				t1->content = ft_substr(str, sta, get_length(str, sta));
+				create_and_push_token(ms, &t1, &t2);
 				sta = sta + get_length(str, sta);
-				tok1->content = ft_substr(str, sta, get_length(str, sta) + 1);
-				if (!str[ind + 1])
-					break ;
 			}
-			tok2 = ms_create_new_token(ms);
-			ms_push_token(tok1, tok2);
-			tok1 = tok2;
+			t1->content = ft_substr(str, sta, get_length(str, sta) + 1);
+			if (ind != 0 && !str[ind + 1])
+				break ;
+			create_and_push_token(ms, &t1, &t2);
 			sta++;
 		}
 		ind++;
 		if (!str[ind])
-			tok1->content = ft_substr(str, sta, get_length(str, sta));
+			t1->content = ft_substr(str, sta, get_length(str, sta));
 	}
+}
+
+/* 
+ *	Replace the given token with new token separated by pipes 
+*/
+static void	start_rebuild_pipes_token(t_minishell *ms, t_token *token)
+{
+	t_token	*tok1;
+	t_token	*tok2;
+	char	*str;
+
+	str = token->content;
+	tok1 = token;
+	tok2 = NULL;
+	rebuild_pipes_token(ms, tok1, tok2, str);
 	free(str);
 }
 
@@ -90,7 +99,7 @@ void	ms_parse_pipes(t_minishell *ms)
 		{
 			if (token->content[i] == '|')
 			{
-				rebuild_pipes_token(ms, token);
+				start_rebuild_pipes_token(ms, token);
 				break ;
 			}
 			i++;

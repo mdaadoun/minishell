@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 10:57:46 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/08/23 12:22:07 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/07 10:21:14 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ static int	get_length(char *string, int start)
 	return (length);
 }
 
+static void	create_and_push_redir(t_minishell *ms, t_token **t1, t_token **t2)
+{
+	*t2 = ms_create_new_token(ms);
+	ms_push_token(*t1, *t2);
+	*t1 = *t2;
+}
 static void	rebuild_redirection_tokens(t_minishell *ms, t_token *token)
 {
 	t_token	*tok1;
@@ -46,32 +52,27 @@ static void	rebuild_redirection_tokens(t_minishell *ms, t_token *token)
 	{
 		if (str[ind] == '<' || str[ind] == '>')
 		{
-			if (ind == 0)
-				tok1->content = ft_substr(str, sta, get_length(str, sta) + 1);
-			else
+			tok1->content = ft_substr(str, sta, get_length(str, sta) + 1);
+			if (ind != 0)
 			{
-				tok1->content = ft_substr(str, sta, get_length(str, sta) + 1);
-				tok2 = ms_create_new_token(ms);
-				ms_push_token(tok1, tok2);
-				tok1 = tok2;
+				create_and_push_redir(ms, &tok1, &tok2);
 				sta = sta + get_length(str, sta);
 				tok1->content = ft_substr(str, sta, get_length(str, sta) + 1);
 				if (!str[ind + 1])
 					break ;
 			}
-			tok2 = ms_create_new_token(ms);
-			ms_push_token(tok1, tok2);
-			tok1 = tok2;
+			create_and_push_redir(ms, &tok1, &tok2);
 			sta++;
 		}
-		if ((str[ind] == '>' && str[ind + 1] == '>') || \
-				(str[ind] == '<' && str[ind + 1] == '<'))
+
+		if (is_double_redirect(str, ind))
 		{
 			ind += 2;
 			sta++;
 		}
 		else
 			ind++;
+			
 		if (!str[ind])
 			tok1->content = ft_substr(str, sta, get_length(str, sta) + 1);
 	}
