@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 08:01:33 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/09/06 14:41:40 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/07 08:08:33 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,6 @@ static void	execv_builtin(t_minishell *ms, t_builtins built, char **arg)
 		exit(ms_free_before_exit(ms));
 	if (is_builtin_fork(built) == true)
 		exit(ms_free_before_exit(ms));
-}
-
-static void	dup_pipe(t_process *proc)
-{
-	dup2(proc->pipe_in, 0);
-	if (proc->pipe_in != 0)
-		close(proc->prev->pipe_out);
-	dup2(proc->pipe_out, 1);
-	if (proc->pipe_out != 1)
-		close(proc->next->pipe_in);
-	if (proc->has_redirection == true)
-		set_redir_fd(proc->first_redirection);
 }
 
 static void	exec_external(t_process *proc)
@@ -98,7 +86,6 @@ static void	exec_builtin(t_minishell *ms, t_process *proc)
 
 void	ms_start_processes(t_minishell *ms)
 {
-	t_redirection	*redir;
 	t_process		*proc;
 	int				pip[2];
 	int				status;
@@ -130,19 +117,7 @@ void	ms_start_processes(t_minishell *ms)
 			else
 				execv_builtin(ms, proc->builtin, proc->cmd);
 		}
-		if (proc->pipe_in != 0)
-			close(proc->pipe_in);
-		if (proc->pipe_out != 1)
-			close(proc->pipe_out);
-		if (proc->has_redirection == true)
-		{
-			redir = proc->first_redirection;
-			while (redir)
-			{
-				close(redir->fd);
-				redir = redir->next;
-			}
-		}
+		close_pipe(proc);
 		proc = proc->next;
 	}
 	proc = ms->first_process;

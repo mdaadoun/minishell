@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/07 06:55:09 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/07 08:06:03 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -380,9 +380,12 @@ bool		ms_is_redirection(t_token *tok);
  *  Utils processes:
  *      Files :
  *			core/utils/ms_utils_processes.c
+ *			core/utils/ms_utils_pipe.c
 */
 
 void		ms_build_type_lines(t_minishell *ms);
+void		dup_pipe(t_process *proc);
+void		close_pipe(t_process *proc);
 
 /*
  *	Memory:
