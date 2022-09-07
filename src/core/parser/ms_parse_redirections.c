@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 10:57:46 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/07 10:21:14 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/07 10:45:21 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void	create_and_push_redir(t_minishell *ms, t_token **t1, t_token **t2)
 	ms_push_token(*t1, *t2);
 	*t1 = *t2;
 }
+
 static void	rebuild_redirection_tokens(t_minishell *ms, t_token *token)
 {
 	t_token	*tok1;
@@ -64,15 +65,11 @@ static void	rebuild_redirection_tokens(t_minishell *ms, t_token *token)
 			create_and_push_redir(ms, &tok1, &tok2);
 			sta++;
 		}
-
-		if (is_double_redirect(str, ind))
+		if (is_double_redirect(str, ind++))
 		{
-			ind += 2;
+			ind++;
 			sta++;
 		}
-		else
-			ind++;
-			
 		if (!str[ind])
 			tok1->content = ft_substr(str, sta, get_length(str, sta) + 1);
 	}
