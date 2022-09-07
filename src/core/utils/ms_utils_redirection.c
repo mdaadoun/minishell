@@ -6,13 +6,13 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 14:06:55 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/09/07 10:20:37 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/07 10:24:51 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-bool is_double_redirect(char *str, int ind)
+bool	is_double_redirect(char *str, int ind)
 {
 	if ((str[ind] == '>' && str[ind + 1] == '>') || \
 				(str[ind] == '<' && str[ind + 1] == '<'))
