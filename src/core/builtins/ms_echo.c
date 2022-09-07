@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/07 07:47:11 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/07 09:22:00 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,11 @@ static bool	check_arg(char **arg, int ind)
 	int	i;
 
 	i = 1;
-	while (arg[ind][i] && arg[ind][i] == 'n')
+	if (arg[ind][i] == '\0')
+		return (true);
+	while (arg[ind][i] == 'n')
 		i++;
-	if (arg[ind][i] != 'n')
+	if (arg[ind][i] && arg[ind][i] != 'n')
 		return (true);
 	return (false);
 }
