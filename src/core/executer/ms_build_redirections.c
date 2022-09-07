@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:12:25 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/06 17:11:42 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/07 08:28:35 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,6 @@ void	ms_build_redir(t_minishell *ms, t_token *token,	t_process *process)
 		if (token->next && token->next->type == TYPE_ARG_DELIMITER)
 			run_heredoc(ms, token, process);
 		else
-			ms_set_error(process->internal_error, err_key, err_msg);
+			ms_set_error(ms->global_error, err_key, err_msg);
 	}
 }
