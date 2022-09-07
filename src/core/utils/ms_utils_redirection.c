@@ -6,17 +6,27 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 14:06:55 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/09/07 10:24:51 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/07 12:08:29 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-bool	is_double_redirect(char *str, int ind)
+bool	is_double_redirect(t_minishell *ms, char *str, int ind)
 {
+	char	*err_msg;
+
+	err_msg = MSG_ERROR_SYNTAX_REDIRECT;
 	if ((str[ind] == '>' && str[ind + 1] == '>') || \
 				(str[ind] == '<' && str[ind + 1] == '<'))
+	{
+		if (str[ind + 2] == '<' || str[ind + 2] == '>')
+		{
+			g_sig.exit_status = 2;
+			ms_set_error(ms->global_error, ERROR_SYNTAX, err_msg);
+		}
 		return (true);
+	}
 	return (false);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 10:57:46 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/07 10:45:21 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/07 12:54:24 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,49 +30,61 @@ static int	get_length(char *string, int start)
 	return (length);
 }
 
-static void	create_and_push_redir(t_minishell *ms, t_token **t1, t_token **t2)
+static void	create_and_push_redir(t_minishell *ms, t_token **t1)
 {
-	*t2 = ms_create_new_token(ms);
-	ms_push_token(*t1, *t2);
-	*t1 = *t2;
+	t_token	*t2;
+
+	t2 = ms_create_new_token(ms);
+	ms_push_token(*t1, t2);
+	*t1 = t2;
+}
+
+void	triple(t_minishell *ms, t_token *tok1, char **str, int sta)
+{
+	create_and_push_redir(ms, &tok1);
+	sta = sta + get_length(*str, sta);
+	tok1->content = ft_substr(*str, sta, get_length(*str, sta) + 1);
+}
+
+void	test(t_minishell *ms, t_token *tok1, char **str, int sta)
+{
+	int	ind;
+
+	ind = 0;
+	while ((*str)[ind])
+	{
+		if ((*str)[ind] == '<' || (*str)[ind] == '>')
+		{
+			tok1->content = ft_substr(*str, sta, get_length(*str, sta));
+			if (ind != 0)
+			{
+				triple(ms, tok1, str, sta);
+				if (!(*str)[ind + 1])
+					break ;
+			}
+			create_and_push_redir(ms, &tok1);
+			sta++;
+		}
+		if (is_double_redirect(ms, *str, ind++))
+		{
+			ind++;
+			sta++;
+		}
+		if (!(*str)[ind])
+			tok1->content = ft_substr(*str, sta, get_length(*str, sta) + 1);
+	}
 }
 
 static void	rebuild_redirection_tokens(t_minishell *ms, t_token *token)
 {
 	t_token	*tok1;
-	t_token	*tok2;
 	char	*str;
-	int		ind;
 	int		sta;
 
 	sta = 0;
-	ind = 0;
 	str = token->content;
 	tok1 = token;
-	while (str[ind])
-	{
-		if (str[ind] == '<' || str[ind] == '>')
-		{
-			tok1->content = ft_substr(str, sta, get_length(str, sta) + 1);
-			if (ind != 0)
-			{
-				create_and_push_redir(ms, &tok1, &tok2);
-				sta = sta + get_length(str, sta);
-				tok1->content = ft_substr(str, sta, get_length(str, sta) + 1);
-				if (!str[ind + 1])
-					break ;
-			}
-			create_and_push_redir(ms, &tok1, &tok2);
-			sta++;
-		}
-		if (is_double_redirect(str, ind++))
-		{
-			ind++;
-			sta++;
-		}
-		if (!str[ind])
-			tok1->content = ft_substr(str, sta, get_length(str, sta) + 1);
-	}
+	test(ms, tok1, &str, sta);
 	free(str);
 }
 
