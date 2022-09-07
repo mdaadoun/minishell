@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/06 17:48:31 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/07 06:55:09 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ typedef struct s_signal {
 	bool	in_process;
 }	t_signal;
 
-t_signal	g_sig;
+t_signal					g_sig;
 
 /*
  *  Builtin commands structures:
