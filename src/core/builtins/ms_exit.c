@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/06 17:47:17 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/08 09:28:13 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,5 @@ void	ms_exit(t_minishell *ms, char **arg)
 			exit(ms_free_before_exit(ms));
 	}
 	else
-	{
-		g_sig.exit_status = 1;
 		exit(ms_free_before_exit(ms));
-	}
 }
