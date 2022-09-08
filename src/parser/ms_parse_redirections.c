@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 10:57:46 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/08 08:01:30 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/08 11:41:47 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char **str, int sta)
 	}
 }
 
-static void	start_rebuild_redirection_tokens(t_minishell *ms, t_token *token)
+static bool	start_rebuild_redirection_tokens(t_minishell *ms, t_token *token)
 {
 	t_token	*tok1;
 	char	*str;
@@ -70,6 +70,7 @@ static void	start_rebuild_redirection_tokens(t_minishell *ms, t_token *token)
 	tok1 = token;
 	rebuild_redirection_tokens(ms, tok1, &str, sta);
 	free(str);
+	return (true);
 }
 
 /*
@@ -97,10 +98,8 @@ void	ms_parse_redirections(t_minishell *ms)
 				if (is_double_redirect(ms, tok->content, i))
 					break ;
 			if (tok->content[i] == '>' || tok->content[i] == '<')
-			{
-				start_rebuild_redirection_tokens(ms, tok);
-				continue ;
-			}
+				if (start_rebuild_redirection_tokens(ms, tok))
+					continue ;
 			i++;
 		}
 		tok = tok->next;
