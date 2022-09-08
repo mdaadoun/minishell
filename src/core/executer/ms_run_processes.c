@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 08:01:33 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/09/07 10:44:02 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/08 08:53:03 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,17 @@ static void	exec_child(t_minishell *ms, t_process *proc, bool flag)
 {
 	if (flag == false && is_builtin_fork(proc->builtin) == false)
 		execv_builtin(ms, proc->builtin, proc->cmd);
-	proc->pid = fork();
-	if (proc->pid == 0)
+	else
 	{
-		dup_pipe(proc);
-		if (flag == true)
-			execve(proc->exec_path, proc->cmd, proc->envp);
-		else
-			execv_builtin(ms, proc->builtin, proc->cmd);
+		proc->pid = fork();
+		if (proc->pid == 0)
+		{
+			dup_pipe(proc);
+			if (flag == true)
+				execve(proc->exec_path, proc->cmd, proc->envp);
+			else
+				execv_builtin(ms, proc->builtin, proc->cmd);
+		}
 	}
 }
 

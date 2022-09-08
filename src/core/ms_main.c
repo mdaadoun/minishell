@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:07:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/07 12:10:23 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/08 08:45:32 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ int	main(int argc, char **argv, char **envp)
 
 	(void) argc;
 	(void) argv;
+	if (DEBUG) // REMOVE BEFORE PUSH
+		test_start(argc, argv, envp);
 	ms_initialize_minishell(&ms, &error, envp);
 	ms_initialize_signals();
 	while (true)

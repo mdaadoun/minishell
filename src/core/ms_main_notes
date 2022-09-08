@@ -1,0 +1,3 @@
+
+	if (DEBUG) // REMOVE BEFORE PUSH
+		test_start(argc, argv, envp);

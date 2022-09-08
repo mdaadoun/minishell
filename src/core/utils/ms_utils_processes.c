@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:49:41 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/06 13:13:59 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/08 08:33:24 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,9 @@ static int8_t	count_tokens(t_token *token)
 
 static bool	check(t_token_type type)
 {
-	if (type != TYPE_ARG_DELIMITER)
-		return (true);
-	if (type != TYPE_ARG_REDIRECT_FILE)
-		return (true);
-	return (false);
+	if (type != TYPE_ARG_DELIMITER && type != TYPE_ARG_REDIRECT_FILE)
+		return (false);
+	return (true);
 }
 
 static void	run_error(t_minishell *ms, t_err_key err_key, char *err_msg)
@@ -63,7 +61,7 @@ void	ms_build_type_lines(t_minishell *ms)
 		idx = 0;
 		while (token && token->type != TYPE_PIPE)
 		{		
-			if (check(token->type) == true && !ms_is_redirection(token))
+			if (!check(token->type) && !ms_is_redirection(token))
 				types_line[idx++] = token->type;
 			token = token->next;
 		}
