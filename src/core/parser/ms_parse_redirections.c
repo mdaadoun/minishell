@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 10:57:46 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/08 07:45:54 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/08 08:01:30 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,11 +94,13 @@ void	ms_parse_redirections(t_minishell *ms)
 		while (tok->content[i] && ft_strlen(tok->content) > 1)
 		{
 			if (ft_strlen(tok->content) == 2)
-				if ((tok->content[i] == '>' && tok->content[i + 1] == '>') \
-					|| (tok->content[i] == '<' && tok->content[i + 1] == '<'))
+				if (is_double_redirect(ms, tok->content, i))
 					break ;
 			if (tok->content[i] == '>' || tok->content[i] == '<')
+			{
 				start_rebuild_redirection_tokens(ms, tok);
+				continue ;
+			}
 			i++;
 		}
 		tok = tok->next;
