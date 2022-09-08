@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/07 11:27:54 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/08 07:45:46 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -313,6 +313,7 @@ bool		check_if_builtin(t_token *command);
 bool		is_double_redirect(t_minishell *ms, char *str, int ind);
 void		init_fd_redirection(t_process *proc);
 void		set_redir_fd(t_redirection *redir);
+int			get_len_redir(char *string, int start);
 
 /*
  *  Tokens:
