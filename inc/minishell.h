@@ -141,7 +141,7 @@ typedef struct s_signal {
 	bool	in_process;
 }	t_signal;
 
-const t_signal					g_sig;
+t_signal					g_sig;
 
 /*
  *  Builtin commands structures:
