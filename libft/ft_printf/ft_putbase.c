@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../inc/libft.h"
+#include "../../inc/libft.h"
 
 static int	count_nb_with_base(size_t nb, int base)
 {

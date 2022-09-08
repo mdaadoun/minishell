@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../inc/minishell.h"
+#include "../../inc/minishell.h"
 
 bool	ms_is_redirection(t_token *tok)
 {

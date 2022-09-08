@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
+#include "../inc/libft.h"
 
 /*
  * Apply the f function to each char of the string s (without return)

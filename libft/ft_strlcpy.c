@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
+#include "../inc/libft.h"
 
 /*
 ** copy a string src to dst and return the length of the copied string

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
+#include "../inc/libft.h"
 
 /*
  *  Apply the function f to the content of each connected lists

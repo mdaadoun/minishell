@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
+#include "../inc/libft.h"
 
 /*
 ** same as memcpy but use a temporary buffer

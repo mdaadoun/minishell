@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
+#include "../inc/libft.h"
 
 /*
  *  Pass the content of lst to the function del and then free it

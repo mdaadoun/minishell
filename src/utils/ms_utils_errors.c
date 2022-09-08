@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../inc/minishell.h"
+#include "../../inc/minishell.h"
 
 /*
  * Check each process for bad commands, if found:

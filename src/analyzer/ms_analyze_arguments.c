@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../inc/minishell.h"
+#include "../../inc/minishell.h"
 
 /*
  * Check if token left with NO_TYPE are option (with -) or simply text

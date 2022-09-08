@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../inc/libft.h"
+#include "../../inc/libft.h"
 
 /* 
     return the index of first '\n' in str or str length if '\n' not found

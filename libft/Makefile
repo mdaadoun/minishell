@@ -25,7 +25,7 @@ get_next_line/get_next_line.c get_next_line/get_next_line_utils.c ft_dlstnew.c f
 ft_dlstlast.c ft_lstnew_str.c ft_lstdelone_str.c ft_lstclear_str.c ft_lstadd_back_str.c \
 ft_lstlast_str.c ft_putnstr_fd.c ft_strlen_arg.c ft_strcmp.c ft_count_tab_string.c
 
-INC = ../../inc/libft.h
+INC = ../inc/libft.h
 
 OBJS = ${SRCS:.c=.o}
 

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../inc/minishell.h"
+#include "../../inc/minishell.h"
 
 static void	ft_rm_env(t_minishell *ms, t_variable *last, t_variable *current)
 {

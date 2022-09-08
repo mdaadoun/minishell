@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../inc/minishell.h"
+#include "../../inc/minishell.h"
 
 // print name of current/working directory
 void	ms_pwd(t_minishell *ms, char **arg)

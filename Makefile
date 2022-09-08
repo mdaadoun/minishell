@@ -27,9 +27,9 @@ executer/ms_executer.c executer/ms_build_redirections.c \
 executer/ms_build_processes.c executer/ms_run_processes.c \
 executer/ms_redirection_struct.c 
 
-DIR = src/core
+DIR = src
 OBJS = $(addprefix $(DIR)/,$(SRCS:%.c=%.o))
-DIR_LIB = src/libft
+DIR_LIB = libft
 LIBFT = $(DIR_LIB)/libft.a
 CC = gcc
 AR = ar rcs
@@ -48,7 +48,7 @@ D = \033[38;5;255m
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@make -sC src/libft
+	@make -sC libft
 	@echo "$(B)Building $(NAME) program.$(D)"
 	@$(CC) $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(READLINE_FLAGS)
 	@echo "$(G)$(NAME) program created.$(D)"
@@ -56,12 +56,12 @@ $(NAME): $(OBJS)
 clean:
 	@echo "$(R)Remove all object files.$(D)"
 	@$(RM) $(OBJS)
-	@make clean -sC src/libft
+	@make clean -sC libft
 
 fclean: clean
 	@echo "$(R)Remove $(NAME) program if present.$(D)"
 	@$(RM) $(NAME)
-	@make fclean -sC src/libft
+	@make fclean -sC libft
 
 re: fclean all
 

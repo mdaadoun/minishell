@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../inc/libft.h"
+#include "../../inc/libft.h"
 
 /*
 	get the string to append from str until '\n'

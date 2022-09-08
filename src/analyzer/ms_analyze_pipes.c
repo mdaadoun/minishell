@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../inc/minishell.h"
+#include "../../inc/minishell.h"
 
 // Give type for each pipe
 void	ms_analyze_pipes(t_minishell *ms)

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../inc/minishell.h"
+#include "../../inc/minishell.h"
 
 static void	execv_builtin(t_minishell *ms, t_builtins built, char **arg)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../inc/minishell.h"
+#include "../../inc/minishell.h"
 
 // Return true if all the token are empty with space
 bool	is_empty_command(t_minishell *ms)
