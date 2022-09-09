@@ -10,5 +10,3 @@
 * review the broken parsing
     * ls >test
     * cat <<EOF >hello
-
-* don't interpret $ alone
