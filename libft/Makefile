@@ -6,7 +6,7 @@
 #    By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/20 08:44:56 by mdaadoun          #+#    #+#              #
-#    Updated: 2022/09/09 08:46:48 by dlaidet          ###   ########.fr        #
+#    Updated: 2022/09/09 09:10:19 by dlaidet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstma
 get_next_line/get_next_line.c get_next_line/get_next_line_utils.c ft_dlstnew.c ft_dlstadd_back.c \
 ft_dlstlast.c ft_lstnew_str.c ft_lstdelone_str.c ft_lstclear_str.c ft_lstadd_back_str.c \
 ft_lstlast_str.c ft_putnstr_fd.c ft_strlen_arg.c ft_strcmp.c ft_count_tab_string.c \
-ft_strjoin_free.c
+ft_strjoin_free.c ft_is.c
 
 INC = ../inc/libft.h
 
