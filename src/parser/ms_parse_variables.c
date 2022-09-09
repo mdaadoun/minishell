@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 11:06:35 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/09/09 09:02:17 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/09 09:22:54 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static size_t	ft_strlen_space(char *str)
 
 	ind = 0;
 	while (str[ind] && str[ind] != ' ' && str[ind] != '$' \
-	&& str[ind] != '\'' && str[ind] != '\"')
+			&& str[ind] != '\'' && str[ind] != '\"')
 		ind++;
 	return (ind);
 }
@@ -59,6 +59,18 @@ static void	swap(t_minishell *ms, t_token *tok, size_t ind)
 	tok->content = tmp;
 }
 
+static size_t	if_swap(t_minishell *ms, t_token *tok, size_t ind)
+{
+	if (ft_is(tok->content[ind + 1], '$'))
+		ind += 2;
+	else if (!ft_is(tok->content[ind + 1], ' ') && \
+			!ft_is(tok->content[ind + 1], '\0'))
+		swap(ms, tok, ind);
+	else
+		ind++;
+	return (ind);
+}
+
 void	ms_swap_env(t_minishell *ms)
 {
 	t_token		*tok;
@@ -73,13 +85,7 @@ void	ms_swap_env(t_minishell *ms)
 			while (tok->content[ind])
 			{
 				if (tok->content[ind] == '$')
-				{
-					if (tok->content[ind + 1] != ' ' && \
-						tok->content[ind + 1] != '\0')
-						swap(ms, tok, ind);
-					else
-						ind++;
-				}
+					ind = if_swap(ms, tok, ind);
 				else
 					ind++;
 			}
