@@ -53,6 +53,8 @@ void	test_quotes(t_minishell *ms, int debug)
 void	test_env(t_minishell *ms, int debug)
 {
 	test_run_command(ms, "echo $ test", debug);
+	test_run_command(ms, "echo $$", debug);
+	test_run_command(ms, "echo $", debug);
 //	test_run_command(ms, "echo $PAGER", debug);
 //	test_run_command(ms, "echo \"hello $PAGER\"", debug);
 //	test_run_command(ms, "echo $PAGER $PAGER \"coucou $PAGER hello $PAGER\"", debug);
