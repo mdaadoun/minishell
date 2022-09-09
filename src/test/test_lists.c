@@ -158,7 +158,8 @@ void	test_pipes(t_minishell *ms, int debug)
 
 void	test_redirections(t_minishell *ms, int debug)
 {
-	test_run_command(ms, "cat -e >> file", debug);
+	test_run_command(ms, "cat -e >file", debug);
+	//test_run_command(ms, "cat -e >> file", debug);
 	// test_run_command(ms, ">> file cat -e", debug);
 	// test_run_command(ms, ">> file cat", debug);
 	// test_run_command(ms, "echo >> >> file", debug);
