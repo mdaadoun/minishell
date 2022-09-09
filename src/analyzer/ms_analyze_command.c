@@ -6,19 +6,38 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:43:46 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/06 11:02:34 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/09 08:10:25 by dlaidet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-static bool	check_absolute_path(t_token *command)
+static bool	path_build(t_minishell *ms, t_token *command, char **path)
+{
+	if (command->content[0] == '/')
+	{
+		*path = strdup(command->content);
+		return (true);
+	}
+	if (command->content[0] == '~')
+	{
+		*path = ft_strjoin(ft_get_env(ms, "HOME"), &command->content[1]);
+		return (true);
+	}
+	if (command->content[0] == '.')
+	{
+		*path = strdup(command->content);
+		return (true);
+	}
+	return (false);
+}
+
+static bool	check_absolute_path(t_minishell *ms, t_token *command)
 {
 	char	*command_path;
 
-	if (command->content[0] == '/' || command->content[0] == '~')
+	if (path_build(ms, command, &command_path))
 	{
-		command_path = strdup(command->content);
 		if (access(command_path, 0) == 0)
 		{
 			command->type = TYPE_EXTERNAL_COMMAND;
@@ -52,7 +71,7 @@ static bool	check_if_external(t_minishell *ms, t_token *command)
 	int		i;
 
 	i = 0;
-	if (check_absolute_path(command) == true)
+	if (check_absolute_path(ms, command) == true)
 		return (true);
 	path = ft_split(ft_get_env(ms, "PATH"), ':');
 	while (path[i])
