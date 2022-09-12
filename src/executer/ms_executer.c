@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 13:46:11 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/12 12:07:35 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/12 14:32:07 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	ms_executer(t_minishell *ms)
 		ms_build_processes(ms);
 	if (!ms->global_error->flag)
 		ms_checking_for_errors(ms);
-	ft_printf("%d\n", g_sig.sigint_signal);
-	if (!ms->global_error->flag && !g_sig.sigint_signal)
+	if (!ms->global_error->flag && g_sig.in_process)
 		ms_start_processes(ms);
 }

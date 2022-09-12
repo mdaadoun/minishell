@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:12:25 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/12 12:09:30 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/12 14:19:09 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,8 @@ static void	run_heredoc(t_minishell *ms, t_token *token, t_process *proc)
 	{
 		g_sig.exit_status = 0;
 		pid = fork();
-		ft_printf("a%d\n", g_sig.sigint_signal);
 		if (pid == 0)
 			child_heredoc(ms, token);
-		ft_printf("b%d\n", g_sig.sigint_signal);
 		g_sig.in_child = true;
 		waitpid(pid, NULL, 0);
 		g_sig.in_child = false;
