@@ -6,18 +6,20 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 07:47:41 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/09/12 09:37:28 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/12 15:31:35 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-static void	add_process(t_process *proc)
+static void	add_process(t_minishell *ms, t_process *proc)
 {
 	t_process	*new_process;
 
 	new_process = (t_process *)ft_calloc(sizeof(t_process), 1);
+	ft_protect_malloc(ms, new_process);
 	new_process->internal_error = (t_error *)ft_calloc(sizeof(t_error), 1);
+	ft_protect_malloc(ms, new_process->internal_error);
 	proc->next = new_process;
 	new_process->prev = proc;
 }
@@ -38,14 +40,10 @@ static size_t	count_tok(t_token *tok)
 
 static t_process	*new_proc(t_minishell *ms, t_process *proc, t_token *tok)
 {
-	add_process(proc);
+	add_process(ms, proc);
 	proc = proc->next;
 	proc->cmd = (char **)ft_calloc(sizeof(char *), count_tok(tok->next));
-	if (!proc->cmd)
-	{
-		ms_set_error(ms->global_error, ERROR_MALLOC, MSG_ERROR_MALLOC);
-		exit(ms_free_before_exit(ms));
-	}
+	ft_protect_malloc(ms, proc->cmd);
 	proc->envp = ms->envp;
 	return (proc);
 }
@@ -86,23 +84,11 @@ void	ms_build_processes(t_minishell *ms)
 
 	tok = ms->first_token;
 	proc = (t_process *)ft_calloc(sizeof(t_process), 1);
-	if (!proc)
-	{
-		ms_set_error(ms->global_error, ERROR_MALLOC, MSG_ERROR_MALLOC);
-		exit(ms_free_before_exit(ms));
-	}
+	ft_protect_malloc(ms, proc);
 	proc->internal_error = (t_error *)ft_calloc(sizeof(t_error), 1);
-	if (!proc->internal_error)
-	{
-		ms_set_error(ms->global_error, ERROR_MALLOC, MSG_ERROR_MALLOC);
-		exit(ms_free_before_exit(ms));
-	}
+	ft_protect_malloc(ms, proc->internal_error);
 	proc->cmd = (char **)ft_calloc(sizeof(char *), count_tok(tok) + 1);
-	if (!proc->cmd)
-	{
-		ms_set_error(ms->global_error, ERROR_MALLOC, MSG_ERROR_MALLOC);
-		exit(ms_free_before_exit(ms));
-	}
+	ft_protect_malloc(ms, proc->cmd);
 	proc->envp = ms->envp;
 	ms->first_process = proc;
 	builder(ms, tok, proc);

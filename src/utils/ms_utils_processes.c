@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:49:41 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/08 08:33:24 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/12 15:28:48 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,6 @@ static bool	check(t_token_type type)
 	return (true);
 }
 
-static void	run_error(t_minishell *ms, t_err_key err_key, char *err_msg)
-{
-	ms_set_error(ms->global_error, err_key, err_msg);
-	exit(ms_free_before_exit(ms));
-}
-
 /*
  * Create an array of the token type for each process.
  */
@@ -56,8 +50,7 @@ void	ms_build_type_lines(t_minishell *ms)
 	while (process)
 	{
 		types_line = ft_calloc(sizeof(int), count_tokens(token) + 1);
-		if (!types_line)
-			run_error(ms, ERROR_MALLOC, MSG_ERROR_MALLOC);
+		ft_protect_malloc(ms, types_line);
 		idx = 0;
 		while (token && token->type != TYPE_PIPE)
 		{		

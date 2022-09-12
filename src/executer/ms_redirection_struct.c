@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 13:00:13 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/09/06 08:06:28 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/12 15:31:28 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ static t_redirection	*create_redirection(void)
 	t_redirection	*redir;
 
 	redir = ft_calloc(sizeof(t_redirection), 1);
-	if (!redir)
-		return (0);
+	ft_protect_malloc(NULL, redir);
 	return (redir);
 }
 

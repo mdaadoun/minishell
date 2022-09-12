@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/12 14:34:43 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/12 15:23:56 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -330,6 +330,7 @@ void		ms_add_token(t_minishell *ms, char *content,
 void		ms_push_token(t_token *first_token, t_token *second_token);
 void		ms_combine_token(t_token *first_token, t_token *second_token);
 void		ms_free_double_pointer(char **data);
+void		ft_protect_malloc(t_minishell *ms, void *ptr);
 
 /*
  *  Parser:
@@ -401,104 +402,5 @@ void		ms_free_last_command(t_minishell *ms);
 void		ms_free_all_tokens(t_minishell *ms);
 void		ms_free_all_redirections(t_process *process);
 void		ms_free_env(t_minishell *ms);
-
-//=========================================
-// Minishell testing functions & structures
-//=========================================
-
-/*
- *  Debug variables and functions:
- *		files :	
- *			test/test_main.c
- *			test/test_utils.c
- *			test/test_parser.c
- *			test/test_analyzer.c
- *			test/test_executer_build.c
- *			test/test_executer_errors.c
- *			test/test_builtin.c
-*/
-
-typedef enum e_tests
-{
-	TEST_ALL,
-	TEST_PARSER = 1,
-	TEST_ANALYZER = 2,
-	TEST_EXECUTER_BUILD = 3,
-	TEST_EXECUTER_ERRORS = 4,
-	TEST_EXECUTER_REDIRECTIONS = 5,
-	TEST_BUILTIN = 6,
-	TEST_PARSER_QUOTES = 11,
-	TEST_PARSER_PIPES = 12,
-	TEST_PARSER_ENV = 13,
-	TEST_PARSER_ARGUMENTS = 14,
-	TEST_PARSER_REDIRECTIONS = 15,
-	TEST_PARSER_BUILTINS = 16,
-	TEST_PARSER_EXTERNALS = 17,
-	TEST_ANALYZER_QUOTES = 21,
-	TEST_ANALYZER_PIPES = 22,
-	TEST_ANALYZER_ENV = 23,
-	TEST_ANALYZER_ARGUMENTS = 24,
-	TEST_ANALYZER_REDIRECTIONS = 25,
-	TEST_ANALYZER_BUILTINS = 26,
-	TEST_ANALYZER_EXTERNALS = 27,
-	TEST_EXECUTER_BUILD_QUOTES = 31,
-	TEST_EXECUTER_BUILD_PIPES = 32,
-	TEST_EXECUTER_BUILD_ENV = 33,
-	TEST_EXECUTER_BUILD_ARGUMENTS = 34,
-	TEST_EXECUTER_BUILD_REDIRECTIONS = 35,
-	TEST_EXECUTER_BUILD_BUILTINS = 36,
-	TEST_EXECUTER_BUILD_EXTERNALS = 37,
-	TEST_EXECUTER_ERRORS_QUOTES = 41,
-	TEST_EXECUTER_ERRORS_PIPES = 42,
-	TEST_EXECUTER_ERRORS_ENV = 43,
-	TEST_EXECUTER_ERRORS_ARGUMENTS = 44,
-	TEST_EXECUTER_ERRORS_REDIRECTIONS = 45,
-	TEST_EXECUTER_ERRORS_BUILTINS = 46,
-	TEST_EXECUTER_ERRORS_EXTERNALS = 47,
-	TEST_EXECUTER_REDIRECTIONS_QUOTES = 51,
-	TEST_EXECUTER_REDIRECTIONS_PIPES = 52,
-	TEST_EXECUTER_REDIRECTIONS_ENV = 53,
-	TEST_EXECUTER_REDIRECTIONS_ARGUMENTS = 54,
-	TEST_EXECUTER_REDIRECTIONS_REDIRECTIONS = 55,
-	TEST_EXECUTER_REDIRECTIONS_BUILTINS = 56,
-	TEST_EXECUTER_REDIRECTIONS_EXTERNALS = 57,
-	TEST_BUILTIN_PWD = 61,
-	TEST_BUILTIN_ENV = 62,
-	TEST_BUILTIN_EXPORT = 63,
-	TEST_BUILTIN_UNSET = 64,
-	TEST_BUILTIN_ECHO = 65
-}	t_tests;
-
-# ifndef DEBUG
-#  define DEBUG 0
-# endif
-
-void		test_start(int argc, char **argv, char **envp);
-void		test_run_command(t_minishell *ms, char *str, int debug);
-void		test_launcher(t_minishell *ms, int debug);
-
-void		test_reset(t_minishell *ms);
-
-void		test_display_tokens(t_minishell *ms);
-void		test_display_tokens_types(t_minishell *ms);
-void		test_display_processes(t_minishell *ms);
-void		test_display_errors(t_minishell *ms);
-void		test_display_local_env(t_minishell *ms);
-void		test_display_redirections(t_minishell *ms);
-
-void		test_builtin(t_minishell *ms, int debug);
-void		test_analyzer(t_minishell *ms, int debug);
-void		test_parser(t_minishell *ms, int debug);
-void		test_executer_build(t_minishell *ms, int debug);
-void		test_executer_errors(t_minishell *ms, int debug);
-void		test_executer_redirections(t_minishell *ms, int debug);
-
-void		test_quotes(t_minishell *ms, int debug);
-void		test_env(t_minishell *ms, int debug);
-void		test_pipes(t_minishell *ms, int debug);
-void		test_redirections(t_minishell *ms, int debug);
-void		test_arguments(t_minishell *ms, int debug);
-void		test_builtins(t_minishell *ms, int debug);
-void		test_externals(t_minishell *ms, int debug);
 
 #endif
