@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/12 10:03:02 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/12 11:56:39 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ typedef struct s_minishell {
 */
 
 typedef struct s_signal {
-	bool	SIGINT_signal;
+	bool	sigint_signal;
 	int		exit_status;
 	char	*delimiter;
 	bool	in_child;
@@ -142,7 +142,7 @@ typedef struct s_signal {
 	bool	in_process;
 }	t_signal;
 
-t_signal					g_sig;
+t_signal	g_sig;
 
 /*
  *  Builtin commands structures:
@@ -474,32 +474,32 @@ typedef enum e_tests
 #  define DEBUG 0
 # endif
 
-void	test_start(int argc, char **argv, char **envp);
-void	test_run_command(t_minishell *ms, char *str, int debug);
-void	test_launcher(t_minishell *ms, int debug);
+void		test_start(int argc, char **argv, char **envp);
+void		test_run_command(t_minishell *ms, char *str, int debug);
+void		test_launcher(t_minishell *ms, int debug);
 
-void	test_reset(t_minishell *ms);
+void		test_reset(t_minishell *ms);
 
-void	test_display_tokens(t_minishell *ms);
-void	test_display_tokens_types(t_minishell *ms);
-void	test_display_processes(t_minishell *ms);
-void	test_display_errors(t_minishell *ms);
-void	test_display_local_env(t_minishell *ms);
-void	test_display_redirections(t_minishell *ms);
+void		test_display_tokens(t_minishell *ms);
+void		test_display_tokens_types(t_minishell *ms);
+void		test_display_processes(t_minishell *ms);
+void		test_display_errors(t_minishell *ms);
+void		test_display_local_env(t_minishell *ms);
+void		test_display_redirections(t_minishell *ms);
 
-void	test_builtin(t_minishell *ms, int debug);
-void	test_analyzer(t_minishell *ms, int debug);
-void	test_parser(t_minishell *ms, int debug);
-void	test_executer_build(t_minishell *ms, int debug);
-void	test_executer_errors(t_minishell *ms, int debug);
-void	test_executer_redirections(t_minishell *ms, int debug);
+void		test_builtin(t_minishell *ms, int debug);
+void		test_analyzer(t_minishell *ms, int debug);
+void		test_parser(t_minishell *ms, int debug);
+void		test_executer_build(t_minishell *ms, int debug);
+void		test_executer_errors(t_minishell *ms, int debug);
+void		test_executer_redirections(t_minishell *ms, int debug);
 
-void	test_quotes(t_minishell *ms, int debug);
-void	test_env(t_minishell *ms, int debug);
-void	test_pipes(t_minishell *ms, int debug);
-void	test_redirections(t_minishell *ms, int debug);
-void	test_arguments(t_minishell *ms, int debug);
-void	test_builtins(t_minishell *ms, int debug);
-void	test_externals(t_minishell *ms, int debug);
+void		test_quotes(t_minishell *ms, int debug);
+void		test_env(t_minishell *ms, int debug);
+void		test_pipes(t_minishell *ms, int debug);
+void		test_redirections(t_minishell *ms, int debug);
+void		test_arguments(t_minishell *ms, int debug);
+void		test_builtins(t_minishell *ms, int debug);
+void		test_externals(t_minishell *ms, int debug);
 
 #endif

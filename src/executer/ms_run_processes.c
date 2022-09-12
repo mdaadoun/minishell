@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 08:01:33 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/09/12 10:04:38 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/12 11:49:15 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	wait_proc(t_minishell *ms, t_process *proc)
 	while (proc)
 	{
 		waitpid(proc->pid, &status, 0);
-		if (proc->has_redirection && g_sig.SIGINT_signal)
+		if (proc->has_redirection && g_sig.sigint_signal)
 			update_status = false;
 		if (proc->types_line[0] == TYPE_EXTERNAL_COMMAND || \
 			is_builtin_fork(proc->builtin))

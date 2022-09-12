@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:28:29 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/12 10:06:24 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/12 12:06:56 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void	sig_heredoc(void)
 {
 	write(1, "^C\n", 3);
+	g_sig.sigint_signal = true;
 	g_sig.in_heredoc = false;
 	if (g_sig.delimiter)
 		free(g_sig.delimiter);
@@ -29,7 +30,6 @@ static void	cancel_process(int signo)
 {
 	if (signo == SIGINT)
 	{
-		g_sig.SIGINT_signal = true;
 		g_sig.exit_status = 130;
 		if (g_sig.in_heredoc)
 			sig_heredoc();

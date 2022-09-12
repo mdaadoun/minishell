@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 11:37:03 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/12 10:05:48 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/12 12:01:03 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	ms_print_error(t_minishell *ms)
 {
 	if (ms->global_error->flag && \
 		ms->global_error->key != ERROR_SILENT && \
-		!g_sig.SIGINT_signal)
+		!g_sig.sigint_signal)
 	{
 		write(2, "\e[0;31mError: ", 14);
 		write(2, ms->global_error->msg, ms->global_error->length);
