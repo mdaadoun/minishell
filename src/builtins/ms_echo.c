@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 08:46:45 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/08 09:21:40 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/12 17:30:16 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ms_echo(char **arg)
 	n = true;
 	if (nb_arg(arg) > 1)
 	{
-		while (arg[ind][0] == '-')
+		while (arg[ind] && arg[ind][0] == '-')
 		{
 			c = check_arg(arg, ind);
 			if (c == false)
