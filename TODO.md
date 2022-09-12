@@ -1,11 +1,7 @@
 
->> micha
-* signal to review
-    * cat << EOF followed by Ctrl-C will execute cat anyway
-    * signal Ctrl-/ quit cat
-
-* echo $USER$USER > | a seg fault > error
-<<
+* echo $USER | > a
+* << EOF
+    * command not found and multiple valgrind error
 
 * review the broken parsing
     * ls >test

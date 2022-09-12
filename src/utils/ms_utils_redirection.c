@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 14:06:55 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/09/08 07:46:08 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/12 11:24:00 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,13 @@ int	get_len_redir(char *string, int start)
 		length++;
 	if (string[start] == '>' && string[start + 1] == '>')
 		length++;
-	while (string[start] != '\0' && \
-			string[start] != '<' && string[start] != '>')
+	if ( (string[start] != '\0' && string[start] == '<') \
+		||  (string[start] != '\0' && string[start] == '>') )
+	{
+		length++;
+	}
+	while(string[start] != '\0' && string[start] != '<' \
+		&& string[start] != '>' )
 	{
 		length++;
 		start++;

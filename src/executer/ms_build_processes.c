@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 07:47:41 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/09/07 08:30:13 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/12 09:37:28 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ static t_process	*new_proc(t_minishell *ms, t_process *proc, t_token *tok)
 	add_process(proc);
 	proc = proc->next;
 	proc->cmd = (char **)ft_calloc(sizeof(char *), count_tok(tok->next));
+	if (!proc->cmd)
+	{
+		ms_set_error(ms->global_error, ERROR_MALLOC, MSG_ERROR_MALLOC);
+		exit(ms_free_before_exit(ms));
+	}
 	proc->envp = ms->envp;
 	return (proc);
 }
@@ -87,7 +92,17 @@ void	ms_build_processes(t_minishell *ms)
 		exit(ms_free_before_exit(ms));
 	}
 	proc->internal_error = (t_error *)ft_calloc(sizeof(t_error), 1);
-	proc->cmd = (char **)ft_calloc(sizeof(char *), count_tok(tok));
+	if (!proc->internal_error)
+	{
+		ms_set_error(ms->global_error, ERROR_MALLOC, MSG_ERROR_MALLOC);
+		exit(ms_free_before_exit(ms));
+	}
+	proc->cmd = (char **)ft_calloc(sizeof(char *), count_tok(tok) + 1);
+	if (!proc->cmd)
+	{
+		ms_set_error(ms->global_error, ERROR_MALLOC, MSG_ERROR_MALLOC);
+		exit(ms_free_before_exit(ms));
+	}
 	proc->envp = ms->envp;
 	ms->first_process = proc;
 	builder(ms, tok, proc);

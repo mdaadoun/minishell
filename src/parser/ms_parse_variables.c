@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 11:06:35 by dlaidet           #+#    #+#             */
-/*   Updated: 2022/09/09 09:22:54 by dlaidet          ###   ########.fr       */
+/*   Updated: 2022/09/12 10:03:08 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ static char	*swap_exit_status(char	*s1)
 
 	ret = ft_strjoin_free(s1, ft_itoa(g_sig.exit_status), 0);
 	if (g_sig.exit_status == 130)
+	{
+		g_sig.SIGINT_signal = false;
 		g_sig.exit_status = 0;
+	}
 	return (ret);
 }
 

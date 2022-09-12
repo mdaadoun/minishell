@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:07:09 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/08 08:45:32 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/12 10:03:27 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ms_initialize_minishell(t_minishell **ms, t_error *error, char **envp)
 	g_sig.in_child = false;
 	g_sig.in_heredoc = false;
 	g_sig.in_process = false;
+	g_sig.SIGINT_signal= false;
 	*ms = (t_minishell *) ft_calloc(sizeof(t_minishell), 1);
 	if (!*ms)
 	{

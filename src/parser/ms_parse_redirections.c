@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 10:57:46 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/08 11:41:47 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/12 11:45:51 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	cutter(t_minishell *ms, t_token **tok1, char **str, int sta)
 {
 	create_and_push_redir(ms, tok1);
 	sta = sta + get_len_redir(*str, sta);
-	(*tok1)->content = ft_substr(*str, sta, get_len_redir(*str, sta) + 1);
+	(*tok1)->content = ft_substr(*str, sta, get_len_redir(*str, sta));
 	return (sta);
 }
 
@@ -55,7 +55,7 @@ char **str, int sta)
 			sta++;
 		}
 		if (!(*str)[ind])
-			tok1->content = ft_substr(*str, sta, get_len_redir(*str, sta) + 1);
+			tok1->content = ft_substr(*str, sta, get_len_redir(*str, sta));
 	}
 }
 

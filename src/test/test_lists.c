@@ -53,8 +53,8 @@ void	test_quotes(t_minishell *ms, int debug)
 void	test_env(t_minishell *ms, int debug)
 {
 	test_run_command(ms, "echo $ test", debug);
-	test_run_command(ms, "echo $$", debug);
-	test_run_command(ms, "echo $", debug);
+	// test_run_command(ms, "echo $$", debug);
+	// test_run_command(ms, "echo $", debug);
 //	test_run_command(ms, "echo $PAGER", debug);
 //	test_run_command(ms, "echo \"hello $PAGER\"", debug);
 //	test_run_command(ms, "echo $PAGER $PAGER \"coucou $PAGER hello $PAGER\"", debug);
@@ -105,9 +105,10 @@ void	test_env(t_minishell *ms, int debug)
 
 void	test_pipes(t_minishell *ms, int debug)
 {
-	test_run_command(ms, "ls|ls|ls", debug);
-	test_run_command(ms, "ls|ls|ls|ls|ls|ls", debug);
-
+	test_run_command(ms, "echo $USER$USER > | a", debug);
+	// test_run_command(ms, "echo $USER$USER | > a", debug);
+	// test_run_command(ms, "ls|ls|ls", debug);
+	// test_run_command(ms, "ls|ls|ls|ls|ls|ls", debug);
 	// test_run_command(ms, "|  <  |  >> < > | echo hello", debug);
 	// test_run_command(ms, "a|b|c|e|p|pw|ec|un|ex", debug);
 	// test_run_command(ms, "a a d|bd w|c a w", debug);
@@ -162,6 +163,11 @@ void	test_pipes(t_minishell *ms, int debug)
 void	test_redirections(t_minishell *ms, int debug)
 {
 	test_run_command(ms, "cat -e >file", debug);
+	test_run_command(ms, "ls >test", debug);
+	test_run_command(ms, "ls >file1>file2", debug);
+	test_run_command(ms, "ls >file1>file2>file3", debug);
+	test_run_command(ms, "ls >file1>file2 >file3", debug);
+	test_run_command(ms, "cat <<EOF>hello", debug);
 	//test_run_command(ms, "cat -e >> file", debug);
 	// test_run_command(ms, ">> file cat -e", debug);
 	// test_run_command(ms, ">> file cat", debug);

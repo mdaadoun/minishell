@@ -6,7 +6,7 @@
 #    By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/20 08:44:56 by mdaadoun          #+#    #+#              #
-#    Updated: 2022/09/09 08:48:17 by dlaidet          ###   ########.fr        #
+#    Updated: 2022/09/12 08:57:14 by mdaadoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,7 +78,7 @@ ft_putendl_fd.c ft_putnbr_fd.c ft_lstnew.c ft_lstadd_front.c ft_lstsize.c \
 ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c \
 get_next_line/get_next_line.c get_next_line/get_next_line_utils.c ft_dlstnew.c ft_dlstadd_back.c \
 ft_dlstlast.c ft_lstnew_str.c ft_lstdelone_str.c ft_lstclear_str.c ft_lstadd_back_str.c ft_lstlast_str.c \
-ft_putnstr_fd.c ft_strlen_arg.c ft_strcmp.c ft_count_tab_string.c ft_strjoin_free.c
+ft_putnstr_fd.c ft_strlen_arg.c ft_strcmp.c ft_count_tab_string.c ft_strjoin_free.c ft_is.c
 
 
 DEBUG_FLAGS = -g3 -ggdb -I. -D DEBUG=1 #-fsanitize=address  -fsanitize=leak

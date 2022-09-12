@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/08 07:53:53 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/12 10:03:02 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ typedef struct s_minishell {
 */
 
 typedef struct s_signal {
+	bool	SIGINT_signal;
 	int		exit_status;
 	char	*delimiter;
 	bool	in_child;
