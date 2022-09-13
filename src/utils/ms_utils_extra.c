@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 10:55:29 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/12 15:45:31 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/13 07:27:22 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_variable	*ft_get_struct_env(t_minishell *ms, char *str)
 
 void	ft_protect_malloc(t_minishell *ms, void *ptr)
 {
-	if (!ms)
+	if (!ms && !ptr)
 		exit(1);
 	if (!ptr)
 	{
