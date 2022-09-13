@@ -6,7 +6,7 @@
 /*   By: mdaadoun <mdaadoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:06:13 by mdaadoun          #+#    #+#             */
-/*   Updated: 2022/09/12 15:23:56 by mdaadoun         ###   ########.fr       */
+/*   Updated: 2022/09/13 09:44:32 by mdaadoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,11 @@
 # include <limits.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include <errno.h>
-# include <error.h>
-# include <getopt.h>
 # include <signal.h>
-# include <assert.h>
 # include <sys/types.h>
 # include <sys/wait.h>       
 # include <sys/stat.h>
 # include <fcntl.h>
-# include <signal.h>
 # include <termios.h>
 
 //======
