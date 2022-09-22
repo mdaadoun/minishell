@@ -1,0 +1,11 @@
+{
+    "makefile.extensionOutputFolder": "./.vscode",
+    "files.associations": {
+        "readline.h": "c",
+        "history.h": "c",
+        "minishell.h": "c",
+        "test.h": "c",
+        "stat.h": "c",
+        "libft.h": "c"
+    }
+}

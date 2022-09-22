@@ -1,0 +1,23 @@
+{
+    "tasks": [
+		{
+			"label": "make_minishell_debug",
+			"command": "make",
+            "args": ["debug"],
+			"type": "shell",
+			"options": {
+                "cwd": "${fileDirname}"
+			}
+		},
+		{
+			"label": "make_minishell_debug_bonus",
+			"command": "make",
+            "args": ["debug_bonus"],
+			"type": "shell",
+			"options": {
+                "cwd": "${fileDirname}"
+			}
+		}
+    ],
+    "version": "2.0.0"
+}
